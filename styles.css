@@ -234,6 +234,10 @@ h1 {
   align-items: end;
 }
 
+.controlGrid > div {
+  min-width: 0;
+}
+
 .controlLabel {
   margin: 0 0 6px;
   color: var(--muted);
@@ -267,6 +271,8 @@ h1 {
 
 .profileTabs,
 .targetTabs {
+  width: 100%;
+  min-width: 0;
   grid-template-columns: repeat(auto-fit, minmax(98px, 1fr));
   border-radius: 18px;
 }
@@ -624,7 +630,11 @@ h1 {
 
   .profileTabs,
   .targetTabs {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    display: flex;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scroll-snap-type: x proximity;
+    -webkit-overflow-scrolling: touch;
   }
 
   .modeTabs button,
@@ -637,8 +647,10 @@ h1 {
 
   .profileTabs button,
   .targetTabs button {
+    flex: 0 0 154px;
     min-height: 58px;
     padding: 7px 8px;
+    scroll-snap-align: start;
   }
 
   #searchInput {

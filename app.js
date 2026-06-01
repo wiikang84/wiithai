@@ -1,5 +1,5 @@
 (async function () {
-  const ASSET_VERSION = "20260601-10";
+  const ASSET_VERSION = "20260601-12";
   const LANGUAGES = window.WIITHAI_LANGUAGES || {};
   const PROFILES = window.WIITHAI_LEARNER_PROFILES || [];
   let phrases = (window.WIITHAI_MULTI_PHRASES || window.THAI_PHRASES || []).map((item, index) => ({
