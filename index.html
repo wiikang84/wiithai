@@ -3,9 +3,9 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>wiithai</title>
+    <title>wiiinfo</title>
     <link rel="icon" href="data:," />
-    <link rel="stylesheet" href="./styles.css?v=20260601-7" />
+    <link rel="stylesheet" href="./styles.css?v=20260601-10" />
   </head>
   <body>
     <main class="app">
@@ -23,9 +23,9 @@
             <span></span>
           </div>
           <div class="heroCopy">
-            <p class="eyebrow">Korean Thai Phrasebook</p>
-            <h1>wiithai</h1>
-            <p class="subtitle">한국인에게는 태국어를, 태국인에게는 한국어를 같은 문장으로 보여주는 기본 학습 앱</p>
+            <p class="eyebrow">Language · Life · Realty</p>
+            <h1>wiiinfo</h1>
+            <p class="subtitle">윈포는 기준 언어를 고르고 외국어, 한국 생활정보, 부동산 표현까지 이어서 배우는 생활형 정보 앱입니다.</p>
           </div>
         </section>
       </header>
@@ -33,7 +33,7 @@
       <section class="stats" aria-label="학습 현황">
         <div class="statCard teal">
           <span id="totalCount">0</span>
-          <small>현재 항목</small>
+          <small>학습 항목</small>
         </div>
         <div class="statCard coral">
           <span id="favoriteCount">0</span>
@@ -41,18 +41,19 @@
         </div>
         <div class="statCard yellow">
           <span id="todayCount">10</span>
-          <small>추천 학습</small>
+          <small>오늘 학습</small>
         </div>
       </section>
 
       <section class="controls" aria-label="문장 필터">
         <div class="controlGrid">
           <div>
-            <p id="audienceLabel" class="controlLabel">학습 대상</p>
-            <div class="audienceTabs" aria-label="학습자 선택">
-              <button id="koreanLearnerButton" class="active" type="button">한국어 → 태국어</button>
-              <button id="thaiViewerButton" type="button">ไทย → 한국어</button>
-            </div>
+            <p id="audienceLabel" class="controlLabel">기준 언어</p>
+            <div id="profileTabs" class="audienceTabs profileTabs" aria-label="학습자 선택"></div>
+          </div>
+          <div>
+            <p id="targetLabel" class="controlLabel">배울 언어</p>
+            <div id="targetTabs" class="targetTabs" aria-label="배울 언어 선택"></div>
           </div>
           <div>
             <p id="modeLabel" class="controlLabel">학습 방식</p>
@@ -69,7 +70,7 @@
             </div>
           </div>
         </div>
-        <input id="searchInput" type="search" aria-label="문장과 문자 검색" placeholder="한국어, 태국어, 발음 검색" />
+        <input id="searchInput" type="search" aria-label="문장과 문자 검색" placeholder="한국어, 외국어, 발음 검색" />
         <div id="categoryTabs" class="tabs"></div>
         <label class="toggle">
           <input id="quizToggle" type="checkbox" />
@@ -117,8 +118,9 @@
 
     <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore-compat.js"></script>
-    <script src="./firebase-config.js?v=20260601-7"></script>
-    <script src="./phrases.js?v=20260601-7"></script>
-    <script src="./app.js?v=20260601-7"></script>
+    <script src="./firebase-config.js?v=20260601-10"></script>
+    <script src="./phrases.js?v=20260601-10"></script>
+    <script src="./multilingual-data.js?v=20260601-10"></script>
+    <script src="./app.js?v=20260601-10"></script>
   </body>
 </html>
