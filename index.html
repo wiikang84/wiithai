@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>wiiInfo</title>
     <link rel="icon" href="data:," />
-    <link rel="stylesheet" href="./styles.css?v=20260601-15" />
+    <link rel="stylesheet" href="./styles.css?v=20260601-18" />
   </head>
   <body>
     <main class="app">
@@ -47,7 +47,7 @@
           <div class="countryChooser">
             <div class="chooserHead">
               <p id="audienceLabel" class="controlLabel">Choose your country</p>
-              <strong>당신은 어느 나라 사람입니까?</strong>
+              <strong id="countryQuestion">당신은 어느 나라 사람입니까?</strong>
             </div>
             <div id="profileTabs" class="countryTabs profileTabs" aria-label="국가 선택"></div>
           </div>
@@ -78,6 +78,18 @@
           <input id="quizToggle" type="checkbox" />
           <span id="quizLabel">한국어 먼저 보기</span>
         </label>
+      </section>
+
+      <section class="infoHub" aria-label="한국 생활 정보">
+        <div id="infoTabs" class="infoTabs" aria-label="생활 정보 선택"></div>
+        <div class="infoPanel">
+          <div>
+            <p id="infoEyebrow" class="controlLabel">Korea info by Wii</p>
+            <h2 id="infoTitle">한국에서 생활하기</h2>
+            <p id="infoSummary">여행, 생활, 집 구하기, 부동산 기초 정보를 한 곳에서 확인합니다.</p>
+          </div>
+          <div id="infoCards" class="infoCards"></div>
+        </div>
       </section>
 
       <section id="phraseList" class="phraseList" aria-label="태국어 문장 목록"></section>
@@ -120,9 +132,9 @@
 
     <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore-compat.js"></script>
-    <script src="./firebase-config.js?v=20260601-15"></script>
-    <script src="./phrases.js?v=20260601-15"></script>
-    <script src="./multilingual-data.js?v=20260601-15"></script>
-    <script src="./app.js?v=20260601-15"></script>
+    <script src="./firebase-config.js?v=20260601-18"></script>
+    <script src="./phrases.js?v=20260601-18"></script>
+    <script src="./multilingual-data.js?v=20260601-18"></script>
+    <script src="./app.js?v=20260601-18"></script>
   </body>
 </html>

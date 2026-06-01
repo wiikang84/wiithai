@@ -1,7 +1,10 @@
 (async function () {
-  const ASSET_VERSION = "20260601-15";
+  const ASSET_VERSION = "20260601-18";
   const LANGUAGES = window.WIITHAI_LANGUAGES || {};
   const PROFILES = window.WIITHAI_LEARNER_PROFILES || [];
+  const UI_COPY = window.WIIINFO_UI_COPY || {};
+  const CATEGORY_LABELS = window.WIIINFO_CATEGORY_LABELS || {};
+  const INFO_SECTIONS = window.WIIINFO_INFO_SECTIONS || {};
   let phrases = (window.WIITHAI_MULTI_PHRASES || window.THAI_PHRASES || []).map((item, index) => ({
     ...item,
     audioIndex: Number(item.audioIndex || item.n || index + 1),
@@ -12,6 +15,7 @@
     category: "전체",
     search: "",
     quiz: false,
+    info: "life",
     favorites: new Set(readJson("thaiPhraseFavorites", []))
   };
 
@@ -38,6 +42,12 @@
   const voiceLabel = document.getElementById("voiceLabel");
   const quizLabel = document.getElementById("quizLabel");
   const heroFlagEmoji = document.getElementById("heroFlagEmoji");
+  const countryQuestion = document.getElementById("countryQuestion");
+  const infoTabs = document.getElementById("infoTabs");
+  const infoEyebrow = document.getElementById("infoEyebrow");
+  const infoTitle = document.getElementById("infoTitle");
+  const infoSummary = document.getElementById("infoSummary");
+  const infoCards = document.getElementById("infoCards");
 
   let categories = [];
   let currentMode = "phrases";
@@ -95,6 +105,7 @@
           ja: data.ja || extra.ja || "",
           zh: data.zh || extra.zh || "",
           vi: data.vi || extra.vi || "",
+          es: data.es || extra.es || "",
           roByLang: data.roByLang || extra.ro || {},
           audioUrl: data.audioUrl || "",
           audioUrlMale: data.audioUrlMale || "",
@@ -112,24 +123,11 @@
   }
 
   function refreshCategories() {
-    categories = ["전체", ...Array.from(new Set(phrases.map((item) => item.c)))];
+    categories = ["전체", ...Array.from(new Set(availablePhrases().map((item) => item.c)))];
   }
 
   function categoryLabel(category) {
-    const thaiLabels = {
-      "전체": "ทั้งหมด",
-      "인사": "คำทักทาย",
-      "자기소개": "แนะนำตัว",
-      "기초응답": "คำตอบพื้นฐาน",
-      "숫자/시간": "ตัวเลข/เวลา",
-      "이동": "การเดินทาง",
-      "식당": "ร้านอาหาร",
-      "쇼핑": "ช้อปปิ้ง",
-      "도움": "ขอความช่วยเหลือ",
-      "일상": "ชีวิตประจำวัน",
-      "한국생활": "ชีวิตในเกาหลี"
-    };
-    return sourceLang === "th" ? thaiLabels[category] || category : category;
+    return CATEGORY_LABELS[sourceLang]?.[category] || CATEGORY_LABELS.ko?.[category] || category;
   }
 
   function saveFavorites() {
@@ -165,24 +163,7 @@
   }
 
   function uiText(key) {
-    const thaiMode = sourceIsThai();
-    const labels = {
-      total: thaiMode ? "รายการ" : "현재 항목",
-      favorites: thaiMode ? "บันทึก" : "즐겨찾기",
-      audience: thaiMode ? "Choose your country" : "Choose your country",
-      target: thaiMode ? "Learn" : "Learn",
-      mode: thaiMode ? "Mode" : "Mode",
-      voice: thaiMode ? "Voice" : "Voice",
-      phrases: thaiMode ? "ประโยค" : "문장",
-      letters: thaiMode ? "ตัวอักษร" : "문자 기초",
-      female: thaiMode ? "ผู้หญิง" : "여성형",
-      male: thaiMode ? "ผู้ชาย" : "남성형",
-      quiz: thaiMode ? "ดูภาษาหลักก่อน" : "기준 언어 먼저 보기",
-      searchPhrases: thaiMode ? "ค้นหาประโยคหรือเสียงอ่าน" : "문장, 뜻, 발음 검색",
-      searchLetters: thaiMode ? "ค้นหาตัวอักษร" : "문자, 이름, 발음 검색",
-      hide: thaiMode ? "ซ่อน" : "가리기"
-    };
-    return labels[key];
+    return UI_COPY[sourceLang]?.[key] || UI_COPY.ko?.[key] || key;
   }
 
   function versionedAudioUrl(url) {
@@ -201,7 +182,7 @@
   function getText(item, lang) {
     if (lang === "ko") return item.ko || "";
     if (lang === "th") return getThaiText(item);
-    return item[lang] || item.ko || "";
+    return item[lang] || "";
   }
 
   function getRoman(item, lang) {
@@ -259,11 +240,19 @@
 
   function filteredPhrases() {
     const keyword = state.search.trim().toLowerCase();
-    return phrases.filter((item) => {
+    return availablePhrases().filter((item) => {
       const inCategory = state.category === "전체" || item.c === state.category;
       const text = `${getText(item, sourceLang)} ${getText(item, targetLang)} ${getRoman(item, targetLang)} ${item.c}`.toLowerCase();
       return inCategory && (!keyword || text.includes(keyword));
     });
+  }
+
+  function hasTranslation(item, lang) {
+    return Boolean(getText(item, lang).trim());
+  }
+
+  function availablePhrases() {
+    return phrases.filter((item) => hasTranslation(item, sourceLang) && hasTranslation(item, targetLang));
   }
 
   function renderProfileTabs() {
@@ -273,7 +262,8 @@
       ja: "Japan",
       en: "USA",
       zh: "China",
-      vi: "Vietnam"
+      vi: "Vietnam",
+      es: "Spain"
     };
     profileTabs.innerHTML = "";
     PROFILES.forEach((profile) => {
@@ -302,6 +292,7 @@
   }
 
   function renderTabs() {
+    refreshCategories();
     tabs.innerHTML = "";
     categories.forEach((category) => {
       const button = document.createElement("button");
@@ -313,6 +304,36 @@
         render();
       });
       tabs.appendChild(button);
+    });
+  }
+
+  function renderInfoHub() {
+    if (!infoTabs || !infoCards) return;
+    const sections = INFO_SECTIONS[sourceLang] || INFO_SECTIONS.ko || [];
+    const selected = sections.find((section) => section.id === state.info) || sections[0];
+    if (!selected) return;
+    state.info = selected.id;
+    infoTabs.innerHTML = "";
+    sections.forEach((section) => {
+      const button = document.createElement("button");
+      button.type = "button";
+      button.className = section.id === state.info ? "active" : "";
+      button.textContent = `${section.icon} ${section.tab}`;
+      button.addEventListener("click", () => {
+        state.info = section.id;
+        renderInfoHub();
+      });
+      infoTabs.appendChild(button);
+    });
+    infoEyebrow.textContent = uiText("infoEyebrow");
+    infoTitle.textContent = selected.title;
+    infoSummary.textContent = selected.summary;
+    infoCards.innerHTML = "";
+    selected.cards.forEach((card) => {
+      const item = document.createElement("article");
+      item.className = "infoCard";
+      item.innerHTML = `<strong>${card.title}</strong><p>${card.text}</p>`;
+      infoCards.appendChild(item);
     });
   }
 
@@ -377,6 +398,7 @@
     if (lang === "en") return window.ENGLISH_LETTERS || [];
     if (lang === "zh") return window.CHINESE_LETTERS || [];
     if (lang === "vi") return window.VIETNAMESE_LETTERS || [];
+    if (lang === "es") return window.SPANISH_LETTERS || [];
     return [];
   }
 
@@ -434,6 +456,8 @@
     updateHeroFlag();
     renderProfileTabs();
     renderTargetTabs();
+    renderInfoHub();
+    refreshCategories();
     currentMode === "letters" ? renderLetters() : render();
   }
 
@@ -445,6 +469,7 @@
     searchInput.value = "";
     updateStaticLabels();
     renderTargetTabs();
+    refreshCategories();
     currentMode === "letters" ? renderLetters() : render();
   }
 
@@ -476,8 +501,9 @@
   function updateStaticLabels() {
     document.querySelector(".statCard.teal small").textContent = uiText("total");
     document.querySelector(".statCard.coral small").textContent = uiText("favorites");
-    document.querySelector(".statCard.yellow small").textContent = sourceIsThai() ? "แนะนำ" : "추천 학습";
+    document.querySelector(".statCard.yellow small").textContent = uiText("today");
     audienceLabel.textContent = uiText("audience");
+    countryQuestion.textContent = uiText("countryQuestion");
     targetLabel.textContent = uiText("target");
     modeLabel.textContent = uiText("mode");
     voiceLabel.textContent = uiText("voice");
@@ -522,6 +548,7 @@
   updateHeroFlag();
   renderProfileTabs();
   renderTargetTabs();
+  renderInfoHub();
   setVoice(voiceMode);
   setMode("phrases");
 })();
