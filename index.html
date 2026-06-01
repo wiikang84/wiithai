@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>wiithai</title>
     <link rel="icon" href="data:," />
-    <link rel="stylesheet" href="./styles.css" />
+    <link rel="stylesheet" href="./styles.css?v=20260601-3" />
   </head>
   <body>
     <main class="app">
@@ -84,7 +84,10 @@
     <template id="phraseCardTemplate">
       <article class="phraseCard">
         <div class="cardHead">
-          <span class="tag"></span>
+          <div class="cardMeta">
+            <span class="numberBadge"></span>
+            <span class="tag"></span>
+          </div>
           <button class="starButton" type="button" title="즐겨찾기">☆</button>
         </div>
         <p class="korean"></p>
@@ -99,7 +102,10 @@
 
     <template id="letterCardTemplate">
       <article class="letterCard">
-        <p class="letter"></p>
+        <div class="letterMark">
+          <span class="letterNumber"></span>
+          <p class="letter"></p>
+        </div>
         <div>
           <p class="letterName"></p>
           <p class="letterSound"></p>
@@ -111,8 +117,8 @@
 
     <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore-compat.js"></script>
-    <script src="./firebase-config.js"></script>
-    <script src="./phrases.js"></script>
-    <script src="./app.js"></script>
+    <script src="./firebase-config.js?v=20260601-3"></script>
+    <script src="./phrases.js?v=20260601-3"></script>
+    <script src="./app.js?v=20260601-3"></script>
   </body>
 </html>

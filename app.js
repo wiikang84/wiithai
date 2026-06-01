@@ -1,6 +1,7 @@
 (async function () {
   let phrases = (window.THAI_PHRASES || []).map((item, index) => ({
     ...item,
+    audioIndex: Number(item.audioIndex || item.n || index + 1),
     audioUrl: item.audioUrl || `./audio/phrases/${String(index + 1).padStart(3, "0")}.mp3`
   }));
   const state = {
@@ -43,19 +44,21 @@
         .firestore()
         .collection(collection)
         .where("isActive", "==", true)
-        .orderBy("sortOrder", "asc")
         .get();
 
-      return snapshot.docs.map((doc) => {
+      return snapshot.docs.map((doc, index) => {
         const data = doc.data();
         return {
           c: data.category || "기타",
           ko: data.ko || "",
           th: data.th || "",
           ro: data.roman || data.ro || "",
-          audioUrl: data.audioUrl || ""
+          audioUrl: data.audioUrl || "",
+          audioIndex: Number(data.audioIndex || data.n || data.sortOrder || index + 1),
+          sortOrder: data.sortOrder || 0
         };
-      }).filter((item) => item.ko && item.th);
+      }).filter((item) => item.ko && item.th)
+        .sort((a, b) => a.sortOrder - b.sortOrder);
     } catch (error) {
       console.warn("Firestore 문장 로드 실패, 로컬 문장으로 대체합니다.", error);
       return [];
@@ -91,6 +94,10 @@
   function getVoice(lang) {
     const voices = speechSynthesis.getVoices();
     return voices.find((voice) => voice.lang.toLowerCase().startsWith(lang.toLowerCase().slice(0, 2))) || null;
+  }
+
+  function formatIndex(number) {
+    return String(number || 0).padStart(3, "0");
   }
 
   function speak(text, audioUrl, lang = "th-TH") {
@@ -149,12 +156,15 @@
       const card = template.content.firstElementChild.cloneNode(true);
       const star = card.querySelector(".starButton");
       const reveal = card.querySelector(".revealButton");
+      const audioNumber = formatIndex(item.audioIndex);
 
+      card.dataset.audioFile = audioNumber;
+      card.querySelector(".numberBadge").textContent = `#${audioNumber}`;
       card.querySelector(".tag").textContent = categoryLabel(item.c);
       const isThaiViewer = audienceMode === "th";
       card.querySelector(".korean").textContent = isThaiViewer ? item.th : item.ko;
       card.querySelector(".thai").textContent = isThaiViewer ? item.ko : item.th;
-      card.querySelector(".roman").textContent = isThaiViewer ? "คำแปลภาษาไทย" : item.ro;
+      card.querySelector(".roman").textContent = item.ro;
       card.querySelector(".speakButton").textContent = isThaiViewer ? "▶ 한국어" : "▶ 태국어";
 
       if (state.quiz) card.classList.add("hiddenThai");
@@ -173,10 +183,10 @@
 
       card.querySelector(".speakButton").addEventListener("click", () => {
         if (audienceMode === "th") {
-          speak(item.ko, getKoreanAudioUrl(index), "ko-KR");
+          speak(item.ko, getKoreanAudioUrl(item.audioIndex), "ko-KR");
           return;
         }
-        speak(item.th, getPhraseAudioUrl(index), "th-TH");
+        speak(item.th, getPhraseAudioUrl(item.audioIndex), "th-TH");
       });
       reveal.addEventListener("click", () => {
         card.classList.toggle("hiddenThai");
@@ -194,7 +204,8 @@
     const sourceLetters = audienceMode === "th" ? window.KOREAN_LETTERS || [] : window.THAI_LETTERS || [];
     const letters = sourceLetters.map((item, index) => ({
       ...item,
-      audioUrl: item.audioUrl || (audienceMode === "th" ? getKoreanLetterAudioUrl(index) : getLetterAudioUrl(index))
+      audioIndex: index + 1,
+      audioUrl: item.audioUrl || (audienceMode === "th" ? getKoreanLetterAudioUrl(index + 1) : getLetterAudioUrl(index + 1))
     }));
     letterList.innerHTML = "";
     const filtered = letters.filter((item) => {
@@ -205,37 +216,40 @@
 
     filtered.forEach((item) => {
       const card = letterTemplate.content.firstElementChild.cloneNode(true);
+      const audioNumber = formatIndex(item.audioIndex);
+      card.dataset.audioFile = audioNumber;
+      card.querySelector(".letterNumber").textContent = `#${audioNumber}`;
       card.querySelector(".letter").textContent = item.char;
       card.querySelector(".letterName").textContent = `${item.type} · ${item.name}`;
       card.querySelector(".letterSound").textContent = item.sound;
       card.querySelector(".letterExample").textContent = item.example;
       card.querySelector(".letterSpeakButton").addEventListener("click", () => {
         const text = `${item.char} ${item.name}`;
-        const audioUrl = audienceMode === "th" ? getKoreanLetterAudioUrl(index) : getLetterAudioUrl(index);
+        const audioUrl = audienceMode === "th" ? getKoreanLetterAudioUrl(item.audioIndex) : getLetterAudioUrl(item.audioIndex);
         speak(text, audioUrl, audienceMode === "th" ? "ko-KR" : "th-TH");
       });
       letterList.appendChild(card);
     });
   }
 
-  function getPhraseAudioUrl(index) {
+  function getPhraseAudioUrl(audioIndex) {
     const folder = voiceMode === "male" ? "audio-male" : "audio";
-    return `./${folder}/phrases/${String(index + 1).padStart(3, "0")}.mp3`;
+    return `./${folder}/phrases/${formatIndex(audioIndex)}.mp3`;
   }
 
-  function getLetterAudioUrl(index) {
+  function getLetterAudioUrl(audioIndex) {
     const folder = voiceMode === "male" ? "audio-male" : "audio";
-    return `./${folder}/letters/${String(index + 1).padStart(3, "0")}.mp3`;
+    return `./${folder}/letters/${formatIndex(audioIndex)}.mp3`;
   }
 
-  function getKoreanAudioUrl(index) {
+  function getKoreanAudioUrl(audioIndex) {
     const folder = voiceMode === "male" ? "audio-ko-male" : "audio-ko";
-    return `./${folder}/phrases/${String(index + 1).padStart(3, "0")}.mp3`;
+    return `./${folder}/phrases/${formatIndex(audioIndex)}.mp3`;
   }
 
-  function getKoreanLetterAudioUrl(index) {
+  function getKoreanLetterAudioUrl(audioIndex) {
     const folder = voiceMode === "male" ? "audio-ko-male" : "audio-ko";
-    return `./${folder}/letters/${String(index + 1).padStart(3, "0")}.mp3`;
+    return `./${folder}/letters/${formatIndex(audioIndex)}.mp3`;
   }
 
   function setVoice(mode) {
@@ -250,7 +264,11 @@
     localStorage.setItem("wiithaiAudienceMode", mode);
     koreanLearnerButton.classList.toggle("active", mode === "ko");
     thaiViewerButton.classList.toggle("active", mode === "th");
-    render();
+    if (currentMode === "letters") {
+      renderLetters();
+    } else {
+      render();
+    }
   }
 
   function setMode(mode) {
@@ -262,9 +280,9 @@
     letterList.hidden = !isLetters;
     tabs.hidden = isLetters;
     quizToggle.parentElement.hidden = isLetters;
-    koreanLearnerButton.parentElement.hidden = isLetters;
-    femaleVoiceButton.parentElement.hidden = isLetters;
-    searchInput.placeholder = isLetters ? "태국어 문자, 이름, 발음 검색" : "한국어, 태국어, 발음 검색";
+    searchInput.placeholder = isLetters
+      ? (audienceMode === "th" ? "한글 자음, 모음, 이름 검색" : "태국어 문자, 이름, 발음 검색")
+      : "한국어, 태국어, 발음 검색";
     if (isLetters) {
       renderLetters();
     } else {

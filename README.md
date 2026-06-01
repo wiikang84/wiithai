@@ -21,6 +21,7 @@ node tools/generate-google-tts.js
 
 - 태국어 100문장
 - 한국어 / 태국어 / 영어식 발음 표기
+- 문장/문자 카드 번호 표시
 - 카테고리 필터
 - 검색
 - 즐겨찾기 저장
@@ -29,6 +30,16 @@ node tools/generate-google-tts.js
 - 태국어 음성 듣기
   - `audioUrl`이 있으면 원어민 녹음 파일 재생
   - `audioUrl`이 없으면 API 비용 없는 브라우저 내장 태국어 음성 재생
+
+## 번호와 음성 파일 수정 규칙
+
+화면의 `#001` 번호는 문장 데이터 순서와 음성 파일명을 맞추는 기준입니다.
+
+- 문장 `#001`: `audio/phrases/001.mp3`, `audio-male/phrases/001.mp3`, `audio-ko/phrases/001.mp3`, `audio-ko-male/phrases/001.mp3`
+- 문자 `#001`: `audio/letters/001.mp3`, `audio-male/letters/001.mp3`, `audio-ko/letters/001.mp3`, `audio-ko-male/letters/001.mp3`
+- `phrases.js` 문장에 `n` 또는 `audioIndex`를 넣으면 그 번호가 우선 적용됩니다.
+- `phrases.js`에서 문장 순서를 바꾸면 번호도 같이 바뀝니다.
+- Firestore로 문장을 넣을 때는 `audioIndex`를 넣으면 해당 번호의 음성 파일을 고정해서 재생합니다.
 
 ## Firebase 방향
 
@@ -40,6 +51,7 @@ node tools/generate-google-tts.js
   "ko": "보증금은 얼마입니까?",
   "th": "เงินมัดจำเท่าไหร่ครับ",
   "roman": "ngoen mat-jam thao-rai khrab",
+  "audioIndex": 45,
   "audioUrl": "",
   "sortOrder": 45,
   "isActive": true
