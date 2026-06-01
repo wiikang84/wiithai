@@ -1,5 +1,5 @@
 (async function () {
-  const ASSET_VERSION = "20260601-19";
+  const ASSET_VERSION = "20260601-23";
   const LANGUAGES = window.WIITHAI_LANGUAGES || {};
   const PROFILES = window.WIITHAI_LEARNER_PROFILES || [];
   const UI_COPY = window.WIIINFO_UI_COPY || {};
@@ -28,8 +28,7 @@
   const quizToggle = document.getElementById("quizToggle");
   const totalCount = document.getElementById("totalCount");
   const favoriteCount = document.getElementById("favoriteCount");
-  const homeButton = document.getElementById("homeButton");
-  const backButton = document.getElementById("backButton");
+  const homeFlagButton = document.getElementById("homeFlagButton");
   const phrasesModeButton = document.getElementById("phrasesModeButton");
   const lettersModeButton = document.getElementById("lettersModeButton");
   const profileTabs = document.getElementById("profileTabs");
@@ -520,8 +519,18 @@
   function updateHeroFlag() {
     const sourceLanguage = LANGUAGES[sourceLang] || {};
     const targetLanguage = LANGUAGES[targetLang] || {};
-    if (heroFlagEmoji) heroFlagEmoji.textContent = sourceLanguage.flag || "🌐";
-    if (heroTargetFlagEmoji) heroTargetFlagEmoji.textContent = targetLanguage.flag || "🌐";
+    setFlagVisual(heroFlagEmoji, sourceLang, sourceLanguage.flag || sourceLang.toUpperCase());
+    setFlagVisual(heroTargetFlagEmoji, targetLang, targetLanguage.flag || targetLang.toUpperCase());
+  }
+
+  function setFlagVisual(element, lang, label) {
+    if (!element) return;
+    element.className = element.className
+      .split(/\s+/)
+      .filter((name) => name && !name.startsWith("flag-"))
+      .join(" ");
+    element.classList.add("flagVisual", `flag-${lang}`);
+    element.textContent = label;
   }
 
   searchInput.addEventListener("input", (event) => {
@@ -536,11 +545,7 @@
   lettersModeButton.addEventListener("click", () => setMode("letters"));
   femaleVoiceButton.addEventListener("click", () => setVoice("female"));
   maleVoiceButton.addEventListener("click", () => setVoice("male"));
-  homeButton.addEventListener("click", goHome);
-  backButton.addEventListener("click", () => {
-    if (currentMode === "letters") setMode("phrases");
-    else history.back();
-  });
+  homeFlagButton.addEventListener("click", goHome);
 
   if ("speechSynthesis" in window) speechSynthesis.onvoiceschanged = () => getVoice("th-TH");
   const firebasePhrases = await loadFirebasePhrases();

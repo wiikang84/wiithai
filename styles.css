@@ -20,6 +20,11 @@
   box-sizing: border-box;
 }
 
+html,
+body {
+  overflow-x: hidden;
+}
+
 [hidden] {
   display: none !important;
 }
@@ -38,6 +43,10 @@ input {
   font: inherit;
 }
 
+button {
+  font-family: inherit;
+}
+
 .app {
   width: min(1180px, 100%);
   margin: 0 auto;
@@ -52,7 +61,7 @@ input {
 .hero {
   min-height: 210px;
   display: grid;
-  grid-template-columns: 92px 1fr;
+  grid-template-columns: 118px 1fr;
   align-items: end;
   gap: 18px;
   padding: 28px;
@@ -85,27 +94,148 @@ input {
 }
 
 .flagMark {
-  width: 112px;
-  height: 118px;
+  border: 0;
+  width: 118px;
+  height: 126px;
   display: flex;
   flex-direction: column;
   place-items: center;
   align-items: center;
   justify-content: center;
-  gap: 3px;
+  gap: 8px;
   border-radius: 18px;
   background: rgba(255, 255, 255, 0.94);
   box-shadow: 0 18px 34px rgba(0, 0, 0, 0.22);
+  cursor: pointer;
+  transition: transform 160ms ease, box-shadow 160ms ease;
+}
+
+.flagMark:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 22px 42px rgba(0, 0, 0, 0.26);
+}
+
+.flagMark:focus-visible {
+  outline: 3px solid rgba(255, 200, 87, 0.92);
+  outline-offset: 4px;
 }
 
 .heroFlagEmoji {
-  font-size: 34px;
   line-height: 1;
+}
+
+.heroSourceFlag {
+  width: 82px;
+  height: 56px;
+}
+
+.heroRoute {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 9px;
+  border-radius: 999px;
+  background: #eef3f8;
+}
+
+.heroTargetFlag {
+  width: 29px;
+  height: 20px;
+}
+
+.flagVisual {
+  position: relative;
+  display: inline-block;
+  overflow: hidden;
+  border-radius: 8px;
+  border: 1px solid rgba(36, 52, 71, 0.16);
+  box-shadow: 0 6px 14px rgba(36, 52, 71, 0.16);
+  color: transparent;
+  text-indent: -999px;
+}
+
+.flag-ko {
+  background: #fff;
+}
+
+.flag-ko::before {
+  content: "";
+  position: absolute;
+  width: 36%;
+  aspect-ratio: 1;
+  left: 50%;
+  top: 50%;
+  border-radius: 50%;
+  transform: translate(-50%, -50%) rotate(28deg);
+  background: linear-gradient(180deg, #cd2e3a 0 50%, #0047a0 50% 100%);
+}
+
+.flag-ko::after {
+  content: "";
+  position: absolute;
+  inset: 16% 13%;
+  background:
+    linear-gradient(#111 0 0) left top / 20% 7% no-repeat,
+    linear-gradient(#111 0 0) left 50% / 20% 7% no-repeat,
+    linear-gradient(#111 0 0) left bottom / 20% 7% no-repeat,
+    linear-gradient(#111 0 0) right top / 20% 7% no-repeat,
+    linear-gradient(#111 0 0) right 50% / 20% 7% no-repeat,
+    linear-gradient(#111 0 0) right bottom / 20% 7% no-repeat;
+  opacity: 0.88;
+}
+
+.flag-th {
+  background: linear-gradient(180deg, #a51931 0 16.66%, #fff 16.66% 33.33%, #2d2a4a 33.33% 66.66%, #fff 66.66% 83.33%, #a51931 83.33%);
+}
+
+.flag-ja {
+  background: radial-gradient(circle at center, #bc002d 0 31%, transparent 32%), #fff;
+}
+
+.flag-en {
+  background:
+    linear-gradient(#3c3b6e 0 0) left top / 45% 54% no-repeat,
+    repeating-linear-gradient(180deg, #b22234 0 7.69%, #fff 7.69% 15.38%);
+}
+
+.flag-zh {
+  background: #de2910;
+}
+
+.flag-zh::before {
+  content: "★";
+  position: absolute;
+  left: 11%;
+  top: 8%;
+  color: #ffde00;
+  font-size: 42%;
+  line-height: 1;
+  text-indent: 0;
+}
+
+.flag-vi {
+  background: #da251d;
+}
+
+.flag-vi::before {
+  content: "★";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  color: #ffde00;
+  font-size: 48%;
+  line-height: 1;
+  transform: translate(-50%, -50%);
+  text-indent: 0;
+}
+
+.flag-es {
+  background: linear-gradient(180deg, #aa151b 0 25%, #f1bf00 25% 75%, #aa151b 75%);
 }
 
 .heroArrow {
   color: var(--ink);
-  font-size: 16px;
+  font-size: 15px;
   font-weight: 900;
   line-height: 1;
 }
@@ -142,7 +272,6 @@ h1 {
   line-height: 1.35;
 }
 
-.quickNav button,
 .speakButton,
 .revealButton,
 .starButton,
@@ -154,27 +283,6 @@ h1 {
   border: 0;
   border-radius: 999px;
   cursor: pointer;
-}
-
-.quickNav {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  justify-self: start;
-}
-
-.quickNav button {
-  min-height: 38px;
-  padding: 0 14px;
-  background: #fff;
-  color: var(--ink);
-  border: 1px solid var(--line);
-  font-weight: 800;
-}
-
-.quickNav button:last-child {
-  background: #eef3f8;
-  color: var(--ink);
 }
 
 .stats {
@@ -409,13 +517,14 @@ h1 {
 .infoHub {
   display: grid;
   gap: 10px;
-  margin: 0 0 14px;
+  margin: 14px 0;
 }
 
 .infoTabs {
   display: flex;
   gap: 8px;
   overflow-x: auto;
+  max-width: 100%;
   padding: 2px 0 4px;
 }
 
@@ -692,23 +801,35 @@ h1 {
   }
 
   .hero {
-    grid-template-columns: 52px 1fr;
+    grid-template-columns: 70px 1fr;
     min-height: 132px;
     padding: 16px;
   }
 
   .flagMark {
-    width: 58px;
-    height: 72px;
+    width: 68px;
+    height: 78px;
     border-radius: 12px;
+    gap: 5px;
   }
 
-  .heroFlagEmoji {
-    font-size: 22px;
+  .heroSourceFlag {
+    width: 48px;
+    height: 32px;
+  }
+
+  .heroRoute {
+    gap: 3px;
+    padding: 3px 6px;
+  }
+
+  .heroTargetFlag {
+    width: 22px;
+    height: 15px;
   }
 
   .heroArrow {
-    font-size: 12px;
+    font-size: 11px;
   }
 
   .eyebrow {
@@ -729,10 +850,6 @@ h1 {
   .brandLine {
     margin-top: 6px;
     font-size: 12px;
-  }
-
-  .quickNav {
-    justify-self: start;
   }
 
   .controlGrid {
