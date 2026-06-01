@@ -1,6 +1,7 @@
 (async function () {
-  const ASSET_VERSION = "20260601-23";
+  const ASSET_VERSION = "20260601-25";
   const LANGUAGES = window.WIITHAI_LANGUAGES || {};
+  const LANGUAGE_NAMES = window.WIIINFO_LANGUAGE_NAMES || {};
   const PROFILES = window.WIITHAI_LEARNER_PROFILES || [];
   const UI_COPY = window.WIIINFO_UI_COPY || {};
   const CATEGORY_LABELS = window.WIIINFO_CATEGORY_LABELS || {};
@@ -28,6 +29,7 @@
   const quizToggle = document.getElementById("quizToggle");
   const totalCount = document.getElementById("totalCount");
   const favoriteCount = document.getElementById("favoriteCount");
+  const todayCount = document.getElementById("todayCount");
   const homeFlagButton = document.getElementById("homeFlagButton");
   const phrasesModeButton = document.getElementById("phrasesModeButton");
   const lettersModeButton = document.getElementById("lettersModeButton");
@@ -166,6 +168,10 @@
     return UI_COPY[sourceLang]?.[key] || UI_COPY.ko?.[key] || key;
   }
 
+  function languageName(lang) {
+    return LANGUAGE_NAMES[sourceLang]?.[lang] || LANGUAGES[lang]?.label || lang;
+  }
+
   function versionedAudioUrl(url) {
     if (!url || /^(https?:|data:|blob:)/.test(url)) return url;
     return `${url}${url.includes("?") ? "&" : "?"}v=${ASSET_VERSION}`;
@@ -285,7 +291,7 @@
       button.type = "button";
       button.className = lang === targetLang ? "active" : "";
       button.setAttribute("aria-pressed", String(lang === targetLang));
-      button.innerHTML = `<span class="flag">${language.flag}</span><span>${language.label}</span>`;
+      button.innerHTML = `<span class="flag">${language.flag}</span><span>${languageName(lang)}</span>`;
       button.addEventListener("click", () => setTarget(lang));
       targetTabs.appendChild(button);
     });
@@ -341,8 +347,11 @@
     renderTabs();
     const items = filteredPhrases();
     list.innerHTML = "";
+    list.setAttribute("aria-label", uiText("phraseListLabel"));
+    letterList.setAttribute("aria-label", uiText("letterListLabel"));
     totalCount.textContent = items.length;
     favoriteCount.textContent = state.favorites.size;
+    todayCount.textContent = "0";
 
     items.forEach((item, index) => {
       const id = item.id || `phrase-${formatIndex(item.audioIndex)}`;
@@ -361,7 +370,7 @@
       card.querySelector(".korean").textContent = sourceText;
       card.querySelector(".thai").textContent = targetText;
       card.querySelector(".roman").textContent = romanText;
-      card.querySelector(".speakButton").textContent = `▶ ${targetLanguage.label || "듣기"}`;
+      card.querySelector(".speakButton").textContent = `▶ ${languageName(targetLang) || targetLanguage.label || "듣기"}`;
 
       if (state.quiz) card.classList.add("hiddenThai");
 
@@ -381,7 +390,7 @@
       });
       reveal.addEventListener("click", () => {
         card.classList.toggle("hiddenThai");
-        reveal.textContent = card.classList.contains("hiddenThai") ? `${targetLanguage.label || "정답"} 보기` : uiText("hide");
+        reveal.textContent = card.classList.contains("hiddenThai") ? `${languageName(targetLang) || targetLanguage.label || "정답"} 보기` : uiText("hide");
       });
 
       if (!state.quiz) reveal.textContent = uiText("hide");
@@ -407,11 +416,14 @@
     const sourceLetters = getLetterSource();
     const letters = sourceLetters.map((item, index) => ({ ...item, audioIndex: index + 1 }));
     letterList.innerHTML = "";
+    list.setAttribute("aria-label", uiText("phraseListLabel"));
+    letterList.setAttribute("aria-label", uiText("letterListLabel"));
     const filtered = letters.filter((item) => {
       const text = `${item.type} ${item.char} ${item.name} ${item.sound} ${item.example}`.toLowerCase();
       return !keyword || text.includes(keyword);
     });
     totalCount.textContent = filtered.length;
+    todayCount.textContent = "0";
 
     filtered.forEach((item) => {
       const card = letterTemplate.content.firstElementChild.cloneNode(true);

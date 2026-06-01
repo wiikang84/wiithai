@@ -20,11 +20,6 @@
   box-sizing: border-box;
 }
 
-html,
-body {
-  overflow-x: hidden;
-}
-
 [hidden] {
   display: none !important;
 }
@@ -51,6 +46,7 @@ button {
   width: min(1180px, 100%);
   margin: 0 auto;
   padding: 22px 16px 52px;
+  overflow-x: clip;
 }
 
 .appHeader {
@@ -289,7 +285,7 @@ h1 {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 10px;
-  margin: 14px 0;
+  margin: 10px 0 14px;
 }
 
 .statCard {
@@ -338,12 +334,7 @@ h1 {
 }
 
 .controls {
-  position: sticky;
-  top: 0;
-  z-index: 5;
-  padding: 12px 0 14px;
-  background: rgba(247, 248, 251, 0.94);
-  backdrop-filter: blur(14px);
+  padding: 14px 0 10px;
 }
 
 .controlGrid {
@@ -478,6 +469,10 @@ h1 {
   outline: none;
 }
 
+.filterBar {
+  padding-top: 10px;
+}
+
 #searchInput:focus {
   border-color: var(--accent);
   box-shadow: 0 0 0 4px rgba(0, 167, 165, 0.14);
@@ -511,7 +506,7 @@ h1 {
   align-items: center;
   gap: 8px;
   color: var(--muted);
-  font-weight: 750;
+  font-weight: 700;
 }
 
 .infoHub {
@@ -701,7 +696,7 @@ h1 {
   background: #f7f9fc;
   color: var(--ink);
   line-height: 1.45;
-  font-weight: 760;
+  font-weight: 800;
 }
 
 .phraseCard.hiddenThai .thai,
@@ -861,6 +856,17 @@ h1 {
     position: static;
     top: auto;
     padding: 8px 0 10px;
+  }
+
+  .filterBar {
+    position: sticky;
+    top: 0;
+    z-index: 5;
+    margin: 8px -12px 0;
+    padding: 8px 12px 10px;
+    background: rgba(247, 248, 251, 0.96);
+    backdrop-filter: blur(14px);
+    border-bottom: 1px solid rgba(234, 223, 206, 0.72);
   }
 
   .controlLabel {

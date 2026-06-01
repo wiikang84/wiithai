@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>wiiInfo</title>
     <link rel="icon" href="data:," />
-    <link rel="stylesheet" href="./styles.css?v=20260601-23" />
+    <link rel="stylesheet" href="./styles.css?v=20260601-25" />
   </head>
   <body>
     <main class="app">
@@ -26,33 +26,6 @@
           </div>
         </section>
       </header>
-
-      <section class="infoHub" aria-label="한국 생활 정보">
-        <div id="infoTabs" class="infoTabs" aria-label="생활 정보 선택"></div>
-        <div class="infoPanel">
-          <div>
-            <p id="infoEyebrow" class="controlLabel">Korea info by Wii</p>
-            <h2 id="infoTitle">한국에서 생활하기</h2>
-            <p id="infoSummary">여행, 생활, 집 구하기, 부동산 기초 정보를 한 곳에서 확인합니다.</p>
-          </div>
-          <div id="infoCards" class="infoCards"></div>
-        </div>
-      </section>
-
-      <section class="stats" aria-label="학습 현황">
-        <div class="statCard teal">
-          <span id="totalCount">0</span>
-          <small>학습 항목</small>
-        </div>
-        <div class="statCard coral">
-          <span id="favoriteCount">0</span>
-          <small>즐겨찾기</small>
-        </div>
-        <div class="statCard yellow">
-          <span id="todayCount">10</span>
-          <small>오늘 학습</small>
-        </div>
-      </section>
 
       <section class="controls" aria-label="문장 필터">
         <div class="controlGrid">
@@ -84,6 +57,9 @@
             </div>
           </div>
         </div>
+      </section>
+
+      <section class="filterBar" aria-label="검색과 카테고리">
         <input id="searchInput" type="search" aria-label="문장과 문자 검색" placeholder="한국어, 외국어, 발음 검색" />
         <div id="categoryTabs" class="tabs"></div>
         <label class="toggle">
@@ -92,8 +68,35 @@
         </label>
       </section>
 
-      <section id="phraseList" class="phraseList" aria-label="태국어 문장 목록"></section>
-      <section id="letterList" class="letterList" aria-label="태국어 문자 목록" hidden></section>
+      <section class="stats" aria-label="학습 현황">
+        <div class="statCard teal">
+          <span id="totalCount">0</span>
+          <small>학습 항목</small>
+        </div>
+        <div class="statCard coral">
+          <span id="favoriteCount">0</span>
+          <small>즐겨찾기</small>
+        </div>
+        <div class="statCard yellow">
+          <span id="todayCount">0</span>
+          <small>오늘 학습</small>
+        </div>
+      </section>
+
+      <section id="phraseList" class="phraseList" aria-label="문장 목록"></section>
+      <section id="letterList" class="letterList" aria-label="문자 목록" hidden></section>
+
+      <section class="infoHub" aria-label="한국 생활 정보">
+        <div id="infoTabs" class="infoTabs" aria-label="생활 정보 선택"></div>
+        <div class="infoPanel">
+          <div>
+            <p id="infoEyebrow" class="controlLabel">Korea info by Wii</p>
+            <h2 id="infoTitle">한국에서 생활하기</h2>
+            <p id="infoSummary">여행, 생활, 집 구하기, 부동산 기초 정보를 한 곳에서 확인합니다.</p>
+          </div>
+          <div id="infoCards" class="infoCards"></div>
+        </div>
+      </section>
     </main>
 
     <template id="phraseCardTemplate">
@@ -132,9 +135,9 @@
 
     <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore-compat.js"></script>
-    <script src="./firebase-config.js?v=20260601-23"></script>
-    <script src="./phrases.js?v=20260601-23"></script>
-    <script src="./multilingual-data.js?v=20260601-23"></script>
-    <script src="./app.js?v=20260601-23"></script>
+    <script src="./firebase-config.js?v=20260601-25"></script>
+    <script src="./phrases.js?v=20260601-25"></script>
+    <script src="./multilingual-data.js?v=20260601-25"></script>
+    <script src="./app.js?v=20260601-25"></script>
   </body>
 </html>
