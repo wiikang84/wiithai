@@ -3,9 +3,9 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>wiiinfo</title>
+    <title>wiiInfo</title>
     <link rel="icon" href="data:," />
-    <link rel="stylesheet" href="./styles.css?v=20260601-12" />
+    <link rel="stylesheet" href="./styles.css?v=20260601-15" />
   </head>
   <body>
     <main class="app">
@@ -16,15 +16,12 @@
         </nav>
         <section class="hero">
           <div class="flagMark" aria-hidden="true">
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
+            <span id="heroFlagEmoji" class="heroFlagEmoji">🇰🇷</span>
           </div>
           <div class="heroCopy">
             <p class="eyebrow">Language · Life · Realty</p>
-            <h1>wiiinfo</h1>
+            <h1>wiiInfo</h1>
+            <p class="brandLine">Info by Wii · Korea info by Wii</p>
             <p class="subtitle">윈포는 기준 언어를 고르고 외국어, 한국 생활정보, 부동산 표현까지 이어서 배우는 생활형 정보 앱입니다.</p>
           </div>
         </section>
@@ -47,26 +44,31 @@
 
       <section class="controls" aria-label="문장 필터">
         <div class="controlGrid">
-          <div>
-            <p id="audienceLabel" class="controlLabel">기준 언어</p>
-            <div id="profileTabs" class="audienceTabs profileTabs" aria-label="학습자 선택"></div>
-          </div>
-          <div>
-            <p id="targetLabel" class="controlLabel">배울 언어</p>
-            <div id="targetTabs" class="targetTabs" aria-label="배울 언어 선택"></div>
-          </div>
-          <div>
-            <p id="modeLabel" class="controlLabel">학습 방식</p>
-            <div class="modeTabs" aria-label="학습 모드">
-              <button id="phrasesModeButton" class="active" type="button">문장 100</button>
-              <button id="lettersModeButton" type="button">문자 기초</button>
+          <div class="countryChooser">
+            <div class="chooserHead">
+              <p id="audienceLabel" class="controlLabel">Choose your country</p>
+              <strong>당신은 어느 나라 사람입니까?</strong>
             </div>
+            <div id="profileTabs" class="countryTabs profileTabs" aria-label="국가 선택"></div>
           </div>
-          <div>
-            <p id="voiceLabel" class="controlLabel">화자/목소리</p>
-            <div class="voiceTabs" aria-label="목소리 선택">
-              <button id="femaleVoiceButton" class="active" type="button">여성형</button>
-              <button id="maleVoiceButton" type="button">남성형</button>
+          <div class="learningChooser">
+            <div>
+              <p id="targetLabel" class="controlLabel">Learn</p>
+              <div id="targetTabs" class="targetTabs" aria-label="배울 언어 선택"></div>
+            </div>
+            <div>
+              <p id="modeLabel" class="controlLabel">Mode</p>
+              <div class="modeTabs" aria-label="학습 모드">
+                <button id="phrasesModeButton" class="active" type="button">문장</button>
+                <button id="lettersModeButton" type="button">문자</button>
+              </div>
+            </div>
+            <div>
+              <p id="voiceLabel" class="controlLabel">Voice</p>
+              <div class="voiceTabs" aria-label="목소리 선택">
+                <button id="femaleVoiceButton" class="active" type="button">여성</button>
+                <button id="maleVoiceButton" type="button">남성</button>
+              </div>
             </div>
           </div>
         </div>
@@ -118,9 +120,9 @@
 
     <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore-compat.js"></script>
-    <script src="./firebase-config.js?v=20260601-12"></script>
-    <script src="./phrases.js?v=20260601-12"></script>
-    <script src="./multilingual-data.js?v=20260601-12"></script>
-    <script src="./app.js?v=20260601-12"></script>
+    <script src="./firebase-config.js?v=20260601-15"></script>
+    <script src="./phrases.js?v=20260601-15"></script>
+    <script src="./multilingual-data.js?v=20260601-15"></script>
+    <script src="./app.js?v=20260601-15"></script>
   </body>
 </html>

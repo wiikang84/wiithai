@@ -1,5 +1,5 @@
 (async function () {
-  const ASSET_VERSION = "20260601-12";
+  const ASSET_VERSION = "20260601-15";
   const LANGUAGES = window.WIITHAI_LANGUAGES || {};
   const PROFILES = window.WIITHAI_LEARNER_PROFILES || [];
   let phrases = (window.WIITHAI_MULTI_PHRASES || window.THAI_PHRASES || []).map((item, index) => ({
@@ -37,6 +37,7 @@
   const modeLabel = document.getElementById("modeLabel");
   const voiceLabel = document.getElementById("voiceLabel");
   const quizLabel = document.getElementById("quizLabel");
+  const heroFlagEmoji = document.getElementById("heroFlagEmoji");
 
   let categories = [];
   let currentMode = "phrases";
@@ -168,10 +169,10 @@
     const labels = {
       total: thaiMode ? "รายการ" : "현재 항목",
       favorites: thaiMode ? "บันทึก" : "즐겨찾기",
-      audience: thaiMode ? "ภาษาหลัก" : "기준 언어",
-      target: thaiMode ? "ภาษาเป้าหมาย" : "배울 언어",
-      mode: thaiMode ? "รูปแบบ" : "학습 방식",
-      voice: thaiMode ? "ผู้พูด/เสียง" : "화자/목소리",
+      audience: thaiMode ? "Choose your country" : "Choose your country",
+      target: thaiMode ? "Learn" : "Learn",
+      mode: thaiMode ? "Mode" : "Mode",
+      voice: thaiMode ? "Voice" : "Voice",
       phrases: thaiMode ? "ประโยค" : "문장",
       letters: thaiMode ? "ตัวอักษร" : "문자 기초",
       female: thaiMode ? "ผู้หญิง" : "여성형",
@@ -266,13 +267,21 @@
   }
 
   function renderProfileTabs() {
+    const countryNames = {
+      ko: "Korea",
+      th: "Thailand",
+      ja: "Japan",
+      en: "USA",
+      zh: "China",
+      vi: "Vietnam"
+    };
     profileTabs.innerHTML = "";
     PROFILES.forEach((profile) => {
       const button = document.createElement("button");
       button.type = "button";
       button.className = profile.id === profileId ? "active" : "";
       button.setAttribute("aria-pressed", String(profile.id === profileId));
-      button.innerHTML = `<span class="flag">${profile.flag}</span><span>${profile.label}</span><small>${profile.native}</small>`;
+      button.innerHTML = `<span class="flag">${profile.flag}</span><span>${countryNames[profile.source] || profile.label}</span>`;
       button.addEventListener("click", () => setProfile(profile.id));
       profileTabs.appendChild(button);
     });
@@ -286,7 +295,7 @@
       button.type = "button";
       button.className = lang === targetLang ? "active" : "";
       button.setAttribute("aria-pressed", String(lang === targetLang));
-      button.innerHTML = `<span class="flag">${language.flag}</span><span>${language.label}</span><small>${language.native || ""}</small>`;
+      button.innerHTML = `<span class="flag">${language.flag}</span><span>${language.label}</span>`;
       button.addEventListener("click", () => setTarget(lang));
       targetTabs.appendChild(button);
     });
@@ -422,6 +431,7 @@
     state.search = "";
     searchInput.value = "";
     updateStaticLabels();
+    updateHeroFlag();
     renderProfileTabs();
     renderTargetTabs();
     currentMode === "letters" ? renderLetters() : render();
@@ -479,6 +489,11 @@
     searchInput.placeholder = currentMode === "letters" ? uiText("searchLetters") : uiText("searchPhrases");
   }
 
+  function updateHeroFlag() {
+    const language = LANGUAGES[sourceLang] || {};
+    if (heroFlagEmoji) heroFlagEmoji.textContent = language.flag || "🌐";
+  }
+
   searchInput.addEventListener("input", (event) => {
     state.search = event.target.value;
     letterList.hidden ? render() : renderLetters();
@@ -504,6 +519,7 @@
   refreshCategories();
   saveFavorites();
   updateStaticLabels();
+  updateHeroFlag();
   renderProfileTabs();
   renderTargetTabs();
   setVoice(voiceMode);
