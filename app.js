@@ -1,5 +1,5 @@
 (async function () {
-  const ASSET_VERSION = "20260601-25";
+  const ASSET_VERSION = "20260601-26";
   const LANGUAGES = window.WIITHAI_LANGUAGES || {};
   const LANGUAGE_NAMES = window.WIIINFO_LANGUAGE_NAMES || {};
   const PROFILES = window.WIITHAI_LEARNER_PROFILES || [];
@@ -22,6 +22,9 @@
 
   const list = document.getElementById("phraseList");
   const letterList = document.getElementById("letterList");
+  const loadMoreWrap = document.getElementById("loadMoreWrap");
+  const loadMoreButton = document.getElementById("loadMoreButton");
+  const loadMoreMeta = document.getElementById("loadMoreMeta");
   const template = document.getElementById("phraseCardTemplate");
   const letterTemplate = document.getElementById("letterCardTemplate");
   const tabs = document.getElementById("categoryTabs");
@@ -53,6 +56,7 @@
 
   let categories = [];
   let currentMode = "phrases";
+  let visibleLimit = 0;
   let voiceMode = localStorage.getItem("wiiinfoVoiceMode") || localStorage.getItem("wiithaiVoiceMode") || "female";
   let profileId = localStorage.getItem("wiiinfoProfileId") || localStorage.getItem("wiithaiProfileId") || "ko";
   let activeProfile = getProfile(profileId);
@@ -170,6 +174,28 @@
 
   function languageName(lang) {
     return LANGUAGE_NAMES[sourceLang]?.[lang] || LANGUAGES[lang]?.label || lang;
+  }
+
+  function getPhrasePageSize() {
+    const width = list?.clientWidth || window.innerWidth;
+    if (width < 680) return 10;
+    if (width < 960) return 20;
+    if (width < 1280) return 18;
+    return 20;
+  }
+
+  function resetVisibleLimit() {
+    visibleLimit = getPhrasePageSize();
+  }
+
+  function loadMoreText(count) {
+    return (uiText("showMore") || "{count}개 더보기").replace("{count}", count);
+  }
+
+  function loadMoreMetaText(visible, total) {
+    return (uiText("showingCount") || "{visible}/{total}개 표시 중")
+      .replace("{visible}", visible)
+      .replace("{total}", total);
   }
 
   function versionedAudioUrl(url) {
@@ -307,6 +333,7 @@
       button.className = category === state.category ? "active" : "";
       button.addEventListener("click", () => {
         state.category = category;
+        resetVisibleLimit();
         render();
       });
       tabs.appendChild(button);
@@ -346,6 +373,8 @@
   function render() {
     renderTabs();
     const items = filteredPhrases();
+    if (!visibleLimit) resetVisibleLimit();
+    const visibleItems = items.slice(0, visibleLimit);
     list.innerHTML = "";
     list.setAttribute("aria-label", uiText("phraseListLabel"));
     letterList.setAttribute("aria-label", uiText("letterListLabel"));
@@ -353,7 +382,7 @@
     favoriteCount.textContent = state.favorites.size;
     todayCount.textContent = "0";
 
-    items.forEach((item, index) => {
+    visibleItems.forEach((item, index) => {
       const id = item.id || `phrase-${formatIndex(item.audioIndex)}`;
       const card = template.content.firstElementChild.cloneNode(true);
       const star = card.querySelector(".starButton");
@@ -397,6 +426,22 @@
       card.style.order = String(index);
       list.appendChild(card);
     });
+
+    renderLoadMore(items.length);
+  }
+
+  function renderLoadMore(total) {
+    if (!loadMoreWrap || !loadMoreButton || !loadMoreMeta) return;
+    const visible = Math.min(visibleLimit, total);
+    const remaining = Math.max(total - visible, 0);
+    loadMoreWrap.hidden = currentMode !== "phrases" || remaining <= 0;
+    if (remaining <= 0) {
+      loadMoreMeta.textContent = total ? loadMoreMetaText(visible, total) : "";
+      return;
+    }
+    const nextCount = Math.min(getPhrasePageSize(), remaining);
+    loadMoreButton.textContent = loadMoreText(nextCount);
+    loadMoreMeta.textContent = loadMoreMetaText(visible, total);
   }
 
   function getLetterSource() {
@@ -416,6 +461,7 @@
     const sourceLetters = getLetterSource();
     const letters = sourceLetters.map((item, index) => ({ ...item, audioIndex: index + 1 }));
     letterList.innerHTML = "";
+    loadMoreWrap.hidden = true;
     list.setAttribute("aria-label", uiText("phraseListLabel"));
     letterList.setAttribute("aria-label", uiText("letterListLabel"));
     const filtered = letters.filter((item) => {
@@ -464,6 +510,7 @@
     state.category = "전체";
     state.search = "";
     searchInput.value = "";
+    resetVisibleLimit();
     updateStaticLabels();
     updateHeroFlag();
     renderProfileTabs();
@@ -479,6 +526,7 @@
     state.category = "전체";
     state.search = "";
     searchInput.value = "";
+    resetVisibleLimit();
     updateStaticLabels();
     updateHeroFlag();
     renderTargetTabs();
@@ -508,6 +556,7 @@
     searchInput.value = "";
     quizToggle.checked = false;
     state.quiz = false;
+    resetVisibleLimit();
     setMode("phrases");
   }
 
@@ -547,6 +596,7 @@
 
   searchInput.addEventListener("input", (event) => {
     state.search = event.target.value;
+    resetVisibleLimit();
     letterList.hidden ? render() : renderLetters();
   });
   quizToggle.addEventListener("change", (event) => {
@@ -558,12 +608,23 @@
   femaleVoiceButton.addEventListener("click", () => setVoice("female"));
   maleVoiceButton.addEventListener("click", () => setVoice("male"));
   homeFlagButton.addEventListener("click", goHome);
+  loadMoreButton.addEventListener("click", () => {
+    visibleLimit += getPhrasePageSize();
+    render();
+  });
+  window.addEventListener("resize", () => {
+    if (currentMode !== "phrases") return;
+    const pageSize = getPhrasePageSize();
+    if (!visibleLimit || visibleLimit < pageSize) visibleLimit = pageSize;
+    render();
+  });
 
   if ("speechSynthesis" in window) speechSynthesis.onvoiceschanged = () => getVoice("th-TH");
   const firebasePhrases = await loadFirebasePhrases();
   if (firebasePhrases.length > 0) phrases = firebasePhrases;
 
   refreshCategories();
+  resetVisibleLimit();
   saveFavorites();
   updateStaticLabels();
   updateHeroFlag();

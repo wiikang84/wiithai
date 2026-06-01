@@ -600,6 +600,36 @@ h1 {
   gap: 14px;
 }
 
+.loadMoreWrap {
+  display: grid;
+  justify-items: center;
+  gap: 8px;
+  margin: 16px 0 20px;
+}
+
+.loadMoreButton {
+  min-height: 48px;
+  padding: 0 24px;
+  border: 0;
+  border-radius: 999px;
+  background: var(--ink);
+  color: #fff;
+  cursor: pointer;
+  font-weight: 900;
+  box-shadow: 0 12px 26px rgba(36, 52, 71, 0.16);
+}
+
+.loadMoreButton:hover {
+  background: #172536;
+}
+
+.loadMoreMeta {
+  margin: 0;
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 800;
+}
+
 .phraseCard {
   min-height: 268px;
   display: flex;

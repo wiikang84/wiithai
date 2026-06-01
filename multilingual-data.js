@@ -34,49 +34,56 @@ window.WIIINFO_UI_COPY = {
     countryQuestion: "당신은 어느 나라 사람입니까?", target: "Learn", mode: "Mode", voice: "Voice",
     phrases: "문장", letters: "문자", female: "여성", male: "남성", quiz: "기준 언어 먼저 보기",
     searchPhrases: "문장, 뜻, 발음 검색", searchLetters: "문자, 이름, 발음 검색", hide: "가리기",
-    infoEyebrow: "Korea info by Wii", phraseListLabel: "문장 목록", letterListLabel: "문자 목록"
+    infoEyebrow: "Korea info by Wii", phraseListLabel: "문장 목록", letterListLabel: "문자 목록",
+    showMore: "{count}개 더보기", showingCount: "{visible}/{total}개 표시 중"
   },
   th: {
     total: "รายการเรียน", favorites: "บันทึก", today: "เรียนวันนี้", audience: "Choose your country",
     countryQuestion: "คุณมาจากประเทศอะไร?", target: "เรียน", mode: "โหมด", voice: "เสียง",
     phrases: "ประโยค", letters: "ตัวอักษร", female: "หญิง", male: "ชาย", quiz: "ดูภาษาของฉันก่อน",
     searchPhrases: "ค้นหาประโยค ความหมาย หรือเสียงอ่าน", searchLetters: "ค้นหาตัวอักษรหรือเสียง", hide: "ซ่อน",
-    infoEyebrow: "ข้อมูลเกาหลี by Wii", phraseListLabel: "รายการประโยค", letterListLabel: "รายการตัวอักษร"
+    infoEyebrow: "ข้อมูลเกาหลี by Wii", phraseListLabel: "รายการประโยค", letterListLabel: "รายการตัวอักษร",
+    showMore: "ดูเพิ่ม {count} รายการ", showingCount: "แสดง {visible}/{total} รายการ"
   },
   ja: {
     total: "学習項目", favorites: "お気に入り", today: "今日の学習", audience: "Choose your country",
     countryQuestion: "あなたはどこの国の人ですか？", target: "学ぶ", mode: "モード", voice: "音声",
     phrases: "文章", letters: "文字", female: "女性", male: "男性", quiz: "自分の言語を先に見る",
     searchPhrases: "文章・意味・発音を検索", searchLetters: "文字・名前・発音を検索", hide: "隠す",
-    infoEyebrow: "Korea info by Wii", phraseListLabel: "文章リスト", letterListLabel: "文字リスト"
+    infoEyebrow: "Korea info by Wii", phraseListLabel: "文章リスト", letterListLabel: "文字リスト",
+    showMore: "{count}件もっと見る", showingCount: "{visible}/{total}件を表示中"
   },
   en: {
     total: "Items", favorites: "Saved", today: "Today", audience: "Choose your country",
     countryQuestion: "Which country are you from?", target: "Learn", mode: "Mode", voice: "Voice",
     phrases: "Phrases", letters: "Letters", female: "Female", male: "Male", quiz: "Show my language first",
     searchPhrases: "Search phrase, meaning, or pronunciation", searchLetters: "Search letters or sounds", hide: "Hide",
-    infoEyebrow: "Korea info by Wii", phraseListLabel: "Phrase list", letterListLabel: "Letter list"
+    infoEyebrow: "Korea info by Wii", phraseListLabel: "Phrase list", letterListLabel: "Letter list",
+    showMore: "Show {count} more", showingCount: "Showing {visible}/{total}"
   },
   zh: {
     total: "学习项目", favorites: "收藏", today: "今日学习", audience: "Choose your country",
     countryQuestion: "你来自哪个国家？", target: "学习", mode: "模式", voice: "声音",
     phrases: "句子", letters: "文字", female: "女声", male: "男声", quiz: "先看我的语言",
     searchPhrases: "搜索句子、意思或发音", searchLetters: "搜索文字或发音", hide: "隐藏",
-    infoEyebrow: "韩国信息 by Wii", phraseListLabel: "句子列表", letterListLabel: "文字列表"
+    infoEyebrow: "韩国信息 by Wii", phraseListLabel: "句子列表", letterListLabel: "文字列表",
+    showMore: "再看 {count} 个", showingCount: "正在显示 {visible}/{total}"
   },
   vi: {
     total: "Bài học", favorites: "Đã lưu", today: "Hôm nay", audience: "Choose your country",
     countryQuestion: "Bạn là người nước nào?", target: "Học", mode: "Chế độ", voice: "Giọng",
     phrases: "Câu", letters: "Chữ cái", female: "Nữ", male: "Nam", quiz: "Xem ngôn ngữ của tôi trước",
     searchPhrases: "Tìm câu, nghĩa hoặc phát âm", searchLetters: "Tìm chữ cái hoặc âm", hide: "Ẩn",
-    infoEyebrow: "Thông tin Hàn Quốc by Wii", phraseListLabel: "Danh sách câu", letterListLabel: "Danh sách chữ cái"
+    infoEyebrow: "Thông tin Hàn Quốc by Wii", phraseListLabel: "Danh sách câu", letterListLabel: "Danh sách chữ cái",
+    showMore: "Xem thêm {count}", showingCount: "Đang hiển thị {visible}/{total}"
   },
   es: {
     total: "Lecciones", favorites: "Guardado", today: "Hoy", audience: "Choose your country",
     countryQuestion: "¿De qué país eres?", target: "Aprender", mode: "Modo", voice: "Voz",
     phrases: "Frases", letters: "Letras", female: "Mujer", male: "Hombre", quiz: "Ver mi idioma primero",
     searchPhrases: "Buscar frase, significado o pronunciación", searchLetters: "Buscar letras o sonidos", hide: "Ocultar",
-    infoEyebrow: "Información de Corea by Wii", phraseListLabel: "Lista de frases", letterListLabel: "Lista de letras"
+    infoEyebrow: "Información de Corea by Wii", phraseListLabel: "Lista de frases", letterListLabel: "Lista de letras",
+    showMore: "Ver {count} más", showingCount: "Mostrando {visible}/{total}"
   }
 };
 
