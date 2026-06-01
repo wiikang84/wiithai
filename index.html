@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>wiithai</title>
+    <link rel="icon" href="data:," />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <main class="app">
+      <header class="appHeader">
+        <nav class="quickNav" aria-label="빠른 이동">
+          <button id="homeButton" type="button">홈</button>
+          <button id="backButton" type="button">뒤로</button>
+        </nav>
+        <section class="hero">
+          <div class="flagMark" aria-hidden="true">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+          <div class="heroCopy">
+            <p class="eyebrow">Korean Thai Phrasebook</p>
+            <h1>wiithai</h1>
+            <p class="subtitle">한국인에게는 태국어를, 태국인에게는 한국어를 같은 문장으로 보여주는 기본 학습 앱</p>
+          </div>
+        </section>
+      </header>
+
+      <section class="stats" aria-label="학습 현황">
+        <div class="statCard teal">
+          <span id="totalCount">0</span>
+          <small>현재 항목</small>
+        </div>
+        <div class="statCard coral">
+          <span id="favoriteCount">0</span>
+          <small>즐겨찾기</small>
+        </div>
+        <div class="statCard yellow">
+          <span id="todayCount">10</span>
+          <small>오늘 학습</small>
+        </div>
+      </section>
+
+      <section class="controls" aria-label="문장 필터">
+        <div class="controlGrid">
+          <div>
+            <p class="controlLabel">학습 대상</p>
+            <div class="audienceTabs" aria-label="학습자 선택">
+              <button id="koreanLearnerButton" class="active" type="button">한국인용</button>
+              <button id="thaiViewerButton" type="button">태국인용</button>
+            </div>
+          </div>
+          <div>
+            <p class="controlLabel">학습 방식</p>
+            <div class="modeTabs" aria-label="학습 모드">
+              <button id="phrasesModeButton" class="active" type="button">문장 100</button>
+              <button id="lettersModeButton" type="button">문자 기초</button>
+            </div>
+          </div>
+          <div>
+            <p class="controlLabel">목소리</p>
+            <div class="voiceTabs" aria-label="목소리 선택">
+              <button id="femaleVoiceButton" class="active" type="button">여성</button>
+              <button id="maleVoiceButton" type="button">남성</button>
+            </div>
+          </div>
+        </div>
+        <input id="searchInput" type="search" placeholder="한국어, 태국어, 발음 검색" />
+        <div id="categoryTabs" class="tabs"></div>
+        <label class="toggle">
+          <input id="quizToggle" type="checkbox" />
+          <span>한국어 먼저 보기</span>
+        </label>
+      </section>
+
+      <section id="phraseList" class="phraseList" aria-label="태국어 문장 목록"></section>
+      <section id="letterList" class="letterList" aria-label="태국어 문자 목록" hidden></section>
+    </main>
+
+    <template id="phraseCardTemplate">
+      <article class="phraseCard">
+        <div class="cardHead">
+          <span class="tag"></span>
+          <button class="starButton" type="button" title="즐겨찾기">☆</button>
+        </div>
+        <p class="korean"></p>
+        <p class="thai"></p>
+        <p class="roman"></p>
+        <div class="actions">
+          <button class="speakButton" type="button">▶ 듣기</button>
+          <button class="revealButton" type="button">태국어 보기</button>
+        </div>
+      </article>
+    </template>
+
+    <template id="letterCardTemplate">
+      <article class="letterCard">
+        <p class="letter"></p>
+        <div>
+          <p class="letterName"></p>
+          <p class="letterSound"></p>
+          <p class="letterExample"></p>
+        </div>
+        <button class="letterSpeakButton" type="button">▶</button>
+      </article>
+    </template>
+
+    <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore-compat.js"></script>
+    <script src="./firebase-config.js"></script>
+    <script src="./phrases.js"></script>
+    <script src="./app.js"></script>
+  </body>
+</html>

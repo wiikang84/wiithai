@@ -1,0 +1,15 @@
+{
+  "projects": {
+    "default": "wiigame-448c7"
+  },
+  "targets": {
+    "wiigame-448c7": {
+      "hosting": {
+        "wiithai": [
+          "wiithai"
+        ]
+      }
+    }
+  },
+  "etags": {}
+}
