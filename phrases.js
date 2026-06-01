@@ -110,6 +110,37 @@ window.THAI_PHRASES = [
   { c: "한국생활", ko: "제가 확인해 보겠습니다.", th: "ผมจะตรวจสอบให้ครับ", ro: "phom ja dtruat-sop hai khrab" }
 ];
 
+function makeFemaleThai(text) {
+  let value = text
+    .replaceAll("ผม", "ฉัน")
+    .replaceAll("ครับ", "ค่ะ");
+
+  const questionPatterns = ["ไหมค่ะ", "อะไรค่ะ", "ที่ไหนค่ะ", "เท่าไหร่ค่ะ", "กี่โมงค่ะ"];
+  questionPatterns.forEach((pattern) => {
+    value = value.replaceAll(pattern, pattern.replace("ค่ะ", "คะ"));
+  });
+
+  return value;
+}
+
+function makeFemaleRoman(text) {
+  return text
+    .replaceAll("phom", "chan")
+    .replaceAll("khrab", "kha");
+}
+
+window.WIITHAI_MAKE_FEMALE_THAI = makeFemaleThai;
+window.WIITHAI_MAKE_FEMALE_ROMAN = makeFemaleRoman;
+
+window.THAI_PHRASES = window.THAI_PHRASES.map((phrase, index) => ({
+  ...phrase,
+  n: phrase.n || index + 1,
+  thMale: phrase.th,
+  roMale: phrase.ro,
+  thFemale: phrase.thFemale || makeFemaleThai(phrase.th),
+  roFemale: phrase.roFemale || makeFemaleRoman(phrase.ro)
+}));
+
 window.THAI_LETTERS = [
   { type: "자음", char: "ก", name: "กอ ไก่", sound: "gaw gai · 한국어 ㄱ에 가까운 소리", example: "ไก่(gai) 닭" },
   { type: "자음", char: "ข", name: "ขอ ไข่", sound: "khor khai · 숨이 섞인 ㅋ 계열", example: "ไข่(khai) 달걀" },

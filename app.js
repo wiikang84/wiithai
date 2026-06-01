@@ -1,5 +1,5 @@
 (async function () {
-  const ASSET_VERSION = "20260601-5";
+  const ASSET_VERSION = "20260601-7";
   let phrases = (window.THAI_PHRASES || []).map((item, index) => ({
     ...item,
     audioIndex: Number(item.audioIndex || item.n || index + 1),
@@ -67,7 +67,11 @@
           c: data.category || "기타",
           ko: data.ko || "",
           th: data.th || "",
+          thMale: data.thMale || data.th || "",
+          thFemale: data.thFemale || (window.WIITHAI_MAKE_FEMALE_THAI ? window.WIITHAI_MAKE_FEMALE_THAI(data.th || "") : ""),
           ro: data.roman || data.ro || "",
+          roMale: data.roMale || data.roman || data.ro || "",
+          roFemale: data.roFemale || (window.WIITHAI_MAKE_FEMALE_ROMAN ? window.WIITHAI_MAKE_FEMALE_ROMAN(data.roman || data.ro || "") : ""),
           audioUrl: data.audioUrl || "",
           audioUrlMale: data.audioUrlMale || "",
           koAudioUrl: data.koAudioUrl || "",
@@ -140,11 +144,11 @@
       today: thaiMode ? "วันนี้" : "오늘 학습",
       audience: thaiMode ? "ผู้เรียน" : "학습 대상",
       mode: thaiMode ? "รูปแบบ" : "학습 방식",
-      voice: thaiMode ? "เสียง" : "목소리",
+      voice: thaiMode ? "ผู้พูด/เสียง" : "화자/목소리",
       phrases: thaiMode ? "100 ประโยค" : "문장 100",
       letters: thaiMode ? "ตัวอักษร" : "문자 기초",
-      female: thaiMode ? "หญิง" : "여성",
-      male: thaiMode ? "ชาย" : "남성",
+      female: thaiMode ? "ผู้หญิง" : "여성형",
+      male: thaiMode ? "ผู้ชาย" : "남성형",
       quiz: thaiMode ? "ดูภาษาไทยก่อน" : "한국어 먼저 보기",
       searchPhrases: thaiMode ? "ค้นหาภาษาไทย เกาหลี หรือเสียงอ่าน" : "한국어, 태국어, 발음 검색",
       searchLetters: thaiMode ? "ค้นหาพยัญชนะ สระ หรือชื่ออักษรเกาหลี" : "태국어 문자, 이름, 발음 검색",
@@ -164,6 +168,14 @@
   function getThaiAudioUrl(item) {
     const customUrl = voiceMode === "male" ? item.audioUrlMale : item.audioUrl;
     return customUrl ? versionedAudioUrl(customUrl) : getPhraseAudioUrl(item.audioIndex);
+  }
+
+  function getThaiText(item) {
+    return voiceMode === "male" ? item.thMale || item.th : item.thFemale || item.th;
+  }
+
+  function getThaiRoman(item) {
+    return voiceMode === "male" ? item.roMale || item.ro : item.roFemale || item.ro;
   }
 
   function getKoreanPhraseAudioUrl(item) {
@@ -233,9 +245,10 @@
       card.querySelector(".numberBadge").textContent = `#${audioNumber}`;
       card.querySelector(".tag").textContent = categoryLabel(item.c);
       const isThaiViewer = audienceMode === "th";
-      card.querySelector(".korean").textContent = isThaiViewer ? item.th : item.ko;
-      card.querySelector(".thai").textContent = isThaiViewer ? item.ko : item.th;
-      card.querySelector(".roman").textContent = isThaiViewer ? `อ่านเกาหลี: ${romanizeKorean(item.ko)}` : item.ro;
+      const thaiText = getThaiText(item);
+      card.querySelector(".korean").textContent = isThaiViewer ? thaiText : item.ko;
+      card.querySelector(".thai").textContent = isThaiViewer ? item.ko : thaiText;
+      card.querySelector(".roman").textContent = isThaiViewer ? `อ่านเกาหลี: ${romanizeKorean(item.ko)}` : getThaiRoman(item);
       card.querySelector(".speakButton").textContent = isThaiViewer ? uiText("listenKorean") : uiText("listenThai");
 
       if (state.quiz) card.classList.add("hiddenThai");
@@ -259,7 +272,7 @@
           speak(item.ko, getKoreanPhraseAudioUrl(item), "ko-KR");
           return;
         }
-        speak(item.th, getThaiAudioUrl(item), "th-TH");
+        speak(getThaiText(item), getThaiAudioUrl(item), "th-TH");
       });
       reveal.addEventListener("click", () => {
         card.classList.toggle("hiddenThai");
@@ -334,6 +347,11 @@
     maleVoiceButton.setAttribute("aria-pressed", String(mode === "male"));
     femaleVoiceButton.textContent = uiText("female");
     maleVoiceButton.textContent = uiText("male");
+    if (currentMode === "letters") {
+      renderLetters();
+    } else {
+      render();
+    }
   }
 
   function setAudience(mode) {

@@ -16,6 +16,7 @@ const languageCode = process.env.WIITHAI_TTS_LANGUAGE || "th-TH";
 const phraseField = process.env.WIITHAI_PHRASE_FIELD || "th";
 const includeLetters = process.env.WIITHAI_INCLUDE_LETTERS !== "false";
 const letterSource = process.env.WIITHAI_LETTER_SOURCE || "thai";
+const overwrite = process.env.WIITHAI_TTS_OVERWRITE === "true";
 
 fs.mkdirSync(phraseDir, { recursive: true });
 fs.mkdirSync(letterDir, { recursive: true });
@@ -92,7 +93,7 @@ function synthesize(token, text) {
 }
 
 async function writeAudio(token, text, filePath) {
-  if (fs.existsSync(filePath) && fs.statSync(filePath).size > 0) {
+  if (!overwrite && fs.existsSync(filePath) && fs.statSync(filePath).size > 0) {
     return "skip";
   }
   const audioContent = await synthesize(token, text);

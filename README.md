@@ -22,6 +22,7 @@ node tools/generate-google-tts.js
 - 태국어 100문장
 - 한국어 / 태국어 / 영어식 발음 표기
 - 문장/문자 카드 번호 표시
+- 태국어 문장 남성형/여성형 화자 전환
 - 카테고리 필터
 - 검색
 - 즐겨찾기 저장
@@ -30,6 +31,12 @@ node tools/generate-google-tts.js
 - 태국어 음성 듣기
   - `audioUrl`이 있으면 원어민 녹음 파일 재생
   - `audioUrl`이 없으면 API 비용 없는 브라우저 내장 태국어 음성 재생
+
+## 태국어 화자 성별
+
+여성형은 `audio/phrases/001.mp3`처럼 기본 `audio` 폴더를 사용하고, 남성형은 `audio-male/phrases/001.mp3`를 사용합니다. 화면 문장도 같은 번호에서 여성형 `ฉัน/ค่ะ/คะ`, 남성형 `ผม/ครับ`으로 같이 전환됩니다.
+
+Firestore를 사용할 때는 필요하면 `thMale`, `thFemale`, `roMale`, `roFemale`, `audioUrlMale` 필드를 넣을 수 있습니다. `thFemale`이 없으면 앱이 기본 규칙으로 여성형을 자동 생성합니다.
 
 ## 번호와 음성 파일 수정 규칙
 
