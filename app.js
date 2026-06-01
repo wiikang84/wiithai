@@ -1,11 +1,18 @@
 (async function () {
-  const ASSET_VERSION = "20260601-26";
+  const ASSET_VERSION = "20260601-28";
   const LANGUAGES = window.WIITHAI_LANGUAGES || {};
   const LANGUAGE_NAMES = window.WIIINFO_LANGUAGE_NAMES || {};
   const PROFILES = window.WIITHAI_LEARNER_PROFILES || [];
   const UI_COPY = window.WIIINFO_UI_COPY || {};
   const CATEGORY_LABELS = window.WIIINFO_CATEGORY_LABELS || {};
   const INFO_SECTIONS = window.WIIINFO_INFO_SECTIONS || {};
+  const AUDIO_FOLDERS = {
+    ja: { female: "audio-ja", male: "audio-ja-male" },
+    en: { female: "audio-en", male: "audio-en-male" },
+    zh: { female: "audio-zh", male: "audio-zh-male" },
+    vi: { female: "audio-vi", male: "audio-vi-male" },
+    es: { female: "audio-es", male: "audio-es-male" }
+  };
   let phrases = (window.WIITHAI_MULTI_PHRASES || window.THAI_PHRASES || []).map((item, index) => ({
     ...item,
     audioIndex: Number(item.audioIndex || item.n || index + 1),
@@ -236,6 +243,10 @@
       const folder = voiceMode === "male" ? "audio-ko-male" : "audio-ko";
       return versionedAudioUrl(`./${folder}/phrases/${formatIndex(item.audioIndex)}.mp3`);
     }
+    if (AUDIO_FOLDERS[lang]) {
+      const folder = AUDIO_FOLDERS[lang][voiceMode] || AUDIO_FOLDERS[lang].female;
+      return versionedAudioUrl(`./${folder}/phrases/${formatIndex(item.audioIndex)}.mp3`);
+    }
     return "";
   }
 
@@ -246,6 +257,10 @@
     }
     if (lang === "ko") {
       const folder = voiceMode === "male" ? "audio-ko-male" : "audio-ko";
+      return versionedAudioUrl(`./${folder}/letters/${formatIndex(audioIndex)}.mp3`);
+    }
+    if (AUDIO_FOLDERS[lang]) {
+      const folder = AUDIO_FOLDERS[lang][voiceMode] || AUDIO_FOLDERS[lang].female;
       return versionedAudioUrl(`./${folder}/letters/${formatIndex(audioIndex)}.mp3`);
     }
     return "";

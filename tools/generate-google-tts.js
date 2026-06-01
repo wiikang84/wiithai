@@ -5,6 +5,7 @@ const { execFileSync } = require("child_process");
 
 global.window = global;
 require("../phrases.js");
+require("../multilingual-data.js");
 
 const projectId = process.env.GOOGLE_CLOUD_PROJECT || "wiigame-448c7";
 const root = path.resolve(__dirname, "..");
@@ -17,6 +18,25 @@ const phraseField = process.env.WIITHAI_PHRASE_FIELD || "th";
 const includeLetters = process.env.WIITHAI_INCLUDE_LETTERS !== "false";
 const letterSource = process.env.WIITHAI_LETTER_SOURCE || "thai";
 const overwrite = process.env.WIITHAI_TTS_OVERWRITE === "true";
+const phrases = process.env.WIITHAI_USE_MULTI_PHRASES === "false"
+  ? THAI_PHRASES
+  : (global.WIITHAI_MULTI_PHRASES || THAI_PHRASES);
+const letterSources = {
+  thai: global.THAI_LETTERS,
+  th: global.THAI_LETTERS,
+  korean: global.KOREAN_LETTERS,
+  ko: global.KOREAN_LETTERS,
+  japanese: global.JAPANESE_LETTERS,
+  ja: global.JAPANESE_LETTERS,
+  english: global.ENGLISH_LETTERS,
+  en: global.ENGLISH_LETTERS,
+  chinese: global.CHINESE_LETTERS,
+  zh: global.CHINESE_LETTERS,
+  vietnamese: global.VIETNAMESE_LETTERS,
+  vi: global.VIETNAMESE_LETTERS,
+  spanish: global.SPANISH_LETTERS,
+  es: global.SPANISH_LETTERS
+};
 
 fs.mkdirSync(phraseDir, { recursive: true });
 fs.mkdirSync(letterDir, { recursive: true });
@@ -35,7 +55,10 @@ function getAccessToken() {
     "gcloud.cmd"
   );
   const command = fs.existsSync(localGcloud) ? localGcloud : "gcloud";
-  return execFileSync(command, ["auth", "print-access-token"], {
+  const tokenCommand = process.platform === "win32" && command.endsWith(".cmd")
+    ? ["cmd.exe", ["/c", command, "auth", "print-access-token"]]
+    : [command, ["auth", "print-access-token"]];
+  return execFileSync(tokenCommand[0], tokenCommand[1], {
     encoding: "utf8"
   }).trim();
 }
@@ -106,16 +129,25 @@ async function main() {
   let written = 0;
   let skipped = 0;
 
-  for (const [index, phrase] of THAI_PHRASES.entries()) {
+  for (const [index, phrase] of phrases.entries()) {
     const filePath = path.join(phraseDir, `${String(index + 1).padStart(3, "0")}.mp3`);
-    const result = await writeAudio(token, phrase[phraseField], filePath);
+    const text = phrase[phraseField];
+    if (!text) {
+      console.log(`skip phrase ${index + 1}: missing ${phraseField}`);
+      skipped += 1;
+      continue;
+    }
+    const result = await writeAudio(token, text, filePath);
     written += result === "write" ? 1 : 0;
     skipped += result === "skip" ? 1 : 0;
-    console.log(`${result} phrase ${index + 1}: ${phrase[phraseField]}`);
+    console.log(`${result} phrase ${index + 1}: ${text}`);
   }
 
   if (includeLetters) {
-    const letters = letterSource === "korean" ? KOREAN_LETTERS : THAI_LETTERS;
+    const letters = letterSources[letterSource] || [];
+    if (letters.length === 0) {
+      console.log(`skip letters: unknown source ${letterSource}`);
+    }
     for (const [index, letter] of letters.entries()) {
       const filePath = path.join(letterDir, `${String(index + 1).padStart(3, "0")}.mp3`);
       const text = `${letter.char} ${letter.name}`;
