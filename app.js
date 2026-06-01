@@ -1,5 +1,5 @@
 (async function () {
-  const ASSET_VERSION = "20260601-18";
+  const ASSET_VERSION = "20260601-19";
   const LANGUAGES = window.WIITHAI_LANGUAGES || {};
   const PROFILES = window.WIITHAI_LEARNER_PROFILES || [];
   const UI_COPY = window.WIIINFO_UI_COPY || {};
@@ -42,6 +42,7 @@
   const voiceLabel = document.getElementById("voiceLabel");
   const quizLabel = document.getElementById("quizLabel");
   const heroFlagEmoji = document.getElementById("heroFlagEmoji");
+  const heroTargetFlagEmoji = document.getElementById("heroTargetFlagEmoji");
   const countryQuestion = document.getElementById("countryQuestion");
   const infoTabs = document.getElementById("infoTabs");
   const infoEyebrow = document.getElementById("infoEyebrow");
@@ -468,6 +469,7 @@
     state.search = "";
     searchInput.value = "";
     updateStaticLabels();
+    updateHeroFlag();
     renderTargetTabs();
     refreshCategories();
     currentMode === "letters" ? renderLetters() : render();
@@ -516,8 +518,10 @@
   }
 
   function updateHeroFlag() {
-    const language = LANGUAGES[sourceLang] || {};
-    if (heroFlagEmoji) heroFlagEmoji.textContent = language.flag || "🌐";
+    const sourceLanguage = LANGUAGES[sourceLang] || {};
+    const targetLanguage = LANGUAGES[targetLang] || {};
+    if (heroFlagEmoji) heroFlagEmoji.textContent = sourceLanguage.flag || "🌐";
+    if (heroTargetFlagEmoji) heroTargetFlagEmoji.textContent = targetLanguage.flag || "🌐";
   }
 
   searchInput.addEventListener("input", (event) => {
