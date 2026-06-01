@@ -1,4 +1,5 @@
 (async function () {
+  const ASSET_VERSION = "20260601-5";
   let phrases = (window.THAI_PHRASES || []).map((item, index) => ({
     ...item,
     audioIndex: Number(item.audioIndex || item.n || index + 1),
@@ -8,7 +9,7 @@
     category: "전체",
     search: "",
     quiz: false,
-    favorites: new Set(JSON.parse(localStorage.getItem("thaiPhraseFavorites") || "[]"))
+    favorites: new Set(readJson("thaiPhraseFavorites", []))
   };
 
   const list = document.getElementById("phraseList");
@@ -28,10 +29,24 @@
   const thaiViewerButton = document.getElementById("thaiViewerButton");
   const femaleVoiceButton = document.getElementById("femaleVoiceButton");
   const maleVoiceButton = document.getElementById("maleVoiceButton");
+  const audienceLabel = document.getElementById("audienceLabel");
+  const modeLabel = document.getElementById("modeLabel");
+  const voiceLabel = document.getElementById("voiceLabel");
+  const quizLabel = document.getElementById("quizLabel");
   let categories = [];
   let currentMode = "phrases";
   let voiceMode = localStorage.getItem("wiithaiVoiceMode") || "female";
   let audienceMode = localStorage.getItem("wiithaiAudienceMode") || "ko";
+
+  function readJson(key, fallback) {
+    try {
+      const value = localStorage.getItem(key);
+      return value ? JSON.parse(value) : fallback;
+    } catch {
+      localStorage.removeItem(key);
+      return fallback;
+    }
+  }
 
   async function loadFirebasePhrases() {
     if (!window.firebase || !window.WIITHAI_FIREBASE_CONFIG) return [];
@@ -54,6 +69,9 @@
           th: data.th || "",
           ro: data.roman || data.ro || "",
           audioUrl: data.audioUrl || "",
+          audioUrlMale: data.audioUrlMale || "",
+          koAudioUrl: data.koAudioUrl || "",
+          koAudioUrlMale: data.koAudioUrlMale || "",
           audioIndex: Number(data.audioIndex || data.n || data.sortOrder || index + 1),
           sortOrder: data.sortOrder || 0
         };
@@ -98,6 +116,59 @@
 
   function formatIndex(number) {
     return String(number || 0).padStart(3, "0");
+  }
+
+  function romanizeKorean(text) {
+    const initials = ["g", "kk", "n", "d", "tt", "r", "m", "b", "pp", "s", "ss", "", "j", "jj", "ch", "k", "t", "p", "h"];
+    const vowels = ["a", "ae", "ya", "yae", "eo", "e", "yeo", "ye", "o", "wa", "wae", "oe", "yo", "u", "wo", "we", "wi", "yu", "eu", "ui", "i"];
+    const finals = ["", "k", "k", "k", "n", "n", "n", "t", "l", "k", "m", "p", "l", "l", "p", "l", "m", "p", "p", "t", "t", "ng", "t", "t", "k", "t", "p", "t"];
+
+    return text.replace(/[가-힣]+/g, (word) => [...word].map((char) => {
+      const code = char.charCodeAt(0) - 0xac00;
+      const initial = Math.floor(code / 588);
+      const vowel = Math.floor((code % 588) / 28);
+      const final = code % 28;
+      return `${initials[initial]}${vowels[vowel]}${finals[final]}`;
+    }).join("-"));
+  }
+
+  function uiText(key) {
+    const thaiMode = audienceMode === "th";
+    const labels = {
+      total: thaiMode ? "รายการ" : "현재 항목",
+      favorites: thaiMode ? "บันทึก" : "즐겨찾기",
+      today: thaiMode ? "วันนี้" : "오늘 학습",
+      audience: thaiMode ? "ผู้เรียน" : "학습 대상",
+      mode: thaiMode ? "รูปแบบ" : "학습 방식",
+      voice: thaiMode ? "เสียง" : "목소리",
+      phrases: thaiMode ? "100 ประโยค" : "문장 100",
+      letters: thaiMode ? "ตัวอักษร" : "문자 기초",
+      female: thaiMode ? "หญิง" : "여성",
+      male: thaiMode ? "ชาย" : "남성",
+      quiz: thaiMode ? "ดูภาษาไทยก่อน" : "한국어 먼저 보기",
+      searchPhrases: thaiMode ? "ค้นหาภาษาไทย เกาหลี หรือเสียงอ่าน" : "한국어, 태국어, 발음 검색",
+      searchLetters: thaiMode ? "ค้นหาพยัญชนะ สระ หรือชื่ออักษรเกาหลี" : "태국어 문자, 이름, 발음 검색",
+      listenThai: thaiMode ? "▶ ฟังภาษาไทย" : "▶ 태국어",
+      listenKorean: thaiMode ? "▶ ฟังภาษาเกาหลี" : "▶ 한국어",
+      showTarget: thaiMode ? "한국어 보기" : "태국어 보기",
+      hide: thaiMode ? "ซ่อน" : "가리기"
+    };
+    return labels[key];
+  }
+
+  function versionedAudioUrl(url) {
+    if (!url || /^(https?:|data:|blob:)/.test(url)) return url;
+    return `${url}${url.includes("?") ? "&" : "?"}v=${ASSET_VERSION}`;
+  }
+
+  function getThaiAudioUrl(item) {
+    const customUrl = voiceMode === "male" ? item.audioUrlMale : item.audioUrl;
+    return customUrl ? versionedAudioUrl(customUrl) : getPhraseAudioUrl(item.audioIndex);
+  }
+
+  function getKoreanPhraseAudioUrl(item) {
+    const customUrl = voiceMode === "male" ? item.koAudioUrlMale : item.koAudioUrl;
+    return customUrl ? versionedAudioUrl(customUrl) : getKoreanAudioUrl(item.audioIndex);
   }
 
   function speak(text, audioUrl, lang = "th-TH") {
@@ -152,7 +223,7 @@
     favoriteCount.textContent = state.favorites.size;
 
     items.forEach((item, index) => {
-      const id = `${item.c}-${item.ko}`;
+      const id = item.id || `phrase-${formatIndex(item.audioIndex)}`;
       const card = template.content.firstElementChild.cloneNode(true);
       const star = card.querySelector(".starButton");
       const reveal = card.querySelector(".revealButton");
@@ -164,13 +235,15 @@
       const isThaiViewer = audienceMode === "th";
       card.querySelector(".korean").textContent = isThaiViewer ? item.th : item.ko;
       card.querySelector(".thai").textContent = isThaiViewer ? item.ko : item.th;
-      card.querySelector(".roman").textContent = item.ro;
-      card.querySelector(".speakButton").textContent = isThaiViewer ? "▶ 한국어" : "▶ 태국어";
+      card.querySelector(".roman").textContent = isThaiViewer ? `อ่านเกาหลี: ${romanizeKorean(item.ko)}` : item.ro;
+      card.querySelector(".speakButton").textContent = isThaiViewer ? uiText("listenKorean") : uiText("listenThai");
 
       if (state.quiz) card.classList.add("hiddenThai");
 
       star.textContent = state.favorites.has(id) ? "★" : "☆";
       star.classList.toggle("on", state.favorites.has(id));
+      star.setAttribute("aria-label", state.favorites.has(id) ? "즐겨찾기 해제" : "즐겨찾기 추가");
+      star.setAttribute("aria-pressed", String(state.favorites.has(id)));
       star.addEventListener("click", () => {
         if (state.favorites.has(id)) {
           state.favorites.delete(id);
@@ -183,17 +256,17 @@
 
       card.querySelector(".speakButton").addEventListener("click", () => {
         if (audienceMode === "th") {
-          speak(item.ko, getKoreanAudioUrl(item.audioIndex), "ko-KR");
+          speak(item.ko, getKoreanPhraseAudioUrl(item), "ko-KR");
           return;
         }
-        speak(item.th, getPhraseAudioUrl(item.audioIndex), "th-TH");
+        speak(item.th, getThaiAudioUrl(item), "th-TH");
       });
       reveal.addEventListener("click", () => {
         card.classList.toggle("hiddenThai");
-        reveal.textContent = card.classList.contains("hiddenThai") ? "태국어 보기" : "가리기";
+        reveal.textContent = card.classList.contains("hiddenThai") ? uiText("showTarget") : uiText("hide");
       });
 
-      if (!state.quiz) reveal.textContent = "가리기";
+      if (!state.quiz) reveal.textContent = uiText("hide");
       card.style.order = String(index);
       list.appendChild(card);
     });
@@ -234,22 +307,22 @@
 
   function getPhraseAudioUrl(audioIndex) {
     const folder = voiceMode === "male" ? "audio-male" : "audio";
-    return `./${folder}/phrases/${formatIndex(audioIndex)}.mp3`;
+    return versionedAudioUrl(`./${folder}/phrases/${formatIndex(audioIndex)}.mp3`);
   }
 
   function getLetterAudioUrl(audioIndex) {
     const folder = voiceMode === "male" ? "audio-male" : "audio";
-    return `./${folder}/letters/${formatIndex(audioIndex)}.mp3`;
+    return versionedAudioUrl(`./${folder}/letters/${formatIndex(audioIndex)}.mp3`);
   }
 
   function getKoreanAudioUrl(audioIndex) {
     const folder = voiceMode === "male" ? "audio-ko-male" : "audio-ko";
-    return `./${folder}/phrases/${formatIndex(audioIndex)}.mp3`;
+    return versionedAudioUrl(`./${folder}/phrases/${formatIndex(audioIndex)}.mp3`);
   }
 
   function getKoreanLetterAudioUrl(audioIndex) {
     const folder = voiceMode === "male" ? "audio-ko-male" : "audio-ko";
-    return `./${folder}/letters/${formatIndex(audioIndex)}.mp3`;
+    return versionedAudioUrl(`./${folder}/letters/${formatIndex(audioIndex)}.mp3`);
   }
 
   function setVoice(mode) {
@@ -257,6 +330,10 @@
     localStorage.setItem("wiithaiVoiceMode", mode);
     femaleVoiceButton.classList.toggle("active", mode === "female");
     maleVoiceButton.classList.toggle("active", mode === "male");
+    femaleVoiceButton.setAttribute("aria-pressed", String(mode === "female"));
+    maleVoiceButton.setAttribute("aria-pressed", String(mode === "male"));
+    femaleVoiceButton.textContent = uiText("female");
+    maleVoiceButton.textContent = uiText("male");
   }
 
   function setAudience(mode) {
@@ -264,6 +341,9 @@
     localStorage.setItem("wiithaiAudienceMode", mode);
     koreanLearnerButton.classList.toggle("active", mode === "ko");
     thaiViewerButton.classList.toggle("active", mode === "th");
+    koreanLearnerButton.setAttribute("aria-pressed", String(mode === "ko"));
+    thaiViewerButton.setAttribute("aria-pressed", String(mode === "th"));
+    updateStaticLabels();
     if (currentMode === "letters") {
       renderLetters();
     } else {
@@ -276,13 +356,13 @@
     currentMode = mode;
     phrasesModeButton.classList.toggle("active", !isLetters);
     lettersModeButton.classList.toggle("active", isLetters);
+    phrasesModeButton.setAttribute("aria-pressed", String(!isLetters));
+    lettersModeButton.setAttribute("aria-pressed", String(isLetters));
     list.hidden = isLetters;
     letterList.hidden = !isLetters;
     tabs.hidden = isLetters;
     quizToggle.parentElement.hidden = isLetters;
-    searchInput.placeholder = isLetters
-      ? (audienceMode === "th" ? "한글 자음, 모음, 이름 검색" : "태국어 문자, 이름, 발음 검색")
-      : "한국어, 태국어, 발음 검색";
+    searchInput.placeholder = isLetters ? uiText("searchLetters") : uiText("searchPhrases");
     if (isLetters) {
       renderLetters();
     } else {
@@ -298,6 +378,21 @@
     quizToggle.checked = false;
     state.quiz = false;
     setMode("phrases");
+  }
+
+  function updateStaticLabels() {
+    document.querySelector(".statCard.teal small").textContent = uiText("total");
+    document.querySelector(".statCard.coral small").textContent = uiText("favorites");
+    document.querySelector(".statCard.yellow small").textContent = audienceMode === "th" ? "แนะนำ" : "추천 학습";
+    audienceLabel.textContent = uiText("audience");
+    modeLabel.textContent = uiText("mode");
+    voiceLabel.textContent = uiText("voice");
+    phrasesModeButton.textContent = uiText("phrases");
+    lettersModeButton.textContent = uiText("letters");
+    femaleVoiceButton.textContent = uiText("female");
+    maleVoiceButton.textContent = uiText("male");
+    quizLabel.textContent = uiText("quiz");
+    searchInput.placeholder = currentMode === "letters" ? uiText("searchLetters") : uiText("searchPhrases");
   }
 
   searchInput.addEventListener("input", (event) => {
@@ -329,7 +424,9 @@
     history.back();
   });
 
-  speechSynthesis.onvoiceschanged = () => getVoice("th-TH");
+  if ("speechSynthesis" in window) {
+    speechSynthesis.onvoiceschanged = () => getVoice("th-TH");
+  }
   const firebasePhrases = await loadFirebasePhrases();
   if (firebasePhrases.length > 0) {
     phrases = firebasePhrases;

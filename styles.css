@@ -526,18 +526,34 @@ h1 {
 
 @media (max-width: 680px) {
   .app {
-    padding: 14px 12px 42px;
+    padding: 10px 12px 42px;
   }
 
   .hero {
-    grid-template-columns: 70px 1fr;
-    min-height: 176px;
-    padding: 20px;
+    grid-template-columns: 52px 1fr;
+    min-height: 132px;
+    padding: 16px;
   }
 
   .flagMark {
-    width: 62px;
-    height: 94px;
+    width: 48px;
+    height: 72px;
+    border-radius: 12px;
+  }
+
+  .eyebrow {
+    margin-bottom: 4px;
+    font-size: 11px;
+  }
+
+  h1 {
+    font-size: 38px;
+  }
+
+  .subtitle {
+    margin-top: 8px;
+    font-size: 13px;
+    line-height: 1.4;
   }
 
   .quickNav {
@@ -546,6 +562,37 @@ h1 {
 
   .controlGrid {
     grid-template-columns: 1fr;
+    gap: 7px;
+  }
+
+  .controls {
+    position: static;
+    top: auto;
+    padding: 8px 0 10px;
+  }
+
+  .controlLabel {
+    margin-bottom: 4px;
+  }
+
+  .modeTabs,
+  .audienceTabs,
+  .voiceTabs {
+    gap: 5px;
+    padding: 4px;
+  }
+
+  .modeTabs button,
+  .audienceTabs button,
+  .voiceTabs button {
+    min-height: 36px;
+    font-size: 13px;
+  }
+
+  #searchInput {
+    height: 42px;
+    margin-top: 8px;
+    border-radius: 12px;
   }
 
   .stats {
@@ -582,11 +629,12 @@ h1 {
   }
 
   .letterCard {
-    grid-template-columns: 70px 1fr;
+    grid-template-columns: 70px 1fr 44px;
   }
 
   .letterSpeakButton {
-    grid-column: 1 / -1;
-    width: 100%;
+    grid-column: auto;
+    width: 44px;
+    height: 44px;
   }
 }

@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>wiithai</title>
     <link rel="icon" href="data:," />
-    <link rel="stylesheet" href="./styles.css?v=20260601-3" />
+    <link rel="stylesheet" href="./styles.css?v=20260601-5" />
   </head>
   <body>
     <main class="app">
@@ -41,39 +41,39 @@
         </div>
         <div class="statCard yellow">
           <span id="todayCount">10</span>
-          <small>오늘 학습</small>
+          <small>추천 학습</small>
         </div>
       </section>
 
       <section class="controls" aria-label="문장 필터">
         <div class="controlGrid">
           <div>
-            <p class="controlLabel">학습 대상</p>
+            <p id="audienceLabel" class="controlLabel">학습 대상</p>
             <div class="audienceTabs" aria-label="학습자 선택">
-              <button id="koreanLearnerButton" class="active" type="button">한국인용</button>
-              <button id="thaiViewerButton" type="button">태국인용</button>
+              <button id="koreanLearnerButton" class="active" type="button">한국어 → 태국어</button>
+              <button id="thaiViewerButton" type="button">ไทย → 한국어</button>
             </div>
           </div>
           <div>
-            <p class="controlLabel">학습 방식</p>
+            <p id="modeLabel" class="controlLabel">학습 방식</p>
             <div class="modeTabs" aria-label="학습 모드">
               <button id="phrasesModeButton" class="active" type="button">문장 100</button>
               <button id="lettersModeButton" type="button">문자 기초</button>
             </div>
           </div>
           <div>
-            <p class="controlLabel">목소리</p>
+            <p id="voiceLabel" class="controlLabel">목소리</p>
             <div class="voiceTabs" aria-label="목소리 선택">
               <button id="femaleVoiceButton" class="active" type="button">여성</button>
               <button id="maleVoiceButton" type="button">남성</button>
             </div>
           </div>
         </div>
-        <input id="searchInput" type="search" placeholder="한국어, 태국어, 발음 검색" />
+        <input id="searchInput" type="search" aria-label="문장과 문자 검색" placeholder="한국어, 태국어, 발음 검색" />
         <div id="categoryTabs" class="tabs"></div>
         <label class="toggle">
           <input id="quizToggle" type="checkbox" />
-          <span>한국어 먼저 보기</span>
+          <span id="quizLabel">한국어 먼저 보기</span>
         </label>
       </section>
 
@@ -117,8 +117,8 @@
 
     <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore-compat.js"></script>
-    <script src="./firebase-config.js?v=20260601-3"></script>
-    <script src="./phrases.js?v=20260601-3"></script>
-    <script src="./app.js?v=20260601-3"></script>
+    <script src="./firebase-config.js?v=20260601-5"></script>
+    <script src="./phrases.js?v=20260601-5"></script>
+    <script src="./app.js?v=20260601-5"></script>
   </body>
 </html>
