@@ -1164,6 +1164,109 @@ function applyHousingSection(lang) {
 
 ["ko", "en", "ja", "th", "zh", "vi", "es"].forEach(applyHousingSection);
 
+const WIIINFO_MORE_LABELS = {
+  ko: {
+    copy: "한국어 문장 복사", overview: "핵심 정보", use: "한국에서 바로 쓰기", tip: "팁",
+    routes: ["🗺️", "추천 코스 TOP10", "한국 추천 코스 TOP10", "하루나 반나절로 묶기 좋은 한국 여행 동선입니다.", "이 코스는 {name} 중심으로 이동 순서와 시간을 미리 잡기 좋습니다.", "지도 앱에서 장소를 순서대로 저장하고 이동 시간을 확인합니다.", "비 오는 날과 주말 혼잡 시간을 미리 확인합니다."],
+    food: ["🍜", "음식·시장 TOP10", "한국 음식과 시장 TOP10", "외국인이 한국에서 쉽게 즐기기 좋은 음식과 시장 경험입니다.", "{name}은 한국의 맛과 분위기를 함께 경험하기 좋은 선택입니다.", "주문 전 매운 정도, 가격, 카드 결제 가능 여부를 확인합니다.", "알레르기나 종교 식단이 있으면 주문 전에 한국어로 확인합니다."],
+    photo: ["📸", "포토스팟 TOP10", "한국 사진 명소 TOP10", "사진 만족도가 높은 한국의 대표 포토스팟입니다.", "{name}은 한국적인 배경과 계절감을 사진으로 남기기 좋습니다.", "사람이 적은 오전이나 해 질 무렵을 우선 고려합니다.", "주거지나 문화재 구역에서는 조용히 이동하고 출입 제한을 지킵니다."],
+    seasonal: ["🍁", "계절 TOP10", "계절별 한국 TOP10", "봄, 여름, 가을, 겨울에 맞춰 보기 좋은 한국 풍경입니다.", "{name}은 계절에 따라 한국의 분위기를 강하게 느끼기 좋은 주제입니다.", "방문 월, 날씨, 옷차림, 축제 일정을 함께 확인합니다.", "성수기에는 숙소와 교통 예약을 먼저 확인합니다."],
+    cities: ["🏙️", "도시 가이드 TOP10", "한국 도시 가이드 TOP10", "서울 밖까지 넓혀 한국을 이해하기 좋은 도시별 가이드입니다.", "{name}은 한국의 다른 지역 문화를 보기 좋은 도시입니다.", "공항, KTX, 버스, 숙소 위치를 먼저 정리합니다.", "초행이면 밤 이동 동선과 숙소 주변 안전을 먼저 확인합니다."]
+  },
+  en: {
+    copy: "Copy Korean phrase", overview: "Key info", use: "Use in Korea", tip: "Tip",
+    routes: ["🗺️", "Routes TOP10", "Korea Travel Routes TOP10", "Half-day and one-day routes that are easy to follow in Korea.", "{name} works well when you want a clear order and time plan.", "Save places in order on a map app and check travel time.", "Check rain options and weekend crowd level first."],
+    food: ["🍜", "Food TOP10", "Korean Food and Markets TOP10", "Food and market experiences that are easy for foreigners to try.", "{name} is a good way to experience Korean taste and atmosphere together.", "Before ordering, check spice level, price, and card payment.", "If you have allergies or religious food rules, ask in Korean first."],
+    photo: ["📸", "Photo TOP10", "Korea Photo Spots TOP10", "Representative Korean places with strong photo satisfaction.", "{name} is good for keeping Korean backgrounds and seasonal mood in photos.", "Try early morning or sunset when crowds are lower.", "Move quietly in residential or heritage areas and follow access limits."],
+    seasonal: ["🍁", "Seasonal TOP10", "Seasonal Korea TOP10", "Korean scenery by spring, summer, autumn, and winter.", "{name} is a strong theme for feeling Korea by season.", "Check month, weather, clothing, and festival dates together.", "During peak season, check lodging and transport first."],
+    cities: ["🏙️", "Cities TOP10", "Korea City Guides TOP10", "City guides for understanding Korea beyond Seoul.", "{name} is a useful city for seeing another side of Korea.", "Plan airport, KTX, bus, and lodging location first.", "For first visits, check night routes and safety near lodging."]
+  },
+  ja: {
+    copy: "韓国語をコピー", overview: "核心情報", use: "韓国で使う", tip: "ヒント",
+    routes: ["🗺️", "コース TOP10", "韓国おすすめコースTOP10", "半日や1日で回りやすい韓国旅行の動線です。", "{name}を中心に順序と時間を決めやすいコースです。", "地図アプリに順番通り保存し、移動時間を確認します。", "雨の日の代替案と週末の混雑を確認します。"],
+    food: ["🍜", "食べ物 TOP10", "韓国の食べ物と市場TOP10", "外国人が試しやすい韓国の食と市場体験です。", "{name}は韓国の味と雰囲気を一緒に感じやすい選択です。", "注文前に辛さ、価格、カード決済可否を確認します。", "アレルギーや宗教食があれば韓国語で先に確認します。"],
+    photo: ["📸", "写真 TOP10", "韓国フォトスポットTOP10", "写真満足度が高い韓国の代表スポットです。", "{name}は韓国らしい背景と季節感を写真に残しやすい場所です。", "人が少ない午前や夕方を優先します。", "住宅地や文化財では静かに移動し、立入制限を守ります。"],
+    seasonal: ["🍁", "季節 TOP10", "季節別韓国TOP10", "春夏秋冬に合わせて楽しめる韓国の風景です。", "{name}は季節ごとの韓国らしさを感じやすいテーマです。", "訪問月、天気、服装、祭り日程を一緒に確認します。", "繁忙期は宿と交通予約を先に確認します。"],
+    cities: ["🏙️", "都市 TOP10", "韓国都市ガイドTOP10", "ソウル以外も含めて韓国を理解しやすい都市ガイドです。", "{name}は韓国の別の地域文化を見るのに役立つ都市です。", "空港、KTX、バス、宿泊位置を先に決めます。", "初訪問なら夜の移動と宿周辺の安全を確認します。"]
+  },
+  th: {
+    copy: "คัดลอกประโยคเกาหลี", overview: "ข้อมูลหลัก", use: "ใช้ในเกาหลี", tip: "ทิป",
+    routes: ["🗺️", "เส้นทาง TOP10", "เส้นทางเที่ยวเกาหลี TOP10", "เส้นทางครึ่งวันหรือหนึ่งวันที่ตามง่ายในเกาหลี", "{name} เหมาะสำหรับวางลำดับและเวลาเดินทางให้ชัดเจน", "บันทึกสถานที่ตามลำดับในแอปแผนที่และเช็กเวลาเดินทาง", "เช็กแผนสำรองวันฝนตกและความหนาแน่นวันหยุด"],
+    food: ["🍜", "อาหาร TOP10", "อาหารและตลาดเกาหลี TOP10", "ประสบการณ์อาหารและตลาดที่ชาวต่างชาติลองได้ง่าย", "{name} เหมาะสำหรับสัมผัสรสชาติและบรรยากาศเกาหลี", "ก่อนสั่งให้เช็กความเผ็ด ราคา และการจ่ายบัตร", "ถ้ามีแพ้อาหารหรือข้อจำกัดทางศาสนา ให้ถามเป็นภาษาเกาหลีก่อน"],
+    photo: ["📸", "ถ่ายรูป TOP10", "จุดถ่ายรูปเกาหลี TOP10", "สถานที่เกาหลีที่ถ่ายรูปแล้วน่าพอใจ", "{name} เหมาะสำหรับเก็บภาพบรรยากาศเกาหลีและฤดูกาล", "ลองไปช่วงเช้าหรือพระอาทิตย์ตกที่คนน้อยกว่า", "ในเขตที่พักอาศัยหรือโบราณสถานให้เงียบและทำตามข้อจำกัด"],
+    seasonal: ["🍁", "ฤดูกาล TOP10", "เกาหลีตามฤดูกาล TOP10", "วิวเกาหลีตามฤดูใบไม้ผลิ ร้อน ใบไม้ร่วง และหนาว", "{name} เป็นธีมที่ทำให้รู้สึกถึงเกาหลีตามฤดูกาล", "เช็กเดือนที่ไป อากาศ เสื้อผ้า และงานเทศกาล", "ช่วงพีคควรเช็กที่พักและการเดินทางก่อน"],
+    cities: ["🏙️", "เมือง TOP10", "ไกด์เมืองเกาหลี TOP10", "ไกด์เมืองที่ช่วยให้เข้าใจเกาหลีนอกโซล", "{name} เป็นเมืองที่ดีสำหรับเห็นอีกด้านของเกาหลี", "วางแผนสนามบิน KTX บัส และที่พักก่อน", "ถ้าไปครั้งแรกให้เช็กเส้นทางกลางคืนและความปลอดภัยรอบที่พัก"]
+  },
+  zh: {
+    copy: "复制韩语句子", overview: "核心信息", use: "在韩国使用", tip: "提示",
+    routes: ["🗺️", "路线 TOP10", "韩国推荐路线 TOP10", "适合半日或一日游的韩国旅行路线。", "{name}适合提前安排顺序和时间。", "在地图App按顺序保存地点并确认移动时间。", "提前确认雨天替代路线和周末拥挤程度。"],
+    food: ["🍜", "美食 TOP10", "韩国美食与市场 TOP10", "外国人容易尝试的韩国饮食和市场体验。", "{name}适合同时体验韩国味道和氛围。", "点餐前确认辣度、价格和是否能刷卡。", "有过敏或宗教饮食限制时，先用韩语确认。"],
+    photo: ["📸", "拍照 TOP10", "韩国拍照景点 TOP10", "照片满意度高的韩国代表地点。", "{name}适合拍出韩国背景和季节感。", "优先考虑人少的上午或日落时段。", "在居住区或文化遗产区域请安静移动并遵守限制。"],
+    seasonal: ["🍁", "季节 TOP10", "季节韩国 TOP10", "春夏秋冬适合欣赏的韩国风景。", "{name}是感受韩国季节氛围的强主题。", "一起确认访问月份、天气、服装和庆典日期。", "旺季要先确认住宿和交通。"],
+    cities: ["🏙️", "城市 TOP10", "韩国城市指南 TOP10", "帮助理解首尔以外韩国的城市指南。", "{name}适合了解韩国不同地区文化。", "先规划机场、KTX、公交和住宿位置。", "第一次去时先确认夜间路线和住宿周边安全。"]
+  },
+  vi: {
+    copy: "Sao chép câu tiếng Hàn", overview: "Thông tin chính", use: "Dùng ở Hàn", tip: "Mẹo",
+    routes: ["🗺️", "Tuyến đi TOP10", "Tuyến du lịch Hàn Quốc TOP10", "Các tuyến nửa ngày hoặc một ngày dễ đi ở Hàn.", "{name} phù hợp khi cần thứ tự và thời gian rõ ràng.", "Lưu địa điểm theo thứ tự trên app bản đồ và kiểm tra thời gian di chuyển.", "Kiểm tra phương án ngày mưa và mức đông cuối tuần."],
+    food: ["🍜", "Ẩm thực TOP10", "Ẩm thực và chợ Hàn Quốc TOP10", "Trải nghiệm đồ ăn và chợ dễ thử cho người nước ngoài.", "{name} giúp cảm nhận cả hương vị và không khí Hàn Quốc.", "Trước khi gọi món, kiểm tra độ cay, giá và thanh toán thẻ.", "Nếu có dị ứng hoặc quy định tôn giáo, hỏi bằng tiếng Hàn trước."],
+    photo: ["📸", "Ảnh TOP10", "Điểm chụp ảnh Hàn Quốc TOP10", "Các điểm Hàn Quốc có ảnh đẹp và dễ hài lòng.", "{name} phù hợp để lưu nền Hàn Quốc và cảm giác mùa.", "Ưu tiên buổi sáng hoặc hoàng hôn khi ít đông hơn.", "Ở khu dân cư hoặc di sản, đi nhẹ và theo giới hạn ra vào."],
+    seasonal: ["🍁", "Theo mùa TOP10", "Hàn Quốc theo mùa TOP10", "Cảnh Hàn Quốc theo xuân, hè, thu, đông.", "{name} là chủ đề mạnh để cảm nhận mùa ở Hàn.", "Kiểm tra tháng đi, thời tiết, quần áo và lịch lễ hội.", "Mùa cao điểm nên kiểm tra chỗ ở và giao thông trước."],
+    cities: ["🏙️", "Thành phố TOP10", "Hướng dẫn thành phố Hàn Quốc TOP10", "Hướng dẫn để hiểu Hàn Quốc ngoài Seoul.", "{name} là thành phố tốt để thấy văn hóa vùng khác.", "Lên kế hoạch sân bay, KTX, xe buýt và vị trí ở trước.", "Lần đầu nên kiểm tra tuyến đêm và an toàn quanh nơi ở."]
+  },
+  es: {
+    copy: "Copiar frase coreana", overview: "Información clave", use: "Usar en Corea", tip: "Consejo",
+    routes: ["🗺️", "Rutas TOP10", "Rutas de viaje en Corea TOP10", "Rutas de medio día o un día fáciles de seguir en Corea.", "{name} funciona bien para planear orden y tiempo.", "Guarda lugares en orden en una app de mapa y revisa tiempos.", "Revisa opciones de lluvia y nivel de gente en fin de semana."],
+    food: ["🍜", "Comida TOP10", "Comida y mercados de Corea TOP10", "Experiencias de comida y mercado fáciles para extranjeros.", "{name} ayuda a sentir sabor y ambiente coreano juntos.", "Antes de pedir, revisa picante, precio y pago con tarjeta.", "Si tienes alergias o reglas religiosas, pregunta en coreano primero."],
+    photo: ["📸", "Fotos TOP10", "Lugares para fotos en Corea TOP10", "Lugares coreanos con alta satisfacción para fotos.", "{name} es bueno para guardar fondo coreano y ambiente estacional.", "Prioriza mañana o atardecer cuando hay menos gente.", "En zonas residenciales o patrimoniales, camina en silencio y respeta límites."],
+    seasonal: ["🍁", "Temporadas TOP10", "Corea por temporada TOP10", "Paisajes coreanos por primavera, verano, otoño e invierno.", "{name} es un tema fuerte para sentir Corea por estación.", "Revisa mes, clima, ropa y fechas de festivales.", "En temporada alta, revisa alojamiento y transporte primero."],
+    cities: ["🏙️", "Ciudades TOP10", "Guías de ciudades de Corea TOP10", "Guías para entender Corea más allá de Seúl.", "{name} es útil para ver otra cultura regional de Corea.", "Planea aeropuerto, KTX, bus y ubicación de alojamiento primero.", "Si es primera visita, revisa rutas nocturnas y seguridad cerca del alojamiento."]
+  }
+};
+
+const WIIINFO_MORE_BASE = {
+  routes: [["Seoul Palace and Hanok Day", "서울 궁궐과 한옥 코스로 가고 싶습니다.", "palace"], ["Myeongdong and N Seoul Tower Night", "명동과 남산서울타워 야경 코스로 가고 싶습니다.", "tower"], ["Hongdae and Yeonnam Cafe Walk", "홍대와 연남동 카페거리 코스로 가고 싶습니다.", "hongdae"], ["Hangang Picnic Evening", "한강공원 피크닉 코스로 가고 싶습니다.", "hangang"], ["Jamsil Lotte and Seokchon Lake", "잠실 롯데월드와 석촌호수 코스로 가고 싶습니다.", "lotte"], ["Nami Island Day Trip", "남이섬 당일치기 코스로 가고 싶습니다.", "nami"], ["Busan Beach Night Route", "부산 해운대와 광안리 야경 코스로 가고 싶습니다.", "busan"], ["Jeju Sunrise and Olle Walk", "제주 성산일출봉과 올레길 코스로 가고 싶습니다.", "jeju"], ["Gyeongju Heritage Day", "경주 불국사와 대릉원 역사 코스로 가고 싶습니다.", "gyeongju"], ["Jeonju Hanok Food Day", "전주 한옥마을과 전통음식 코스로 가고 싶습니다.", "jeonju"]],
+  food: [["Gwangjang Market", "광장시장에서 빈대떡, 김밥, 육회 등 대표 음식을 먹고 싶습니다.", "market"], ["Myeongdong Street Food", "명동 길거리 음식을 추천받고 싶습니다.", "hongdae"], ["Mangwon Market", "망원시장에서 현지 시장 음식을 먹고 싶습니다.", "market"], ["Namdaemun Market", "남대문시장에서 쇼핑과 간단한 음식을 같이 보고 싶습니다.", "market"], ["Jeonju Bibimbap", "전주비빔밥을 먹을 수 있는 곳을 찾고 있습니다.", "jeonju"], ["Busan Jagalchi Seafood", "부산 자갈치시장에서 해산물을 먹고 싶습니다.", "busan"], ["Jeju Black Pork", "제주 흑돼지를 먹을 수 있는 곳을 찾고 있습니다.", "jeju"], ["Hongdae and Yeonnam Cafes", "홍대와 연남동에서 카페를 추천받고 싶습니다.", "hongdae"], ["Korean Chicken and Beer", "한국식 치킨과 맥주를 먹고 싶습니다.", "hangang"], ["Insadong Traditional Tea", "인사동에서 전통차를 마시고 싶습니다.", "hanokLife"]],
+  photo: [["Gyeongbokgung Geunjeongjeon", "경복궁 근정전 사진을 찍기 좋은 위치를 알려 주세요.", "palace"], ["Bukchon Hanok Alleys", "북촌 한옥마을에서 사진 찍기 좋은 골목을 알려 주세요.", "hanokLife"], ["N Seoul Tower Night View", "남산서울타워 야경 사진을 찍고 싶습니다.", "tower"], ["Banpo Hangang Fountain", "반포한강공원 달빛무지개분수 시간을 알고 싶습니다.", "hangang"], ["Seongsu Cafe Streets", "성수동에서 사진 찍기 좋은 카페거리를 찾고 있습니다.", "hongdae"], ["Gwangalli Bridge Night", "광안대교 야경 사진을 찍기 좋은 곳을 알려 주세요.", "busan"], ["Gamcheon Culture Village", "감천문화마을 사진 명소를 찾고 있습니다.", "busan"], ["Jeju Seongsan Sunrise", "성산일출봉 일출 사진을 찍고 싶습니다.", "jeju"], ["Jeonju Hanok Village", "전주 한옥마을에서 한복 사진을 찍고 싶습니다.", "jeonju"], ["Gyeongju Daereungwon", "경주 대릉원에서 사진 찍기 좋은 시간을 알려 주세요.", "gyeongju"]],
+  seasonal: [["Spring Cherry Blossoms", "봄 벚꽃 명소와 개화 시기를 알고 싶습니다.", "palace"], ["Jinhae Cherry Blossom Festival", "진해 벚꽃 축제 일정과 가는 방법을 알고 싶습니다.", "hanokLife"], ["Summer Hangang Night", "여름 한강 야경과 피크닉 장소를 추천해 주세요.", "hangang"], ["Busan Summer Beach", "부산 여름 해변 여행 정보를 알고 싶습니다.", "busan"], ["Jeju Summer Coast", "제주 여름 해안 여행 코스를 추천해 주세요.", "jeju"], ["Autumn Seoul Palaces", "가을 궁궐 단풍을 볼 수 있는 곳을 알려 주세요.", "palace"], ["Seoraksan Autumn Leaves", "설악산 단풍 시기와 이동 방법을 알고 싶습니다.", "skyline"], ["Nami Island Autumn", "남이섬 가을 풍경을 보러 가고 싶습니다.", "nami"], ["Winter Hanok Snow", "눈 오는 한옥마을 사진을 찍고 싶습니다.", "jeonju"], ["Korean Winter Sea", "한국 겨울 바다 여행지를 추천해 주세요.", "busan"]],
+  cities: [["Seoul", "서울에서 처음 가기 좋은 지역을 추천해 주세요.", "skyline"], ["Busan", "부산에서 바다와 야경을 볼 수 있는 코스를 알려 주세요.", "busan"], ["Jeju", "제주에서 자연 풍경을 보는 코스를 추천해 주세요.", "jeju"], ["Gyeongju", "경주에서 역사 여행 코스를 추천해 주세요.", "gyeongju"], ["Jeonju", "전주 한옥마을과 음식 코스를 알려 주세요.", "jeonju"], ["Incheon", "인천공항 근처와 송도 여행 정보를 알고 싶습니다.", "skyline"], ["Gangneung", "강릉 바다와 카페거리 코스를 추천해 주세요.", "busan"], ["Sokcho", "속초와 설악산 여행 코스를 알고 싶습니다.", "nami"], ["Daegu", "대구에서 가볼 만한 지역을 추천해 주세요.", "market"], ["Yeosu", "여수 밤바다와 해상 케이블카 정보를 알고 싶습니다.", "busan"]]
+};
+
+function buildMoreSection(lang, id) {
+  const labels = WIIINFO_MORE_LABELS[lang] || WIIINFO_MORE_LABELS.en;
+  const sectionLabels = labels[id];
+  return {
+    id,
+    icon: sectionLabels[0],
+    tab: sectionLabels[1],
+    title: sectionLabels[2],
+    summary: sectionLabels[3],
+    cards: WIIINFO_MORE_BASE[id].map(([name, koreanCopy, imageKey], index) => ({
+      title: `${String(index + 1).padStart(2, "0")}. ${name}`,
+      text: sectionLabels[4].replace("{name}", name),
+      detail: {
+        images: WIIINFO_VISUAL_SETS[imageKey] || WIIINFO_VISUAL_SETS.civic,
+        lead: sectionLabels[4].replace("{name}", name),
+        actions: [{ type: "copy", label: labels.copy, value: koreanCopy }],
+        sections: [
+          { title: labels.overview, items: [sectionLabels[4].replace("{name}", name)] },
+          { title: labels.use, items: [koreanCopy] },
+          { title: labels.tip, items: [sectionLabels[5], sectionLabels[6]] }
+        ]
+      }
+    }))
+  };
+}
+
+function applyMoreInfoSections(lang) {
+  const sections = window.WIIINFO_INFO_SECTIONS[lang];
+  if (!sections) return;
+  ["routes", "food", "photo", "seasonal", "cities"].forEach((id) => {
+    if (!sections.some((section) => section.id === id)) sections.push(buildMoreSection(lang, id));
+  });
+}
+
+["ko", "en", "ja", "th", "zh", "vi", "es"].forEach(applyMoreInfoSections);
+
 const WIIINFO_TRAVEL_DETAILS_KO = {
   "01. 경복궁·북촌": {
     images: WIIINFO_VISUAL_SETS.palace,
