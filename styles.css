@@ -543,7 +543,7 @@ h1 {
 
 .infoPanel {
   display: grid;
-  grid-template-columns: 0.85fr 0.8fr 1.2fr;
+  grid-template-columns: 0.82fr 1.65fr;
   align-items: start;
   gap: 14px;
   padding: 18px;
@@ -555,10 +555,10 @@ h1 {
 
 .infoVisual {
   display: grid;
-  grid-template-columns: 1.1fr 0.9fr;
-  grid-auto-rows: 130px;
+  grid-template-columns: 1.15fr 0.85fr;
+  grid-auto-rows: 134px;
   gap: 8px;
-  min-height: 268px;
+  min-height: 276px;
 }
 
 .infoVisual figure {
@@ -569,6 +569,16 @@ h1 {
   border-radius: 14px;
   background: #243447;
   box-shadow: 0 10px 24px rgba(36, 52, 71, 0.1);
+  cursor: pointer;
+  transition: transform 160ms ease, box-shadow 160ms ease;
+}
+
+.infoVisual figure:hover,
+.infoVisual figure:focus-visible {
+  transform: translateY(-2px);
+  box-shadow: 0 16px 34px rgba(36, 52, 71, 0.18);
+  outline: 3px solid rgba(0, 167, 165, 0.22);
+  outline-offset: 2px;
 }
 
 .infoVisual figure.featured {
@@ -612,12 +622,13 @@ h1 {
 
 .infoCards {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-column: 2;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 10px;
 }
 
 .infoCard {
-  min-height: 118px;
+  min-height: 110px;
   padding: 14px;
   border: 1px solid #edf0f4;
   border-radius: 14px;
@@ -1225,6 +1236,7 @@ h1 {
   }
 
   .infoCards {
+    grid-column: auto;
     grid-template-columns: 1fr;
   }
 

@@ -1,5 +1,5 @@
 (async function () {
-  const ASSET_VERSION = "20260602-07";
+  const ASSET_VERSION = "20260602-08";
   const LANGUAGES = window.WIITHAI_LANGUAGES || {};
   const LANGUAGE_NAMES = window.WIIINFO_LANGUAGE_NAMES || {};
   const PROFILES = window.WIITHAI_LEARNER_PROFILES || [];
@@ -412,8 +412,21 @@
       return { ...image, label: card.title };
     });
     visual.innerHTML = images.map((image, index) => image.src
-      ? `<figure class="${index === 0 ? "featured" : ""}"><img src="${image.src}" alt="${image.alt || image.label}" loading="lazy" /><figcaption>${image.label}</figcaption></figure>`
-      : `<figure class="imageFallback ${index === 0 ? "featured" : ""}"><span>${image.label}</span></figure>`).join("");
+      ? `<figure class="${index === 0 ? "featured" : ""}" role="button" tabindex="0" data-card-index="${index}" aria-label="${image.label} 상세 보기"><img src="${image.src}" alt="${image.alt || image.label}" loading="lazy" /><figcaption>${image.label}</figcaption></figure>`
+      : `<figure class="imageFallback ${index === 0 ? "featured" : ""}" role="button" tabindex="0" data-card-index="${index}" aria-label="${image.label} 상세 보기"><span>${image.label}</span></figure>`).join("");
+    visual.querySelectorAll("figure").forEach((figure) => {
+      const open = () => {
+        const card = section.cards[Number(figure.dataset.cardIndex)];
+        if (card) openInfoDetail(card, section);
+      };
+      figure.addEventListener("click", open);
+      figure.addEventListener("keydown", (event) => {
+        if (event.key === "Enter" || event.key === " ") {
+          event.preventDefault();
+          open();
+        }
+      });
+    });
     visual.querySelectorAll("img").forEach((image) => {
       image.addEventListener("error", () => {
         const figure = image.closest("figure");
