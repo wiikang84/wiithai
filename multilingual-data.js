@@ -671,31 +671,31 @@ const WIIINFO_SECTION_IMAGE_ROTATION = {
 const WIIINFO_SAFETY_LABELS = {
   ko: {
     tab: "안전 TOP10", title: "한국 긴급·안전 TOP10", summary: "위급하거나 막혔을 때 바로 전화하고 설명할 수 있는 실전 연락처입니다.",
-    when: "언제 쓰나", say: "바로 말할 문장", caution: "주의사항", call: "전화하기", copy: "문장 복사", official: "공식 안내"
+    when: "언제 쓰나", say: "바로 말할 문장", caution: "주의사항", call: "전화하기", copy: "한국어 문장 복사", official: "공식 안내"
   },
   en: {
     tab: "Safety TOP10", title: "Korea Safety and Emergency TOP10", summary: "Practical numbers and phrases to use when something goes wrong in Korea.",
-    when: "When to use it", say: "Phrase to say", caution: "Caution", call: "Call now", copy: "Copy phrase", official: "Official guide"
+    when: "When to use it", say: "Phrase to say", caution: "Caution", call: "Call now", copy: "Copy Korean phrase", official: "Official guide"
   },
   ja: {
     tab: "安全 TOP10", title: "韓国の緊急・安全TOP10", summary: "困った時にすぐ電話し、状況を説明するための実用連絡先です。",
-    when: "使う場面", say: "すぐ伝える文", caution: "注意事項", call: "電話する", copy: "文をコピー", official: "公式案内"
+    when: "使う場面", say: "すぐ伝える文", caution: "注意事項", call: "電話する", copy: "韓国語をコピー", official: "公式案内"
   },
   th: {
     tab: "ความปลอดภัย TOP10", title: "เบอร์ฉุกเฉินและความปลอดภัยในเกาหลี TOP10", summary: "เบอร์และประโยคที่ใช้ได้ทันทีเมื่อเกิดปัญหาในเกาหลี",
-    when: "ใช้เมื่อไร", say: "ประโยคที่พูดได้ทันที", caution: "ข้อควรระวัง", call: "โทรเลย", copy: "คัดลอกประโยค", official: "ข้อมูลทางการ"
+    when: "ใช้เมื่อไร", say: "ประโยคที่พูดได้ทันที", caution: "ข้อควรระวัง", call: "โทรเลย", copy: "คัดลอกประโยคเกาหลี", official: "ข้อมูลทางการ"
   },
   zh: {
     tab: "安全 TOP10", title: "韩国紧急与安全 TOP10", summary: "在韩国遇到紧急情况或困难时可立即使用的电话和表达。",
-    when: "什么时候使用", say: "可直接说的话", caution: "注意事项", call: "立即拨打", copy: "复制句子", official: "官方指南"
+    when: "什么时候使用", say: "可直接说的话", caution: "注意事项", call: "立即拨打", copy: "复制韩语句子", official: "官方指南"
   },
   vi: {
     tab: "An toàn TOP10", title: "Khẩn cấp và an toàn ở Hàn Quốc TOP10", summary: "Số điện thoại và câu nói thực tế khi gặp sự cố ở Hàn Quốc.",
-    when: "Khi nào dùng", say: "Câu có thể nói ngay", caution: "Lưu ý", call: "Gọi ngay", copy: "Sao chép câu", official: "Hướng dẫn chính thức"
+    when: "Khi nào dùng", say: "Câu có thể nói ngay", caution: "Lưu ý", call: "Gọi ngay", copy: "Sao chép câu tiếng Hàn", official: "Hướng dẫn chính thức"
   },
   es: {
     tab: "Seguridad TOP10", title: "Emergencias y seguridad en Corea TOP10", summary: "Números y frases útiles cuando algo sale mal en Corea.",
-    when: "Cuándo usarlo", say: "Frase para decir", caution: "Cuidado", call: "Llamar", copy: "Copiar frase", official: "Guía oficial"
+    when: "Cuándo usarlo", say: "Frase para decir", caution: "Cuidado", call: "Llamar", copy: "Copiar frase coreana", official: "Guía oficial"
   }
 };
 
@@ -786,6 +786,10 @@ const WIIINFO_SAFETY_ITEMS = {
   ]
 };
 
+const WIIINFO_KOREAN_COPY = {
+  safety: WIIINFO_SAFETY_ITEMS.ko.map((item) => item.copy)
+};
+
 function buildWiiInfoSafetySection(lang) {
   const labels = WIIINFO_SAFETY_LABELS[lang] || WIIINFO_SAFETY_LABELS.en;
   const items = WIIINFO_SAFETY_ITEMS[lang] || WIIINFO_SAFETY_ITEMS.en;
@@ -795,24 +799,28 @@ function buildWiiInfoSafetySection(lang) {
     tab: labels.tab,
     title: labels.title,
     summary: labels.summary,
-    cards: items.map((item) => ({
+    cards: items.map((item) => {
+      const index = items.indexOf(item);
+      const koreanCopy = WIIINFO_KOREAN_COPY.safety[index] || item.copy;
+      return {
       title: item.title,
       text: item.text,
       detail: {
-        images: WIIINFO_VISUAL_SETS[WIIINFO_SECTION_IMAGE_ROTATION.safety[items.indexOf(item)]] || WIIINFO_VISUAL_SETS.civic,
+        images: WIIINFO_VISUAL_SETS[WIIINFO_SECTION_IMAGE_ROTATION.safety[index]] || WIIINFO_VISUAL_SETS.civic,
         lead: item.text,
         actions: [
           item.phone ? { type: "tel", label: `${labels.call} ${item.phone}`, value: item.phone } : null,
-          item.copy ? { type: "copy", label: labels.copy, value: item.copy } : null,
+          item.copy ? { type: "copy", label: labels.copy, value: koreanCopy } : null,
           item.link ? { type: "link", label: labels.official, href: item.link } : null
         ].filter(Boolean),
         sections: [
           { title: labels.when, items: [item.use, item.text] },
-          { title: labels.say, items: [item.copy] },
+          { title: labels.say, items: [koreanCopy, lang === "ko" ? null : item.copy].filter(Boolean) },
           { title: labels.caution, items: [item.caution] }
         ]
       }
-    }))
+    };
+    })
   };
 }
 
@@ -826,54 +834,56 @@ function buildWiiInfoSafetySection(lang) {
 const WIIINFO_FIRST_DAYS_LABELS = {
   ko: {
     tab: "첫 7일 TOP10", title: "한국 도착 첫 7일 TOP10", summary: "한국에 도착한 뒤 먼저 처리하면 생활이 막히지 않는 순서형 체크리스트입니다.",
-    when: "언제 처리하나", prepare: "준비할 것", avoid: "실수 방지", phrase: "바로 말할 문장", copy: "문장 복사", official: "공식 안내", call: "상담 전화",
+    when: "언제 처리하나", prepare: "준비할 것", avoid: "실수 방지", phrase: "바로 말할 문장", copy: "한국어 문장 복사", official: "공식 안내", call: "상담 전화",
     step: "도착 후 우선순위", prepareItems: ["여권, 외국인등록증 또는 신청 예정 서류", "한국 전화번호, 거주지 주소, 계약서나 안내문 사진", "예약이 필요한 업무는 방문 전 온라인 예약 확인"],
     avoidItems: ["이름, 생년월일, 주소 표기가 서류마다 다르면 절차가 지연될 수 있습니다.", "기한이 있는 신고는 전화 상담만 믿지 말고 공식 사이트와 방문 예약을 함께 확인합니다."],
     phrases: ["외국인등록을 하려면 무엇을 준비해야 하나요?", "선불 유심이나 휴대폰 개통을 하고 싶습니다.", "외국인이 계좌를 만들려면 어떤 서류가 필요합니까?", "교통카드를 어디에서 살 수 있나요?", "이 주소까지 가는 길을 알려주세요.", "이 지역의 쓰레기 배출 요일은 언제인가요?", "근처 병원이나 약국을 찾고 있습니다.", "휴대폰 본인인증이 되지 않습니다.", "방문 예약이 필요한가요?", "긴급 상황이면 어디로 전화해야 하나요?"]
   },
   en: {
     tab: "First 7 Days", title: "First 7 Days in Korea TOP10", summary: "A step-by-step checklist to avoid getting stuck during your first week in Korea.",
-    when: "When to handle it", prepare: "Prepare", avoid: "Avoid mistakes", phrase: "Phrase to say", copy: "Copy phrase", official: "Official guide", call: "Call help",
+    when: "When to handle it", prepare: "Prepare", avoid: "Avoid mistakes", phrase: "Phrase to say", copy: "Copy Korean phrase", official: "Official guide", call: "Call help",
     step: "Arrival priority", prepareItems: ["Passport, alien registration card, or documents you will use to apply", "Korean phone number, address, and photos of contracts or notices", "For office visits, check whether online reservation is required"],
     avoidItems: ["Different name, birth date, or address formats across documents can delay the process.", "For deadline-based duties, check official websites and reservations, not only phone advice."],
     phrases: ["What do I need to prepare for alien registration?", "I want to open a prepaid SIM or mobile phone plan.", "What documents does a foreigner need to open a bank account?", "Where can I buy a transport card?", "Please tell me how to get to this address.", "What day should I take out trash in this area?", "I am looking for a nearby clinic or pharmacy.", "Mobile identity verification is not working.", "Do I need to make a reservation before visiting?", "Where should I call in an emergency?"]
   },
   ja: {
     tab: "最初の7日 TOP10", title: "韓国到着後 最初の7日TOP10", summary: "韓国到着後に先に処理すると生活が詰まりにくい順序型チェックリストです。",
-    when: "いつ処理するか", prepare: "準備するもの", avoid: "ミス防止", phrase: "すぐ伝える文", copy: "文をコピー", official: "公式案内", call: "相談電話",
+    when: "いつ処理するか", prepare: "準備するもの", avoid: "ミス防止", phrase: "すぐ伝える文", copy: "韓国語をコピー", official: "公式案内", call: "相談電話",
     step: "到着後の優先順位", prepareItems: ["パスポート、外国人登録証または申請予定書類", "韓国の電話番号、住所、契約書や案内文の写真", "訪問業務はオンライン予約が必要か事前確認"],
     avoidItems: ["書類ごとに名前、生年月日、住所の表記が違うと手続きが遅れることがあります。", "期限がある手続きは電話相談だけでなく公式サイトと予約も確認します。"],
     phrases: ["外国人登録には何を準備すればいいですか。", "プリペイドSIMまたは携帯電話を開通したいです。", "外国人が口座を作るにはどんな書類が必要ですか。", "交通カードはどこで買えますか。", "この住所までの行き方を教えてください。", "この地域のごみ出し日はいつですか。", "近くの病院か薬局を探しています。", "携帯電話の本人認証ができません。", "訪問予約が必要ですか。", "緊急時はどこに電話すればいいですか。"]
   },
   th: {
     tab: "7 วันแรก TOP10", title: "7 วันแรกหลังมาถึงเกาหลี TOP10", summary: "เช็กลิสต์ตามลำดับเพื่อไม่ให้ติดขัดในสัปดาห์แรกที่เกาหลี",
-    when: "ควรทำเมื่อไร", prepare: "สิ่งที่ต้องเตรียม", avoid: "กันความผิดพลาด", phrase: "ประโยคที่พูดได้ทันที", copy: "คัดลอกประโยค", official: "ข้อมูลทางการ", call: "โทรปรึกษา",
+    when: "ควรทำเมื่อไร", prepare: "สิ่งที่ต้องเตรียม", avoid: "กันความผิดพลาด", phrase: "ประโยคที่พูดได้ทันที", copy: "คัดลอกประโยคเกาหลี", official: "ข้อมูลทางการ", call: "โทรปรึกษา",
     step: "ลำดับความสำคัญหลังมาถึง", prepareItems: ["พาสปอร์ต บัตรต่างชาติ หรือเอกสารที่จะใช้สมัคร", "เบอร์เกาหลี ที่อยู่ และรูปสัญญาหรือเอกสารแจ้ง", "งานที่ต้องไปสำนักงานให้เช็กการจองออนไลน์ก่อน"],
     avoidItems: ["ถ้าชื่อ วันเกิด หรือที่อยู่ในเอกสารไม่ตรงกัน ขั้นตอนอาจล่าช้า", "งานที่มีวันครบกำหนดควรเช็กเว็บไซต์ทางการและการจอง ไม่ใช่แค่โทรถาม"],
     phrases: ["ต้องเตรียมอะไรบ้างสำหรับการลงทะเบียนคนต่างชาติ", "ต้องการเปิดซิมเติมเงินหรือเบอร์มือถือ", "ชาวต่างชาติต้องใช้เอกสารอะไรในการเปิดบัญชี", "ซื้อบัตรโดยสารได้ที่ไหน", "ช่วยบอกทางไปที่อยู่นี้ได้ไหม", "พื้นที่นี้ทิ้งขยะวันไหน", "กำลังหาร้านยาหรือคลินิกใกล้ ๆ", "ยืนยันตัวตนด้วยมือถือไม่ได้", "ต้องจองก่อนเข้าไปไหม", "ถ้าฉุกเฉินต้องโทรเบอร์ไหน"]
   },
   zh: {
     tab: "最初7天 TOP10", title: "到韩国最初7天 TOP10", summary: "到韩国后先处理这些事项，生活流程会更顺畅。",
-    when: "什么时候处理", prepare: "需要准备", avoid: "避免失误", phrase: "可直接说的话", copy: "复制句子", official: "官方指南", call: "咨询电话",
+    when: "什么时候处理", prepare: "需要准备", avoid: "避免失误", phrase: "可直接说的话", copy: "复制韩语句子", official: "官方指南", call: "咨询电话",
     step: "到达后优先顺序", prepareItems: ["护照、外国人登录证或申请所需文件", "韩国电话号码、住址、合同或通知照片", "访问机关前确认是否需要线上预约"],
     avoidItems: ["文件上的姓名、出生日期、地址格式不同，手续可能会延迟。", "有期限的事项不要只听电话咨询，也要确认官网和预约。"],
     phrases: ["办理外国人登录需要准备什么？", "我想办理预付SIM卡或手机号码。", "外国人开银行账户需要哪些文件？", "在哪里可以买交通卡？", "请告诉我去这个地址的方法。", "这个地区哪天倒垃圾？", "我在找附近的医院或药店。", "手机本人认证无法通过。", "访问前需要预约吗？", "紧急情况应该打哪个电话？"]
   },
   vi: {
     tab: "7 ngày đầu TOP10", title: "7 ngày đầu ở Hàn Quốc TOP10", summary: "Checklist theo thứ tự để tuần đầu ở Hàn không bị vướng thủ tục.",
-    when: "Khi nào xử lý", prepare: "Cần chuẩn bị", avoid: "Tránh sai sót", phrase: "Câu có thể nói ngay", copy: "Sao chép câu", official: "Hướng dẫn chính thức", call: "Gọi tư vấn",
+    when: "Khi nào xử lý", prepare: "Cần chuẩn bị", avoid: "Tránh sai sót", phrase: "Câu có thể nói ngay", copy: "Sao chép câu tiếng Hàn", official: "Hướng dẫn chính thức", call: "Gọi tư vấn",
     step: "Ưu tiên sau khi đến", prepareItems: ["Hộ chiếu, thẻ người nước ngoài hoặc giấy tờ để đăng ký", "Số điện thoại Hàn, địa chỉ, ảnh hợp đồng hoặc thông báo", "Nếu cần đến văn phòng, kiểm tra đặt lịch online trước"],
     avoidItems: ["Tên, ngày sinh hoặc địa chỉ không thống nhất giữa giấy tờ có thể làm chậm thủ tục.", "Việc có hạn chót cần kiểm tra website chính thức và đặt lịch, không chỉ nghe tư vấn qua điện thoại."],
     phrases: ["Tôi cần chuẩn bị gì để đăng ký người nước ngoài?", "Tôi muốn mở SIM trả trước hoặc số điện thoại.", "Người nước ngoài cần giấy tờ gì để mở tài khoản?", "Tôi có thể mua thẻ giao thông ở đâu?", "Xin chỉ đường đến địa chỉ này.", "Khu vực này đổ rác vào ngày nào?", "Tôi đang tìm phòng khám hoặc nhà thuốc gần đây.", "Xác minh danh tính bằng điện thoại không hoạt động.", "Tôi có cần đặt lịch trước khi đến không?", "Khi khẩn cấp tôi nên gọi số nào?"]
   },
   es: {
     tab: "Primeros 7 días", title: "Primeros 7 días en Corea TOP10", summary: "Checklist en orden para no quedarte bloqueado durante tu primera semana en Corea.",
-    when: "Cuándo hacerlo", prepare: "Preparar", avoid: "Evitar errores", phrase: "Frase para decir", copy: "Copiar frase", official: "Guía oficial", call: "Llamar ayuda",
+    when: "Cuándo hacerlo", prepare: "Preparar", avoid: "Evitar errores", phrase: "Frase para decir", copy: "Copiar frase coreana", official: "Guía oficial", call: "Llamar ayuda",
     step: "Prioridad al llegar", prepareItems: ["Pasaporte, tarjeta extranjera o documentos para solicitarla", "Número coreano, dirección y fotos de contratos o avisos", "Antes de visitar una oficina, revisa si necesitas reserva online"],
     avoidItems: ["Si nombre, fecha de nacimiento o dirección no coinciden entre documentos, el trámite puede retrasarse.", "Para trámites con fecha límite, revisa web oficial y reserva, no solo una llamada."],
     phrases: ["¿Qué necesito preparar para el registro extranjero?", "Quiero abrir una SIM prepago o plan móvil.", "¿Qué documentos necesita un extranjero para abrir cuenta bancaria?", "¿Dónde puedo comprar una tarjeta de transporte?", "Por favor dime cómo llegar a esta dirección.", "¿Qué día se saca la basura en esta zona?", "Busco una clínica o farmacia cercana.", "La verificación móvil no funciona.", "¿Necesito reservar antes de visitar?", "¿A qué número debo llamar en una emergencia?"]
   }
 };
+
+WIIINFO_KOREAN_COPY.firstDays = WIIINFO_FIRST_DAYS_LABELS.ko.phrases;
 
 function applyFirstDaysSection(lang) {
   const sections = window.WIIINFO_INFO_SECTIONS[lang];
@@ -885,8 +895,9 @@ function applyFirstDaysSection(lang) {
   section.title = labels.title;
   section.summary = labels.summary;
   section.cards.forEach((card, index) => {
+    const koreanCopy = WIIINFO_KOREAN_COPY.firstDays[index] || WIIINFO_KOREAN_COPY.firstDays[0];
     const actions = [
-      { type: "copy", label: labels.copy, value: labels.phrases[index] || labels.phrases[0] },
+      { type: "copy", label: labels.copy, value: koreanCopy },
       index === 0 || index === 8 ? { type: "tel", label: `${labels.call} 1345`, value: "1345" } : null,
       index === 0 || index === 8 ? { type: "link", label: labels.official, href: "https://www.hikorea.go.kr" } : null
     ].filter(Boolean);
@@ -897,7 +908,7 @@ function applyFirstDaysSection(lang) {
       sections: [
         { title: labels.when, items: [`${labels.step} ${String(index + 1).padStart(2, "0")}`, card.text] },
         { title: labels.prepare, items: labels.prepareItems },
-        { title: labels.phrase, items: [labels.phrases[index] || labels.phrases[0]] },
+        { title: labels.phrase, items: [koreanCopy, lang === "ko" ? null : labels.phrases[index] || labels.phrases[0]].filter(Boolean) },
         { title: labels.avoid, items: labels.avoidItems }
       ]
     };
@@ -909,7 +920,7 @@ function applyFirstDaysSection(lang) {
 const WIIINFO_WARNING_PACKS = {
   ko: {
     tab: "주의 TOP10", title: "한국 생활 사기·위험 주의 TOP10", summary: "외국인이 한국에서 돈, 계약, 비자 문제를 피하기 위해 먼저 확인할 위험 신호입니다.",
-    risk: "위험 신호", action: "바로 할 일", phrase: "거절·확인 문장", avoid: "피해야 할 행동", copy: "문장 복사", call: "상담 전화",
+    risk: "위험 신호", action: "바로 할 일", phrase: "거절·확인 문장", avoid: "피해야 할 행동", copy: "한국어 문장 복사", call: "상담 전화",
     actionItems: ["이름, 계좌, 주소, 날짜, 금액을 사진이나 문자로 남깁니다.", "이해가 안 되면 바로 송금하거나 서명하지 말고 확인을 요청합니다."],
     avoidItems: ["급하게 결정하라는 압박을 받으면 잠시 멈춥니다.", "한국어 문장을 이해하지 못한 상태로 계약하거나 개인정보를 보내지 않습니다."],
     cards: [
@@ -927,7 +938,7 @@ const WIIINFO_WARNING_PACKS = {
   },
   en: {
     tab: "Warnings TOP10", title: "Korea Scam and Risk Warnings TOP10", summary: "Risk signals foreigners should check before sending money, signing contracts, or breaking visa rules.",
-    risk: "Risk signal", action: "What to do now", phrase: "Phrase to refuse or check", avoid: "Avoid this", copy: "Copy phrase", call: "Call help",
+    risk: "Risk signal", action: "What to do now", phrase: "Phrase to refuse or check", avoid: "Avoid this", copy: "Copy Korean phrase", call: "Call help",
     actionItems: ["Keep names, accounts, addresses, dates, and amounts in photos or text messages.", "If you do not understand, do not send money or sign until someone checks it."],
     avoidItems: ["Pause when someone pressures you to decide quickly.", "Do not sign Korean text or send personal data before you understand the request."],
     cards: [
@@ -945,7 +956,7 @@ const WIIINFO_WARNING_PACKS = {
   },
   ja: {
     tab: "注意 TOP10", title: "韓国生活 詐欺・危険注意TOP10", summary: "送金、契約、ビザ違反を避けるために外国人が先に確認すべき危険信号です。",
-    risk: "危険信号", action: "すぐすること", phrase: "断る・確認する文", avoid: "避ける行動", copy: "文をコピー", call: "相談電話",
+    risk: "危険信号", action: "すぐすること", phrase: "断る・確認する文", avoid: "避ける行動", copy: "韓国語をコピー", call: "相談電話",
     actionItems: ["名前、口座、住所、日付、金額を写真やメッセージで残します。", "理解できない場合は送金や署名をせず、確認を依頼します。"],
     avoidItems: ["急いで決めろと言われたら一度止まります。", "韓国語を理解しないまま契約したり個人情報を送ったりしません。"],
     cards: [
@@ -963,7 +974,7 @@ const WIIINFO_WARNING_PACKS = {
   },
   th: {
     tab: "คำเตือน TOP10", title: "คำเตือนเรื่องหลอกลวงและความเสี่ยงในเกาหลี TOP10", summary: "สัญญาณเสี่ยงที่ชาวต่างชาติควรเช็กก่อนโอนเงิน เซ็นสัญญา หรือทำผิดเงื่อนไขวีซ่า",
-    risk: "สัญญาณเสี่ยง", action: "สิ่งที่ควรทำทันที", phrase: "ประโยคปฏิเสธหรือขอตรวจสอบ", avoid: "สิ่งที่ควรเลี่ยง", copy: "คัดลอกประโยค", call: "โทรปรึกษา",
+    risk: "สัญญาณเสี่ยง", action: "สิ่งที่ควรทำทันที", phrase: "ประโยคปฏิเสธหรือขอตรวจสอบ", avoid: "สิ่งที่ควรเลี่ยง", copy: "คัดลอกประโยคเกาหลี", call: "โทรปรึกษา",
     actionItems: ["เก็บชื่อ บัญชี ที่อยู่ วันที่ และจำนวนเงินเป็นรูปหรือข้อความ", "ถ้าไม่เข้าใจ อย่าเพิ่งโอนเงินหรือเซ็น ให้ขอตรวจสอบก่อน"],
     avoidItems: ["ถ้าถูกเร่งให้ตัดสินใจเร็ว ให้หยุดก่อน", "อย่าเซ็นภาษาเกาหลีหรือส่งข้อมูลส่วนตัวก่อนเข้าใจ"],
     cards: [
@@ -981,7 +992,7 @@ const WIIINFO_WARNING_PACKS = {
   },
   zh: {
     tab: "注意 TOP10", title: "韩国生活诈骗与风险注意 TOP10", summary: "外国人在汇款、签约或违反签证规则前应确认的风险信号。",
-    risk: "风险信号", action: "马上要做", phrase: "拒绝或确认用语", avoid: "避免行为", copy: "复制句子", call: "咨询电话",
+    risk: "风险信号", action: "马上要做", phrase: "拒绝或确认用语", avoid: "避免行为", copy: "复制韩语句子", call: "咨询电话",
     actionItems: ["把姓名、账户、地址、日期、金额用照片或文字留下。", "不理解时不要马上汇款或签字，先要求确认。"],
     avoidItems: ["被催促马上决定时先暂停。", "不要在不理解韩语内容时签约或发送个人信息。"],
     cards: [
@@ -999,7 +1010,7 @@ const WIIINFO_WARNING_PACKS = {
   },
   vi: {
     tab: "Cảnh báo TOP10", title: "Cảnh báo lừa đảo và rủi ro ở Hàn Quốc TOP10", summary: "Tín hiệu rủi ro người nước ngoài nên kiểm tra trước khi chuyển tiền, ký hợp đồng hoặc vi phạm visa.",
-    risk: "Tín hiệu rủi ro", action: "Việc cần làm ngay", phrase: "Câu từ chối hoặc kiểm tra", avoid: "Cần tránh", copy: "Sao chép câu", call: "Gọi tư vấn",
+    risk: "Tín hiệu rủi ro", action: "Việc cần làm ngay", phrase: "Câu từ chối hoặc kiểm tra", avoid: "Cần tránh", copy: "Sao chép câu tiếng Hàn", call: "Gọi tư vấn",
     actionItems: ["Lưu tên, tài khoản, địa chỉ, ngày và số tiền bằng ảnh hoặc tin nhắn.", "Nếu chưa hiểu, đừng chuyển tiền hoặc ký trước khi kiểm tra."],
     avoidItems: ["Nếu bị ép quyết định nhanh, hãy dừng lại.", "Không ký tiếng Hàn hoặc gửi dữ liệu cá nhân khi chưa hiểu yêu cầu."],
     cards: [
@@ -1017,7 +1028,7 @@ const WIIINFO_WARNING_PACKS = {
   },
   es: {
     tab: "Advertencias TOP10", title: "Estafas y riesgos en Corea TOP10", summary: "Señales de riesgo que extranjeros deben revisar antes de pagar, firmar o romper reglas de visa.",
-    risk: "Señal de riesgo", action: "Qué hacer ahora", phrase: "Frase para rechazar o revisar", avoid: "Evitar esto", copy: "Copiar frase", call: "Llamar ayuda",
+    risk: "Señal de riesgo", action: "Qué hacer ahora", phrase: "Frase para rechazar o revisar", avoid: "Evitar esto", copy: "Copiar frase coreana", call: "Llamar ayuda",
     actionItems: ["Guarda nombres, cuentas, direcciones, fechas y montos en fotos o mensajes.", "Si no entiendes, no envíes dinero ni firmes hasta revisarlo."],
     avoidItems: ["Pausa cuando alguien te presiona para decidir rápido.", "No firmes coreano ni envíes datos personales antes de entender la solicitud."],
     cards: [
@@ -1035,6 +1046,8 @@ const WIIINFO_WARNING_PACKS = {
   }
 };
 
+WIIINFO_KOREAN_COPY.warnings = WIIINFO_WARNING_PACKS.ko.cards.map((card) => card[3]);
+
 function applyWarningsSection(lang) {
   const sections = window.WIIINFO_INFO_SECTIONS[lang];
   const section = sections?.find((item) => item.id === "realty");
@@ -1051,14 +1064,14 @@ function applyWarningsSection(lang) {
       images: WIIINFO_VISUAL_SETS[WIIINFO_SECTION_IMAGE_ROTATION.realty[index]] || WIIINFO_VISUAL_SETS.realty,
       lead: text,
       actions: [
-        { type: "copy", label: pack.copy, value: phrase },
+        { type: "copy", label: pack.copy, value: WIIINFO_KOREAN_COPY.warnings[index] || phrase },
         [0, 1, 3, 7, 8].includes(index) ? { type: "tel", label: `${pack.call} 112`, value: "112" } : null,
         [5, 6].includes(index) ? { type: "tel", label: `${pack.call} 1345`, value: "1345" } : null
       ].filter(Boolean),
       sections: [
         { title: pack.risk, items: [risk, text] },
         { title: pack.action, items: pack.actionItems },
-        { title: pack.phrase, items: [phrase] },
+        { title: pack.phrase, items: [WIIINFO_KOREAN_COPY.warnings[index] || phrase, lang === "ko" ? null : phrase].filter(Boolean) },
         { title: pack.avoid, items: pack.avoidItems }
       ]
     }
