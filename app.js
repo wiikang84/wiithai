@@ -1,5 +1,5 @@
 (async function () {
-  const ASSET_VERSION = "20260602-17";
+  const ASSET_VERSION = "20260602-18";
   const LANGUAGES = window.WIITHAI_LANGUAGES || {};
   const LANGUAGE_NAMES = window.WIIINFO_LANGUAGE_NAMES || {};
   const PROFILES = window.WIITHAI_LEARNER_PROFILES || [];
@@ -385,7 +385,7 @@
       item.className = "infoCard";
       item.tabIndex = 0;
       item.setAttribute("role", "button");
-      item.setAttribute("aria-label", `${card.title} 상세 보기`);
+      item.setAttribute("aria-label", `${card.title} ${detailLabel("viewDetail")}`);
       item.innerHTML = `<strong>${card.title}</strong><p>${card.text}</p>`;
       item.addEventListener("click", () => openInfoDetail(card, selected));
       item.addEventListener("keydown", (event) => {
@@ -412,8 +412,8 @@
       return { ...image, label: card.title };
     });
     visual.innerHTML = images.map((image, index) => image.src
-      ? `<figure class="${index === 0 ? "featured" : ""}" role="button" tabindex="0" data-card-index="${index}" aria-label="${image.label} 상세 보기"><img src="${image.src}" alt="${image.alt || image.label}" loading="lazy" /><figcaption>${image.label}</figcaption></figure>`
-      : `<figure class="imageFallback ${index === 0 ? "featured" : ""}" role="button" tabindex="0" data-card-index="${index}" aria-label="${image.label} 상세 보기"><span>${image.label}</span></figure>`).join("");
+      ? `<figure class="${index === 0 ? "featured" : ""}" role="button" tabindex="0" data-card-index="${index}" aria-label="${image.label} ${detailLabel("viewDetail")}"><img src="${image.src}" alt="${image.alt || image.label}" loading="lazy" /><figcaption>${image.label}</figcaption></figure>`
+      : `<figure class="imageFallback ${index === 0 ? "featured" : ""}" role="button" tabindex="0" data-card-index="${index}" aria-label="${image.label} ${detailLabel("viewDetail")}"><span>${image.label}</span></figure>`).join("");
     visual.querySelectorAll("figure").forEach((figure) => {
       const open = () => {
         const card = section.cards[Number(figure.dataset.cardIndex)];
@@ -468,13 +468,13 @@
 
   function detailLabel(key) {
     const labels = {
-      ko: { address: "주소", directions: "가는 방법", hours: "운영/시간", map: "지도 보기", source: "자료 기준", copied: "복사됨" },
-      en: { address: "Address", directions: "How to get there", hours: "Hours", map: "Open map", source: "Reference", copied: "Copied" },
-      ja: { address: "住所", directions: "行き方", hours: "時間", map: "地図を見る", source: "参考", copied: "コピー済み" },
-      th: { address: "ที่อยู่", directions: "วิธีเดินทาง", hours: "เวลา", map: "เปิดแผนที่", source: "แหล่งข้อมูล", copied: "คัดลอกแล้ว" },
-      zh: { address: "地址", directions: "交通方式", hours: "时间", map: "查看地图", source: "参考", copied: "已复制" },
-      vi: { address: "Địa chỉ", directions: "Cách đi", hours: "Thời gian", map: "Mở bản đồ", source: "Nguồn tham khảo", copied: "Đã sao chép" },
-      es: { address: "Dirección", directions: "Cómo llegar", hours: "Horario", map: "Abrir mapa", source: "Referencia", copied: "Copiado" }
+      ko: { address: "주소", directions: "가는 방법", hours: "운영/시간", map: "지도 보기", source: "자료 기준", copied: "복사됨", close: "상세 닫기", viewDetail: "상세 보기" },
+      en: { address: "Address", directions: "How to get there", hours: "Hours", map: "Open map", source: "Reference", copied: "Copied", close: "Close details", viewDetail: "View details" },
+      ja: { address: "住所", directions: "行き方", hours: "時間", map: "地図を見る", source: "参考", copied: "コピー済み", close: "詳細を閉じる", viewDetail: "詳細を見る" },
+      th: { address: "ที่อยู่", directions: "วิธีเดินทาง", hours: "เวลา", map: "เปิดแผนที่", source: "แหล่งข้อมูล", copied: "คัดลอกแล้ว", close: "ปิดรายละเอียด", viewDetail: "ดูรายละเอียด" },
+      zh: { address: "地址", directions: "交通方式", hours: "时间", map: "查看地图", source: "参考", copied: "已复制", close: "关闭详情", viewDetail: "查看详情" },
+      vi: { address: "Địa chỉ", directions: "Cách đi", hours: "Thời gian", map: "Mở bản đồ", source: "Nguồn tham khảo", copied: "Đã sao chép", close: "Đóng chi tiết", viewDetail: "Xem chi tiết" },
+      es: { address: "Dirección", directions: "Cómo llegar", hours: "Horario", map: "Abrir mapa", source: "Referencia", copied: "Copiado", close: "Cerrar detalles", viewDetail: "Ver detalles" }
     };
     const lang = labels[sourceLang] ? sourceLang : "en";
     return labels[lang][key] || key;
@@ -516,6 +516,8 @@
     const actions = detailModal.querySelector(".infoDetailActions");
     const sections = detailModal.querySelector(".infoDetailSections");
     const images = detail.images && detail.images.length ? detail.images : [{ src: "", alt: card.title }];
+
+    detailModal.querySelector(".infoDetailClose").setAttribute("aria-label", detailLabel("close"));
 
     gallery.innerHTML = images.map((image, index) => image.src
       ? `<figure class="${index === 0 ? "featured" : ""}"><img src="${image.src}" alt="${image.alt || card.title}" loading="lazy" /><figcaption>${image.alt || card.title}</figcaption></figure>`
