@@ -1,5 +1,5 @@
 (async function () {
-  const ASSET_VERSION = "20260602-21";
+  const ASSET_VERSION = "20260602-22";
   const LANGUAGES = window.WIITHAI_LANGUAGES || {};
   const LANGUAGE_NAMES = window.WIIINFO_LANGUAGE_NAMES || {};
   const PROFILES = window.WIITHAI_LEARNER_PROFILES || [];
@@ -67,7 +67,7 @@
   let currentMode = "phrases";
   let visibleLimit = 0;
   let voiceMode = localStorage.getItem("wiiinfoVoiceMode") || localStorage.getItem("wiithaiVoiceMode") || "female";
-  let profileId = localStorage.getItem("wiiinfoProfileId") || localStorage.getItem("wiithaiProfileId") || "ko";
+  let profileId = localStorage.getItem("wiiinfoProfileId") || localStorage.getItem("wiithaiProfileId") || preferredProfileId();
   let activeProfile = getProfile(profileId);
   let sourceLang = activeProfile.source;
   let targetLang = localStorage.getItem("wiiinfoTargetLang") || localStorage.getItem("wiithaiTargetLang") || activeProfile.targets[0];
@@ -91,6 +91,13 @@
       label: "한국인이 배워요",
       flag: "🇰🇷"
     };
+  }
+
+  function preferredProfileId() {
+    const locale = (navigator.language || navigator.userLanguage || "").toLowerCase();
+    const prefix = locale.split("-")[0];
+    const mapped = { en: "en", ja: "ja", th: "th", zh: "zh", vi: "vi", es: "es", ko: "ko" }[prefix] || "en";
+    return PROFILES.some((profile) => profile.id === mapped) ? mapped : "en";
   }
 
   async function loadFirebasePhrases() {
