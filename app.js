@@ -1,5 +1,5 @@
 (async function () {
-  const ASSET_VERSION = "20260602-18";
+  const ASSET_VERSION = "20260602-19";
   const LANGUAGES = window.WIITHAI_LANGUAGES || {};
   const LANGUAGE_NAMES = window.WIIINFO_LANGUAGE_NAMES || {};
   const PROFILES = window.WIITHAI_LEARNER_PROFILES || [];
@@ -468,13 +468,13 @@
 
   function detailLabel(key) {
     const labels = {
-      ko: { address: "주소", directions: "가는 방법", hours: "운영/시간", map: "지도 보기", source: "자료 기준", copied: "복사됨", close: "상세 닫기", viewDetail: "상세 보기" },
-      en: { address: "Address", directions: "How to get there", hours: "Hours", map: "Open map", source: "Reference", copied: "Copied", close: "Close details", viewDetail: "View details" },
-      ja: { address: "住所", directions: "行き方", hours: "時間", map: "地図を見る", source: "参考", copied: "コピー済み", close: "詳細を閉じる", viewDetail: "詳細を見る" },
-      th: { address: "ที่อยู่", directions: "วิธีเดินทาง", hours: "เวลา", map: "เปิดแผนที่", source: "แหล่งข้อมูล", copied: "คัดลอกแล้ว", close: "ปิดรายละเอียด", viewDetail: "ดูรายละเอียด" },
-      zh: { address: "地址", directions: "交通方式", hours: "时间", map: "查看地图", source: "参考", copied: "已复制", close: "关闭详情", viewDetail: "查看详情" },
-      vi: { address: "Địa chỉ", directions: "Cách đi", hours: "Thời gian", map: "Mở bản đồ", source: "Nguồn tham khảo", copied: "Đã sao chép", close: "Đóng chi tiết", viewDetail: "Xem chi tiết" },
-      es: { address: "Dirección", directions: "Cómo llegar", hours: "Horario", map: "Abrir mapa", source: "Referencia", copied: "Copiado", close: "Cerrar detalles", viewDetail: "Ver detalles" }
+      ko: { address: "주소", directions: "가는 방법", hours: "운영/시간", map: "지도 보기", source: "자료 기준", copied: "복사됨", close: "상세 닫기", viewDetail: "상세 보기", favoriteAdd: "즐겨찾기 추가", favoriteRemove: "즐겨찾기 해제" },
+      en: { address: "Address", directions: "How to get there", hours: "Hours", map: "Open map", source: "Reference", copied: "Copied", close: "Close details", viewDetail: "View details", favoriteAdd: "Save item", favoriteRemove: "Remove saved item" },
+      ja: { address: "住所", directions: "行き方", hours: "時間", map: "地図を見る", source: "参考", copied: "コピー済み", close: "詳細を閉じる", viewDetail: "詳細を見る", favoriteAdd: "保存に追加", favoriteRemove: "保存を解除" },
+      th: { address: "ที่อยู่", directions: "วิธีเดินทาง", hours: "เวลา", map: "เปิดแผนที่", source: "แหล่งข้อมูล", copied: "คัดลอกแล้ว", close: "ปิดรายละเอียด", viewDetail: "ดูรายละเอียด", favoriteAdd: "บันทึกรายการ", favoriteRemove: "ลบรายการที่บันทึก" },
+      zh: { address: "地址", directions: "交通方式", hours: "时间", map: "查看地图", source: "参考", copied: "已复制", close: "关闭详情", viewDetail: "查看详情", favoriteAdd: "添加收藏", favoriteRemove: "取消收藏" },
+      vi: { address: "Địa chỉ", directions: "Cách đi", hours: "Thời gian", map: "Mở bản đồ", source: "Nguồn tham khảo", copied: "Đã sao chép", close: "Đóng chi tiết", viewDetail: "Xem chi tiết", favoriteAdd: "Lưu mục", favoriteRemove: "Bỏ lưu mục" },
+      es: { address: "Dirección", directions: "Cómo llegar", hours: "Horario", map: "Abrir mapa", source: "Referencia", copied: "Copiado", close: "Cerrar detalles", viewDetail: "Ver detalles", favoriteAdd: "Guardar elemento", favoriteRemove: "Quitar guardado" }
     };
     const lang = labels[sourceLang] ? sourceLang : "en";
     return labels[lang][key] || key;
@@ -619,7 +619,9 @@
 
       star.textContent = state.favorites.has(id) ? "★" : "☆";
       star.classList.toggle("on", state.favorites.has(id));
-      star.setAttribute("aria-label", state.favorites.has(id) ? "즐겨찾기 해제" : "즐겨찾기 추가");
+      const favoriteLabel = state.favorites.has(id) ? detailLabel("favoriteRemove") : detailLabel("favoriteAdd");
+      star.setAttribute("aria-label", favoriteLabel);
+      star.title = favoriteLabel;
       star.setAttribute("aria-pressed", String(state.favorites.has(id)));
       star.addEventListener("click", () => {
         if (state.favorites.has(id)) state.favorites.delete(id);
