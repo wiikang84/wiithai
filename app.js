@@ -1,5 +1,5 @@
 (async function () {
-  const ASSET_VERSION = "20260601-28";
+  const ASSET_VERSION = "20260602-07";
   const LANGUAGES = window.WIITHAI_LANGUAGES || {};
   const LANGUAGE_NAMES = window.WIIINFO_LANGUAGE_NAMES || {};
   const PROFILES = window.WIITHAI_LEARNER_PROFILES || [];
@@ -60,6 +60,8 @@
   const infoTitle = document.getElementById("infoTitle");
   const infoSummary = document.getElementById("infoSummary");
   const infoCards = document.getElementById("infoCards");
+  const infoPanel = document.querySelector(".infoPanel");
+  const detailModal = createInfoDetailModal();
 
   let categories = [];
   let currentMode = "phrases";
@@ -376,13 +378,161 @@
     infoEyebrow.textContent = uiText("infoEyebrow");
     infoTitle.textContent = selected.title;
     infoSummary.textContent = selected.summary;
+    renderInfoVisual(selected);
     infoCards.innerHTML = "";
     selected.cards.forEach((card) => {
       const item = document.createElement("article");
       item.className = "infoCard";
+      item.tabIndex = 0;
+      item.setAttribute("role", "button");
+      item.setAttribute("aria-label", `${card.title} 상세 보기`);
       item.innerHTML = `<strong>${card.title}</strong><p>${card.text}</p>`;
+      item.addEventListener("click", () => openInfoDetail(card, selected));
+      item.addEventListener("keydown", (event) => {
+        if (event.key === "Enter" || event.key === " ") {
+          event.preventDefault();
+          openInfoDetail(card, selected);
+        }
+      });
       infoCards.appendChild(item);
     });
+  }
+
+  function renderInfoVisual(section) {
+    if (!infoPanel || !section?.cards?.length) return;
+    let visual = infoPanel.querySelector(".infoVisual");
+    if (!visual) {
+      visual = document.createElement("div");
+      visual.className = "infoVisual";
+      infoPanel.insertBefore(visual, infoPanel.firstElementChild);
+    }
+    const cards = section.cards.slice(0, 4);
+    const images = cards.map((card) => {
+      const image = card.detail?.images?.[0] || {};
+      return { ...image, label: card.title };
+    });
+    visual.innerHTML = images.map((image, index) => image.src
+      ? `<figure class="${index === 0 ? "featured" : ""}"><img src="${image.src}" alt="${image.alt || image.label}" loading="lazy" /><figcaption>${image.label}</figcaption></figure>`
+      : `<figure class="imageFallback ${index === 0 ? "featured" : ""}"><span>${image.label}</span></figure>`).join("");
+    visual.querySelectorAll("img").forEach((image) => {
+      image.addEventListener("error", () => {
+        const figure = image.closest("figure");
+        if (!figure) return;
+        figure.classList.add("imageFallback");
+        figure.innerHTML = `<span>${image.alt || ""}</span>`;
+      }, { once: true });
+    });
+  }
+
+  function createInfoDetailModal() {
+    const overlay = document.createElement("div");
+    overlay.className = "infoDetailOverlay";
+    overlay.hidden = true;
+    overlay.innerHTML = `
+      <section class="infoDetail" role="dialog" aria-modal="true" aria-labelledby="infoDetailTitle">
+        <button class="infoDetailClose" type="button" aria-label="상세 닫기">×</button>
+        <div class="infoDetailGallery"></div>
+        <div class="infoDetailBody">
+          <p class="controlLabel infoDetailEyebrow"></p>
+          <h2 id="infoDetailTitle"></h2>
+          <p class="infoDetailLead"></p>
+          <div class="infoDetailMeta"></div>
+          <div class="infoDetailSections"></div>
+        </div>
+      </section>
+    `;
+    document.body.appendChild(overlay);
+    overlay.querySelector(".infoDetailClose").addEventListener("click", closeInfoDetail);
+    overlay.addEventListener("click", (event) => {
+      if (event.target === overlay) closeInfoDetail();
+    });
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && !overlay.hidden) closeInfoDetail();
+    });
+    return overlay;
+  }
+
+  function detailLabel(key) {
+    const labels = {
+      ko: { address: "주소", directions: "가는 방법", hours: "운영/시간", map: "지도 보기", source: "자료 기준" },
+      en: { address: "Address", directions: "How to get there", hours: "Hours", map: "Open map", source: "Reference" },
+      ja: { address: "住所", directions: "行き方", hours: "時間", map: "地図を見る", source: "参考" },
+      th: { address: "ที่อยู่", directions: "วิธีเดินทาง", hours: "เวลา", map: "เปิดแผนที่", source: "แหล่งข้อมูล" },
+      zh: { address: "地址", directions: "交通方式", hours: "时间", map: "查看地图", source: "参考" },
+      vi: { address: "Địa chỉ", directions: "Cách đi", hours: "Thời gian", map: "Mở bản đồ", source: "Nguồn tham khảo" },
+      es: { address: "Dirección", directions: "Cómo llegar", hours: "Horario", map: "Abrir mapa", source: "Referencia" }
+    };
+    const lang = labels[sourceLang] ? sourceLang : "en";
+    return labels[lang][key] || key;
+  }
+
+  function fallbackDetail(card, section) {
+    return {
+      lead: card.text,
+      images: [],
+      meta: [],
+      sections: [
+        { title: section.title, items: [card.text] },
+        { title: sourceLang === "ko" ? "체크 포인트" : "Checklist", items: [
+          sourceLang === "ko" ? "계약·방문·신청 전에 필요한 서류와 비용을 먼저 확인합니다." : "Check required documents and costs before visiting, applying, or signing.",
+          sourceLang === "ko" ? "이해가 안 되는 문장은 사진으로 저장하고 한국어 가능한 사람에게 확인받습니다." : "Save unclear Korean text and ask someone who can read Korean to review it.",
+          sourceLang === "ko" ? "금액을 송금하거나 서명하기 전에는 이름, 주소, 날짜를 다시 확인합니다." : "Before sending money or signing, check names, addresses, and dates again."
+        ] }
+      ]
+    };
+  }
+
+  function openInfoDetail(card, section) {
+    const detail = card.detail || fallbackDetail(card, section);
+    const gallery = detailModal.querySelector(".infoDetailGallery");
+    const eyebrow = detailModal.querySelector(".infoDetailEyebrow");
+    const title = detailModal.querySelector("#infoDetailTitle");
+    const lead = detailModal.querySelector(".infoDetailLead");
+    const meta = detailModal.querySelector(".infoDetailMeta");
+    const sections = detailModal.querySelector(".infoDetailSections");
+    const images = detail.images && detail.images.length ? detail.images : [{ src: "", alt: card.title }];
+
+    gallery.innerHTML = images.map((image, index) => image.src
+      ? `<figure class="${index === 0 ? "featured" : ""}"><img src="${image.src}" alt="${image.alt || card.title}" loading="lazy" /><figcaption>${image.alt || card.title}</figcaption></figure>`
+      : `<figure class="imageFallback featured"><span>${card.title}</span></figure>`).join("");
+    gallery.querySelectorAll("img").forEach((image) => {
+      image.addEventListener("error", () => {
+        const figure = image.closest("figure");
+        if (!figure) return;
+        figure.classList.add("imageFallback");
+        figure.innerHTML = `<span>${image.alt || card.title}</span>`;
+      }, { once: true });
+    });
+
+    eyebrow.textContent = section.tab;
+    title.textContent = card.title;
+    lead.textContent = detail.lead || card.text;
+
+    const metaRows = [
+      detail.address ? [detailLabel("address"), detail.address] : null,
+      detail.directions ? [detailLabel("directions"), detail.directions] : null,
+      detail.hours ? [detailLabel("hours"), detail.hours] : null
+    ].filter(Boolean);
+    meta.innerHTML = metaRows.map(([label, value]) => `<div><span>${label}</span><strong>${value}</strong></div>`).join("");
+    if (detail.mapUrl) {
+      meta.innerHTML += `<a class="mapLink" href="${detail.mapUrl}" target="_blank" rel="noopener">${detailLabel("map")}</a>`;
+    }
+
+    sections.innerHTML = (detail.sections || []).map((group) => `
+      <section>
+        <h3>${group.title}</h3>
+        <ul>${(group.items || []).map((item) => `<li>${item}</li>`).join("")}</ul>
+      </section>
+    `).join("");
+
+    detailModal.hidden = false;
+    document.body.classList.add("modalOpen");
+    detailModal.querySelector(".infoDetailClose").focus();
+  }
+
+  function closeInfoDetail() {
+    detailModal.hidden = true;
+    document.body.classList.remove("modalOpen");
   }
 
   function render() {
