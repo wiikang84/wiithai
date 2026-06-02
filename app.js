@@ -1,5 +1,5 @@
 (async function () {
-  const ASSET_VERSION = "20260602-23";
+  const ASSET_VERSION = "20260602-24";
   const LANGUAGES = window.WIITHAI_LANGUAGES || {};
   const LANGUAGE_NAMES = window.WIIINFO_LANGUAGE_NAMES || {};
   const PROFILES = window.WIITHAI_LEARNER_PROFILES || [];
@@ -821,6 +821,7 @@
   }
 
   function updateStaticLabels() {
+    document.documentElement.lang = sourceLang || "en";
     document.querySelector(".statCard.teal small").textContent = uiText("total");
     document.querySelector(".statCard.coral small").textContent = uiText("favorites");
     document.querySelector(".statCard.yellow small").textContent = uiText("today");
