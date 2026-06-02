@@ -1231,9 +1231,73 @@ const WIIINFO_MORE_BASE = {
   cities: [["Seoul", "서울에서 처음 가기 좋은 지역을 추천해 주세요.", "skyline"], ["Busan", "부산에서 바다와 야경을 볼 수 있는 코스를 알려 주세요.", "busan"], ["Jeju", "제주에서 자연 풍경을 보는 코스를 추천해 주세요.", "jeju"], ["Gyeongju", "경주에서 역사 여행 코스를 추천해 주세요.", "gyeongju"], ["Jeonju", "전주 한옥마을과 음식 코스를 알려 주세요.", "jeonju"], ["Incheon", "인천공항 근처와 송도 여행 정보를 알고 싶습니다.", "skyline"], ["Gangneung", "강릉 바다와 카페거리 코스를 추천해 주세요.", "busan"], ["Sokcho", "속초와 설악산 여행 코스를 알고 싶습니다.", "nami"], ["Daegu", "대구에서 가볼 만한 지역을 추천해 주세요.", "market"], ["Yeosu", "여수 밤바다와 해상 케이블카 정보를 알고 싶습니다.", "busan"]]
 };
 
+const WIIINFO_MORE_NAMES = {
+  ko: {
+    routes: ["서울 궁궐·한옥 하루 코스", "명동·남산서울타워 야경", "홍대·연남 카페 산책", "한강 피크닉 저녁", "잠실 롯데·석촌호수", "남이섬 당일치기", "부산 해변 야경 코스", "제주 일출·올레길", "경주 역사 하루", "전주 한옥·음식 하루"],
+    food: ["광장시장", "명동 길거리 음식", "망원시장", "남대문시장", "전주비빔밥", "부산 자갈치 해산물", "제주 흑돼지", "홍대·연남 카페", "한국 치킨과 맥주", "인사동 전통차"],
+    photo: ["경복궁 근정전", "북촌 한옥 골목", "남산서울타워 야경", "반포한강공원 분수", "성수 카페거리", "광안대교 야경", "감천문화마을", "제주 성산일출봉", "전주 한옥마을", "경주 대릉원"],
+    seasonal: ["봄 벚꽃 명소", "진해 벚꽃 축제", "여름 한강 밤", "부산 여름 해변", "제주 여름 해안", "가을 서울 궁궐", "설악산 단풍", "남이섬 가을", "겨울 한옥 눈 풍경", "한국 겨울 바다"],
+    cities: ["서울", "부산", "제주", "경주", "전주", "인천", "강릉", "속초", "대구", "여수"]
+  },
+  en: {
+    routes: ["Seoul Palace and Hanok Day", "Myeongdong and N Seoul Tower Night", "Hongdae and Yeonnam Cafe Walk", "Hangang Picnic Evening", "Jamsil Lotte and Seokchon Lake", "Nami Island Day Trip", "Busan Beach Night Route", "Jeju Sunrise and Olle Walk", "Gyeongju Heritage Day", "Jeonju Hanok Food Day"],
+    food: ["Gwangjang Market", "Myeongdong Street Food", "Mangwon Market", "Namdaemun Market", "Jeonju Bibimbap", "Busan Jagalchi Seafood", "Jeju Black Pork", "Hongdae and Yeonnam Cafes", "Korean Chicken and Beer", "Insadong Traditional Tea"],
+    photo: ["Gyeongbokgung Geunjeongjeon", "Bukchon Hanok Alleys", "N Seoul Tower Night View", "Banpo Hangang Fountain", "Seongsu Cafe Streets", "Gwangalli Bridge Night", "Gamcheon Culture Village", "Jeju Seongsan Sunrise", "Jeonju Hanok Village", "Gyeongju Daereungwon"],
+    seasonal: ["Spring Cherry Blossoms", "Jinhae Cherry Blossom Festival", "Summer Hangang Night", "Busan Summer Beach", "Jeju Summer Coast", "Autumn Seoul Palaces", "Seoraksan Autumn Leaves", "Nami Island Autumn", "Winter Hanok Snow", "Korean Winter Sea"],
+    cities: ["Seoul", "Busan", "Jeju", "Gyeongju", "Jeonju", "Incheon", "Gangneung", "Sokcho", "Daegu", "Yeosu"]
+  },
+  ja: {
+    routes: ["ソウル宮殿・韓屋1日コース", "明洞・Nソウルタワー夜景", "弘大・延南カフェ散歩", "漢江ピクニックの夕方", "蚕室ロッテ・石村湖", "南怡島日帰り", "釜山ビーチ夜景コース", "済州日の出・オルレ道", "慶州歴史1日", "全州韓屋・食の1日"],
+    food: ["広蔵市場", "明洞屋台グルメ", "望遠市場", "南大門市場", "全州ビビンバ", "釜山チャガルチ海鮮", "済州黒豚", "弘大・延南カフェ", "韓国チキンとビール", "仁寺洞伝統茶"],
+    photo: ["景福宮勤政殿", "北村韓屋の路地", "Nソウルタワー夜景", "盤浦漢江公園の噴水", "聖水カフェ通り", "広安大橋夜景", "甘川文化村", "済州城山日出峰", "全州韓屋村", "慶州大陵苑"],
+    seasonal: ["春の桜スポット", "鎮海桜祭り", "夏の漢江ナイト", "釜山夏の海", "済州夏の海岸", "秋のソウル宮殿", "雪岳山の紅葉", "南怡島の秋", "冬の韓屋雪景色", "韓国の冬の海"],
+    cities: ["ソウル", "釜山", "済州", "慶州", "全州", "仁川", "江陵", "束草", "大邱", "麗水"]
+  },
+  th: {
+    routes: ["วังและหมู่บ้านฮันอกในโซล 1 วัน", "เมียงดงและ N Seoul Tower ตอนกลางคืน", "เดินคาเฟ่ฮงแดและยอนนัม", "ปิกนิกเย็นที่แม่น้ำฮัน", "จัมซิล ล็อตเต้ และทะเลสาบซอกชน", "เที่ยวนามิแบบไปเช้าเย็นกลับ", "เส้นทางกลางคืนชายหาดปูซาน", "พระอาทิตย์ขึ้นและเส้นทางโอลเล่ที่เชจู", "เที่ยวประวัติศาสตร์คยองจู 1 วัน", "ฮันอกและอาหารที่จอนจู 1 วัน"],
+    food: ["ตลาดควังจัง", "อาหารริมทางเมียงดง", "ตลาดมังวอน", "ตลาดนัมแดมุน", "บิบิมบับจอนจู", "อาหารทะเลจากัลชี ปูซาน", "หมูดำเชจู", "คาเฟ่ฮงแดและยอนนัม", "ไก่ทอดเกาหลีและเบียร์", "ชาดั้งเดิมอินซาดง"],
+    photo: ["พระที่นั่งคึนจองจอน คยองบกกุง", "ตรอกฮันอกบุกชน", "วิวกลางคืน N Seoul Tower", "น้ำพุสวนบันโพฮันกัง", "ถนนคาเฟ่ซองซู", "วิวกลางคืนสะพานกวังอัน", "หมู่บ้านวัฒนธรรมคัมชอน", "ซองซานอิลชุลบง เชจู", "หมู่บ้านฮันอกจอนจู", "แดรึงวอน คยองจู"],
+    seasonal: ["จุดชมซากุระฤดูใบไม้ผลิ", "เทศกาลซากุระจินแฮ", "คืนฤดูร้อนที่แม่น้ำฮัน", "ชายหาดปูซานฤดูร้อน", "ชายฝั่งเชจูฤดูร้อน", "พระราชวังโซลฤดูใบไม้ร่วง", "ใบไม้เปลี่ยนสีซอรัคซาน", "นามิฤดูใบไม้ร่วง", "ฮันอกหิมะฤดูหนาว", "ทะเลเกาหลีฤดูหนาว"],
+    cities: ["โซล", "ปูซาน", "เชจู", "คยองจู", "จอนจู", "อินชอน", "คังนึง", "ซกโช", "แทกู", "ยอซู"]
+  },
+  zh: {
+    routes: ["首尔宫殿与韩屋一日路线", "明洞与N首尔塔夜景", "弘大与延南咖啡散步", "汉江野餐傍晚", "蚕室乐天与石村湖", "南怡岛一日游", "釜山海边夜景路线", "济州日出与偶来小路", "庆州历史一日游", "全州韩屋与美食一日游"],
+    food: ["广藏市场", "明洞街头美食", "望远市场", "南大门市场", "全州拌饭", "釜山札嘎其海鲜", "济州黑猪肉", "弘大与延南咖啡馆", "韩式炸鸡和啤酒", "仁寺洞传统茶"],
+    photo: ["景福宫勤政殿", "北村韩屋小巷", "N首尔塔夜景", "盘浦汉江公园喷泉", "圣水咖啡街", "广安大桥夜景", "甘川文化村", "济州城山日出峰", "全州韩屋村", "庆州大陵苑"],
+    seasonal: ["春季樱花名所", "镇海樱花节", "夏季汉江夜晚", "釜山夏季海边", "济州夏季海岸", "秋季首尔宫殿", "雪岳山红叶", "南怡岛秋景", "冬季韩屋雪景", "韩国冬季大海"],
+    cities: ["首尔", "釜山", "济州", "庆州", "全州", "仁川", "江陵", "束草", "大邱", "丽水"]
+  },
+  vi: {
+    routes: ["Một ngày cung điện và hanok Seoul", "Đêm Myeongdong và tháp N Seoul", "Đi dạo cafe Hongdae và Yeonnam", "Chiều picnic sông Hàn", "Jamsil Lotte và hồ Seokchon", "Đi Nami trong ngày", "Tuyến đêm biển Busan", "Bình minh Jeju và đường Olle", "Một ngày di sản Gyeongju", "Một ngày hanok và ẩm thực Jeonju"],
+    food: ["Chợ Gwangjang", "Đồ ăn đường phố Myeongdong", "Chợ Mangwon", "Chợ Namdaemun", "Bibimbap Jeonju", "Hải sản Jagalchi Busan", "Thịt heo đen Jeju", "Cafe Hongdae và Yeonnam", "Gà rán Hàn Quốc và bia", "Trà truyền thống Insadong"],
+    photo: ["Điện Geunjeongjeon ở Gyeongbokgung", "Hẻm hanok Bukchon", "Cảnh đêm tháp N Seoul", "Đài phun nước Banpo Hangang", "Phố cafe Seongsu", "Cảnh đêm cầu Gwangalli", "Làng văn hóa Gamcheon", "Seongsan Ilchulbong Jeju", "Làng hanok Jeonju", "Daereungwon Gyeongju"],
+    seasonal: ["Điểm hoa anh đào mùa xuân", "Lễ hội hoa anh đào Jinhae", "Đêm hè sông Hàn", "Biển Busan mùa hè", "Bờ biển Jeju mùa hè", "Cung điện Seoul mùa thu", "Lá thu Seoraksan", "Nami mùa thu", "Hanok phủ tuyết mùa đông", "Biển Hàn Quốc mùa đông"],
+    cities: ["Seoul", "Busan", "Jeju", "Gyeongju", "Jeonju", "Incheon", "Gangneung", "Sokcho", "Daegu", "Yeosu"]
+  },
+  es: {
+    routes: ["Día de palacios y hanok en Seúl", "Noche en Myeongdong y N Seoul Tower", "Paseo de cafés en Hongdae y Yeonnam", "Tarde de picnic en el río Han", "Jamsil Lotte y lago Seokchon", "Excursión de un día a Nami", "Ruta nocturna de playa en Busan", "Amanecer y camino Olle en Jeju", "Día histórico en Gyeongju", "Día de hanok y comida en Jeonju"],
+    food: ["Mercado Gwangjang", "Comida callejera de Myeongdong", "Mercado Mangwon", "Mercado Namdaemun", "Bibimbap de Jeonju", "Mariscos Jagalchi de Busan", "Cerdo negro de Jeju", "Cafés de Hongdae y Yeonnam", "Pollo coreano y cerveza", "Té tradicional en Insadong"],
+    photo: ["Geunjeongjeon de Gyeongbokgung", "Callejones hanok de Bukchon", "Vista nocturna de N Seoul Tower", "Fuente Banpo Hangang", "Calles de cafés de Seongsu", "Noche del puente Gwangalli", "Aldea cultural Gamcheon", "Seongsan Ilchulbong en Jeju", "Aldea hanok de Jeonju", "Daereungwon de Gyeongju"],
+    seasonal: ["Cerezos de primavera", "Festival de cerezos de Jinhae", "Noche de verano en el río Han", "Playas de Busan en verano", "Costa de Jeju en verano", "Palacios de Seúl en otoño", "Hojas de otoño en Seoraksan", "Otoño en Nami", "Hanok con nieve en invierno", "Mar coreano en invierno"],
+    cities: ["Seúl", "Busan", "Jeju", "Gyeongju", "Jeonju", "Incheon", "Gangneung", "Sokcho", "Daegu", "Yeosu"]
+  }
+};
+
+const WIIINFO_MORE_DETAIL_LABELS = {
+  ko: { why: "왜 추천하는지", copyHint: "버튼을 누르면 한국 직원이나 택시 기사에게 바로 보여줄 한국어 요청문이 복사됩니다.", localCheck: "현장에서는 한국어 표지판, 휴무일, 마지막 입장 시간을 다시 확인합니다." },
+  en: { why: "Why it is useful", copyHint: "The copy button saves a Korean request you can show to staff or a taxi driver in Korea.", localCheck: "On site, recheck Korean signs, closed days, and last admission time." },
+  ja: { why: "おすすめ理由", copyHint: "コピーすると、韓国のスタッフやタクシー運転手に見せられる韓国語の依頼文になります。", localCheck: "現地では韓国語の案内、休業日、最終入場時間を再確認します。" },
+  th: { why: "เหตุผลที่แนะนำ", copyHint: "ปุ่มคัดลอกจะบันทึกประโยคภาษาเกาหลีที่ใช้แสดงให้พนักงานหรือแท็กซี่ในเกาหลีได้", localCheck: "หน้างานให้เช็กป้ายภาษาเกาหลี วันหยุด และเวลาเข้าชมรอบสุดท้ายอีกครั้ง" },
+  zh: { why: "推荐理由", copyHint: "点击复制后，会保存可给韩国工作人员或出租车司机看的韩语请求句。", localCheck: "到现场后请再次确认韩语告示、休息日和最后入场时间。" },
+  vi: { why: "Vì sao nên chọn", copyHint: "Nút sao chép lưu một câu tiếng Hàn để đưa cho nhân viên hoặc tài xế taxi ở Hàn.", localCheck: "Tại chỗ, hãy kiểm tra lại biển tiếng Hàn, ngày nghỉ và giờ vào cuối." },
+  es: { why: "Por qué conviene", copyHint: "El botón copia una frase coreana para mostrar a personal local o a un taxista en Corea.", localCheck: "En el lugar, revisa señales en coreano, días de cierre y última entrada." }
+};
+
 function buildMoreSection(lang, id) {
   const labels = WIIINFO_MORE_LABELS[lang] || WIIINFO_MORE_LABELS.en;
   const sectionLabels = labels[id];
+  const names = WIIINFO_MORE_NAMES[lang]?.[id] || WIIINFO_MORE_NAMES.en[id];
+  const detailLabels = WIIINFO_MORE_DETAIL_LABELS[lang] || WIIINFO_MORE_DETAIL_LABELS.en;
   return {
     id,
     icon: sectionLabels[0],
@@ -1241,16 +1305,16 @@ function buildMoreSection(lang, id) {
     title: sectionLabels[2],
     summary: sectionLabels[3],
     cards: WIIINFO_MORE_BASE[id].map(([name, koreanCopy, imageKey], index) => ({
-      title: `${String(index + 1).padStart(2, "0")}. ${name}`,
-      text: sectionLabels[4].replace("{name}", name),
+      title: `${String(index + 1).padStart(2, "0")}. ${names[index] || name}`,
+      text: sectionLabels[4].replace("{name}", names[index] || name),
       detail: {
         images: WIIINFO_VISUAL_SETS[imageKey] || WIIINFO_VISUAL_SETS.civic,
-        lead: sectionLabels[4].replace("{name}", name),
+        lead: sectionLabels[4].replace("{name}", names[index] || name),
         actions: [{ type: "copy", label: labels.copy, value: koreanCopy }],
         sections: [
-          { title: labels.overview, items: [sectionLabels[4].replace("{name}", name)] },
-          { title: labels.use, items: [koreanCopy] },
-          { title: labels.tip, items: [sectionLabels[5], sectionLabels[6]] }
+          { title: labels.overview, items: [sectionLabels[4].replace("{name}", names[index] || name), `${detailLabels.why}: ${sectionLabels[5]}`] },
+          { title: labels.use, items: [koreanCopy, detailLabels.copyHint] },
+          { title: labels.tip, items: [sectionLabels[6], detailLabels.localCheck] }
         ]
       }
     }))
