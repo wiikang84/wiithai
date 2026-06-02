@@ -906,6 +906,167 @@ function applyFirstDaysSection(lang) {
 
 ["ko", "en", "ja", "th", "zh", "vi", "es"].forEach(applyFirstDaysSection);
 
+const WIIINFO_WARNING_PACKS = {
+  ko: {
+    tab: "주의 TOP10", title: "한국 생활 사기·위험 주의 TOP10", summary: "외국인이 한국에서 돈, 계약, 비자 문제를 피하기 위해 먼저 확인할 위험 신호입니다.",
+    risk: "위험 신호", action: "바로 할 일", phrase: "거절·확인 문장", avoid: "피해야 할 행동", copy: "문장 복사", call: "상담 전화",
+    actionItems: ["이름, 계좌, 주소, 날짜, 금액을 사진이나 문자로 남깁니다.", "이해가 안 되면 바로 송금하거나 서명하지 말고 확인을 요청합니다."],
+    avoidItems: ["급하게 결정하라는 압박을 받으면 잠시 멈춥니다.", "한국어 문장을 이해하지 못한 상태로 계약하거나 개인정보를 보내지 않습니다."],
+    cards: [
+      ["01. 보증금 사기", "시세보다 싸거나 보증금이 큰 집은 소유자와 권리관계를 먼저 확인합니다.", "보증금이 너무 높거나 집주인 확인을 피하면 위험합니다.", "계약 전 등기부등본과 임대인 계좌 명의를 확인하고 싶습니다."],
+      ["02. 계약금 선송금", "집, 중고거래, 예약에서 확인 전 송금을 요구하면 멈추고 확인합니다.", "계약서·신분 확인 전 빠른 송금을 요구하면 위험합니다.", "확인 후에 송금하겠습니다. 먼저 계약서와 신분 확인이 필요합니다."],
+      ["03. 등기부 미확인", "부동산 계약 전 소유자, 근저당, 압류를 확인하지 않으면 보증금 위험이 커집니다.", "등기부 확인을 귀찮아하거나 보여주지 않으면 위험합니다.", "등기부등본을 계약 당일 기준으로 확인하고 싶습니다."],
+      ["04. 중고거래 사기", "택배 선입금, 가짜 안전결제 링크, 시세보다 싼 물건을 조심합니다.", "외부 링크 결제나 선입금을 강하게 요구하면 위험합니다.", "직거래나 안전한 결제 방법으로만 거래하고 싶습니다."],
+      ["05. 택시 바가지", "미터기 없이 요금을 정하거나 돌아가는 길을 제안하면 주의합니다.", "미터기를 켜지 않거나 현금만 요구하면 위험합니다.", "미터기를 켜 주세요. 이 주소로 가 주세요."],
+      ["06. 불법 알바", "비자에서 허용하지 않는 일을 하면 벌금, 출국, 체류 문제로 이어질 수 있습니다.", "비자 확인 없이 바로 일하라고 하면 위험합니다.", "제 비자로 이 일을 할 수 있는지 먼저 확인하겠습니다."],
+      ["07. 비자 위반", "체류기간, 근무 조건, 주소 신고 기한을 놓치면 문제가 생길 수 있습니다.", "기한이 지난 뒤 처리해도 괜찮다고 말하면 위험합니다.", "체류기간과 신고 기한을 공식 안내로 확인하고 싶습니다."],
+      ["08. 개인정보 요구", "여권, 외국인등록증, 계좌, 인증번호 사진을 쉽게 보내지 않습니다.", "인증번호나 신분증 사진을 메신저로 요구하면 위험합니다.", "개인정보는 공식 절차에서만 제출하겠습니다."],
+      ["09. 보이스피싱", "검찰, 경찰, 은행을 사칭하며 계좌 이체나 앱 설치를 요구하면 의심합니다.", "수사, 벌금, 계좌 보호를 이유로 송금을 요구하면 위험합니다.", "전화로 송금하지 않겠습니다. 공식 번호로 다시 확인하겠습니다."],
+      ["10. 한국어 계약서 미확인", "번역본만 믿지 말고 실제 효력이 있는 한국어 계약서를 확인합니다.", "한국어 원문을 보여주지 않거나 설명을 피하면 위험합니다.", "한국어 계약서를 충분히 확인한 뒤 서명하겠습니다."]
+    ]
+  },
+  en: {
+    tab: "Warnings TOP10", title: "Korea Scam and Risk Warnings TOP10", summary: "Risk signals foreigners should check before sending money, signing contracts, or breaking visa rules.",
+    risk: "Risk signal", action: "What to do now", phrase: "Phrase to refuse or check", avoid: "Avoid this", copy: "Copy phrase", call: "Call help",
+    actionItems: ["Keep names, accounts, addresses, dates, and amounts in photos or text messages.", "If you do not understand, do not send money or sign until someone checks it."],
+    avoidItems: ["Pause when someone pressures you to decide quickly.", "Do not sign Korean text or send personal data before you understand the request."],
+    cards: [
+      ["01. Deposit scam", "If housing is too cheap or the deposit is large, check owner and registry first.", "A high deposit with weak owner verification is dangerous.", "I want to check the registry and landlord account before signing."],
+      ["02. Advance payment pressure", "Stop when someone asks for money before contract, ID, or item verification.", "Fast payment before written proof is a risk signal.", "I will pay after checking the contract and identity first."],
+      ["03. No registry check", "Skipping registry checks before housing contracts increases deposit risk.", "Avoiding or delaying registry review is dangerous.", "I want to check the registry on the contract day."],
+      ["04. Used-goods scam", "Watch for delivery prepayment, fake safe-payment links, and unusually cheap items.", "External payment links or strong prepayment pressure are risky.", "I want to trade only in person or through a safe payment method."],
+      ["05. Taxi overcharge", "Be careful if a taxi does not use the meter or suggests a strange route.", "No meter or cash-only pressure can be a risk signal.", "Please turn on the meter and go to this address."],
+      ["06. Illegal part-time work", "Work not allowed by your visa can lead to fines, departure, or stay problems.", "Working immediately without visa check is risky.", "I will check first whether my visa allows this work."],
+      ["07. Visa violation", "Missing stay period, work limits, or address-report deadlines can create problems.", "Being told a deadline does not matter is risky.", "I want to confirm my stay period and reporting deadline officially."],
+      ["08. Personal data request", "Do not casually send passport, ARC, bank, or verification-code photos.", "Requests for codes or ID photos by messenger are risky.", "I will submit personal data only through an official process."],
+      ["09. Voice phishing", "Be suspicious if someone claiming to be police, prosecutor, or bank asks for transfer or app install.", "Money transfer for investigation, fines, or account protection is a major risk.", "I will not send money by phone. I will call the official number again."],
+      ["10. Korean contract unchecked", "Do not rely only on translation; check the Korean contract that has legal effect.", "Avoiding the Korean original or explanation is dangerous.", "I will sign after carefully checking the Korean contract."]
+    ]
+  },
+  ja: {
+    tab: "注意 TOP10", title: "韓国生活 詐欺・危険注意TOP10", summary: "送金、契約、ビザ違反を避けるために外国人が先に確認すべき危険信号です。",
+    risk: "危険信号", action: "すぐすること", phrase: "断る・確認する文", avoid: "避ける行動", copy: "文をコピー", call: "相談電話",
+    actionItems: ["名前、口座、住所、日付、金額を写真やメッセージで残します。", "理解できない場合は送金や署名をせず、確認を依頼します。"],
+    avoidItems: ["急いで決めろと言われたら一度止まります。", "韓国語を理解しないまま契約したり個人情報を送ったりしません。"],
+    cards: [
+      ["01. 保証金詐欺", "相場より安い家や保証金が大きい家は所有者と登記を先に確認します。", "保証金が高く、所有者確認を避ける場合は危険です。", "契約前に登記簿と貸主の口座名義を確認したいです。"],
+      ["02. 先払い要求", "契約、身分、品物を確認する前に送金を求められたら止まります。", "書面確認前の急な送金要求は危険です。", "契約書と身分確認後に送金します。"],
+      ["03. 登記簿未確認", "不動産契約前に所有者、抵当、差押えを確認しないと保証金リスクが高まります。", "登記確認を避ける場合は危険です。", "契約当日基準で登記簿を確認したいです。"],
+      ["04. 中古取引詐欺", "配送先払い、偽安全決済リンク、安すぎる商品に注意します。", "外部リンク決済や先払いの強要は危険です。", "対面取引または安全な決済方法で取引したいです。"],
+      ["05. タクシーぼったくり", "メーターなしの料金提示や遠回り提案に注意します。", "メーターを使わない、現金だけ要求する場合は危険です。", "メーターをつけて、この住所へ行ってください。"],
+      ["06. 違法アルバイト", "ビザで許可されていない仕事は罰金、出国、滞在問題につながります。", "ビザ確認なしですぐ働けと言われるのは危険です。", "この仕事が私のビザで可能か先に確認します。"],
+      ["07. ビザ違反", "滞在期間、勤務条件、住所申告期限を逃すと問題になります。", "期限後でも大丈夫と言われたら危険です。", "滞在期間と申告期限を公式案内で確認したいです。"],
+      ["08. 個人情報要求", "旅券、登録証、口座、認証番号の写真を簡単に送らないでください。", "メッセンジャーで認証番号や身分証写真を求めるのは危険です。", "個人情報は公式手続きでのみ提出します。"],
+      ["09. ボイスフィッシング", "警察、検察、銀行を名乗り送金やアプリ設置を求めたら疑います。", "捜査、罰金、口座保護を理由に送金要求するのは危険です。", "電話では送金しません。公式番号で再確認します。"],
+      ["10. 韓国語契約書未確認", "翻訳だけに頼らず、効力のある韓国語契約書を確認します。", "韓国語原文を見せない、説明を避ける場合は危険です。", "韓国語契約書を十分確認してから署名します。"]
+    ]
+  },
+  th: {
+    tab: "คำเตือน TOP10", title: "คำเตือนเรื่องหลอกลวงและความเสี่ยงในเกาหลี TOP10", summary: "สัญญาณเสี่ยงที่ชาวต่างชาติควรเช็กก่อนโอนเงิน เซ็นสัญญา หรือทำผิดเงื่อนไขวีซ่า",
+    risk: "สัญญาณเสี่ยง", action: "สิ่งที่ควรทำทันที", phrase: "ประโยคปฏิเสธหรือขอตรวจสอบ", avoid: "สิ่งที่ควรเลี่ยง", copy: "คัดลอกประโยค", call: "โทรปรึกษา",
+    actionItems: ["เก็บชื่อ บัญชี ที่อยู่ วันที่ และจำนวนเงินเป็นรูปหรือข้อความ", "ถ้าไม่เข้าใจ อย่าเพิ่งโอนเงินหรือเซ็น ให้ขอตรวจสอบก่อน"],
+    avoidItems: ["ถ้าถูกเร่งให้ตัดสินใจเร็ว ให้หยุดก่อน", "อย่าเซ็นภาษาเกาหลีหรือส่งข้อมูลส่วนตัวก่อนเข้าใจ"],
+    cards: [
+      ["01. หลอกเงินมัดจำ", "บ้านที่ถูกเกินไปหรือมัดจำสูงต้องเช็กเจ้าของและทะเบียนก่อน", "มัดจำสูงแต่ไม่ให้ตรวจเจ้าของคือสัญญาณเสี่ยง", "ขอตรวจทะเบียนและชื่อบัญชีเจ้าของก่อนเซ็น"],
+      ["02. เร่งให้โอนก่อน", "หยุดทันทีถ้าถูกขอโอนเงินก่อนเช็กสัญญา ตัวตน หรือของ", "เร่งให้จ่ายก่อนมีหลักฐานเป็นความเสี่ยง", "จะโอนหลังตรวจสัญญาและตัวตนก่อน"],
+      ["03. ไม่ตรวจทะเบียนบ้าน", "ไม่ตรวจทะเบียนก่อนสัญญาเช่าทำให้เงินมัดจำเสี่ยง", "ถ้าเลี่ยงการตรวจทะเบียนถือว่าเสี่ยง", "ต้องการตรวจทะเบียนในวันที่ทำสัญญา"],
+      ["04. โกงของมือสอง", "ระวังโอนก่อน ส่งของปลอม ลิงก์จ่ายเงินปลอม และของถูกผิดปกติ", "ลิงก์จ่ายเงินภายนอกหรือบังคับโอนก่อนคือความเสี่ยง", "ต้องการซื้อขายต่อหน้าหรือใช้วิธีจ่ายเงินที่ปลอดภัย"],
+      ["05. แท็กซี่คิดเงินเกิน", "ระวังแท็กซี่ไม่เปิดมิเตอร์หรือพาอ้อม", "ไม่เปิดมิเตอร์หรือบังคับเงินสดอาจเสี่ยง", "กรุณาเปิดมิเตอร์และไปที่อยู่นี้"],
+      ["06. งานพาร์ตไทม์ผิดกฎหมาย", "งานที่วีซ่าไม่อนุญาตอาจทำให้ถูกปรับหรือมีปัญหาการพำนัก", "ให้เริ่มงานโดยไม่เช็กวีซ่าคือความเสี่ยง", "ขอเช็กก่อนว่าวีซ่าของฉันทำงานนี้ได้ไหม"],
+      ["07. ผิดเงื่อนไขวีซ่า", "พลาดวันหมดอายุ เงื่อนไขงาน หรือแจ้งที่อยู่ อาจเกิดปัญหา", "บอกว่าเลยกำหนดก็ไม่เป็นไรคือความเสี่ยง", "ต้องการเช็กระยะพำนักและกำหนดแจ้งจากข้อมูลทางการ"],
+      ["08. ขอข้อมูลส่วนตัว", "อย่าส่งรูปพาสปอร์ต บัตรต่างชาติ บัญชี หรือรหัสยืนยันง่าย ๆ", "ขอรหัสหรือรูปบัตรทางแชตคือความเสี่ยง", "จะส่งข้อมูลส่วนตัวผ่านขั้นตอนทางการเท่านั้น"],
+      ["09. มิจฉาชีพทางโทรศัพท์", "สงสัยทันทีถ้าอ้างเป็นตำรวจ อัยการ หรือธนาคารแล้วให้โอนเงินหรือติดตั้งแอป", "ขอเงินเพื่อสืบสวน ค่าปรับ หรือปกป้องบัญชีคือความเสี่ยงสูง", "จะไม่โอนเงินทางโทรศัพท์ จะโทรกลับเบอร์ทางการ"],
+      ["10. ไม่ตรวจสัญญาเกาหลี", "อย่าเชื่อแค่คำแปล ต้องตรวจสัญญาภาษาเกาหลีที่มีผลจริง", "ไม่ให้ดูต้นฉบับเกาหลีหรือเลี่ยงอธิบายคือความเสี่ยง", "จะเซ็นหลังตรวจสัญญาภาษาเกาหลีให้ดี"]
+    ]
+  },
+  zh: {
+    tab: "注意 TOP10", title: "韩国生活诈骗与风险注意 TOP10", summary: "外国人在汇款、签约或违反签证规则前应确认的风险信号。",
+    risk: "风险信号", action: "马上要做", phrase: "拒绝或确认用语", avoid: "避免行为", copy: "复制句子", call: "咨询电话",
+    actionItems: ["把姓名、账户、地址、日期、金额用照片或文字留下。", "不理解时不要马上汇款或签字，先要求确认。"],
+    avoidItems: ["被催促马上决定时先暂停。", "不要在不理解韩语内容时签约或发送个人信息。"],
+    cards: [
+      ["01. 保证金诈骗", "房子过便宜或保证金很高时，先确认房东和登记信息。", "保证金高但回避房东确认很危险。", "签约前我想确认登记簿和房东账户名义。"],
+      ["02. 先付款压力", "在确认合同、身份或物品前要求汇款时先停止。", "书面确认前催促付款是风险信号。", "我会在确认合同和身份后付款。"],
+      ["03. 未确认登记簿", "租房前不查所有人、抵押和查封会增加保证金风险。", "不让查看登记簿或拖延查看很危险。", "我想在签约当天确认登记簿。"],
+      ["04. 二手交易诈骗", "注意先付款、假安全支付链接和价格异常低的物品。", "外部支付链接或强迫先付款有风险。", "我只想当面交易或使用安全支付方式。"],
+      ["05. 出租车乱收费", "不打表或建议奇怪路线时要小心。", "不打表或只收现金可能是风险信号。", "请打开计价器，去这个地址。"],
+      ["06. 非法兼职", "签证不允许的工作可能导致罚款、出境或滞留问题。", "不确认签证就让你马上工作很危险。", "我要先确认我的签证是否允许这份工作。"],
+      ["07. 签证违规", "错过停留期限、工作条件或地址申报期限会产生问题。", "说过期后处理也没关系是风险信号。", "我想通过官方信息确认停留期限和申报期限。"],
+      ["08. 要求个人信息", "不要轻易发送护照、外国人登录证、账户或验证码照片。", "通过聊天软件要求验证码或证件照片很危险。", "我只会通过官方程序提交个人信息。"],
+      ["09. 电话诈骗", "自称警察、检察官或银行并要求转账或安装App时要怀疑。", "以调查、罚款、账户保护为由要求转账是重大风险。", "我不会通过电话转账，会拨打官方号码确认。"],
+      ["10. 未确认韩文合同", "不要只相信翻译，要确认具有法律效力的韩文合同。", "不出示韩文原文或回避解释很危险。", "我会充分确认韩文合同后再签字。"]
+    ]
+  },
+  vi: {
+    tab: "Cảnh báo TOP10", title: "Cảnh báo lừa đảo và rủi ro ở Hàn Quốc TOP10", summary: "Tín hiệu rủi ro người nước ngoài nên kiểm tra trước khi chuyển tiền, ký hợp đồng hoặc vi phạm visa.",
+    risk: "Tín hiệu rủi ro", action: "Việc cần làm ngay", phrase: "Câu từ chối hoặc kiểm tra", avoid: "Cần tránh", copy: "Sao chép câu", call: "Gọi tư vấn",
+    actionItems: ["Lưu tên, tài khoản, địa chỉ, ngày và số tiền bằng ảnh hoặc tin nhắn.", "Nếu chưa hiểu, đừng chuyển tiền hoặc ký trước khi kiểm tra."],
+    avoidItems: ["Nếu bị ép quyết định nhanh, hãy dừng lại.", "Không ký tiếng Hàn hoặc gửi dữ liệu cá nhân khi chưa hiểu yêu cầu."],
+    cards: [
+      ["01. Lừa đảo tiền cọc", "Nhà quá rẻ hoặc cọc lớn cần kiểm tra chủ nhà và đăng ký trước.", "Cọc cao nhưng né kiểm tra chủ sở hữu là nguy hiểm.", "Tôi muốn kiểm tra đăng ký và tài khoản chủ nhà trước khi ký."],
+      ["02. Ép chuyển tiền trước", "Dừng lại khi bị yêu cầu trả tiền trước khi kiểm tra hợp đồng, danh tính hoặc món hàng.", "Trả tiền nhanh trước khi có bằng chứng viết là rủi ro.", "Tôi sẽ trả sau khi kiểm tra hợp đồng và danh tính."],
+      ["03. Không kiểm tra đăng ký", "Không kiểm tra đăng ký nhà trước hợp đồng làm tăng rủi ro tiền cọc.", "Né hoặc trì hoãn kiểm tra đăng ký là nguy hiểm.", "Tôi muốn kiểm tra đăng ký vào ngày ký hợp đồng."],
+      ["04. Lừa đảo đồ cũ", "Cẩn thận chuyển khoản trước, link thanh toán giả và hàng rẻ bất thường.", "Link ngoài hoặc ép trả trước là rủi ro.", "Tôi chỉ muốn giao dịch trực tiếp hoặc qua cách thanh toán an toàn."],
+      ["05. Taxi tính quá tiền", "Cẩn thận nếu taxi không bật đồng hồ hoặc đi đường lạ.", "Không bật đồng hồ hoặc chỉ nhận tiền mặt có thể là rủi ro.", "Vui lòng bật đồng hồ và đi đến địa chỉ này."],
+      ["06. Làm thêm bất hợp pháp", "Việc visa không cho phép có thể gây phạt, xuất cảnh hoặc vấn đề lưu trú.", "Bắt đầu làm ngay mà không kiểm tra visa là rủi ro.", "Tôi sẽ kiểm tra trước visa của tôi có cho phép công việc này không."],
+      ["07. Vi phạm visa", "Bỏ lỡ thời hạn lưu trú, điều kiện làm việc hoặc khai báo địa chỉ có thể gây vấn đề.", "Nói rằng quá hạn vẫn không sao là rủi ro.", "Tôi muốn xác nhận thời hạn lưu trú và hạn khai báo bằng thông tin chính thức."],
+      ["08. Yêu cầu thông tin cá nhân", "Đừng dễ dàng gửi ảnh hộ chiếu, thẻ người nước ngoài, tài khoản hoặc mã xác minh.", "Yêu cầu mã hoặc ảnh giấy tờ qua chat là rủi ro.", "Tôi sẽ chỉ nộp thông tin cá nhân qua quy trình chính thức."],
+      ["09. Lừa đảo qua điện thoại", "Nghi ngờ nếu tự xưng cảnh sát, công tố hoặc ngân hàng rồi yêu cầu chuyển tiền hoặc cài app.", "Yêu cầu chuyển tiền vì điều tra, phạt hoặc bảo vệ tài khoản là rủi ro lớn.", "Tôi sẽ không chuyển tiền qua điện thoại. Tôi sẽ gọi lại số chính thức."],
+      ["10. Chưa kiểm tra hợp đồng Hàn", "Đừng chỉ tin bản dịch; hãy kiểm tra hợp đồng tiếng Hàn có hiệu lực.", "Không cho xem bản Hàn hoặc né giải thích là nguy hiểm.", "Tôi sẽ ký sau khi kiểm tra kỹ hợp đồng tiếng Hàn."]
+    ]
+  },
+  es: {
+    tab: "Advertencias TOP10", title: "Estafas y riesgos en Corea TOP10", summary: "Señales de riesgo que extranjeros deben revisar antes de pagar, firmar o romper reglas de visa.",
+    risk: "Señal de riesgo", action: "Qué hacer ahora", phrase: "Frase para rechazar o revisar", avoid: "Evitar esto", copy: "Copiar frase", call: "Llamar ayuda",
+    actionItems: ["Guarda nombres, cuentas, direcciones, fechas y montos en fotos o mensajes.", "Si no entiendes, no envíes dinero ni firmes hasta revisarlo."],
+    avoidItems: ["Pausa cuando alguien te presiona para decidir rápido.", "No firmes coreano ni envíes datos personales antes de entender la solicitud."],
+    cards: [
+      ["01. Estafa de depósito", "Si la vivienda es muy barata o el depósito es grande, revisa dueño y registro primero.", "Depósito alto con poca verificación del dueño es peligroso.", "Quiero revisar el registro y la cuenta del dueño antes de firmar."],
+      ["02. Presión de pago previo", "Detente si piden dinero antes de verificar contrato, identidad o producto.", "Pago rápido antes de prueba escrita es señal de riesgo.", "Pagaré después de revisar contrato e identidad."],
+      ["03. Sin revisar registro", "No revisar el registro antes de alquilar aumenta el riesgo del depósito.", "Evitar o retrasar la revisión del registro es peligroso.", "Quiero revisar el registro el día del contrato."],
+      ["04. Estafa de segunda mano", "Cuidado con prepago por envío, links falsos de pago seguro y precios demasiado bajos.", "Links externos o presión de prepago son riesgosos.", "Quiero comprar solo en persona o con pago seguro."],
+      ["05. Taxi con sobrecargo", "Cuidado si el taxi no usa taxímetro o propone una ruta extraña.", "Sin taxímetro o solo efectivo puede ser señal de riesgo.", "Por favor encienda el taxímetro y vaya a esta dirección."],
+      ["06. Trabajo ilegal", "Trabajo no permitido por tu visa puede causar multa, salida o problemas de estancia.", "Trabajar sin revisar visa es riesgoso.", "Primero revisaré si mi visa permite este trabajo."],
+      ["07. Violación de visa", "Perder periodo de estancia, límites de trabajo o plazo de dirección puede causar problemas.", "Decir que la fecha límite no importa es riesgoso.", "Quiero confirmar oficialmente mi periodo y fecha límite."],
+      ["08. Solicitud de datos personales", "No envíes fácilmente fotos de pasaporte, tarjeta extranjera, cuenta o código.", "Pedir códigos o ID por chat es riesgoso.", "Enviaré datos personales solo por proceso oficial."],
+      ["09. Phishing telefónico", "Sospecha si supuesta policía, fiscalía o banco pide transferencia o instalar app.", "Transferir por investigación, multa o protección de cuenta es gran riesgo.", "No enviaré dinero por teléfono. Llamaré al número oficial."],
+      ["10. Contrato coreano sin revisar", "No confíes solo en traducción; revisa el contrato coreano con efecto legal.", "Evitar mostrar o explicar el original coreano es peligroso.", "Firmaré después de revisar bien el contrato coreano."]
+    ]
+  }
+};
+
+function applyWarningsSection(lang) {
+  const sections = window.WIIINFO_INFO_SECTIONS[lang];
+  const section = sections?.find((item) => item.id === "realty");
+  const pack = WIIINFO_WARNING_PACKS[lang] || WIIINFO_WARNING_PACKS.en;
+  if (!section) return;
+  section.icon = "⚠️";
+  section.tab = pack.tab;
+  section.title = pack.title;
+  section.summary = pack.summary;
+  section.cards = pack.cards.map(([title, text, risk, phrase], index) => ({
+    title,
+    text,
+    detail: {
+      images: WIIINFO_VISUAL_SETS[WIIINFO_SECTION_IMAGE_ROTATION.realty[index]] || WIIINFO_VISUAL_SETS.realty,
+      lead: text,
+      actions: [
+        { type: "copy", label: pack.copy, value: phrase },
+        [0, 1, 3, 7, 8].includes(index) ? { type: "tel", label: `${pack.call} 112`, value: "112" } : null,
+        [5, 6].includes(index) ? { type: "tel", label: `${pack.call} 1345`, value: "1345" } : null
+      ].filter(Boolean),
+      sections: [
+        { title: pack.risk, items: [risk, text] },
+        { title: pack.action, items: pack.actionItems },
+        { title: pack.phrase, items: [phrase] },
+        { title: pack.avoid, items: pack.avoidItems }
+      ]
+    }
+  }));
+}
+
+["ko", "en", "ja", "th", "zh", "vi", "es"].forEach(applyWarningsSection);
+
 const WIIINFO_TRAVEL_DETAILS_KO = {
   "01. 경복궁·북촌": {
     images: WIIINFO_VISUAL_SETS.palace,
