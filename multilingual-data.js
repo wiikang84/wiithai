@@ -1080,6 +1080,90 @@ function applyWarningsSection(lang) {
 
 ["ko", "en", "ja", "th", "zh", "vi", "es"].forEach(applyWarningsSection);
 
+const WIIINFO_HOUSING_LABELS = {
+  ko: {
+    title: "한국에서 집 구하기 실전 TOP10", summary: "예산, 보증금, 관리비, 계약서, 입주·퇴실까지 실제 계약 전에 확인할 항목입니다.",
+    check: "핵심 확인", ask: "중개사·집주인에게 물어볼 말", prepare: "준비할 것", warning: "주의할 점", copy: "한국어 문장 복사",
+    prepareItems: ["예산표, 여권·외국인등록증, 체류기간, 입주 희망일을 정리합니다.", "방문한 집의 사진, 주소, 중개사 연락처, 관리비 조건을 저장합니다."],
+    warningItems: ["사진만 보고 계약하지 말고 실제 방문 후 결정합니다.", "보증금, 월세, 관리비, 수리 책임은 말이 아니라 계약서에 남깁니다."]
+  },
+  en: {
+    title: "Practical Housing in Korea TOP10", summary: "Checks for budget, deposit, fees, contract, move-in, and move-out before renting in Korea.",
+    check: "Key check", ask: "Phrase for broker or landlord", prepare: "Prepare", warning: "Warning", copy: "Copy Korean phrase",
+    prepareItems: ["Prepare your budget, passport or ARC, stay period, and desired move-in date.", "Save room photos, address, broker contact, and maintenance-fee conditions."],
+    warningItems: ["Do not sign based only on listing photos; visit the room first.", "Deposit, rent, maintenance fee, and repair duties should be written in the contract."]
+  },
+  ja: {
+    title: "韓国で部屋探し 実戦TOP10", summary: "予算、保証金、管理費、契約書、入居・退去前に確認する項目です。",
+    check: "核心確認", ask: "仲介士・家主に聞く文", prepare: "準備するもの", warning: "注意事項", copy: "韓国語をコピー",
+    prepareItems: ["予算、パスポートまたは外国人登録証、滞在期間、入居希望日を整理します。", "見た部屋の写真、住所、仲介士連絡先、管理費条件を保存します。"],
+    warningItems: ["写真だけで契約せず、必ず実際に訪問して確認します。", "保証金、家賃、管理費、修理責任は契約書に残します。"]
+  },
+  th: {
+    title: "หาบ้านในเกาหลีแบบใช้จริง TOP10", summary: "สิ่งที่ต้องเช็กก่อนเช่า ทั้งงบ มัดจำ ค่าส่วนกลาง สัญญา เข้าอยู่และย้ายออก",
+    check: "เช็กหลัก", ask: "ประโยคถามนายหน้าหรือเจ้าของ", prepare: "สิ่งที่ต้องเตรียม", warning: "ข้อควรระวัง", copy: "คัดลอกประโยคเกาหลี",
+    prepareItems: ["เตรียมงบ พาสปอร์ตหรือบัตรต่างชาติ ระยะพำนัก และวันที่อยากเข้าอยู่", "เก็บรูปห้อง ที่อยู่ เบอร์ติดต่อนายหน้า และเงื่อนไขค่าส่วนกลาง"],
+    warningItems: ["อย่าเซ็นจากรูปประกาศเท่านั้น ต้องไปดูห้องจริงก่อน", "มัดจำ ค่าเช่า ค่าส่วนกลาง และหน้าที่ซ่อมต้องอยู่ในสัญญา"]
+  },
+  zh: {
+    title: "韩国租房实用 TOP10", summary: "签约前确认预算、保证金、管理费、合同、入住和退房事项。",
+    check: "核心确认", ask: "问中介或房东的话", prepare: "需要准备", warning: "注意事项", copy: "复制韩语句子",
+    prepareItems: ["整理预算、护照或外国人登录证、停留期限和希望入住日期。", "保存看房照片、地址、中介联系方式和管理费条件。"],
+    warningItems: ["不要只看照片就签约，必须实际看房后决定。", "保证金、月租、管理费和维修责任要写进合同。"]
+  },
+  vi: {
+    title: "Tìm nhà ở Hàn thực tế TOP10", summary: "Các điểm cần kiểm tra trước khi thuê: ngân sách, cọc, phí quản lý, hợp đồng, vào và trả nhà.",
+    check: "Điểm chính", ask: "Câu hỏi cho môi giới hoặc chủ nhà", prepare: "Cần chuẩn bị", warning: "Lưu ý", copy: "Sao chép câu tiếng Hàn",
+    prepareItems: ["Chuẩn bị ngân sách, hộ chiếu hoặc ARC, thời hạn lưu trú và ngày muốn vào ở.", "Lưu ảnh phòng, địa chỉ, liên hệ môi giới và điều kiện phí quản lý."],
+    warningItems: ["Đừng ký chỉ dựa vào ảnh; hãy đến xem phòng trước.", "Tiền cọc, tiền thuê, phí quản lý và trách nhiệm sửa chữa phải ghi trong hợp đồng."]
+  },
+  es: {
+    title: "Vivienda práctica en Corea TOP10", summary: "Revisiones de presupuesto, depósito, mantenimiento, contrato, entrada y salida antes de alquilar.",
+    check: "Revisión clave", ask: "Frase para agente o dueño", prepare: "Preparar", warning: "Cuidado", copy: "Copiar frase coreana",
+    prepareItems: ["Prepara presupuesto, pasaporte o tarjeta extranjera, periodo de estancia y fecha deseada de entrada.", "Guarda fotos del cuarto, dirección, contacto del agente y condiciones de mantenimiento."],
+    warningItems: ["No firmes solo por fotos del anuncio; visita el cuarto primero.", "Depósito, renta, mantenimiento y reparaciones deben quedar por escrito."]
+  }
+};
+
+const WIIINFO_HOUSING_KOREAN_COPY = [
+  "보증금, 월세, 관리비, 중개보수, 이사비를 모두 합친 예상 비용을 알려 주세요.",
+  "이 지역의 밤길, 지하철, 버스, 주변 편의시설을 확인하고 싶습니다.",
+  "이 집은 원룸, 오피스텔, 빌라, 아파트 중 어떤 종류인가요?",
+  "관리비에 포함된 항목과 별도로 내야 하는 공과금을 알려 주세요.",
+  "채광, 냄새, 소음, 곰팡이, 수압, 난방을 직접 확인하고 싶습니다.",
+  "침대, 냉장고, 세탁기, 에어컨 등 포함 옵션을 계약서에 적어 주세요.",
+  "입주일, 계약 만기일, 중도 퇴실 조건을 계약서에 정확히 적어 주세요.",
+  "보증금은 계약서의 임대인 명의 계좌로만 송금하겠습니다.",
+  "이 집에서 전입신고와 확정일자를 받을 수 있나요?",
+  "퇴실 청소, 원상복구, 보증금 반환일, 공과금 정산 기준을 알려 주세요."
+];
+
+function applyHousingSection(lang) {
+  const sections = window.WIIINFO_INFO_SECTIONS[lang];
+  const section = sections?.find((item) => item.id === "housing");
+  const labels = WIIINFO_HOUSING_LABELS[lang] || WIIINFO_HOUSING_LABELS.en;
+  if (!section) return;
+  section.icon = "🏘️";
+  section.title = labels.title;
+  section.summary = labels.summary;
+  section.cards.forEach((card, index) => {
+    const koreanCopy = WIIINFO_HOUSING_KOREAN_COPY[index] || WIIINFO_HOUSING_KOREAN_COPY[0];
+    card.detail = {
+      images: WIIINFO_VISUAL_SETS[WIIINFO_SECTION_IMAGE_ROTATION.housing[index]] || WIIINFO_VISUAL_SETS.housing,
+      lead: card.text,
+      actions: [{ type: "copy", label: labels.copy, value: koreanCopy }],
+      sections: [
+        { title: labels.check, items: [card.text] },
+        { title: labels.ask, items: [koreanCopy, lang === "ko" ? null : card.text].filter(Boolean) },
+        { title: labels.prepare, items: labels.prepareItems },
+        { title: labels.warning, items: labels.warningItems }
+      ]
+    };
+  });
+}
+
+["ko", "en", "ja", "th", "zh", "vi", "es"].forEach(applyHousingSection);
+
 const WIIINFO_TRAVEL_DETAILS_KO = {
   "01. 경복궁·북촌": {
     images: WIIINFO_VISUAL_SETS.palace,
@@ -1322,42 +1406,50 @@ function localizeTravelDetail(base, card, labels) {
   };
 }
 
+function withTravelActions(detail, koBase, labels) {
+  if (!detail || !koBase?.address) return detail;
+  detail.actions = [
+    { type: "copy", label: labels.copyAddress, value: koBase.address }
+  ];
+  return detail;
+}
+
 const WIIINFO_DETAIL_LABELS = {
   ko: {
     routeTitle: "추천 동선", goodTitle: "외국인에게 좋은 포인트", cautionTitle: "주의사항",
     goodDefault: "처음 방문하는 사람도 이해하기 쉬운 대표 코스입니다.", cautionDefault: "운영시간, 교통, 혼잡도를 미리 확인합니다.",
-    defaultHours: "운영시간은 장소별 공식 안내를 확인하세요."
+    defaultHours: "운영시간은 장소별 공식 안내를 확인하세요.", copyAddress: "한국어 주소 복사"
   },
   en: {
     routeTitle: "Suggested route", goodTitle: "Why foreigners like it", cautionTitle: "Cautions",
     goodDefault: "This is an easy first-visit route for foreigners.", cautionDefault: "Check opening hours, transport, and crowd level before visiting.",
     defaultDirections: "Use subway, bus, or taxi depending on the destination.",
-    defaultHours: "Check official opening hours for each place."
+    defaultHours: "Check official opening hours for each place.", copyAddress: "Copy Korean address"
   },
   ja: {
     routeTitle: "おすすめ動線", goodTitle: "外国人におすすめの理由", cautionTitle: "注意事項",
     goodDefault: "初めて訪れる人にも分かりやすい代表コースです。", cautionDefault: "営業時間、交通、混雑状況を事前に確認します。",
-    defaultDirections: "地下鉄、バス、タクシーを目的地に合わせて利用します。", defaultHours: "営業時間は各施設の公式案内を確認してください。"
+    defaultDirections: "地下鉄、バス、タクシーを目的地に合わせて利用します。", defaultHours: "営業時間は各施設の公式案内を確認してください。", copyAddress: "韓国語住所をコピー"
   },
   th: {
     routeTitle: "เส้นทางแนะนำ", goodTitle: "ทำไมชาวต่างชาติชอบ", cautionTitle: "ข้อควรระวัง",
     goodDefault: "เป็นเส้นทางที่เข้าใจง่ายสำหรับการเที่ยวครั้งแรก", cautionDefault: "เช็กเวลาเปิด การเดินทาง และความหนาแน่นก่อนเดินทาง",
-    defaultDirections: "ใช้รถไฟใต้ดิน รถบัส หรือแท็กซี่ตามจุดหมาย", defaultHours: "ตรวจเวลาเปิดจากประกาศทางการของแต่ละสถานที่"
+    defaultDirections: "ใช้รถไฟใต้ดิน รถบัส หรือแท็กซี่ตามจุดหมาย", defaultHours: "ตรวจเวลาเปิดจากประกาศทางการของแต่ละสถานที่", copyAddress: "คัดลอกที่อยู่ภาษาเกาหลี"
   },
   zh: {
     routeTitle: "推荐路线", goodTitle: "适合外国人的理由", cautionTitle: "注意事项",
     goodDefault: "这是第一次来访也容易理解的代表路线。", cautionDefault: "出发前确认营业时间、交通和拥挤程度。",
-    defaultDirections: "根据目的地使用地铁、公交或出租车。", defaultHours: "请查看各景点官方营业时间。"
+    defaultDirections: "根据目的地使用地铁、公交或出租车。", defaultHours: "请查看各景点官方营业时间。", copyAddress: "复制韩语地址"
   },
   vi: {
     routeTitle: "Lộ trình gợi ý", goodTitle: "Vì sao người nước ngoài thích", cautionTitle: "Lưu ý",
     goodDefault: "Đây là tuyến dễ hiểu cho người lần đầu đến.", cautionDefault: "Kiểm tra giờ mở cửa, giao thông và mức đông trước khi đi.",
-    defaultDirections: "Dùng tàu điện, xe buýt hoặc taxi tùy điểm đến.", defaultHours: "Hãy kiểm tra giờ mở cửa chính thức của từng nơi."
+    defaultDirections: "Dùng tàu điện, xe buýt hoặc taxi tùy điểm đến.", defaultHours: "Hãy kiểm tra giờ mở cửa chính thức của từng nơi.", copyAddress: "Sao chép địa chỉ tiếng Hàn"
   },
   es: {
     routeTitle: "Ruta sugerida", goodTitle: "Por qué gusta a extranjeros", cautionTitle: "Cuidados",
     goodDefault: "Es una ruta fácil de entender para una primera visita.", cautionDefault: "Revisa horario, transporte y nivel de gente antes de ir.",
-    defaultDirections: "Usa metro, bus o taxi según el destino.", defaultHours: "Consulta el horario oficial de cada lugar."
+    defaultDirections: "Usa metro, bus o taxi según el destino.", defaultHours: "Consulta el horario oficial de cada lugar.", copyAddress: "Copiar dirección coreana"
   }
 };
 
@@ -1391,13 +1483,14 @@ function enrichWiiInfoDetails(sections, lang) {
       card.index = index;
       if (card.detail) return;
       if (section.id === "travel") {
-        const koBase = WIIINFO_TRAVEL_DETAILS_KO[WIIINFO_KOREA_INFO_KO[1].cards[index]?.title];
+        const koTravelSection = WIIINFO_KOREA_INFO_KO.find((item) => item.id === "travel");
+        const koBase = WIIINFO_TRAVEL_DETAILS_KO[koTravelSection?.cards[index]?.title];
         if (isKo) {
-          card.detail = koBase || {
+          card.detail = withTravelActions(koBase || {
             images: WIIINFO_VISUAL_SETS.palace,
             lead: card.text,
             sections: [{ title: labels.routeTitle, items: [card.text] }]
-          };
+          }, koBase, labels);
           return;
         }
         if (isEn && travelDetails[card.title]) {
@@ -1405,13 +1498,14 @@ function enrichWiiInfoDetails(sections, lang) {
           card.detail.address = WIIINFO_ADDRESS_ROMAN[index] || card.detail.address;
           card.detail.directions = WIIINFO_DETAIL_LABELS.en.defaultDirections || "Use subway, bus, or taxi depending on the destination.";
           card.detail.hours = WIIINFO_DETAIL_LABELS.en.defaultHours;
+          withTravelActions(card.detail, koBase, labels);
           return;
         }
-        card.detail = koBase ? localizeTravelDetail(koBase, card, labels) : {
+        card.detail = withTravelActions(koBase ? localizeTravelDetail(koBase, card, labels) : {
           images: WIIINFO_VISUAL_SETS.palace,
           lead: card.text,
           sections: [{ title: labels.routeTitle, items: [card.text] }]
-        };
+        }, koBase, labels);
         return;
       }
       card.detail = {
