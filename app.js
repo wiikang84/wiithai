@@ -1,5 +1,5 @@
 (async function () {
-  const ASSET_VERSION = "20260602-19";
+  const ASSET_VERSION = "20260602-20";
   const LANGUAGES = window.WIITHAI_LANGUAGES || {};
   const LANGUAGE_NAMES = window.WIIINFO_LANGUAGE_NAMES || {};
   const PROFILES = window.WIITHAI_LEARNER_PROFILES || [];
@@ -275,7 +275,7 @@
       return;
     }
     if (!("speechSynthesis" in window)) {
-      alert("이 브라우저는 음성 읽기를 지원하지 않습니다.");
+      alert(detailLabel("speechUnsupported"));
       return;
     }
     speechSynthesis.cancel();
@@ -468,13 +468,13 @@
 
   function detailLabel(key) {
     const labels = {
-      ko: { address: "주소", directions: "가는 방법", hours: "운영/시간", map: "지도 보기", source: "자료 기준", copied: "복사됨", close: "상세 닫기", viewDetail: "상세 보기", favoriteAdd: "즐겨찾기 추가", favoriteRemove: "즐겨찾기 해제" },
-      en: { address: "Address", directions: "How to get there", hours: "Hours", map: "Open map", source: "Reference", copied: "Copied", close: "Close details", viewDetail: "View details", favoriteAdd: "Save item", favoriteRemove: "Remove saved item" },
-      ja: { address: "住所", directions: "行き方", hours: "時間", map: "地図を見る", source: "参考", copied: "コピー済み", close: "詳細を閉じる", viewDetail: "詳細を見る", favoriteAdd: "保存に追加", favoriteRemove: "保存を解除" },
-      th: { address: "ที่อยู่", directions: "วิธีเดินทาง", hours: "เวลา", map: "เปิดแผนที่", source: "แหล่งข้อมูล", copied: "คัดลอกแล้ว", close: "ปิดรายละเอียด", viewDetail: "ดูรายละเอียด", favoriteAdd: "บันทึกรายการ", favoriteRemove: "ลบรายการที่บันทึก" },
-      zh: { address: "地址", directions: "交通方式", hours: "时间", map: "查看地图", source: "参考", copied: "已复制", close: "关闭详情", viewDetail: "查看详情", favoriteAdd: "添加收藏", favoriteRemove: "取消收藏" },
-      vi: { address: "Địa chỉ", directions: "Cách đi", hours: "Thời gian", map: "Mở bản đồ", source: "Nguồn tham khảo", copied: "Đã sao chép", close: "Đóng chi tiết", viewDetail: "Xem chi tiết", favoriteAdd: "Lưu mục", favoriteRemove: "Bỏ lưu mục" },
-      es: { address: "Dirección", directions: "Cómo llegar", hours: "Horario", map: "Abrir mapa", source: "Referencia", copied: "Copiado", close: "Cerrar detalles", viewDetail: "Ver detalles", favoriteAdd: "Guardar elemento", favoriteRemove: "Quitar guardado" }
+      ko: { address: "주소", directions: "가는 방법", hours: "운영/시간", map: "지도 보기", source: "자료 기준", copied: "복사됨", close: "상세 닫기", viewDetail: "상세 보기", favoriteAdd: "즐겨찾기 추가", favoriteRemove: "즐겨찾기 해제", showLanguage: "{language} 보기", speechUnsupported: "이 브라우저는 음성 읽기를 지원하지 않습니다.", answer: "정답", listen: "듣기" },
+      en: { address: "Address", directions: "How to get there", hours: "Hours", map: "Open map", source: "Reference", copied: "Copied", close: "Close details", viewDetail: "View details", favoriteAdd: "Save item", favoriteRemove: "Remove saved item", showLanguage: "Show {language}", speechUnsupported: "This browser does not support speech playback.", answer: "answer", listen: "Listen" },
+      ja: { address: "住所", directions: "行き方", hours: "時間", map: "地図を見る", source: "参考", copied: "コピー済み", close: "詳細を閉じる", viewDetail: "詳細を見る", favoriteAdd: "保存に追加", favoriteRemove: "保存を解除", showLanguage: "{language}を見る", speechUnsupported: "このブラウザは音声再生に対応していません。", answer: "答え", listen: "聞く" },
+      th: { address: "ที่อยู่", directions: "วิธีเดินทาง", hours: "เวลา", map: "เปิดแผนที่", source: "แหล่งข้อมูล", copied: "คัดลอกแล้ว", close: "ปิดรายละเอียด", viewDetail: "ดูรายละเอียด", favoriteAdd: "บันทึกรายการ", favoriteRemove: "ลบรายการที่บันทึก", showLanguage: "ดู{language}", speechUnsupported: "เบราว์เซอร์นี้ไม่รองรับการเล่นเสียง", answer: "คำตอบ", listen: "ฟัง" },
+      zh: { address: "地址", directions: "交通方式", hours: "时间", map: "查看地图", source: "参考", copied: "已复制", close: "关闭详情", viewDetail: "查看详情", favoriteAdd: "添加收藏", favoriteRemove: "取消收藏", showLanguage: "查看{language}", speechUnsupported: "此浏览器不支持语音播放。", answer: "答案", listen: "收听" },
+      vi: { address: "Địa chỉ", directions: "Cách đi", hours: "Thời gian", map: "Mở bản đồ", source: "Nguồn tham khảo", copied: "Đã sao chép", close: "Đóng chi tiết", viewDetail: "Xem chi tiết", favoriteAdd: "Lưu mục", favoriteRemove: "Bỏ lưu mục", showLanguage: "Xem {language}", speechUnsupported: "Trình duyệt này không hỗ trợ phát giọng nói.", answer: "đáp án", listen: "Nghe" },
+      es: { address: "Dirección", directions: "Cómo llegar", hours: "Horario", map: "Abrir mapa", source: "Referencia", copied: "Copiado", close: "Cerrar detalles", viewDetail: "Ver detalles", favoriteAdd: "Guardar elemento", favoriteRemove: "Quitar guardado", showLanguage: "Ver {language}", speechUnsupported: "Este navegador no admite reproducción de voz.", answer: "respuesta", listen: "Escuchar" }
     };
     const lang = labels[sourceLang] ? sourceLang : "en";
     return labels[lang][key] || key;
@@ -488,6 +488,10 @@
       "\"": "&quot;",
       "'": "&#39;"
     }[char]));
+  }
+
+  function detailText(key, replacements = {}) {
+    return Object.entries(replacements).reduce((text, [name, value]) => text.replace(`{${name}}`, value), detailLabel(key));
   }
 
   function fallbackDetail(card, section) {
@@ -613,7 +617,7 @@
       card.querySelector(".korean").textContent = sourceText;
       card.querySelector(".thai").textContent = targetText;
       card.querySelector(".roman").textContent = romanText;
-      card.querySelector(".speakButton").textContent = `▶ ${languageName(targetLang) || targetLanguage.label || "듣기"}`;
+      card.querySelector(".speakButton").textContent = `▶ ${languageName(targetLang) || targetLanguage.label || detailLabel("listen")}`;
 
       if (state.quiz) card.classList.add("hiddenThai");
 
@@ -635,7 +639,9 @@
       });
       reveal.addEventListener("click", () => {
         card.classList.toggle("hiddenThai");
-        reveal.textContent = card.classList.contains("hiddenThai") ? `${languageName(targetLang) || targetLanguage.label || "정답"} 보기` : uiText("hide");
+        reveal.textContent = card.classList.contains("hiddenThai")
+          ? detailText("showLanguage", { language: languageName(targetLang) || targetLanguage.label || detailLabel("answer") })
+          : uiText("hide");
       });
 
       if (!state.quiz) reveal.textContent = uiText("hide");
