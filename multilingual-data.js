@@ -1284,13 +1284,13 @@ const WIIINFO_MORE_NAMES = {
 };
 
 const WIIINFO_MORE_DETAIL_LABELS = {
-  ko: { why: "왜 추천하는지", copyHint: "버튼을 누르면 한국 직원이나 택시 기사에게 바로 보여줄 한국어 요청문이 복사됩니다.", localCheck: "현장에서는 한국어 표지판, 휴무일, 마지막 입장 시간을 다시 확인합니다." },
-  en: { why: "Why it is useful", copyHint: "The copy button saves a Korean request you can show to staff or a taxi driver in Korea.", localCheck: "On site, recheck Korean signs, closed days, and last admission time." },
-  ja: { why: "おすすめ理由", copyHint: "コピーすると、韓国のスタッフやタクシー運転手に見せられる韓国語の依頼文になります。", localCheck: "現地では韓国語の案内、休業日、最終入場時間を再確認します。" },
-  th: { why: "เหตุผลที่แนะนำ", copyHint: "ปุ่มคัดลอกจะบันทึกประโยคภาษาเกาหลีที่ใช้แสดงให้พนักงานหรือแท็กซี่ในเกาหลีได้", localCheck: "หน้างานให้เช็กป้ายภาษาเกาหลี วันหยุด และเวลาเข้าชมรอบสุดท้ายอีกครั้ง" },
-  zh: { why: "推荐理由", copyHint: "点击复制后，会保存可给韩国工作人员或出租车司机看的韩语请求句。", localCheck: "到现场后请再次确认韩语告示、休息日和最后入场时间。" },
-  vi: { why: "Vì sao nên chọn", copyHint: "Nút sao chép lưu một câu tiếng Hàn để đưa cho nhân viên hoặc tài xế taxi ở Hàn.", localCheck: "Tại chỗ, hãy kiểm tra lại biển tiếng Hàn, ngày nghỉ và giờ vào cuối." },
-  es: { why: "Por qué conviene", copyHint: "El botón copia una frase coreana para mostrar a personal local o a un taxista en Corea.", localCheck: "En el lugar, revisa señales en coreano, días de cierre y última entrada." }
+  ko: { why: "왜 추천하는지", copyHint: "버튼을 누르면 한국 직원이나 택시 기사에게 바로 보여줄 한국어 요청문이 복사됩니다.", localCheck: "현장에서는 한국어 표지판, 휴무일, 마지막 입장 시간을 다시 확인합니다.", directions: "지도 링크를 열어 현재 위치 기준 대중교통·택시 이동 시간을 확인하세요." },
+  en: { why: "Why it is useful", copyHint: "The copy button saves a Korean request you can show to staff or a taxi driver in Korea.", localCheck: "On site, recheck Korean signs, closed days, and last admission time.", directions: "Open the map link and check transit or taxi time from your current location." },
+  ja: { why: "おすすめ理由", copyHint: "コピーすると、韓国のスタッフやタクシー運転手に見せられる韓国語の依頼文になります。", localCheck: "現地では韓国語の案内、休業日、最終入場時間を再確認します。", directions: "地図リンクを開き、現在地からの公共交通やタクシー時間を確認します。" },
+  th: { why: "เหตุผลที่แนะนำ", copyHint: "ปุ่มคัดลอกจะบันทึกประโยคภาษาเกาหลีที่ใช้แสดงให้พนักงานหรือแท็กซี่ในเกาหลีได้", localCheck: "หน้างานให้เช็กป้ายภาษาเกาหลี วันหยุด และเวลาเข้าชมรอบสุดท้ายอีกครั้ง", directions: "เปิดลิงก์แผนที่แล้วเช็กเวลาเดินทางด้วยขนส่งสาธารณะหรือแท็กซี่จากตำแหน่งปัจจุบัน" },
+  zh: { why: "推荐理由", copyHint: "点击复制后，会保存可给韩国工作人员或出租车司机看的韩语请求句。", localCheck: "到现场后请再次确认韩语告示、休息日和最后入场时间。", directions: "打开地图链接，确认从当前位置出发的公交或出租车时间。" },
+  vi: { why: "Vì sao nên chọn", copyHint: "Nút sao chép lưu một câu tiếng Hàn để đưa cho nhân viên hoặc tài xế taxi ở Hàn.", localCheck: "Tại chỗ, hãy kiểm tra lại biển tiếng Hàn, ngày nghỉ và giờ vào cuối.", directions: "Mở liên kết bản đồ và kiểm tra thời gian đi bằng phương tiện công cộng hoặc taxi từ vị trí hiện tại." },
+  es: { why: "Por qué conviene", copyHint: "El botón copia una frase coreana para mostrar a personal local o a un taxista en Corea.", localCheck: "En el lugar, revisa señales en coreano, días de cierre y última entrada.", directions: "Abre el enlace del mapa y revisa el tiempo en transporte público o taxi desde tu ubicación actual." }
 };
 
 const WIIINFO_MORE_IMAGE_MIX = {
@@ -1331,6 +1331,8 @@ function buildMoreSection(lang, id) {
       detail: {
         images: buildGuideImages(id, imageKey, index),
         lead: sectionLabels[4].replace("{name}", names[index] || name),
+        directions: detailLabels.directions,
+        mapUrl: `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${name} Korea`)}`,
         actions: [{ type: "copy", label: labels.copy, value: koreanCopy }],
         sections: [
           { title: labels.overview, items: [sectionLabels[4].replace("{name}", names[index] || name), `${detailLabels.why}: ${sectionLabels[5]}`] },
