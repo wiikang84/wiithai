@@ -1293,6 +1293,27 @@ const WIIINFO_MORE_DETAIL_LABELS = {
   es: { why: "Por qué conviene", copyHint: "El botón copia una frase coreana para mostrar a personal local o a un taxista en Corea.", localCheck: "En el lugar, revisa señales en coreano, días de cierre y última entrada." }
 };
 
+const WIIINFO_MORE_IMAGE_MIX = {
+  routes: ["palace", "tower", "hangang", "hongdae", "lotte", "nami", "busan", "jeju", "gyeongju", "jeonju"],
+  food: ["market", "hongdae", "market", "market", "jeonju", "busan", "jeju", "hongdae", "hangang", "hanokLife"],
+  photo: ["palace", "hanokLife", "tower", "hangang", "hongdae", "busan", "busan", "jeju", "jeonju", "gyeongju"],
+  seasonal: ["palace", "hanokLife", "hangang", "busan", "jeju", "palace", "nami", "nami", "jeonju", "busan"],
+  cities: ["skyline", "busan", "jeju", "gyeongju", "jeonju", "skyline", "busan", "nami", "market", "busan"]
+};
+
+function buildGuideImages(sectionId, imageKey, index) {
+  const primary = WIIINFO_VISUAL_SETS[imageKey] || [];
+  const mixKey = WIIINFO_MORE_IMAGE_MIX[sectionId]?.[index];
+  const mixed = WIIINFO_VISUAL_SETS[mixKey] || [];
+  const support = WIIINFO_VISUAL_SETS.skyline || [];
+  const seen = new Set();
+  return [...primary, ...mixed, ...support].filter((image) => {
+    if (!image?.src || seen.has(image.src)) return false;
+    seen.add(image.src);
+    return true;
+  }).slice(0, 6);
+}
+
 function buildMoreSection(lang, id) {
   const labels = WIIINFO_MORE_LABELS[lang] || WIIINFO_MORE_LABELS.en;
   const sectionLabels = labels[id];
@@ -1308,7 +1329,7 @@ function buildMoreSection(lang, id) {
       title: `${String(index + 1).padStart(2, "0")}. ${names[index] || name}`,
       text: sectionLabels[4].replace("{name}", names[index] || name),
       detail: {
-        images: WIIINFO_VISUAL_SETS[imageKey] || WIIINFO_VISUAL_SETS.civic,
+        images: buildGuideImages(id, imageKey, index),
         lead: sectionLabels[4].replace("{name}", names[index] || name),
         actions: [{ type: "copy", label: labels.copy, value: koreanCopy }],
         sections: [
