@@ -663,9 +663,165 @@ const WIIINFO_VISUAL_SETS = {
 
 const WIIINFO_SECTION_IMAGE_ROTATION = {
   life: ["civic", "market", "hanokLife", "transit", "skyline", "market", "civic", "hanokLife", "transit", "skyline"],
+  safety: ["skyline", "transit", "civic", "market", "hanokLife", "skyline", "transit", "civic", "market", "hanokLife"],
   housing: ["housing", "skyline", "hanokLife", "realty", "housing", "skyline", "realty", "hanokLife", "housing", "market"],
   realty: ["realty", "housing", "skyline", "market", "realty", "housing", "hanokLife", "skyline", "realty", "civic"]
 };
+
+const WIIINFO_SAFETY_LABELS = {
+  ko: {
+    tab: "안전 TOP10", title: "한국 긴급·안전 TOP10", summary: "위급하거나 막혔을 때 바로 전화하고 설명할 수 있는 실전 연락처입니다.",
+    when: "언제 쓰나", say: "바로 말할 문장", caution: "주의사항", call: "전화하기", copy: "문장 복사", official: "공식 안내"
+  },
+  en: {
+    tab: "Safety TOP10", title: "Korea Safety and Emergency TOP10", summary: "Practical numbers and phrases to use when something goes wrong in Korea.",
+    when: "When to use it", say: "Phrase to say", caution: "Caution", call: "Call now", copy: "Copy phrase", official: "Official guide"
+  },
+  ja: {
+    tab: "安全 TOP10", title: "韓国の緊急・安全TOP10", summary: "困った時にすぐ電話し、状況を説明するための実用連絡先です。",
+    when: "使う場面", say: "すぐ伝える文", caution: "注意事項", call: "電話する", copy: "文をコピー", official: "公式案内"
+  },
+  th: {
+    tab: "ความปลอดภัย TOP10", title: "เบอร์ฉุกเฉินและความปลอดภัยในเกาหลี TOP10", summary: "เบอร์และประโยคที่ใช้ได้ทันทีเมื่อเกิดปัญหาในเกาหลี",
+    when: "ใช้เมื่อไร", say: "ประโยคที่พูดได้ทันที", caution: "ข้อควรระวัง", call: "โทรเลย", copy: "คัดลอกประโยค", official: "ข้อมูลทางการ"
+  },
+  zh: {
+    tab: "安全 TOP10", title: "韩国紧急与安全 TOP10", summary: "在韩国遇到紧急情况或困难时可立即使用的电话和表达。",
+    when: "什么时候使用", say: "可直接说的话", caution: "注意事项", call: "立即拨打", copy: "复制句子", official: "官方指南"
+  },
+  vi: {
+    tab: "An toàn TOP10", title: "Khẩn cấp và an toàn ở Hàn Quốc TOP10", summary: "Số điện thoại và câu nói thực tế khi gặp sự cố ở Hàn Quốc.",
+    when: "Khi nào dùng", say: "Câu có thể nói ngay", caution: "Lưu ý", call: "Gọi ngay", copy: "Sao chép câu", official: "Hướng dẫn chính thức"
+  },
+  es: {
+    tab: "Seguridad TOP10", title: "Emergencias y seguridad en Corea TOP10", summary: "Números y frases útiles cuando algo sale mal en Corea.",
+    when: "Cuándo usarlo", say: "Frase para decir", caution: "Cuidado", call: "Llamar", copy: "Copiar frase", official: "Guía oficial"
+  }
+};
+
+const WIIINFO_SAFETY_ITEMS = {
+  ko: [
+    { title: "01. 112 경찰 신고", text: "범죄, 폭행, 스토킹, 교통사고처럼 경찰 도움이 필요하면 112로 전화합니다.", phone: "112", copy: "저는 외국인입니다. 경찰 도움이 필요합니다. 제 위치는 여기입니다.", use: "위협, 범죄, 사고, 분실물 관련 현장 도움이 필요할 때 사용합니다.", caution: "긴급하지 않은 생활 상담은 112가 아니라 1330, 1345, 120 같은 상담 창구를 먼저 확인합니다." },
+    { title: "02. 119 구급차·화재", text: "응급환자, 화재, 구조, 큰 부상은 119로 전화합니다.", phone: "119", copy: "구급차가 필요합니다. 환자가 아픕니다. 제 위치는 여기입니다.", use: "갑자기 쓰러짐, 심한 통증, 사고 부상, 화재, 구조 상황에 사용합니다.", caution: "병원 위치를 모르면 증상과 현재 위치를 먼저 말하고 안내를 받습니다." },
+    { title: "03. 1330 관광통역", text: "여행 중 길, 통역, 관광 불편, 기본 안내가 필요하면 1330을 이용합니다.", phone: "1330", link: "https://english.visitkorea.or.kr/svc/contents/contentsView.do?vcontsId=140632", copy: "통역 도움이 필요합니다. 한국어를 잘 못합니다.", use: "여행 중 통역, 길 안내, 관광 정보, 불편 신고가 필요할 때 유용합니다.", caution: "생명·범죄 관련 긴급 상황은 1330보다 112 또는 119가 우선입니다." },
+    { title: "04. 1345 출입국 상담", text: "비자, 체류기간, 외국인등록, 주소 변경은 1345에 문의합니다.", phone: "1345", link: "https://www.immigration.go.kr/immigration_eng/1862/subview.do", copy: "비자와 체류 관련 상담이 필요합니다.", use: "외국인등록, 체류기간 연장, 체류지 변경, 출입국 업무를 확인할 때 사용합니다.", caution: "기한이 있는 업무는 전화 상담만 믿지 말고 HiKorea 예약과 공식 안내를 함께 확인합니다." },
+    { title: "05. 병원·응급실", text: "응급이면 119, 일반 진료는 가까운 병원이나 의원을 확인합니다.", phone: "119", copy: "응급실에 가야 하나요? 영어가 가능한 병원이 있나요?", use: "심한 통증, 고열, 사고 부상은 119를 먼저 이용하고 일반 증상은 가까운 의원부터 확인합니다.", caution: "여권, 외국인등록증, 보험 정보, 결제수단을 챙기는 것이 좋습니다." },
+    { title: "06. 약국·야간약국", text: "가벼운 증상은 약국에서 상담하고, 밤에는 운영 중인 약국을 확인합니다.", copy: "이 증상에 맞는 약이 필요합니다. 저는 이 약에 알레르기가 있습니다.", use: "감기, 소화불량, 가벼운 통증처럼 처방전 없이 상담 가능한 상황에 사용합니다.", caution: "심한 호흡곤란, 흉통, 의식 저하는 약국보다 119가 우선입니다." },
+    { title: "07. 여권 분실", text: "여권을 잃어버리면 경찰 신고와 자국 대사관·영사관 연락이 필요합니다.", copy: "여권을 잃어버렸습니다. 분실 신고서가 필요합니다.", use: "여권, 체류카드, 중요한 신분증을 잃어버렸을 때 사용합니다.", caution: "항공권 일정이 있으면 대사관 긴급여권 가능 여부를 바로 확인합니다." },
+    { title: "08. 카드·휴대폰 분실", text: "카드사와 통신사에 즉시 정지 요청하고, 도난이면 112에 신고합니다.", copy: "카드와 휴대폰을 잃어버렸습니다. 사용 정지를 하고 싶습니다.", use: "결제카드, 휴대폰, 지갑을 잃어버렸거나 도난이 의심될 때 사용합니다.", caution: "은행 앱, 간편결제, 유심 재발급까지 함께 확인해야 추가 피해를 줄일 수 있습니다." },
+    { title: "09. 분실물 찾기", text: "지하철, 택시, 버스에서 잃어버린 물건은 이동수단과 시간 기록이 중요합니다.", copy: "이 물건을 잃어버렸습니다. 시간과 장소는 여기입니다.", use: "대중교통, 택시, 식당, 숙소에서 물건을 두고 왔을 때 사용합니다.", caution: "택시 영수증, 카드 결제 내역, 승하차 시간, 사진을 저장해 두면 찾기 쉽습니다." },
+    { title: "10. 대사관·영사관", text: "여권, 체포, 큰 사고, 가족 연락 문제는 자국 대사관이나 영사관을 확인합니다.", copy: "제 나라 대사관에 연락해야 합니다. 도움을 받을 수 있나요?", use: "여권 재발급, 법적 문제, 큰 사고, 가족 연락이 필요한 상황에 사용합니다.", caution: "대사관은 한국의 병원비·벌금·개인 계약 문제를 대신 해결해주지는 않습니다." }
+  ],
+  en: [
+    { title: "01. 112 Police", text: "Call 112 for crime, assault, stalking, traffic accidents, or urgent police help.", phone: "112", copy: "I am a foreigner. I need police help. My location is here.", use: "Use it for threats, crime, accidents, theft, or when police help is needed on site.", caution: "For non-urgent life questions, use a help center such as 1330, 1345, or 120 first." },
+    { title: "02. 119 Ambulance and fire", text: "Call 119 for medical emergencies, fire, rescue, or serious injuries.", phone: "119", copy: "I need an ambulance. The patient is sick. My location is here.", use: "Use it for collapse, severe pain, accident injury, fire, or rescue situations.", caution: "If you do not know a hospital, explain symptoms and location first." },
+    { title: "03. 1330 Travel helpline", text: "Use 1330 for travel help, interpretation, directions, and tourism complaints.", phone: "1330", link: "https://english.visitkorea.or.kr/svc/contents/contentsView.do?vcontsId=140632", copy: "I need interpretation help. I do not speak Korean well.", use: "Useful for travel interpretation, directions, tourist information, and travel complaints.", caution: "For life-threatening or crime situations, call 112 or 119 first." },
+    { title: "04. 1345 Immigration", text: "Call 1345 for visa, stay period, alien registration, and address-change questions.", phone: "1345", link: "https://www.immigration.go.kr/immigration_eng/1862/subview.do", copy: "I need help with visa and immigration status.", use: "Use it for alien registration, stay extension, address changes, and immigration procedures.", caution: "For deadline-based work, also check HiKorea reservations and official notices." },
+    { title: "05. Hospital and ER", text: "For emergencies call 119; for ordinary symptoms, check a nearby clinic first.", phone: "119", copy: "Do I need the emergency room? Is there an English-speaking hospital?", use: "For serious pain, fever, or accident injury, call 119; for minor symptoms, start with a clinic.", caution: "Bring passport, alien registration card, insurance information, and a payment method if possible." },
+    { title: "06. Pharmacy and night pharmacy", text: "For mild symptoms, ask a pharmacy; at night, check which pharmacy is open.", copy: "I need medicine for these symptoms. I have an allergy to this medicine.", use: "Use it for colds, indigestion, mild pain, and non-prescription consultation.", caution: "For breathing trouble, chest pain, or loss of consciousness, call 119 first." },
+    { title: "07. Lost passport", text: "If you lose your passport, report it and contact your embassy or consulate.", copy: "I lost my passport. I need a loss report.", use: "Use it when you lose your passport, residence card, or important ID.", caution: "If you have a flight soon, ask your embassy about emergency passport options immediately." },
+    { title: "08. Lost card or phone", text: "Ask your card company and carrier to suspend service immediately; call 112 if stolen.", copy: "I lost my card and phone. I want to suspend them.", use: "Use it when a card, phone, or wallet is lost or theft is suspected.", caution: "Also check banking apps, mobile payments, and SIM reissue to reduce further damage." },
+    { title: "09. Lost property", text: "For items lost in subway, taxi, or bus, time and route records matter.", copy: "I lost this item. The time and place are here.", use: "Use it when you left something on public transport, in a taxi, restaurant, or hotel.", caution: "Taxi receipts, card payment records, ride time, and photos make recovery easier." },
+    { title: "10. Embassy or consulate", text: "Contact your embassy for passport, detention, major accidents, or family contact issues.", copy: "I need to contact my embassy. Can you help me?", use: "Use it for emergency travel documents, legal trouble, major accidents, or family contact.", caution: "Embassies usually cannot pay hospital bills, fines, or private contract costs for you." }
+  ],
+  ja: [
+    { title: "01. 112 警察", text: "犯罪、暴行、ストーカー、交通事故など警察の助けが必要な時は112に電話します。", phone: "112", copy: "私は外国人です。警察の助けが必要です。私の場所はここです。", use: "脅威、犯罪、事故、盗難など現場で警察の助けが必要な時に使います。", caution: "緊急ではない生活相談は112ではなく、1330、1345、120などを先に確認します。" },
+    { title: "02. 119 救急・火災", text: "急病、火災、救助、大きなけがは119に電話します。", phone: "119", copy: "救急車が必要です。患者が具合悪いです。私の場所はここです。", use: "倒れた時、強い痛み、事故のけが、火災、救助が必要な時に使います。", caution: "病院が分からない時は、症状と現在地を先に伝えます。" },
+    { title: "03. 1330 観光通訳", text: "旅行中の道案内、通訳、観光案内、不便申告には1330を利用します。", phone: "1330", link: "https://english.visitkorea.or.kr/svc/contents/contentsView.do?vcontsId=140632", copy: "通訳の助けが必要です。韓国語がよく分かりません。", use: "旅行中の通訳、道案内、観光情報、不便申告に便利です。", caution: "命に関わる緊急事態や犯罪は112または119が優先です。" },
+    { title: "04. 1345 出入国相談", text: "ビザ、滞在期間、外国人登録、住所変更は1345に問い合わせます。", phone: "1345", link: "https://www.immigration.go.kr/immigration_eng/1862/subview.do", copy: "ビザと滞在資格について相談が必要です。", use: "外国人登録、滞在延長、住所変更、出入国手続きの確認に使います。", caution: "期限がある手続きは電話だけでなくHiKorea予約と公式案内も確認します。" },
+    { title: "05. 病院・救急室", text: "緊急なら119、一般診療は近くの病院や医院を確認します。", phone: "119", copy: "救急室に行く必要がありますか。英語対応の病院はありますか。", use: "強い痛み、高熱、事故のけがは119、軽い症状は医院から確認します。", caution: "パスポート、外国人登録証、保険情報、支払い手段を持って行くと安心です。" },
+    { title: "06. 薬局・夜間薬局", text: "軽い症状は薬局で相談し、夜は営業中の薬局を確認します。", copy: "この症状に合う薬が必要です。この薬にアレルギーがあります。", use: "風邪、消化不良、軽い痛みなど処方箋なしで相談できる時に使います。", caution: "呼吸困難、胸痛、意識低下は薬局より119が優先です。" },
+    { title: "07. パスポート紛失", text: "パスポートをなくしたら警察への申告と自国大使館・領事館への連絡が必要です。", copy: "パスポートをなくしました。紛失届が必要です。", use: "パスポート、在留カード、重要な身分証をなくした時に使います。", caution: "航空券の予定がある場合は緊急旅券の可否をすぐ確認します。" },
+    { title: "08. カード・携帯紛失", text: "カード会社と通信会社にすぐ停止を依頼し、盗難なら112に申告します。", copy: "カードと携帯をなくしました。利用停止したいです。", use: "カード、携帯、財布をなくした時や盗難が疑われる時に使います。", caution: "銀行アプリ、簡単決済、SIM再発行も確認して追加被害を防ぎます。" },
+    { title: "09. 忘れ物を探す", text: "地下鉄、タクシー、バスでなくした物は時間と経路の記録が重要です。", copy: "この物をなくしました。時間と場所はここです。", use: "交通機関、タクシー、店、宿泊先に物を置き忘れた時に使います。", caution: "タクシー領収書、カード決済履歴、乗車時間、写真があると探しやすいです。" },
+    { title: "10. 大使館・領事館", text: "旅券、拘束、大きな事故、家族連絡は自国大使館や領事館を確認します。", copy: "自国の大使館に連絡する必要があります。手伝ってもらえますか。", use: "緊急旅券、法的問題、大きな事故、家族連絡が必要な時に使います。", caution: "大使館は病院費、罰金、個人契約問題を代わりに解決する機関ではありません。" }
+  ],
+  th: [
+    { title: "01. 112 ตำรวจ", text: "โทร 112 เมื่อมีอาชญากรรม ถูกทำร้าย ถูกคุกคาม หรืออุบัติเหตุที่ต้องให้ตำรวจช่วย", phone: "112", copy: "ฉันเป็นชาวต่างชาติ ต้องการความช่วยเหลือจากตำรวจ ตำแหน่งของฉันอยู่ที่นี่", use: "ใช้เมื่อมีภัยคุกคาม อาชญากรรม อุบัติเหตุ ของหาย หรือจำเป็นต้องให้ตำรวจมาที่จุดเกิดเหตุ", caution: "ถ้าไม่ใช่เรื่องฉุกเฉิน ให้ลองติดต่อ 1330, 1345 หรือ 120 ก่อน" },
+    { title: "02. 119 รถพยาบาลและไฟไหม้", text: "โทร 119 เมื่อมีเหตุฉุกเฉินทางการแพทย์ ไฟไหม้ กู้ภัย หรือบาดเจ็บรุนแรง", phone: "119", copy: "ต้องการรถพยาบาล ผู้ป่วยไม่สบาย ตำแหน่งของฉันอยู่ที่นี่", use: "ใช้เมื่อหมดสติ เจ็บรุนแรง บาดเจ็บจากอุบัติเหตุ ไฟไหม้ หรือเหตุที่ต้องกู้ภัย", caution: "ถ้าไม่รู้โรงพยาบาล ให้บอกอาการและตำแหน่งปัจจุบันก่อน" },
+    { title: "03. 1330 สายช่วยเหลือนักท่องเที่ยว", text: "ใช้ 1330 สำหรับการท่องเที่ยว ล่าม เส้นทาง และเรื่องร้องเรียนการท่องเที่ยว", phone: "1330", link: "https://english.visitkorea.or.kr/svc/contents/contentsView.do?vcontsId=140632", copy: "ต้องการความช่วยเหลือด้านล่าม ฉันพูดภาษาเกาหลีไม่เก่ง", use: "เหมาะกับล่ามระหว่างเที่ยว ถามทาง ข้อมูลท่องเที่ยว และปัญหาในการเดินทาง", caution: "ถ้าเป็นอันตรายถึงชีวิตหรืออาชญากรรม ให้โทร 112 หรือ 119 ก่อน" },
+    { title: "04. 1345 ตรวจคนเข้าเมือง", text: "โทร 1345 เรื่องวีซ่า ระยะพำนัก บัตรต่างชาติ และการเปลี่ยนที่อยู่", phone: "1345", link: "https://www.immigration.go.kr/immigration_eng/1862/subview.do", copy: "ต้องการปรึกษาเรื่องวีซ่าและสถานะพำนัก", use: "ใช้ตรวจเรื่องบัตรต่างชาติ ต่อวีซ่า เปลี่ยนที่อยู่ และขั้นตอนตรวจคนเข้าเมือง", caution: "งานที่มีวันครบกำหนดควรเช็กการจอง HiKorea และประกาศทางการด้วย" },
+    { title: "05. โรงพยาบาลและห้องฉุกเฉิน", text: "กรณีฉุกเฉินโทร 119; อาการทั่วไปให้เริ่มจากคลินิกใกล้บ้าน", phone: "119", copy: "ฉันต้องไปห้องฉุกเฉินไหม มีโรงพยาบาลที่พูดอังกฤษได้ไหม", use: "อาการปวดรุนแรง ไข้สูง หรือบาดเจ็บจากอุบัติเหตุให้โทร 119; อาการเบาให้เริ่มจากคลินิก", caution: "ควรพกพาสปอร์ต บัตรต่างชาติ ข้อมูลประกัน และวิธีจ่ายเงิน" },
+    { title: "06. ร้านยาและร้านยากลางคืน", text: "อาการไม่รุนแรงให้ถามร้านยา และตอนกลางคืนให้เช็กร้านยาที่เปิดอยู่", copy: "ต้องการยาสำหรับอาการนี้ ฉันแพ้ยานี้", use: "ใช้กับหวัด อาหารไม่ย่อย ปวดเล็กน้อย และการปรึกษายาที่ไม่ต้องใช้ใบสั่งแพทย์", caution: "หายใจลำบาก เจ็บหน้าอก หรือหมดสติ ให้โทร 119 ก่อน" },
+    { title: "07. พาสปอร์ตหาย", text: "ถ้าพาสปอร์ตหาย ให้แจ้งความและติดต่อสถานทูตหรือกงสุลของประเทศตนเอง", copy: "พาสปอร์ตของฉันหาย ต้องการใบแจ้งความของหาย", use: "ใช้เมื่อพาสปอร์ต บัตรพำนัก หรือเอกสารสำคัญหาย", caution: "ถ้ามีเที่ยวบินใกล้ ๆ ให้ถามสถานทูตเรื่องพาสปอร์ตฉุกเฉินทันที" },
+    { title: "08. บัตรหรือมือถือหาย", text: "ให้บริษัทบัตรและเครือข่ายมือถือระงับทันที ถ้าถูกขโมยให้โทร 112", copy: "บัตรและมือถือของฉันหาย ต้องการระงับการใช้งาน", use: "ใช้เมื่อบัตร มือถือ หรือกระเป๋าหาย หรือสงสัยว่าถูกขโมย", caution: "ตรวจแอปธนาคาร การจ่ายเงินมือถือ และการออกซิมใหม่ด้วย" },
+    { title: "09. ของหาย", text: "ถ้าของหายในรถไฟใต้ดิน แท็กซี่ หรือบัส เวลาและเส้นทางสำคัญมาก", copy: "ฉันทำของชิ้นนี้หาย เวลาและสถานที่อยู่ที่นี่", use: "ใช้เมื่อทิ้งของไว้ในขนส่งสาธารณะ แท็กซี่ ร้านอาหาร หรือที่พัก", caution: "ใบเสร็จแท็กซี่ รายการจ่ายบัตร เวลาเดินทาง และรูปช่วยให้หาของง่ายขึ้น" },
+    { title: "10. สถานทูตหรือกงสุล", text: "ติดต่อสถานทูตเมื่อมีเรื่องพาสปอร์ต ถูกจับ อุบัติเหตุใหญ่ หรือการติดต่อครอบครัว", copy: "ฉันต้องติดต่อสถานทูตของประเทศฉัน ช่วยได้ไหม", use: "ใช้เมื่อจำเป็นต้องมีเอกสารเดินทางฉุกเฉิน ปัญหากฎหมาย อุบัติเหตุใหญ่ หรือครอบครัว", caution: "สถานทูตมักไม่สามารถจ่ายค่ารักษา ค่าปรับ หรือค่าใช้จ่ายสัญญาส่วนตัวแทนคุณได้" }
+  ],
+  zh: [
+    { title: "01. 112 警察", text: "遇到犯罪、暴力、跟踪、交通事故等需要警察帮助时拨打112。", phone: "112", copy: "我是外国人。我需要警察帮助。我的位置在这里。", use: "有威胁、犯罪、事故、盗窃或需要警察到现场时使用。", caution: "非紧急生活咨询请先使用1330、1345或120等咨询窗口。" },
+    { title: "02. 119 救护车和火灾", text: "急病、火灾、救援或严重受伤时拨打119。", phone: "119", copy: "我需要救护车。病人不舒服。我的位置在这里。", use: "昏倒、剧痛、事故受伤、火灾或救援情况时使用。", caution: "不知道去哪个医院时，先说明症状和当前位置。" },
+    { title: "03. 1330 旅游翻译", text: "旅行中需要问路、翻译、旅游信息或投诉时使用1330。", phone: "1330", link: "https://english.visitkorea.or.kr/svc/contents/contentsView.do?vcontsId=140632", copy: "我需要翻译帮助。我韩语说得不好。", use: "适合旅行翻译、路线咨询、旅游信息和旅游不便投诉。", caution: "生命危险或犯罪情况请优先拨打112或119。" },
+    { title: "04. 1345 出入境咨询", text: "签证、停留期限、外国人登录和地址变更可咨询1345。", phone: "1345", link: "https://www.immigration.go.kr/immigration_eng/1862/subview.do", copy: "我需要签证和停留资格咨询。", use: "确认外国人登录、停留延期、地址变更和出入境手续时使用。", caution: "有期限的业务不要只依赖电话，也要确认HiKorea预约和官方公告。" },
+    { title: "05. 医院和急诊室", text: "紧急情况拨打119；普通症状先确认附近诊所。", phone: "119", copy: "我需要去急诊室吗？有能说英语的医院吗？", use: "剧痛、高烧、事故受伤时先拨119；轻微症状可从诊所开始。", caution: "建议携带护照、外国人登录证、保险信息和付款方式。" },
+    { title: "06. 药店和夜间药店", text: "轻微症状可在药店咨询，夜间需确认营业药店。", copy: "我需要适合这些症状的药。我对这种药过敏。", use: "感冒、消化不良、轻微疼痛等无需处方咨询时使用。", caution: "呼吸困难、胸痛、意识下降时应优先拨打119。" },
+    { title: "07. 护照丢失", text: "护照丢失时需要报警并联系本国大使馆或领事馆。", copy: "我的护照丢了。我需要遗失证明。", use: "护照、居留卡或重要身份证件丢失时使用。", caution: "如果近期有航班，马上向大使馆确认紧急旅行证件。" },
+    { title: "08. 银行卡或手机丢失", text: "立即联系发卡公司和通信公司停用；如被盗请拨打112。", copy: "我的卡和手机丢了。我想停用。", use: "银行卡、手机或钱包丢失，或怀疑被盗时使用。", caution: "还要确认银行App、移动支付和SIM补办，减少进一步损失。" },
+    { title: "09. 寻找遗失物", text: "在地铁、出租车或公交上遗失物品时，时间和路线记录很重要。", copy: "我丢了这个东西。时间和地点在这里。", use: "在公共交通、出租车、餐厅或住宿处遗落物品时使用。", caution: "出租车收据、刷卡记录、乘车时间和照片会帮助找回。" },
+    { title: "10. 大使馆或领事馆", text: "护照、拘留、重大事故或联系家人问题请联系本国大使馆。", copy: "我需要联系我国大使馆。可以帮我吗？", use: "需要紧急旅行证件、法律问题、重大事故或联系家人时使用。", caution: "大使馆通常不能代付医疗费、罚款或私人合同费用。" }
+  ],
+  vi: [
+    { title: "01. 112 Cảnh sát", text: "Gọi 112 khi có tội phạm, bị hành hung, theo dõi, tai nạn giao thông hoặc cần cảnh sát.", phone: "112", copy: "Tôi là người nước ngoài. Tôi cần cảnh sát giúp. Vị trí của tôi ở đây.", use: "Dùng khi có đe dọa, tội phạm, tai nạn, mất cắp hoặc cần cảnh sát tại hiện trường.", caution: "Nếu không khẩn cấp, hãy thử 1330, 1345 hoặc 120 trước." },
+    { title: "02. 119 Cấp cứu và cứu hỏa", text: "Gọi 119 khi cấp cứu y tế, cháy, cứu hộ hoặc bị thương nặng.", phone: "119", copy: "Tôi cần xe cấp cứu. Bệnh nhân đang đau. Vị trí của tôi ở đây.", use: "Dùng khi ngất, đau nặng, bị thương do tai nạn, cháy hoặc cần cứu hộ.", caution: "Nếu không biết bệnh viện, hãy nói triệu chứng và vị trí hiện tại trước." },
+    { title: "03. 1330 Hỗ trợ du lịch", text: "Dùng 1330 để hỏi đường, phiên dịch, thông tin du lịch và khiếu nại du lịch.", phone: "1330", link: "https://english.visitkorea.or.kr/svc/contents/contentsView.do?vcontsId=140632", copy: "Tôi cần hỗ trợ phiên dịch. Tôi không nói tiếng Hàn tốt.", use: "Hữu ích cho phiên dịch khi du lịch, hỏi đường, thông tin du lịch và phàn nàn.", caution: "Nếu nguy hiểm tính mạng hoặc tội phạm, gọi 112 hoặc 119 trước." },
+    { title: "04. 1345 Xuất nhập cảnh", text: "Gọi 1345 về visa, thời hạn lưu trú, thẻ người nước ngoài và đổi địa chỉ.", phone: "1345", link: "https://www.immigration.go.kr/immigration_eng/1862/subview.do", copy: "Tôi cần tư vấn về visa và tình trạng lưu trú.", use: "Dùng để hỏi về đăng ký người nước ngoài, gia hạn lưu trú, đổi địa chỉ và thủ tục xuất nhập cảnh.", caution: "Với việc có hạn chót, hãy kiểm tra cả đặt lịch HiKorea và thông báo chính thức." },
+    { title: "05. Bệnh viện và cấp cứu", text: "Khẩn cấp gọi 119; triệu chứng thông thường nên kiểm tra phòng khám gần nhất.", phone: "119", copy: "Tôi có cần đến phòng cấp cứu không? Có bệnh viện nói tiếng Anh không?", use: "Đau nặng, sốt cao, chấn thương do tai nạn thì gọi 119; triệu chứng nhẹ bắt đầu từ phòng khám.", caution: "Nên mang hộ chiếu, thẻ người nước ngoài, thông tin bảo hiểm và phương thức thanh toán." },
+    { title: "06. Nhà thuốc và nhà thuốc đêm", text: "Triệu chứng nhẹ có thể hỏi nhà thuốc; ban đêm kiểm tra nhà thuốc đang mở.", copy: "Tôi cần thuốc cho triệu chứng này. Tôi bị dị ứng với thuốc này.", use: "Dùng cho cảm lạnh, khó tiêu, đau nhẹ và tư vấn thuốc không cần đơn.", caution: "Khó thở, đau ngực hoặc mất ý thức thì gọi 119 trước." },
+    { title: "07. Mất hộ chiếu", text: "Khi mất hộ chiếu, cần báo mất và liên hệ đại sứ quán hoặc lãnh sự quán của bạn.", copy: "Tôi bị mất hộ chiếu. Tôi cần giấy báo mất.", use: "Dùng khi mất hộ chiếu, thẻ cư trú hoặc giấy tờ tùy thân quan trọng.", caution: "Nếu sắp bay, hãy hỏi đại sứ quán ngay về giấy thông hành khẩn cấp." },
+    { title: "08. Mất thẻ hoặc điện thoại", text: "Yêu cầu công ty thẻ và nhà mạng khóa ngay; nếu bị trộm, gọi 112.", copy: "Tôi bị mất thẻ và điện thoại. Tôi muốn khóa chúng.", use: "Dùng khi mất thẻ, điện thoại, ví hoặc nghi bị trộm.", caution: "Kiểm tra cả app ngân hàng, thanh toán di động và cấp lại SIM để giảm thiệt hại." },
+    { title: "09. Tìm đồ thất lạc", text: "Nếu mất đồ trên tàu điện, taxi hoặc xe buýt, thời gian và tuyến đường rất quan trọng.", copy: "Tôi làm mất món đồ này. Thời gian và địa điểm ở đây.", use: "Dùng khi để quên đồ trên phương tiện công cộng, taxi, nhà hàng hoặc nơi ở.", caution: "Hóa đơn taxi, lịch sử thanh toán thẻ, giờ đi và ảnh giúp tìm lại dễ hơn." },
+    { title: "10. Đại sứ quán hoặc lãnh sự", text: "Liên hệ đại sứ quán về hộ chiếu, bị giữ, tai nạn lớn hoặc liên lạc gia đình.", copy: "Tôi cần liên hệ đại sứ quán của nước tôi. Bạn có thể giúp không?", use: "Dùng khi cần giấy tờ du lịch khẩn cấp, vấn đề pháp lý, tai nạn lớn hoặc liên hệ gia đình.", caution: "Đại sứ quán thường không trả viện phí, tiền phạt hoặc chi phí hợp đồng cá nhân thay bạn." }
+  ],
+  es: [
+    { title: "01. 112 Policía", text: "Llama al 112 por crimen, agresión, acoso, accidente de tráfico o ayuda policial urgente.", phone: "112", copy: "Soy extranjero. Necesito ayuda de la policía. Mi ubicación está aquí.", use: "Úsalo para amenazas, delitos, accidentes, robos o cuando necesitas policía en el lugar.", caution: "Para consultas no urgentes, prueba primero 1330, 1345 o 120." },
+    { title: "02. 119 Ambulancia e incendio", text: "Llama al 119 por emergencia médica, incendio, rescate o lesión grave.", phone: "119", copy: "Necesito una ambulancia. El paciente está enfermo. Mi ubicación está aquí.", use: "Úsalo por desmayo, dolor fuerte, lesión por accidente, incendio o rescate.", caution: "Si no sabes qué hospital usar, explica primero los síntomas y tu ubicación." },
+    { title: "03. 1330 Ayuda turística", text: "Usa 1330 para ayuda de viaje, interpretación, direcciones y quejas turísticas.", phone: "1330", link: "https://english.visitkorea.or.kr/svc/contents/contentsView.do?vcontsId=140632", copy: "Necesito ayuda de interpretación. No hablo bien coreano.", use: "Útil para interpretación, direcciones, información turística y quejas durante el viaje.", caution: "Para peligro de vida o crimen, llama primero a 112 o 119." },
+    { title: "04. 1345 Inmigración", text: "Llama al 1345 por visa, periodo de estancia, registro extranjero y cambio de dirección.", phone: "1345", link: "https://www.immigration.go.kr/immigration_eng/1862/subview.do", copy: "Necesito ayuda con visa y estatus de estancia.", use: "Úsalo para registro extranjero, extensión, cambio de dirección y trámites migratorios.", caution: "Si hay fecha límite, revisa también reservas de HiKorea y avisos oficiales." },
+    { title: "05. Hospital y urgencias", text: "En emergencia llama al 119; para síntomas comunes, revisa una clínica cercana.", phone: "119", copy: "¿Necesito ir a urgencias? ¿Hay hospital que hable inglés?", use: "Dolor fuerte, fiebre alta o lesión por accidente: llama al 119; síntomas leves: clínica.", caution: "Lleva pasaporte, tarjeta extranjera, seguro y medio de pago si es posible." },
+    { title: "06. Farmacia y farmacia nocturna", text: "Para síntomas leves pregunta en farmacia; de noche, confirma cuál está abierta.", copy: "Necesito medicina para estos síntomas. Soy alérgico a esta medicina.", use: "Úsalo para resfriado, indigestión, dolor leve y consulta sin receta.", caution: "Dificultad para respirar, dolor en pecho o pérdida de conciencia: llama al 119 primero." },
+    { title: "07. Pasaporte perdido", text: "Si pierdes el pasaporte, haz reporte y contacta tu embajada o consulado.", copy: "Perdí mi pasaporte. Necesito un reporte de pérdida.", use: "Úsalo cuando pierdes pasaporte, tarjeta de residencia o identificación importante.", caution: "Si tienes vuelo pronto, pregunta de inmediato por pasaporte de emergencia." },
+    { title: "08. Tarjeta o teléfono perdido", text: "Pide bloqueo inmediato a la tarjeta y operadora; si fue robo, llama al 112.", copy: "Perdí mi tarjeta y teléfono. Quiero bloquearlos.", use: "Úsalo cuando pierdes tarjeta, teléfono o cartera, o sospechas robo.", caution: "Revisa apps bancarias, pagos móviles y reemisión de SIM para reducir daños." },
+    { title: "09. Objetos perdidos", text: "Si perdiste algo en metro, taxi o bus, importan hora y ruta.", copy: "Perdí este objeto. La hora y el lugar están aquí.", use: "Úsalo si dejaste algo en transporte público, taxi, restaurante u hotel.", caution: "Recibo de taxi, pago con tarjeta, hora del viaje y fotos ayudan a recuperarlo." },
+    { title: "10. Embajada o consulado", text: "Contacta tu embajada por pasaporte, detención, accidente grave o contacto familiar.", copy: "Necesito contactar a mi embajada. ¿Puede ayudarme?", use: "Úsalo para documentos de viaje urgentes, problemas legales, accidentes grandes o familia.", caution: "La embajada normalmente no paga hospital, multas ni contratos privados por ti." }
+  ]
+};
+
+function buildWiiInfoSafetySection(lang) {
+  const labels = WIIINFO_SAFETY_LABELS[lang] || WIIINFO_SAFETY_LABELS.en;
+  const items = WIIINFO_SAFETY_ITEMS[lang] || WIIINFO_SAFETY_ITEMS.en;
+  return {
+    id: "safety",
+    icon: "🚨",
+    tab: labels.tab,
+    title: labels.title,
+    summary: labels.summary,
+    cards: items.map((item) => ({
+      title: item.title,
+      text: item.text,
+      detail: {
+        images: WIIINFO_VISUAL_SETS[WIIINFO_SECTION_IMAGE_ROTATION.safety[items.indexOf(item)]] || WIIINFO_VISUAL_SETS.civic,
+        lead: item.text,
+        actions: [
+          item.phone ? { type: "tel", label: `${labels.call} ${item.phone}`, value: item.phone } : null,
+          item.copy ? { type: "copy", label: labels.copy, value: item.copy } : null,
+          item.link ? { type: "link", label: labels.official, href: item.link } : null
+        ].filter(Boolean),
+        sections: [
+          { title: labels.when, items: [item.use, item.text] },
+          { title: labels.say, items: [item.copy] },
+          { title: labels.caution, items: [item.caution] }
+        ]
+      }
+    }))
+  };
+}
+
+["ko", "en", "ja", "th", "zh", "vi", "es"].forEach((lang) => {
+  const sections = window.WIIINFO_INFO_SECTIONS[lang];
+  if (sections && !sections.some((section) => section.id === "safety")) {
+    sections.splice(1, 0, buildWiiInfoSafetySection(lang));
+  }
+});
 
 const WIIINFO_TRAVEL_DETAILS_KO = {
   "01. 경복궁·북촌": {
@@ -969,12 +1125,14 @@ function enrichWiiInfoDetails(sections, lang) {
   if (lang !== "ko") labels.addresses = WIIINFO_ADDRESS_ROMAN;
   const fallbackImages = {
     life: WIIINFO_VISUAL_SETS.civic,
+    safety: WIIINFO_VISUAL_SETS.civic,
     housing: WIIINFO_VISUAL_SETS.housing,
     realty: WIIINFO_VISUAL_SETS.realty
   };
   sections.forEach((section) => {
     section.cards.forEach((card, index) => {
       card.index = index;
+      if (card.detail) return;
       if (section.id === "travel") {
         const koBase = WIIINFO_TRAVEL_DETAILS_KO[WIIINFO_KOREA_INFO_KO[1].cards[index]?.title];
         if (isKo) {

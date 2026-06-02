@@ -1,5 +1,5 @@
 (async function () {
-  const ASSET_VERSION = "20260602-08";
+  const ASSET_VERSION = "20260602-09";
   const LANGUAGES = window.WIITHAI_LANGUAGES || {};
   const LANGUAGE_NAMES = window.WIIINFO_LANGUAGE_NAMES || {};
   const PROFILES = window.WIITHAI_LEARNER_PROFILES || [];
@@ -450,6 +450,7 @@
           <h2 id="infoDetailTitle"></h2>
           <p class="infoDetailLead"></p>
           <div class="infoDetailMeta"></div>
+          <div class="infoDetailActions"></div>
           <div class="infoDetailSections"></div>
         </div>
       </section>
@@ -467,16 +468,26 @@
 
   function detailLabel(key) {
     const labels = {
-      ko: { address: "주소", directions: "가는 방법", hours: "운영/시간", map: "지도 보기", source: "자료 기준" },
-      en: { address: "Address", directions: "How to get there", hours: "Hours", map: "Open map", source: "Reference" },
-      ja: { address: "住所", directions: "行き方", hours: "時間", map: "地図を見る", source: "参考" },
-      th: { address: "ที่อยู่", directions: "วิธีเดินทาง", hours: "เวลา", map: "เปิดแผนที่", source: "แหล่งข้อมูล" },
-      zh: { address: "地址", directions: "交通方式", hours: "时间", map: "查看地图", source: "参考" },
-      vi: { address: "Địa chỉ", directions: "Cách đi", hours: "Thời gian", map: "Mở bản đồ", source: "Nguồn tham khảo" },
-      es: { address: "Dirección", directions: "Cómo llegar", hours: "Horario", map: "Abrir mapa", source: "Referencia" }
+      ko: { address: "주소", directions: "가는 방법", hours: "운영/시간", map: "지도 보기", source: "자료 기준", copied: "복사됨" },
+      en: { address: "Address", directions: "How to get there", hours: "Hours", map: "Open map", source: "Reference", copied: "Copied" },
+      ja: { address: "住所", directions: "行き方", hours: "時間", map: "地図を見る", source: "参考", copied: "コピー済み" },
+      th: { address: "ที่อยู่", directions: "วิธีเดินทาง", hours: "เวลา", map: "เปิดแผนที่", source: "แหล่งข้อมูล", copied: "คัดลอกแล้ว" },
+      zh: { address: "地址", directions: "交通方式", hours: "时间", map: "查看地图", source: "参考", copied: "已复制" },
+      vi: { address: "Địa chỉ", directions: "Cách đi", hours: "Thời gian", map: "Mở bản đồ", source: "Nguồn tham khảo", copied: "Đã sao chép" },
+      es: { address: "Dirección", directions: "Cómo llegar", hours: "Horario", map: "Abrir mapa", source: "Referencia", copied: "Copiado" }
     };
     const lang = labels[sourceLang] ? sourceLang : "en";
     return labels[lang][key] || key;
+  }
+
+  function escapeHtml(value) {
+    return String(value || "").replace(/[&<>"']/g, (char) => ({
+      "&": "&amp;",
+      "<": "&lt;",
+      ">": "&gt;",
+      "\"": "&quot;",
+      "'": "&#39;"
+    }[char]));
   }
 
   function fallbackDetail(card, section) {
@@ -502,6 +513,7 @@
     const title = detailModal.querySelector("#infoDetailTitle");
     const lead = detailModal.querySelector(".infoDetailLead");
     const meta = detailModal.querySelector(".infoDetailMeta");
+    const actions = detailModal.querySelector(".infoDetailActions");
     const sections = detailModal.querySelector(".infoDetailSections");
     const images = detail.images && detail.images.length ? detail.images : [{ src: "", alt: card.title }];
 
@@ -530,6 +542,28 @@
     if (detail.mapUrl) {
       meta.innerHTML += `<a class="mapLink" href="${detail.mapUrl}" target="_blank" rel="noopener">${detailLabel("map")}</a>`;
     }
+
+    actions.innerHTML = (detail.actions || []).map((action, index) => {
+      const label = escapeHtml(action.label);
+      if (action.type === "copy") {
+        return `<button type="button" class="detailAction copyAction" data-action-index="${index}">${label}</button>`;
+      }
+      const href = action.type === "tel" ? `tel:${action.value}` : action.href;
+      return `<a class="detailAction ${action.type === "tel" ? "callAction" : ""}" href="${escapeHtml(href)}" ${action.type === "link" ? "target=\"_blank\" rel=\"noopener\"" : ""}>${label}</a>`;
+    }).join("");
+    actions.hidden = !(detail.actions || []).length;
+    actions.querySelectorAll(".copyAction").forEach((button) => {
+      button.addEventListener("click", async () => {
+        const action = detail.actions[Number(button.dataset.actionIndex)];
+        if (!action?.value) return;
+        try {
+          await navigator.clipboard.writeText(action.value);
+          button.textContent = detailLabel("copied");
+        } catch (error) {
+          button.textContent = action.value;
+        }
+      });
+    });
 
     sections.innerHTML = (detail.sections || []).map((group) => `
       <section>
