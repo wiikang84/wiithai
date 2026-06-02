@@ -823,6 +823,89 @@ function buildWiiInfoSafetySection(lang) {
   }
 });
 
+const WIIINFO_FIRST_DAYS_LABELS = {
+  ko: {
+    tab: "첫 7일 TOP10", title: "한국 도착 첫 7일 TOP10", summary: "한국에 도착한 뒤 먼저 처리하면 생활이 막히지 않는 순서형 체크리스트입니다.",
+    when: "언제 처리하나", prepare: "준비할 것", avoid: "실수 방지", phrase: "바로 말할 문장", copy: "문장 복사", official: "공식 안내", call: "상담 전화",
+    step: "도착 후 우선순위", prepareItems: ["여권, 외국인등록증 또는 신청 예정 서류", "한국 전화번호, 거주지 주소, 계약서나 안내문 사진", "예약이 필요한 업무는 방문 전 온라인 예약 확인"],
+    avoidItems: ["이름, 생년월일, 주소 표기가 서류마다 다르면 절차가 지연될 수 있습니다.", "기한이 있는 신고는 전화 상담만 믿지 말고 공식 사이트와 방문 예약을 함께 확인합니다."],
+    phrases: ["외국인등록을 하려면 무엇을 준비해야 하나요?", "선불 유심이나 휴대폰 개통을 하고 싶습니다.", "외국인이 계좌를 만들려면 어떤 서류가 필요합니까?", "교통카드를 어디에서 살 수 있나요?", "이 주소까지 가는 길을 알려주세요.", "이 지역의 쓰레기 배출 요일은 언제인가요?", "근처 병원이나 약국을 찾고 있습니다.", "휴대폰 본인인증이 되지 않습니다.", "방문 예약이 필요한가요?", "긴급 상황이면 어디로 전화해야 하나요?"]
+  },
+  en: {
+    tab: "First 7 Days", title: "First 7 Days in Korea TOP10", summary: "A step-by-step checklist to avoid getting stuck during your first week in Korea.",
+    when: "When to handle it", prepare: "Prepare", avoid: "Avoid mistakes", phrase: "Phrase to say", copy: "Copy phrase", official: "Official guide", call: "Call help",
+    step: "Arrival priority", prepareItems: ["Passport, alien registration card, or documents you will use to apply", "Korean phone number, address, and photos of contracts or notices", "For office visits, check whether online reservation is required"],
+    avoidItems: ["Different name, birth date, or address formats across documents can delay the process.", "For deadline-based duties, check official websites and reservations, not only phone advice."],
+    phrases: ["What do I need to prepare for alien registration?", "I want to open a prepaid SIM or mobile phone plan.", "What documents does a foreigner need to open a bank account?", "Where can I buy a transport card?", "Please tell me how to get to this address.", "What day should I take out trash in this area?", "I am looking for a nearby clinic or pharmacy.", "Mobile identity verification is not working.", "Do I need to make a reservation before visiting?", "Where should I call in an emergency?"]
+  },
+  ja: {
+    tab: "最初の7日 TOP10", title: "韓国到着後 最初の7日TOP10", summary: "韓国到着後に先に処理すると生活が詰まりにくい順序型チェックリストです。",
+    when: "いつ処理するか", prepare: "準備するもの", avoid: "ミス防止", phrase: "すぐ伝える文", copy: "文をコピー", official: "公式案内", call: "相談電話",
+    step: "到着後の優先順位", prepareItems: ["パスポート、外国人登録証または申請予定書類", "韓国の電話番号、住所、契約書や案内文の写真", "訪問業務はオンライン予約が必要か事前確認"],
+    avoidItems: ["書類ごとに名前、生年月日、住所の表記が違うと手続きが遅れることがあります。", "期限がある手続きは電話相談だけでなく公式サイトと予約も確認します。"],
+    phrases: ["外国人登録には何を準備すればいいですか。", "プリペイドSIMまたは携帯電話を開通したいです。", "外国人が口座を作るにはどんな書類が必要ですか。", "交通カードはどこで買えますか。", "この住所までの行き方を教えてください。", "この地域のごみ出し日はいつですか。", "近くの病院か薬局を探しています。", "携帯電話の本人認証ができません。", "訪問予約が必要ですか。", "緊急時はどこに電話すればいいですか。"]
+  },
+  th: {
+    tab: "7 วันแรก TOP10", title: "7 วันแรกหลังมาถึงเกาหลี TOP10", summary: "เช็กลิสต์ตามลำดับเพื่อไม่ให้ติดขัดในสัปดาห์แรกที่เกาหลี",
+    when: "ควรทำเมื่อไร", prepare: "สิ่งที่ต้องเตรียม", avoid: "กันความผิดพลาด", phrase: "ประโยคที่พูดได้ทันที", copy: "คัดลอกประโยค", official: "ข้อมูลทางการ", call: "โทรปรึกษา",
+    step: "ลำดับความสำคัญหลังมาถึง", prepareItems: ["พาสปอร์ต บัตรต่างชาติ หรือเอกสารที่จะใช้สมัคร", "เบอร์เกาหลี ที่อยู่ และรูปสัญญาหรือเอกสารแจ้ง", "งานที่ต้องไปสำนักงานให้เช็กการจองออนไลน์ก่อน"],
+    avoidItems: ["ถ้าชื่อ วันเกิด หรือที่อยู่ในเอกสารไม่ตรงกัน ขั้นตอนอาจล่าช้า", "งานที่มีวันครบกำหนดควรเช็กเว็บไซต์ทางการและการจอง ไม่ใช่แค่โทรถาม"],
+    phrases: ["ต้องเตรียมอะไรบ้างสำหรับการลงทะเบียนคนต่างชาติ", "ต้องการเปิดซิมเติมเงินหรือเบอร์มือถือ", "ชาวต่างชาติต้องใช้เอกสารอะไรในการเปิดบัญชี", "ซื้อบัตรโดยสารได้ที่ไหน", "ช่วยบอกทางไปที่อยู่นี้ได้ไหม", "พื้นที่นี้ทิ้งขยะวันไหน", "กำลังหาร้านยาหรือคลินิกใกล้ ๆ", "ยืนยันตัวตนด้วยมือถือไม่ได้", "ต้องจองก่อนเข้าไปไหม", "ถ้าฉุกเฉินต้องโทรเบอร์ไหน"]
+  },
+  zh: {
+    tab: "最初7天 TOP10", title: "到韩国最初7天 TOP10", summary: "到韩国后先处理这些事项，生活流程会更顺畅。",
+    when: "什么时候处理", prepare: "需要准备", avoid: "避免失误", phrase: "可直接说的话", copy: "复制句子", official: "官方指南", call: "咨询电话",
+    step: "到达后优先顺序", prepareItems: ["护照、外国人登录证或申请所需文件", "韩国电话号码、住址、合同或通知照片", "访问机关前确认是否需要线上预约"],
+    avoidItems: ["文件上的姓名、出生日期、地址格式不同，手续可能会延迟。", "有期限的事项不要只听电话咨询，也要确认官网和预约。"],
+    phrases: ["办理外国人登录需要准备什么？", "我想办理预付SIM卡或手机号码。", "外国人开银行账户需要哪些文件？", "在哪里可以买交通卡？", "请告诉我去这个地址的方法。", "这个地区哪天倒垃圾？", "我在找附近的医院或药店。", "手机本人认证无法通过。", "访问前需要预约吗？", "紧急情况应该打哪个电话？"]
+  },
+  vi: {
+    tab: "7 ngày đầu TOP10", title: "7 ngày đầu ở Hàn Quốc TOP10", summary: "Checklist theo thứ tự để tuần đầu ở Hàn không bị vướng thủ tục.",
+    when: "Khi nào xử lý", prepare: "Cần chuẩn bị", avoid: "Tránh sai sót", phrase: "Câu có thể nói ngay", copy: "Sao chép câu", official: "Hướng dẫn chính thức", call: "Gọi tư vấn",
+    step: "Ưu tiên sau khi đến", prepareItems: ["Hộ chiếu, thẻ người nước ngoài hoặc giấy tờ để đăng ký", "Số điện thoại Hàn, địa chỉ, ảnh hợp đồng hoặc thông báo", "Nếu cần đến văn phòng, kiểm tra đặt lịch online trước"],
+    avoidItems: ["Tên, ngày sinh hoặc địa chỉ không thống nhất giữa giấy tờ có thể làm chậm thủ tục.", "Việc có hạn chót cần kiểm tra website chính thức và đặt lịch, không chỉ nghe tư vấn qua điện thoại."],
+    phrases: ["Tôi cần chuẩn bị gì để đăng ký người nước ngoài?", "Tôi muốn mở SIM trả trước hoặc số điện thoại.", "Người nước ngoài cần giấy tờ gì để mở tài khoản?", "Tôi có thể mua thẻ giao thông ở đâu?", "Xin chỉ đường đến địa chỉ này.", "Khu vực này đổ rác vào ngày nào?", "Tôi đang tìm phòng khám hoặc nhà thuốc gần đây.", "Xác minh danh tính bằng điện thoại không hoạt động.", "Tôi có cần đặt lịch trước khi đến không?", "Khi khẩn cấp tôi nên gọi số nào?"]
+  },
+  es: {
+    tab: "Primeros 7 días", title: "Primeros 7 días en Corea TOP10", summary: "Checklist en orden para no quedarte bloqueado durante tu primera semana en Corea.",
+    when: "Cuándo hacerlo", prepare: "Preparar", avoid: "Evitar errores", phrase: "Frase para decir", copy: "Copiar frase", official: "Guía oficial", call: "Llamar ayuda",
+    step: "Prioridad al llegar", prepareItems: ["Pasaporte, tarjeta extranjera o documentos para solicitarla", "Número coreano, dirección y fotos de contratos o avisos", "Antes de visitar una oficina, revisa si necesitas reserva online"],
+    avoidItems: ["Si nombre, fecha de nacimiento o dirección no coinciden entre documentos, el trámite puede retrasarse.", "Para trámites con fecha límite, revisa web oficial y reserva, no solo una llamada."],
+    phrases: ["¿Qué necesito preparar para el registro extranjero?", "Quiero abrir una SIM prepago o plan móvil.", "¿Qué documentos necesita un extranjero para abrir cuenta bancaria?", "¿Dónde puedo comprar una tarjeta de transporte?", "Por favor dime cómo llegar a esta dirección.", "¿Qué día se saca la basura en esta zona?", "Busco una clínica o farmacia cercana.", "La verificación móvil no funciona.", "¿Necesito reservar antes de visitar?", "¿A qué número debo llamar en una emergencia?"]
+  }
+};
+
+function applyFirstDaysSection(lang) {
+  const sections = window.WIIINFO_INFO_SECTIONS[lang];
+  const section = sections?.find((item) => item.id === "life");
+  if (!section) return;
+  const labels = WIIINFO_FIRST_DAYS_LABELS[lang] || WIIINFO_FIRST_DAYS_LABELS.en;
+  section.icon = "✅";
+  section.tab = labels.tab;
+  section.title = labels.title;
+  section.summary = labels.summary;
+  section.cards.forEach((card, index) => {
+    const actions = [
+      { type: "copy", label: labels.copy, value: labels.phrases[index] || labels.phrases[0] },
+      index === 0 || index === 8 ? { type: "tel", label: `${labels.call} 1345`, value: "1345" } : null,
+      index === 0 || index === 8 ? { type: "link", label: labels.official, href: "https://www.hikorea.go.kr" } : null
+    ].filter(Boolean);
+    card.detail = {
+      images: WIIINFO_VISUAL_SETS[WIIINFO_SECTION_IMAGE_ROTATION.life[index]] || WIIINFO_VISUAL_SETS.civic,
+      lead: card.text,
+      actions,
+      sections: [
+        { title: labels.when, items: [`${labels.step} ${String(index + 1).padStart(2, "0")}`, card.text] },
+        { title: labels.prepare, items: labels.prepareItems },
+        { title: labels.phrase, items: [labels.phrases[index] || labels.phrases[0]] },
+        { title: labels.avoid, items: labels.avoidItems }
+      ]
+    };
+  });
+}
+
+["ko", "en", "ja", "th", "zh", "vi", "es"].forEach(applyFirstDaysSection);
+
 const WIIINFO_TRAVEL_DETAILS_KO = {
   "01. 경복궁·북촌": {
     images: WIIINFO_VISUAL_SETS.palace,
