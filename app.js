@@ -1,5 +1,5 @@
 (async function () {
-  const ASSET_VERSION = "20260602-20";
+  const ASSET_VERSION = "20260602-21";
   const LANGUAGES = window.WIITHAI_LANGUAGES || {};
   const LANGUAGE_NAMES = window.WIIINFO_LANGUAGE_NAMES || {};
   const PROFILES = window.WIITHAI_LEARNER_PROFILES || [];
@@ -494,18 +494,49 @@
     return Object.entries(replacements).reduce((text, [name, value]) => text.replace(`{${name}}`, value), detailLabel(key));
   }
 
+  function fallbackChecklist() {
+    const labels = {
+      ko: {
+        title: "체크 포인트",
+        items: ["계약·방문·신청 전에 필요한 서류와 비용을 먼저 확인합니다.", "이해가 안 되는 문장은 사진으로 저장하고 한국어 가능한 사람에게 확인받습니다.", "금액을 송금하거나 서명하기 전에는 이름, 주소, 날짜를 다시 확인합니다."]
+      },
+      en: {
+        title: "Checklist",
+        items: ["Check required documents and costs before visiting, applying, or signing.", "Save unclear Korean text and ask someone who can read Korean to review it.", "Before sending money or signing, check names, addresses, and dates again."]
+      },
+      ja: {
+        title: "チェックポイント",
+        items: ["訪問・申請・契約の前に必要書類と費用を確認します。", "分からない韓国語は写真で保存し、韓国語が分かる人に確認してもらいます。", "送金や署名前に名前、住所、日付をもう一度確認します。"]
+      },
+      th: {
+        title: "จุดที่ต้องเช็ก",
+        items: ["ก่อนเยี่ยมชม สมัคร หรือเซ็นสัญญา ให้เช็กเอกสารและค่าใช้จ่ายที่จำเป็น", "ถ้าข้อความเกาหลีไม่เข้าใจ ให้ถ่ายรูปไว้และให้คนที่อ่านเกาหลีได้ช่วยตรวจ", "ก่อนโอนเงินหรือเซ็นชื่อ ให้ตรวจชื่อ ที่อยู่ และวันที่อีกครั้ง"]
+      },
+      zh: {
+        title: "检查事项",
+        items: ["访问、申请或签约前，先确认所需文件和费用。", "看不懂的韩语请拍照保存，并请懂韩语的人确认。", "汇款或签名前，再次确认姓名、地址和日期。"]
+      },
+      vi: {
+        title: "Điểm cần kiểm tra",
+        items: ["Trước khi đến, đăng ký hoặc ký hợp đồng, hãy kiểm tra giấy tờ và chi phí cần thiết.", "Lưu lại câu tiếng Hàn chưa hiểu bằng ảnh và nhờ người đọc được tiếng Hàn kiểm tra.", "Trước khi chuyển tiền hoặc ký, hãy kiểm tra lại tên, địa chỉ và ngày tháng."]
+      },
+      es: {
+        title: "Lista de verificación",
+        items: ["Antes de visitar, solicitar o firmar, revisa documentos y costos necesarios.", "Guarda en foto el texto coreano que no entiendas y pide revisión a alguien que lea coreano.", "Antes de enviar dinero o firmar, revisa nombres, dirección y fechas otra vez."]
+      }
+    };
+    return labels[sourceLang] || labels.en;
+  }
+
   function fallbackDetail(card, section) {
+    const checklist = fallbackChecklist();
     return {
       lead: card.text,
       images: [],
       meta: [],
       sections: [
         { title: section.title, items: [card.text] },
-        { title: sourceLang === "ko" ? "체크 포인트" : "Checklist", items: [
-          sourceLang === "ko" ? "계약·방문·신청 전에 필요한 서류와 비용을 먼저 확인합니다." : "Check required documents and costs before visiting, applying, or signing.",
-          sourceLang === "ko" ? "이해가 안 되는 문장은 사진으로 저장하고 한국어 가능한 사람에게 확인받습니다." : "Save unclear Korean text and ask someone who can read Korean to review it.",
-          sourceLang === "ko" ? "금액을 송금하거나 서명하기 전에는 이름, 주소, 날짜를 다시 확인합니다." : "Before sending money or signing, check names, addresses, and dates again."
-        ] }
+        { title: checklist.title, items: checklist.items }
       ]
     };
   }
