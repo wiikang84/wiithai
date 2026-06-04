@@ -1,0 +1,201 @@
+﻿번호,카테고리,한국어,영어,베트남어,로마자,수정 제안,비고
+1,인사,안녕하세요.,Hello.,Xin chào.,sin chao,,기존
+2,인사,안녕하세요. 만나서 반갑습니다.,Hello. Nice to meet you.,Xin chào. Rất vui được gặp bạn.,"sin chao, rat vui duoc gap ban",,기존
+3,인사,감사합니다.,Thank you.,Cảm ơn.,kam un,,기존
+4,인사,정말 감사합니다.,Thank you very much.,Cảm ơn rất nhiều.,kam un rat nhieu,,기존
+5,인사,죄송합니다.,I'm sorry.,Xin lỗi.,sin loi,,기존
+6,인사,괜찮습니다.,It's okay.,Không sao.,khong sao,,기존
+7,인사,잘 지내세요?,How are you?,Bạn khỏe không?,ban khoe khong,,기존
+8,인사,잘 지냅니다.,I'm doing well.,Tôi khỏe.,toi khoe,,기존
+9,인사,또 만나요.,See you again.,Hẹn gặp lại.,hen gap lai,,기존
+10,인사,안녕히 가세요.,Goodbye.,Tạm biệt.,tam biet,,기존
+11,자기소개,저는 한국 사람입니다.,I am Korean.,Tôi là người Hàn Quốc.,toi la nguoi han quoc,,기존
+12,자기소개,저는 한국에서 왔습니다.,I am from Korea.,Tôi đến từ Hàn Quốc.,toi den tu han quoc,,기존
+13,자기소개,제 이름은 ___입니다.,My name is ___.,Tên tôi là ___.,ten toi la ___,,기존
+14,자기소개,당신의 이름은 무엇입니까?,What is your name?,Bạn tên là gì?,ban ten la gi,,기존
+15,자기소개,저는 태국어를 배우고 있습니다.,I am learning Thai.,Tôi đang học tiếng Thái.,toi dang hoc tieng thai,,기존
+16,자기소개,태국어를 조금 할 수 있습니다.,I can speak a little Thai.,Tôi nói được một chút tiếng Thái.,toi noi duoc mot chut tieng thai,,기존
+17,자기소개,저는 영어를 조금 할 수 있습니다.,I can speak a little English.,Tôi nói được một chút tiếng Anh.,toi noi duoc mot chut tieng anh,,기존
+18,자기소개,저는 이해했습니다.,I understand.,Tôi hiểu rồi.,toi hieu roi,,기존
+19,자기소개,저는 이해하지 못했습니다.,I don't understand.,Tôi không hiểu.,toi khong hieu,,기존
+20,자기소개,천천히 말씀해 주세요.,Please speak slowly.,Vui lòng nói chậm thôi.,vui long noi cham thoi,,기존
+21,기초응답,네.,Yes.,Vâng.,vang,,기존
+22,기초응답,아니요.,No.,Không.,khong,,기존
+23,기초응답,맞습니다.,That's right.,Đúng rồi.,dung roi,,기존
+24,기초응답,아닙니다.,That's not right.,Không đúng.,khong dung,,기존
+25,기초응답,좋습니다.,Good.,Tốt.,tot,,기존
+26,기초응답,좋지 않습니다.,Not good.,Không tốt.,khong tot,,기존
+27,기초응답,괜찮아요?,Are you okay?,Bạn ổn không?,ban on khong,,기존
+28,기초응답,괜찮아요.,I'm okay.,Tôi ổn.,toi on,,기존
+29,기초응답,문제 없습니다.,No problem.,Không có vấn đề gì.,khong co van de gi,,기존
+30,기초응답,다시 말해 주세요.,Please say it again.,Vui lòng nói lại.,vui long noi lai,,기존
+31,숫자/시간,이것은 얼마입니까?,How much is this?,Cái này bao nhiêu tiền?,cai nay bao nhieu tien,,기존
+32,숫자/시간,너무 비쌉니다.,It's too expensive.,Đắt quá.,dat qua,,기존
+33,숫자/시간,조금 깎아 주세요.,Please give me a discount.,Vui lòng giảm giá một chút.,vui long giam gia mot chut,,기존
+34,숫자/시간,몇 시입니까?,What time is it?,Mấy giờ rồi?,may gio roi,,기존
+35,숫자/시간,오늘입니다.,It's today.,Là hôm nay.,la hom nay,,기존
+36,숫자/시간,내일입니다.,It's tomorrow.,Là ngày mai.,la ngay mai,,기존
+37,숫자/시간,어제입니다.,It was yesterday.,Là hôm qua.,la hom qua,,기존
+38,숫자/시간,지금 가겠습니다.,I'll go now.,Tôi sẽ đi ngay bây giờ.,toi se di ngay bay gio,,기존
+39,숫자/시간,잠시만 기다려 주세요.,Please wait a moment.,Vui lòng đợi một chút.,vui long doi mot chut,,기존
+40,숫자/시간,10분 정도 걸립니다.,It takes about ten minutes.,Mất khoảng mười phút.,mat khoang muoi phut,,기존
+41,이동,여기는 어디입니까?,Where is this place?,Đây là đâu?,day la dau,,기존
+42,이동,화장실은 어디입니까?,Where is the restroom?,Nhà vệ sinh ở đâu?,nha ve sinh o dau,,기존
+43,이동,지하철역은 어디입니까?,Where is the subway station?,Ga tàu điện ngầm ở đâu?,ga tau dien ngam o dau,,기존
+44,이동,이쪽으로 오세요.,Please come this way.,Vui lòng đi lối này.,vui long di loi nay,,기존
+45,이동,저쪽으로 가세요.,Please go that way.,Vui lòng đi lối kia.,vui long di loi kia,,기존
+46,이동,오른쪽으로 가세요.,Please go to the right.,Vui lòng rẽ phải.,vui long re phai,,기존
+47,이동,왼쪽으로 가세요.,Please go to the left.,Vui lòng rẽ trái.,vui long re trai,,기존
+48,이동,곧장 가세요.,Please go straight.,Vui lòng đi thẳng.,vui long di thang,,기존
+49,이동,택시를 타고 싶습니다.,I want to take a taxi.,Tôi muốn đi taxi.,toi muon di taxi,,기존
+50,이동,여기서 내려 주세요.,Please let me off here.,Vui lòng cho tôi xuống ở đây.,vui long cho toi xuong o day,,기존
+51,식당,메뉴 주세요.,Please give me the menu.,Cho tôi xem thực đơn.,cho toi xem thuc don,,기존
+52,식당,이것을 주세요.,Please give me this.,Cho tôi cái này.,cho toi cai nay,,기존
+53,식당,물을 주세요.,Please give me water.,Cho tôi nước.,cho toi nuoc,,기존
+54,식당,맵지 않게 해 주세요.,Please make it not spicy.,Vui lòng đừng làm cay.,vui long dung lam cay,,기존
+55,식당,조금 맵게 해 주세요.,Please make it a little spicy.,Vui lòng làm hơi cay.,vui long lam hoi cay,,기존
+56,식당,맛있습니다.,It's delicious.,Ngon lắm.,ngon lam,,기존
+57,식당,계산해 주세요.,Please bring the bill.,Tính tiền giúp tôi.,tinh tien giup toi,,기존
+58,식당,포장해 주세요.,Please pack it to go.,Vui lòng gói mang về.,vui long goi mang ve,,기존
+59,식당,알레르기가 있습니다.,I have a food allergy.,Tôi bị dị ứng thức ăn.,toi bi di ung thuc an,,기존
+60,식당,고기를 먹지 않습니다.,I don't eat meat.,Tôi không ăn thịt.,toi khong an thit,,기존
+61,쇼핑,이것을 사고 싶습니다.,I want to buy this.,Tôi muốn mua cái này.,toi muon mua cai nay,,기존
+62,쇼핑,다른 색이 있습니까?,Do you have another color?,Có màu khác không?,co mau khac khong,,기존
+63,쇼핑,다른 사이즈가 있습니까?,Do you have another size?,Có size khác không?,co size khac khong,,기존
+64,쇼핑,입어봐도 됩니까?,Can I try it on?,Tôi thử được không?,toi thu duoc khong,,기존
+65,쇼핑,카드로 결제할 수 있습니까?,Can I pay by card?,Tôi thanh toán bằng thẻ được không?,toi thanh toan bang the duoc khong,,기존
+66,쇼핑,현금으로 결제하겠습니다.,I'll pay in cash.,Tôi sẽ trả bằng tiền mặt.,toi se tra bang tien mat,,기존
+67,쇼핑,영수증 주세요.,Please give me a receipt.,Cho tôi hóa đơn.,cho toi hoa don,,기존
+68,쇼핑,봉투 주세요.,Please give me a bag.,Cho tôi túi.,cho toi tui,,기존
+69,쇼핑,구경만 하고 있습니다.,I'm just looking.,Tôi chỉ xem thôi.,toi chi xem thoi,,기존
+70,쇼핑,이것은 마음에 듭니다.,I like this.,Tôi thích cái này.,toi thich cai nay,,기존
+71,도움,도와주세요.,Please help me.,Xin hãy giúp tôi.,xin hay giup toi,,기존
+72,도움,길을 잃었습니다.,I'm lost.,Tôi bị lạc đường.,toi bi lac duong,,기존
+73,도움,휴대폰을 잃어버렸습니다.,I lost my phone.,Tôi bị mất điện thoại.,toi bi mat dien thoai,,기존
+74,도움,지갑을 잃어버렸습니다.,I lost my wallet.,Tôi bị mất ví.,toi bi mat vi,,기존
+75,도움,아픕니다.,It hurts.,Tôi bị đau.,toi bi dau,,기존
+76,도움,병원에 가야 합니다.,I need to go to the hospital.,Tôi cần đến bệnh viện.,toi can den benh vien,,기존
+77,도움,경찰을 불러 주세요.,Please call the police.,Vui lòng gọi cảnh sát.,vui long goi canh sat,,기존
+78,도움,한국어를 할 수 있습니까?,Can you speak Korean?,Bạn nói được tiếng Hàn không?,ban noi duoc tieng han khong,,기존
+79,도움,영어를 할 수 있습니까?,Can you speak English?,Bạn nói được tiếng Anh không?,ban noi duoc tieng anh khong,,기존
+80,도움,사진을 찍어 주실 수 있습니까?,Can you take a photo for me?,Bạn chụp ảnh giúp tôi được không?,ban chup anh giup toi duoc khong,,기존
+81,일상,오늘 날씨가 좋습니다.,The weather is nice today.,Hôm nay thời tiết đẹp.,hom nay thoi tiet dep,,기존
+82,일상,오늘 춥습니다.,It's cold today.,Hôm nay lạnh.,hom nay lanh,,기존
+83,일상,오늘 덥습니다.,It's hot today.,Hôm nay nóng.,hom nay nong,,기존
+84,일상,비가 옵니다.,It's raining.,Trời đang mưa.,troi dang mua,,기존
+85,일상,피곤합니다.,I'm tired.,Tôi mệt.,toi met,,기존
+86,일상,배고픕니다.,I'm hungry.,Tôi đói.,toi doi,,기존
+87,일상,목마릅니다.,I'm thirsty.,Tôi khát.,toi khat,,기존
+88,일상,괜찮으세요?,Are you okay?,Bạn ổn chứ?,ban on chu,,기존
+89,일상,좋은 하루 되세요.,Have a good day.,Chúc bạn một ngày tốt lành.,chuc ban mot ngay tot lanh,,기존
+90,일상,다음에 연락하겠습니다.,I'll contact you next time.,Lần sau tôi sẽ liên lạc.,lan sau toi se lien lac,,기존
+91,한국생활,주소를 알려 주세요.,Please tell me the address.,Vui lòng cho tôi biết địa chỉ.,vui long cho toi biet dia chi,,기존
+92,한국생활,전화번호를 알려 주세요.,Please tell me the phone number.,Vui lòng cho tôi biết số điện thoại.,vui long cho toi biet so dien thoai,,기존
+93,한국생활,카카오톡을 사용합니까?,Do you use KakaoTalk?,Bạn có dùng KakaoTalk không?,ban co dung KakaoTalk khong,,기존
+94,한국생활,지도 링크를 보내겠습니다.,I'll send you the map link.,Tôi sẽ gửi link bản đồ.,toi se gui link ban do,,기존
+95,한국생활,외국인등록증이 필요합니다.,An alien registration card is required.,Cần thẻ đăng ký người nước ngoài.,can the dang ky nguoi nuoc ngoai,,기존
+96,한국생활,여권이 필요합니다.,A passport is required.,Cần hộ chiếu.,can ho chieu,,기존
+97,한국생활,예약이 필요합니다.,A reservation is required.,Cần đặt lịch trước.,can dat lich truoc,,기존
+98,한국생활,쓰레기는 정해진 날에 버립니다.,Trash must be thrown away on the designated day.,Rác phải bỏ đúng ngày quy định.,rac phai bo dung ngay quy dinh,,기존
+99,한국생활,인터넷이 필요합니다.,I need internet.,Tôi cần internet.,toi can internet,,기존
+100,한국생활,제가 확인해 보겠습니다.,I'll check it.,Tôi sẽ kiểm tra.,toi se kiem tra,,기존
+101,이동,버스 정류장은 어디입니까?,Where is the bus stop?,Trạm xe buýt ở đâu?,tram xe buyt o dau,,신규(검수 필요)
+102,이동,이 버스는 명동에 갑니까?,Does this bus go to Myeongdong?,Xe buýt này có đi Myeongdong không?,xe buyt nay co di Myeongdong khong,,신규(검수 필요)
+103,이동,표는 어디에서 삽니까?,Where can I buy a ticket?,Mua vé ở đâu?,mua ve o dau,,신규(검수 필요)
+104,이동,얼마나 걸립니까?,How long does it take?,Mất bao lâu?,mat bao lau,,신규(검수 필요)
+105,이동,여기서 내릴게요.,I'll get off here.,Tôi xuống ở đây.,toi xuong o day,,신규(검수 필요)
+106,이동,다음 역은 어디입니까?,What is the next station?,Ga tiếp theo là ga nào?,ga tiep theo la ga nao,,신규(검수 필요)
+107,이동,지도를 봐 주시겠어요?,Could you look at this map with me?,Bạn xem giúp tôi bản đồ được không?,ban xem giup toi ban do duoc khong,,신규(검수 필요)
+108,이동,공항까지 가 주세요.,"To the airport, please.",Cho tôi đến sân bay.,cho toi den san bay,,신규(검수 필요)
+109,이동,기차표를 예매하고 싶습니다.,I want to book a train ticket.,Tôi muốn đặt vé tàu.,toi muon dat ve tau,,신규(검수 필요)
+110,이동,환승해야 합니까?,Do I need to transfer?,Tôi có cần đổi tuyến không?,toi co can doi tuyen khong,,신규(검수 필요)
+111,식당,두 사람 자리 있습니까?,Do you have a table for two?,Có bàn cho hai người không?,co ban cho hai nguoi khong,,신규(검수 필요)
+112,식당,예약했습니다.,I have a reservation.,Tôi đã đặt chỗ rồi.,toi da dat cho roi,,신규(검수 필요)
+113,식당,추천 메뉴가 무엇입니까?,What do you recommend?,Món nào được gợi ý?,mon nao duoc goi y,,신규(검수 필요)
+114,식당,이것은 무슨 요리입니까?,What kind of dish is this?,Đây là món gì?,day la mon gi,,신규(검수 필요)
+115,식당,덜 맵게 해 주세요.,"Less spicy, please.",Cho ít cay thôi.,cho it cay thoi,,신규(검수 필요)
+116,식당,고수는 빼 주세요.,"No cilantro, please.",Đừng cho rau mùi.,dung cho rau mui,,신규(검수 필요)
+117,식당,리필 됩니까?,Can I get a refill?,Có thể lấy thêm không?,co the lay them khong,,신규(검수 필요)
+118,식당,따로 계산해 주세요.,"Separate bills, please.",Tính tiền riêng giúp tôi.,tinh tien rieng giup toi,,신규(검수 필요)
+119,식당,포장 됩니까?,Can I take this to go?,Có thể gói mang về không?,co the goi mang ve khong,,신규(검수 필요)
+120,식당,아주 맛있었습니다.,It was delicious. Thank you.,Rất ngon. Cảm ơn.,"rat ngon, kam un",,신규(검수 필요)
+121,쇼핑,이것보다 싼 것 있습니까?,Do you have anything cheaper?,Có cái nào rẻ hơn không?,co cai nao re hon khong,,신규(검수 필요)
+122,쇼핑,새 것으로 주세요.,"A new one, please.",Cho tôi cái mới.,cho toi cai moi,,신규(검수 필요)
+123,쇼핑,교환할 수 있습니까?,Can I exchange this?,Tôi đổi cái này được không?,toi doi cai nay duoc khong,,신규(검수 필요)
+124,쇼핑,환불해 주세요.,I'd like a refund.,Cho tôi hoàn tiền.,cho toi hoan tien,,신규(검수 필요)
+125,쇼핑,선물 포장해 주세요.,Please gift-wrap it.,Gói quà giúp tôi.,goi qua giup toi,,신규(검수 필요)
+126,쇼핑,면세 됩니까?,Is it tax-free?,Có hoàn thuế không?,co hoan thue khong,,신규(검수 필요)
+127,쇼핑,영업시간이 어떻게 됩니까?,What are your opening hours?,Giờ mở cửa từ mấy giờ đến mấy giờ?,gio mo cua tu may gio den may gio,,신규(검수 필요)
+128,쇼핑,이것 두 개 주세요.,"Two of these, please.",Cho tôi hai cái này.,cho toi hai cai nay,,신규(검수 필요)
+129,쇼핑,더 큰 것 있습니까?,Do you have a bigger one?,Có cái nào to hơn không?,co cai nao to hon khong,,신규(검수 필요)
+130,쇼핑,인기 있는 것은 무엇입니까?,Which one is popular?,Cái nào bán chạy?,cai nao ban chay,,신규(검수 필요)
+131,병원,병원은 어디에 있습니까?,Where is the hospital?,Bệnh viện ở đâu?,benh vien o dau,,신규(검수 필요)
+132,병원,약국은 어디에 있습니까?,Where is the pharmacy?,Nhà thuốc ở đâu?,nha thuoc o dau,,신규(검수 필요)
+133,병원,머리가 아픕니다.,I have a headache.,Tôi bị đau đầu.,toi bi dau dau,,신규(검수 필요)
+134,병원,배가 아픕니다.,I have a stomachache.,Tôi bị đau bụng.,toi bi dau bung,,신규(검수 필요)
+135,병원,열이 납니다.,I have a fever.,Tôi bị sốt.,toi bi sot,,신규(검수 필요)
+136,병원,감기에 걸렸습니다.,I caught a cold.,Tôi bị cảm.,toi bi cam,,신규(검수 필요)
+137,병원,약 알레르기가 있습니다.,I'm allergic to some medicine.,Tôi bị dị ứng thuốc.,toi bi di ung thuoc,,신규(검수 필요)
+138,병원,진통제 있습니까?,Do you have painkillers?,Có thuốc giảm đau không?,co thuoc giam dau khong,,신규(검수 필요)
+139,병원,하루에 몇 번 먹습니까?,How many times a day do I take it?,Một ngày uống mấy lần?,mot ngay uong may lan,,신규(검수 필요)
+140,병원,보험이 있습니다.,I have insurance.,Tôi có bảo hiểm.,toi co bao hiem,,신규(검수 필요)
+141,은행,계좌를 만들고 싶습니다.,I want to open a bank account.,Tôi muốn mở tài khoản.,toi muon mo tai khoan,,신규(검수 필요)
+142,은행,환전하고 싶습니다.,I want to exchange money.,Tôi muốn đổi tiền.,toi muon doi tien,,신규(검수 필요)
+143,은행,환율이 어떻게 됩니까?,What is the exchange rate?,Tỷ giá bao nhiêu?,ty gia bao nhieu,,신규(검수 필요)
+144,은행,ATM은 어디에 있습니까?,Where is the ATM?,Máy ATM ở đâu?,may ATM o dau,,신규(검수 필요)
+145,은행,송금하고 싶습니다.,I want to send money.,Tôi muốn chuyển tiền.,toi muon chuyen tien,,신규(검수 필요)
+146,은행,외국인등록증이 필요합니까?,Do I need an alien registration card?,Có cần thẻ đăng ký người nước ngoài không?,co can the dang ky nguoi nuoc ngoai khong,,신규(검수 필요)
+147,은행,이 서류 작성을 도와주세요.,Please help me fill out this form.,Giúp tôi điền mẫu đơn này.,giup toi dien mau don nay,,신규(검수 필요)
+148,은행,비자를 연장하고 싶습니다.,I want to extend my visa.,Tôi muốn gia hạn visa.,toi muon gia han visa,,신규(검수 필요)
+149,은행,여기에 서명하면 됩니까?,Do I sign here?,Ký ở đây phải không?,ky o day phai khong,,신규(검수 필요)
+150,은행,수수료가 있습니까?,Is there a fee?,Có phí không?,co phi khong,,신규(검수 필요)
+151,숙소,빈 방 있습니까?,Do you have a room available?,Còn phòng trống không?,con phong trong khong,,신규(검수 필요)
+152,숙소,하룻밤에 얼마입니까?,How much per night?,Một đêm bao nhiêu tiền?,mot dem bao nhieu tien,,신규(검수 필요)
+153,숙소,체크인하고 싶습니다.,I'd like to check in.,Tôi muốn nhận phòng.,toi muon nhan phong,,신규(검수 필요)
+154,숙소,체크아웃은 몇 시입니까?,What time is checkout?,Mấy giờ trả phòng?,may gio tra phong,,신규(검수 필요)
+155,숙소,와이파이 비밀번호가 무엇입니까?,What is the Wi-Fi password?,Mật khẩu Wi-Fi là gì?,mat khau Wi-Fi la gi,,신규(검수 필요)
+156,숙소,짐을 맡길 수 있습니까?,Can I leave my luggage here?,Tôi gửi hành lý được không?,toi gui hanh ly duoc khong,,신규(검수 필요)
+157,숙소,방을 바꾸고 싶습니다.,I'd like to change rooms.,Tôi muốn đổi phòng.,toi muon doi phong,,신규(검수 필요)
+158,숙소,에어컨이 고장 났습니다.,The air conditioner is broken.,Máy lạnh bị hỏng.,may lanh bi hong,,신규(검수 필요)
+159,숙소,수건을 더 주세요.,"More towels, please.",Cho tôi thêm khăn tắm.,cho toi them khan tam,,신규(검수 필요)
+160,숙소,하루 더 묵고 싶습니다.,I'd like to stay one more night.,Tôi muốn ở thêm một đêm.,toi muon o them mot dem,,신규(검수 필요)
+161,부동산,방을 구하고 있습니다.,I'm looking for a room to rent.,Tôi đang tìm phòng thuê.,toi dang tim phong thue,,신규(검수 필요)
+162,부동산,월세는 얼마입니까?,How much is the monthly rent?,Tiền thuê hàng tháng bao nhiêu?,tien thue hang thang bao nhieu,,신규(검수 필요)
+163,부동산,보증금은 얼마입니까?,How much is the deposit?,Tiền đặt cọc bao nhiêu?,tien dat coc bao nhieu,,신규(검수 필요)
+164,부동산,관리비가 포함되어 있습니까?,Is the maintenance fee included?,Đã bao gồm phí quản lý chưa?,da bao gom phi quan ly chua,,신규(검수 필요)
+165,부동산,방을 보고 싶습니다.,I'd like to see the room.,Tôi muốn xem phòng.,toi muon xem phong,,신규(검수 필요)
+166,부동산,언제 입주할 수 있습니까?,When can I move in?,Khi nào tôi có thể dọn vào?,khi nao toi co the don vao,,신규(검수 필요)
+167,부동산,계약 기간은 얼마나 됩니까?,How long is the contract?,Hợp đồng bao lâu?,hop dong bao lau,,신규(검수 필요)
+168,부동산,가구가 포함되어 있습니까?,Is it furnished?,Có nội thất không?,co noi that khong,,신규(검수 필요)
+169,부동산,지하철역에서 가깝습니까?,Is it close to the subway station?,Có gần ga tàu điện ngầm không?,co gan ga tau dien ngam khong,,신규(검수 필요)
+170,부동산,계약서를 천천히 읽고 싶습니다.,I want to read the contract slowly.,Tôi muốn đọc kỹ hợp đồng.,toi muon doc ky hop dong,,신규(검수 필요)
+171,직장,잘 부탁드립니다.,I look forward to working with you.,Mong được giúp đỡ.,mong duoc giup do,,신규(검수 필요)
+172,직장,회의는 몇 시입니까?,What time is the meeting?,Cuộc họp lúc mấy giờ?,cuoc hop luc may gio,,신규(검수 필요)
+173,직장,잠시 쉬어도 됩니까?,May I take a short break?,Tôi nghỉ một chút được không?,toi nghi mot chut duoc khong,,신규(검수 필요)
+174,직장,이것을 도와주시겠어요?,Could you help me with this?,Bạn giúp tôi việc này được không?,ban giup toi viec nay duoc khong,,신규(검수 필요)
+175,직장,언제까지 끝내야 합니까?,When is the deadline?,Hạn chót là khi nào?,han chot la khi nao,,신규(검수 필요)
+176,직장,다시 설명해 주시겠어요?,Could you explain it again?,Bạn giải thích lại được không?,ban giai thich lai duoc khong,,신규(검수 필요)
+177,직장,알겠습니다. 바로 하겠습니다.,Understood. I'll do it right away.,Tôi hiểu rồi. Tôi làm ngay.,"toi hieu roi, toi lam ngay",,신규(검수 필요)
+178,직장,오늘 야근합니까?,Are we working overtime today?,Hôm nay có tăng ca không?,hom nay co tang ca khong,,신규(검수 필요)
+179,직장,월급날은 언제입니까?,When is payday?,Ngày lĩnh lương là khi nào?,ngay linh luong la khi nao,,신규(검수 필요)
+180,직장,휴가를 내고 싶습니다.,I'd like to take a day off.,Tôi muốn xin nghỉ phép.,toi muon xin nghi phep,,신규(검수 필요)
+181,도움,응급 상황입니다.,It's an emergency.,Đây là trường hợp khẩn cấp.,day la truong hop khan cap,,신규(검수 필요)
+182,도움,구급차를 불러 주세요.,Please call an ambulance.,Vui lòng gọi xe cấp cứu.,vui long goi xe cap cuu,,신규(검수 필요)
+183,도움,불이 났습니다.,There is a fire.,Có cháy.,co chay,,신규(검수 필요)
+184,도움,여권을 잃어버렸습니다.,I lost my passport.,Tôi bị mất hộ chiếu.,toi bi mat ho chieu,,신규(검수 필요)
+185,도움,도둑맞았습니다.,I was robbed.,Tôi bị trộm đồ.,toi bi trom do,,신규(검수 필요)
+186,도움,대사관에 연락하고 싶습니다.,I want to contact my embassy.,Tôi muốn liên hệ đại sứ quán.,toi muon lien he dai su quan,,신규(검수 필요)
+187,도움,한국어 통역이 필요합니다.,I need a Korean interpreter.,Tôi cần phiên dịch tiếng Hàn.,toi can phien dich tieng Han,,신규(검수 필요)
+188,도움,여기가 안전합니까?,Is it safe here?,Ở đây có an toàn không?,o day co an toan khong,,신규(검수 필요)
+189,도움,경찰서는 어디입니까?,Where is the police station?,Đồn cảnh sát ở đâu?,don canh sat o dau,,신규(검수 필요)
+190,도움,분실물 센터는 어디입니까?,Where is the lost and found?,Trung tâm đồ thất lạc ở đâu?,trung tam do that lac o dau,,신규(검수 필요)
+191,일상,주말에 무엇을 하세요?,What do you do on weekends?,Cuối tuần bạn làm gì?,cuoi tuan ban lam gi,,신규(검수 필요)
+192,일상,취미가 무엇입니까?,What are your hobbies?,Sở thích của bạn là gì?,so thich cua ban la gi,,신규(검수 필요)
+193,일상,한국 음식을 좋아합니까?,Do you like Korean food?,Bạn có thích món Hàn không?,ban co thich mon Han khong,,신규(검수 필요)
+194,일상,가장 좋아하는 음식은 무엇입니까?,What is your favorite food?,Món ăn bạn thích nhất là gì?,mon an ban thich nhat la gi,,신규(검수 필요)
+195,일상,한국은 처음입니까?,Is this your first time in Korea?,Đây là lần đầu bạn đến Hàn Quốc à?,day la lan dau ban den Han Quoc a,,신규(검수 필요)
+196,일상,사진 찍어 드릴까요?,Shall I take a photo for you?,Tôi chụp ảnh giúp bạn nhé?,toi chup anh giup ban nhe,,신규(검수 필요)
+197,일상,연락처를 교환합시다.,Let's exchange contact information.,Chúng ta trao đổi liên lạc nhé.,chung ta trao doi lien lac nhe,,신규(검수 필요)
+198,일상,다음에 같이 식사해요.,Let's eat together next time.,Lần sau cùng ăn nhé.,lan sau cung an nhe,,신규(검수 필요)
+199,일상,한국 생활은 어떻습니까?,How is life in Korea?,Cuộc sống ở Hàn thế nào?,cuoc song o Han the nao,,신규(검수 필요)
+200,일상,만나서 즐거웠습니다.,It was nice meeting you.,Rất vui được gặp bạn.,rat vui duoc gap ban,,신규(검수 필요)

@@ -1,0 +1,201 @@
+﻿번호,카테고리,한국어,영어,태국어(남성형),태국어(여성형),로마자,수정 제안,비고
+1,인사,안녕하세요.,Hello.,สวัสดีครับ,สวัสดีค่ะ,sa-wat-dee khrab,,기존
+2,인사,안녕하세요. 만나서 반갑습니다.,Hello. Nice to meet you.,สวัสดีครับ ยินดีที่ได้รู้จักครับ,สวัสดีค่ะ ยินดีที่ได้รู้จักค่ะ,"sa-wat-dee khrab, yin-dee thee dai roo-jak khrab",,기존
+3,인사,감사합니다.,Thank you.,ขอบคุณครับ,ขอบคุณค่ะ,khop khun khrab,,기존
+4,인사,정말 감사합니다.,Thank you very much.,ขอบคุณมากครับ,ขอบคุณมากค่ะ,khop khun maak khrab,,기존
+5,인사,죄송합니다.,I'm sorry.,ขอโทษครับ,ขอโทษค่ะ,khor thot khrab,,기존
+6,인사,괜찮습니다.,It's okay.,ไม่เป็นไรครับ,ไม่เป็นไรค่ะ,mai pen rai khrab,,기존
+7,인사,잘 지내세요?,How are you?,สบายดีไหมครับ,สบายดีไหมคะ,sa-baai dee mai khrab,,기존
+8,인사,잘 지냅니다.,I'm doing well.,สบายดีครับ,สบายดีค่ะ,sa-baai dee khrab,,기존
+9,인사,또 만나요.,See you again.,แล้วพบกันใหม่ครับ,แล้วพบกันใหม่ค่ะ,laeo phop gan mai khrab,,기존
+10,인사,안녕히 가세요.,Goodbye.,ลาก่อนครับ,ลาก่อนค่ะ,laa gon khrab,,기존
+11,자기소개,저는 한국 사람입니다.,I am Korean.,ผมเป็นคนเกาหลี,ฉันเป็นคนเกาหลี,phom pen khon gao-lee,,기존
+12,자기소개,저는 한국에서 왔습니다.,I am from Korea.,ผมมาจากเกาหลี,ฉันมาจากเกาหลี,phom maa jaak gao-lee,,기존
+13,자기소개,제 이름은 ___입니다.,My name is ___.,ผมชื่อ ___,ฉันชื่อ ___,phom chue ___,,기존
+14,자기소개,당신의 이름은 무엇입니까?,What is your name?,คุณชื่ออะไรครับ,คุณชื่ออะไรคะ,khun chue a-rai khrab,,기존
+15,자기소개,저는 태국어를 배우고 있습니다.,I am learning Thai.,ผมกำลังเรียนภาษาไทย,ฉันกำลังเรียนภาษาไทย,phom gam-lang rian phaa-saa thai,,기존
+16,자기소개,태국어를 조금 할 수 있습니다.,I can speak a little Thai.,ผมพูดภาษาไทยได้นิดหน่อย,ฉันพูดภาษาไทยได้นิดหน่อย,phom phoot phaa-saa thai dai nit noi,,기존
+17,자기소개,저는 영어를 조금 할 수 있습니다.,I can speak a little English.,ผมพูดภาษาอังกฤษได้นิดหน่อย,ฉันพูดภาษาอังกฤษได้นิดหน่อย,phom phoot phaa-saa ang-grit dai nit noi,,기존
+18,자기소개,저는 이해했습니다.,I understand.,ผมเข้าใจแล้วครับ,ฉันเข้าใจแล้วค่ะ,phom khao jai laeo khrab,,기존
+19,자기소개,저는 이해하지 못했습니다.,I don't understand.,ผมไม่เข้าใจครับ,ฉันไม่เข้าใจค่ะ,phom mai khao jai khrab,,기존
+20,자기소개,천천히 말씀해 주세요.,Please speak slowly.,กรุณาพูดช้า ๆ ครับ,กรุณาพูดช้า ๆ ค่ะ,ga-ru-naa phoot chaa chaa khrab,,기존
+21,기초응답,네.,Yes.,ใช่ครับ,ใช่ค่ะ,chai khrab,,기존
+22,기초응답,아니요.,No.,ไม่ใช่ครับ,ไม่ใช่ค่ะ,mai chai khrab,,기존
+23,기초응답,맞습니다.,That's right.,ถูกต้องครับ,ถูกต้องค่ะ,thook tong khrab,,기존
+24,기초응답,아닙니다.,That's not right.,ไม่ถูกครับ,ไม่ถูกค่ะ,mai thook khrab,,기존
+25,기초응답,좋습니다.,Good.,ดีครับ,ดีค่ะ,dee khrab,,기존
+26,기초응답,좋지 않습니다.,Not good.,ไม่ดีครับ,ไม่ดีค่ะ,mai dee khrab,,기존
+27,기초응답,괜찮아요?,Are you okay?,โอเคไหมครับ,โอเคไหมคะ,oh-kay mai khrab,,기존
+28,기초응답,괜찮아요.,I'm okay.,โอเคครับ,โอเคค่ะ,oh-kay khrab,,기존
+29,기초응답,문제 없습니다.,No problem.,ไม่มีปัญหาครับ,ไม่มีปัญหาค่ะ,mai mee pan-haa khrab,,기존
+30,기초응답,다시 말해 주세요.,Please say it again.,กรุณาพูดอีกครั้งครับ,กรุณาพูดอีกครั้งค่ะ,ga-ru-naa phoot eek khrang khrab,,기존
+31,숫자/시간,이것은 얼마입니까?,How much is this?,อันนี้ราคาเท่าไหร่ครับ,อันนี้ราคาเท่าไหร่คะ,an nee raa-khaa thao-rai khrab,,기존
+32,숫자/시간,너무 비쌉니다.,It's too expensive.,แพงเกินไปครับ,แพงเกินไปค่ะ,phaeng gern pai khrab,,기존
+33,숫자/시간,조금 깎아 주세요.,Please give me a discount.,ลดราคาให้หน่อยครับ,ลดราคาให้หน่อยค่ะ,lot raa-khaa hai noi khrab,,기존
+34,숫자/시간,몇 시입니까?,What time is it?,กี่โมงครับ,กี่โมงคะ,gee mohng khrab,,기존
+35,숫자/시간,오늘입니다.,It's today.,วันนี้ครับ,วันนี้ค่ะ,wan nee khrab,,기존
+36,숫자/시간,내일입니다.,It's tomorrow.,พรุ่งนี้ครับ,พรุ่งนี้ค่ะ,phrung nee khrab,,기존
+37,숫자/시간,어제입니다.,It was yesterday.,เมื่อวานครับ,เมื่อวานค่ะ,muea waan khrab,,기존
+38,숫자/시간,지금 가겠습니다.,I'll go now.,ผมจะไปตอนนี้ครับ,ฉันจะไปตอนนี้ค่ะ,phom ja pai ton nee khrab,,기존
+39,숫자/시간,잠시만 기다려 주세요.,Please wait a moment.,กรุณารอสักครู่ครับ,กรุณารอสักครู่ค่ะ,ga-ru-naa ror sak khroo khrab,,기존
+40,숫자/시간,10분 정도 걸립니다.,It takes about ten minutes.,ใช้เวลาประมาณสิบนาทีครับ,ใช้เวลาประมาณสิบนาทีค่ะ,chai way-laa pra-maan sip naa-thee khrab,,기존
+41,이동,여기는 어디입니까?,Where is this place?,ที่นี่ที่ไหนครับ,ที่นี่ที่ไหนคะ,thee nee thee nai khrab,,기존
+42,이동,화장실은 어디입니까?,Where is the restroom?,ห้องน้ำอยู่ที่ไหนครับ,ห้องน้ำอยู่ที่ไหนคะ,hong naam yuu thee nai khrab,,기존
+43,이동,지하철역은 어디입니까?,Where is the subway station?,สถานีรถไฟใต้ดินอยู่ที่ไหนครับ,สถานีรถไฟใต้ดินอยู่ที่ไหนคะ,sa-thaa-nee rot-fai dtai-din yuu thee nai khrab,,기존
+44,이동,이쪽으로 오세요.,Please come this way.,เชิญทางนี้ครับ,เชิญทางนี้ค่ะ,choen thaang nee khrab,,기존
+45,이동,저쪽으로 가세요.,Please go that way.,ไปทางนั้นครับ,ไปทางนั้นค่ะ,pai thaang nan khrab,,기존
+46,이동,오른쪽으로 가세요.,Please go to the right.,ไปทางขวาครับ,ไปทางขวาค่ะ,pai thaang khwaa khrab,,기존
+47,이동,왼쪽으로 가세요.,Please go to the left.,ไปทางซ้ายครับ,ไปทางซ้ายค่ะ,pai thaang saai khrab,,기존
+48,이동,곧장 가세요.,Please go straight.,ตรงไปครับ,ตรงไปค่ะ,dtrong pai khrab,,기존
+49,이동,택시를 타고 싶습니다.,I want to take a taxi.,ผมอยากนั่งแท็กซี่ครับ,ฉันอยากนั่งแท็กซี่ค่ะ,phom yaak nang taxi khrab,,기존
+50,이동,여기서 내려 주세요.,Please let me off here.,จอดตรงนี้ครับ,จอดตรงนี้ค่ะ,jot dtrong nee khrab,,기존
+51,식당,메뉴 주세요.,Please give me the menu.,ขอเมนูหน่อยครับ,ขอเมนูหน่อยค่ะ,khor menu noi khrab,,기존
+52,식당,이것을 주세요.,Please give me this.,ขออันนี้ครับ,ขออันนี้ค่ะ,khor an nee khrab,,기존
+53,식당,물을 주세요.,Please give me water.,ขอน้ำหน่อยครับ,ขอน้ำหน่อยค่ะ,khor naam noi khrab,,기존
+54,식당,맵지 않게 해 주세요.,Please make it not spicy.,ขอไม่เผ็ดครับ,ขอไม่เผ็ดค่ะ,khor mai phet khrab,,기존
+55,식당,조금 맵게 해 주세요.,Please make it a little spicy.,ขอเผ็ดนิดหน่อยครับ,ขอเผ็ดนิดหน่อยค่ะ,khor phet nit noi khrab,,기존
+56,식당,맛있습니다.,It's delicious.,อร่อยครับ,อร่อยค่ะ,a-roi khrab,,기존
+57,식당,계산해 주세요.,Please bring the bill.,เช็กบิลด้วยครับ,เช็กบิลด้วยค่ะ,check bin duai khrab,,기존
+58,식당,포장해 주세요.,Please pack it to go.,ใส่ถุงกลับบ้านครับ,ใส่ถุงกลับบ้านค่ะ,sai thung glap baan khrab,,기존
+59,식당,알레르기가 있습니다.,I have a food allergy.,ผมมีอาการแพ้อาหารครับ,ฉันมีอาการแพ้อาหารค่ะ,phom mee aa-gaan phae aa-haan khrab,,기존
+60,식당,고기를 먹지 않습니다.,I don't eat meat.,ผมไม่กินเนื้อครับ,ฉันไม่กินเนื้อค่ะ,phom mai gin nuea khrab,,기존
+61,쇼핑,이것을 사고 싶습니다.,I want to buy this.,ผมอยากซื้ออันนี้ครับ,ฉันอยากซื้ออันนี้ค่ะ,phom yaak sue an nee khrab,,기존
+62,쇼핑,다른 색이 있습니까?,Do you have another color?,มีสีอื่นไหมครับ,มีสีอื่นไหมคะ,mee see eun mai khrab,,기존
+63,쇼핑,다른 사이즈가 있습니까?,Do you have another size?,มีไซซ์อื่นไหมครับ,มีไซซ์อื่นไหมคะ,mee size eun mai khrab,,기존
+64,쇼핑,입어봐도 됩니까?,Can I try it on?,ลองใส่ได้ไหมครับ,ลองใส่ได้ไหมคะ,long sai dai mai khrab,,기존
+65,쇼핑,카드로 결제할 수 있습니까?,Can I pay by card?,จ่ายบัตรได้ไหมครับ,จ่ายบัตรได้ไหมคะ,jaai bat dai mai khrab,,기존
+66,쇼핑,현금으로 결제하겠습니다.,I'll pay in cash.,ผมจะจ่ายเงินสดครับ,ฉันจะจ่ายเงินสดค่ะ,phom ja jaai ngoen sot khrab,,기존
+67,쇼핑,영수증 주세요.,Please give me a receipt.,ขอใบเสร็จด้วยครับ,ขอใบเสร็จด้วยค่ะ,khor bai-set duai khrab,,기존
+68,쇼핑,봉투 주세요.,Please give me a bag.,ขอถุงด้วยครับ,ขอถุงด้วยค่ะ,khor thung duai khrab,,기존
+69,쇼핑,구경만 하고 있습니다.,I'm just looking.,ผมแค่ดูเฉย ๆ ครับ,ฉันแค่ดูเฉย ๆ ค่ะ,phom khae doo choei choei khrab,,기존
+70,쇼핑,이것은 마음에 듭니다.,I like this.,ผมชอบอันนี้ครับ,ฉันชอบอันนี้ค่ะ,phom chob an nee khrab,,기존
+71,도움,도와주세요.,Please help me.,ช่วยด้วยครับ,ช่วยด้วยค่ะ,chuai duai khrab,,기존
+72,도움,길을 잃었습니다.,I'm lost.,ผมหลงทางครับ,ฉันหลงทางค่ะ,phom long thaang khrab,,기존
+73,도움,휴대폰을 잃어버렸습니다.,I lost my phone.,ผมทำโทรศัพท์หายครับ,ฉันทำโทรศัพท์หายค่ะ,phom tham toh-ra-sap haai khrab,,기존
+74,도움,지갑을 잃어버렸습니다.,I lost my wallet.,ผมทำกระเป๋าสตางค์หายครับ,ฉันทำกระเป๋าสตางค์หายค่ะ,phom tham gra-pao sa-taang haai khrab,,기존
+75,도움,아픕니다.,It hurts.,ผมเจ็บครับ,ฉันเจ็บค่ะ,phom jep khrab,,기존
+76,도움,병원에 가야 합니다.,I need to go to the hospital.,ผมต้องไปโรงพยาบาลครับ,ฉันต้องไปโรงพยาบาลค่ะ,phom dtong pai rohng pha-yaa-baan khrab,,기존
+77,도움,경찰을 불러 주세요.,Please call the police.,กรุณาเรียกตำรวจให้ครับ,กรุณาเรียกตำรวจให้ค่ะ,ga-ru-naa riak dtam-ruat hai khrab,,기존
+78,도움,한국어를 할 수 있습니까?,Can you speak Korean?,พูดภาษาเกาหลีได้ไหมครับ,พูดภาษาเกาหลีได้ไหมคะ,phoot phaa-saa gao-lee dai mai khrab,,기존
+79,도움,영어를 할 수 있습니까?,Can you speak English?,พูดภาษาอังกฤษได้ไหมครับ,พูดภาษาอังกฤษได้ไหมคะ,phoot phaa-saa ang-grit dai mai khrab,,기존
+80,도움,사진을 찍어 주실 수 있습니까?,Can you take a photo for me?,ช่วยถ่ายรูปให้หน่อยได้ไหมครับ,ช่วยถ่ายรูปให้หน่อยได้ไหมคะ,chuai thaai roop hai noi dai mai khrab,,기존
+81,일상,오늘 날씨가 좋습니다.,The weather is nice today.,วันนี้อากาศดีครับ,วันนี้อากาศดีค่ะ,wan nee aa-gaat dee khrab,,기존
+82,일상,오늘 춥습니다.,It's cold today.,วันนี้หนาวครับ,วันนี้หนาวค่ะ,wan nee naao khrab,,기존
+83,일상,오늘 덥습니다.,It's hot today.,วันนี้ร้อนครับ,วันนี้ร้อนค่ะ,wan nee ron khrab,,기존
+84,일상,비가 옵니다.,It's raining.,ฝนตกครับ,ฝนตกค่ะ,fon dtok khrab,,기존
+85,일상,피곤합니다.,I'm tired.,ผมเหนื่อยครับ,ฉันเหนื่อยค่ะ,phom nueai khrab,,기존
+86,일상,배고픕니다.,I'm hungry.,ผมหิวครับ,ฉันหิวค่ะ,phom hiu khrab,,기존
+87,일상,목마릅니다.,I'm thirsty.,ผมหิวน้ำครับ,ฉันหิวน้ำค่ะ,phom hiu naam khrab,,기존
+88,일상,괜찮으세요?,Are you okay?,คุณโอเคไหมครับ,คุณโอเคไหมคะ,khun oh-kay mai khrab,,기존
+89,일상,좋은 하루 되세요.,Have a good day.,ขอให้มีวันที่ดีครับ,ขอให้มีวันที่ดีค่ะ,khor hai mee wan thee dee khrab,,기존
+90,일상,다음에 연락하겠습니다.,I'll contact you next time.,ผมจะติดต่ออีกครั้งครับ,ฉันจะติดต่ออีกครั้งค่ะ,phom ja dtit-dtor eek khrang khrab,,기존
+91,한국생활,주소를 알려 주세요.,Please tell me the address.,กรุณาบอกที่อยู่ครับ,กรุณาบอกที่อยู่ค่ะ,ga-ru-naa bok thee-yuu khrab,,기존
+92,한국생활,전화번호를 알려 주세요.,Please tell me the phone number.,กรุณาบอกเบอร์โทรศัพท์ครับ,กรุณาบอกเบอร์โทรศัพท์ค่ะ,ga-ru-naa bok ber toh-ra-sap khrab,,기존
+93,한국생활,카카오톡을 사용합니까?,Do you use KakaoTalk?,ใช้คาเคาไหมครับ,ใช้คาเคาไหมคะ,chai Kakao mai khrab,,기존
+94,한국생활,지도 링크를 보내겠습니다.,I'll send you the map link.,ผมจะส่งลิงก์แผนที่ให้ครับ,ฉันจะส่งลิงก์แผนที่ให้ค่ะ,phom ja song link phaen-thee hai khrab,,기존
+95,한국생활,외국인등록증이 필요합니다.,An alien registration card is required.,ต้องใช้บัตรคนต่างชาติครับ,ต้องใช้บัตรคนต่างชาติค่ะ,dtong chai bat khon dtaang-chaat khrab,,기존
+96,한국생활,여권이 필요합니다.,A passport is required.,ต้องใช้หนังสือเดินทางครับ,ต้องใช้หนังสือเดินทางค่ะ,dtong chai nang-sue doen-thaang khrab,,기존
+97,한국생활,예약이 필요합니다.,A reservation is required.,ต้องจองก่อนครับ,ต้องจองก่อนค่ะ,dtong jong gon khrab,,기존
+98,한국생활,쓰레기는 정해진 날에 버립니다.,Trash must be thrown away on the designated day.,ต้องทิ้งขยะตามวันที่กำหนดครับ,ต้องทิ้งขยะตามวันที่กำหนดค่ะ,dtong thing kha-ya taam wan thee gam-not khrab,,기존
+99,한국생활,인터넷이 필요합니다.,I need internet.,ต้องใช้อินเทอร์เน็ตครับ,ต้องใช้อินเทอร์เน็ตค่ะ,dtong chai internet khrab,,기존
+100,한국생활,제가 확인해 보겠습니다.,I'll check it.,ผมจะตรวจสอบให้ครับ,ฉันจะตรวจสอบให้ค่ะ,phom ja dtruat-sop hai khrab,,기존
+101,이동,버스 정류장은 어디입니까?,Where is the bus stop?,ป้ายรถเมล์อยู่ที่ไหนครับ,ป้ายรถเมล์อยู่ที่ไหนคะ,paai rot-mee yuu thee nai khrab,,신규(검수 필요)
+102,이동,이 버스는 명동에 갑니까?,Does this bus go to Myeongdong?,รถเมล์คันนี้ไปเมียงดงไหมครับ,รถเมล์คันนี้ไปเมียงดงไหมคะ,rot-mee khan nee pai Myeongdong mai khrab,,신규(검수 필요)
+103,이동,표는 어디에서 삽니까?,Where can I buy a ticket?,ซื้อตั๋วได้ที่ไหนครับ,ซื้อตั๋วได้ที่ไหนคะ,sue tua dai thee nai khrab,,신규(검수 필요)
+104,이동,얼마나 걸립니까?,How long does it take?,ใช้เวลานานเท่าไหร่ครับ,ใช้เวลานานเท่าไหร่คะ,chai wee-laa naan thao-rai khrab,,신규(검수 필요)
+105,이동,여기서 내릴게요.,I'll get off here.,ผมจะลงที่นี่ครับ,ฉันจะลงที่นี่ค่ะ,phom ja long thee nee khrab,,신규(검수 필요)
+106,이동,다음 역은 어디입니까?,What is the next station?,สถานีต่อไปคือที่ไหนครับ,สถานีต่อไปคือที่ไหนคะ,sa-thaa-nee tor pai khue thee nai khrab,,신규(검수 필요)
+107,이동,지도를 봐 주시겠어요?,Could you look at this map with me?,ช่วยดูแผนที่ให้หน่อยได้ไหมครับ,ช่วยดูแผนที่ให้หน่อยได้ไหมคะ,chuay duu phaen-thee hai noi dai mai khrab,,신규(검수 필요)
+108,이동,공항까지 가 주세요.,"To the airport, please.",ไปสนามบินครับ,ไปสนามบินค่ะ,pai sa-naam-bin khrab,,신규(검수 필요)
+109,이동,기차표를 예매하고 싶습니다.,I want to book a train ticket.,ผมอยากจองตั๋วรถไฟครับ,ฉันอยากจองตั๋วรถไฟค่ะ,phom yaak jong tua rot-fai khrab,,신규(검수 필요)
+110,이동,환승해야 합니까?,Do I need to transfer?,ต้องเปลี่ยนสายไหมครับ,ต้องเปลี่ยนสายไหมคะ,tong plian saai mai khrab,,신규(검수 필요)
+111,식당,두 사람 자리 있습니까?,Do you have a table for two?,มีที่นั่งสำหรับสองคนไหมครับ,มีที่นั่งสำหรับสองคนไหมคะ,mee thee nang sam-rap song khon mai khrab,,신규(검수 필요)
+112,식당,예약했습니다.,I have a reservation.,ผมจองไว้แล้วครับ,ฉันจองไว้แล้วค่ะ,phom jong wai laeo khrab,,신규(검수 필요)
+113,식당,추천 메뉴가 무엇입니까?,What do you recommend?,เมนูแนะนำคืออะไรครับ,เมนูแนะนำคืออะไรคะ,mee-nuu nae-nam khue a-rai khrab,,신규(검수 필요)
+114,식당,이것은 무슨 요리입니까?,What kind of dish is this?,อันนี้คืออาหารอะไรครับ,อันนี้คืออาหารอะไรคะ,an nee khue aa-haan a-rai khrab,,신규(검수 필요)
+115,식당,덜 맵게 해 주세요.,"Less spicy, please.",ขอเผ็ดน้อยหน่อยครับ,ขอเผ็ดน้อยหน่อยค่ะ,khor phet noi noi khrab,,신규(검수 필요)
+116,식당,고수는 빼 주세요.,"No cilantro, please.",ไม่ใส่ผักชีครับ,ไม่ใส่ผักชีค่ะ,mai sai phak-chee khrab,,신규(검수 필요)
+117,식당,리필 됩니까?,Can I get a refill?,เติมได้ไหมครับ,เติมได้ไหมคะ,term dai mai khrab,,신규(검수 필요)
+118,식당,따로 계산해 주세요.,"Separate bills, please.",คิดเงินแยกกันครับ,คิดเงินแยกกันค่ะ,khit ngern yaek gan khrab,,신규(검수 필요)
+119,식당,포장 됩니까?,Can I take this to go?,ใส่กล่องกลับบ้านได้ไหมครับ,ใส่กล่องกลับบ้านได้ไหมคะ,sai glong glap baan dai mai khrab,,신규(검수 필요)
+120,식당,아주 맛있었습니다.,It was delicious. Thank you.,อร่อยมากครับ ขอบคุณครับ,อร่อยมากค่ะ ขอบคุณค่ะ,"a-roi maak khrab, khop khun khrab",,신규(검수 필요)
+121,쇼핑,이것보다 싼 것 있습니까?,Do you have anything cheaper?,มีถูกกว่านี้ไหมครับ,มีถูกกว่านี้ไหมคะ,mee thuuk gwaa nee mai khrab,,신규(검수 필요)
+122,쇼핑,새 것으로 주세요.,"A new one, please.",ขอชิ้นใหม่ครับ,ขอชิ้นใหม่ค่ะ,khor chin mai khrab,,신규(검수 필요)
+123,쇼핑,교환할 수 있습니까?,Can I exchange this?,เปลี่ยนได้ไหมครับ,เปลี่ยนได้ไหมคะ,plian dai mai khrab,,신규(검수 필요)
+124,쇼핑,환불해 주세요.,I'd like a refund.,ขอคืนเงินครับ,ขอคืนเงินค่ะ,khor khuen ngern khrab,,신규(검수 필요)
+125,쇼핑,선물 포장해 주세요.,Please gift-wrap it.,ช่วยห่อของขวัญให้หน่อยครับ,ช่วยห่อของขวัญให้หน่อยค่ะ,chuay hor khong-khwan hai noi khrab,,신규(검수 필요)
+126,쇼핑,면세 됩니까?,Is it tax-free?,ขอคืนภาษีได้ไหมครับ,ขอคืนภาษีได้ไหมคะ,khor khuen phaa-see dai mai khrab,,신규(검수 필요)
+127,쇼핑,영업시간이 어떻게 됩니까?,What are your opening hours?,เปิดกี่โมงถึงกี่โมงครับ,เปิดกี่โมงถึงกี่โมงคะ,pert gee mohng thueng gee mohng khrab,,신규(검수 필요)
+128,쇼핑,이것 두 개 주세요.,"Two of these, please.",ขออันนี้สองชิ้นครับ,ขออันนี้สองชิ้นค่ะ,khor an nee song chin khrab,,신규(검수 필요)
+129,쇼핑,더 큰 것 있습니까?,Do you have a bigger one?,มีอันใหญ่กว่านี้ไหมครับ,มีอันใหญ่กว่านี้ไหมคะ,mee an yai gwaa nee mai khrab,,신규(검수 필요)
+130,쇼핑,인기 있는 것은 무엇입니까?,Which one is popular?,อันไหนขายดีครับ,อันไหนขายดีคะ,an nai khaai dee khrab,,신규(검수 필요)
+131,병원,병원은 어디에 있습니까?,Where is the hospital?,โรงพยาบาลอยู่ที่ไหนครับ,โรงพยาบาลอยู่ที่ไหนคะ,rohng-pha-yaa-baan yuu thee nai khrab,,신규(검수 필요)
+132,병원,약국은 어디에 있습니까?,Where is the pharmacy?,ร้านขายยาอยู่ที่ไหนครับ,ร้านขายยาอยู่ที่ไหนคะ,raan khaai yaa yuu thee nai khrab,,신규(검수 필요)
+133,병원,머리가 아픕니다.,I have a headache.,ผมปวดหัวครับ,ฉันปวดหัวค่ะ,phom puat hua khrab,,신규(검수 필요)
+134,병원,배가 아픕니다.,I have a stomachache.,ผมปวดท้องครับ,ฉันปวดท้องค่ะ,phom puat thong khrab,,신규(검수 필요)
+135,병원,열이 납니다.,I have a fever.,ผมมีไข้ครับ,ฉันมีไข้ค่ะ,phom mee khai khrab,,신규(검수 필요)
+136,병원,감기에 걸렸습니다.,I caught a cold.,ผมเป็นหวัดครับ,ฉันเป็นหวัดค่ะ,phom pen wat khrab,,신규(검수 필요)
+137,병원,약 알레르기가 있습니다.,I'm allergic to some medicine.,ผมแพ้ยาครับ,ฉันแพ้ยาค่ะ,phom phae yaa khrab,,신규(검수 필요)
+138,병원,진통제 있습니까?,Do you have painkillers?,มียาแก้ปวดไหมครับ,มียาแก้ปวดไหมคะ,mee yaa gae puat mai khrab,,신규(검수 필요)
+139,병원,하루에 몇 번 먹습니까?,How many times a day do I take it?,กินวันละกี่ครั้งครับ,กินวันละกี่ครั้งคะ,gin wan la gee khrang khrab,,신규(검수 필요)
+140,병원,보험이 있습니다.,I have insurance.,ผมมีประกันครับ,ฉันมีประกันค่ะ,phom mee pra-gan khrab,,신규(검수 필요)
+141,은행,계좌를 만들고 싶습니다.,I want to open a bank account.,ผมอยากเปิดบัญชีครับ,ฉันอยากเปิดบัญชีค่ะ,phom yaak pert ban-chee khrab,,신규(검수 필요)
+142,은행,환전하고 싶습니다.,I want to exchange money.,ผมอยากแลกเงินครับ,ฉันอยากแลกเงินค่ะ,phom yaak laek ngern khrab,,신규(검수 필요)
+143,은행,환율이 어떻게 됩니까?,What is the exchange rate?,อัตราแลกเปลี่ยนเท่าไหร่ครับ,อัตราแลกเปลี่ยนเท่าไหร่คะ,at-traa laek-plian thao-rai khrab,,신규(검수 필요)
+144,은행,ATM은 어디에 있습니까?,Where is the ATM?,ตู้เอทีเอ็มอยู่ที่ไหนครับ,ตู้เอทีเอ็มอยู่ที่ไหนคะ,tuu ee-thee-em yuu thee nai khrab,,신규(검수 필요)
+145,은행,송금하고 싶습니다.,I want to send money.,ผมอยากโอนเงินครับ,ฉันอยากโอนเงินค่ะ,phom yaak ohn ngern khrab,,신규(검수 필요)
+146,은행,외국인등록증이 필요합니까?,Do I need an alien registration card?,ต้องใช้บัตรคนต่างชาติไหมครับ,ต้องใช้บัตรคนต่างชาติไหมคะ,tong chai bat khon taang-chaat mai khrab,,신규(검수 필요)
+147,은행,이 서류 작성을 도와주세요.,Please help me fill out this form.,ช่วยกรอกเอกสารให้หน่อยครับ,ช่วยกรอกเอกสารให้หน่อยค่ะ,chuay grok ek-ga-saan hai noi khrab,,신규(검수 필요)
+148,은행,비자를 연장하고 싶습니다.,I want to extend my visa.,ผมอยากต่อวีซ่าครับ,ฉันอยากต่อวีซ่าค่ะ,phom yaak tor wee-saa khrab,,신규(검수 필요)
+149,은행,여기에 서명하면 됩니까?,Do I sign here?,เซ็นชื่อตรงนี้ใช่ไหมครับ,เซ็นชื่อตรงนี้ใช่ไหมคะ,sen chue trong nee chai mai khrab,,신규(검수 필요)
+150,은행,수수료가 있습니까?,Is there a fee?,มีค่าธรรมเนียมไหมครับ,มีค่าธรรมเนียมไหมคะ,mee khaa tham-niam mai khrab,,신규(검수 필요)
+151,숙소,빈 방 있습니까?,Do you have a room available?,มีห้องว่างไหมครับ,มีห้องว่างไหมคะ,mee hong waang mai khrab,,신규(검수 필요)
+152,숙소,하룻밤에 얼마입니까?,How much per night?,คืนละเท่าไหร่ครับ,คืนละเท่าไหร่คะ,khuen la thao-rai khrab,,신규(검수 필요)
+153,숙소,체크인하고 싶습니다.,I'd like to check in.,ผมขอเช็คอินครับ,ฉันขอเช็คอินค่ะ,phom khor chek-in khrab,,신규(검수 필요)
+154,숙소,체크아웃은 몇 시입니까?,What time is checkout?,เช็คเอาท์กี่โมงครับ,เช็คเอาท์กี่โมงคะ,chek-ao gee mohng khrab,,신규(검수 필요)
+155,숙소,와이파이 비밀번호가 무엇입니까?,What is the Wi-Fi password?,รหัสไวไฟคืออะไรครับ,รหัสไวไฟคืออะไรคะ,ra-hat wai-fai khue a-rai khrab,,신규(검수 필요)
+156,숙소,짐을 맡길 수 있습니까?,Can I leave my luggage here?,ฝากกระเป๋าได้ไหมครับ,ฝากกระเป๋าได้ไหมคะ,faak gra-pao dai mai khrab,,신규(검수 필요)
+157,숙소,방을 바꾸고 싶습니다.,I'd like to change rooms.,ผมอยากเปลี่ยนห้องครับ,ฉันอยากเปลี่ยนห้องค่ะ,phom yaak plian hong khrab,,신규(검수 필요)
+158,숙소,에어컨이 고장 났습니다.,The air conditioner is broken.,แอร์เสียครับ,แอร์เสียค่ะ,ae sia khrab,,신규(검수 필요)
+159,숙소,수건을 더 주세요.,"More towels, please.",ขอผ้าเช็ดตัวเพิ่มครับ,ขอผ้าเช็ดตัวเพิ่มค่ะ,khor phaa-chet-tua perm khrab,,신규(검수 필요)
+160,숙소,하루 더 묵고 싶습니다.,I'd like to stay one more night.,ผมอยากพักต่ออีกคืนครับ,ฉันอยากพักต่ออีกคืนค่ะ,phom yaak phak tor eek khuen khrab,,신규(검수 필요)
+161,부동산,방을 구하고 있습니다.,I'm looking for a room to rent.,ผมกำลังหาห้องเช่าครับ,ฉันกำลังหาห้องเช่าค่ะ,phom gam-lang haa hong chao khrab,,신규(검수 필요)
+162,부동산,월세는 얼마입니까?,How much is the monthly rent?,ค่าเช่าเดือนละเท่าไหร่ครับ,ค่าเช่าเดือนละเท่าไหร่คะ,khaa chao duean la thao-rai khrab,,신규(검수 필요)
+163,부동산,보증금은 얼마입니까?,How much is the deposit?,เงินมัดจำเท่าไหร่ครับ,เงินมัดจำเท่าไหร่คะ,ngern mat-jam thao-rai khrab,,신규(검수 필요)
+164,부동산,관리비가 포함되어 있습니까?,Is the maintenance fee included?,รวมค่าส่วนกลางไหมครับ,รวมค่าส่วนกลางไหมคะ,ruam khaa suan-glaang mai khrab,,신규(검수 필요)
+165,부동산,방을 보고 싶습니다.,I'd like to see the room.,ผมขอดูห้องหน่อยครับ,ฉันขอดูห้องหน่อยค่ะ,phom khor duu hong noi khrab,,신규(검수 필요)
+166,부동산,언제 입주할 수 있습니까?,When can I move in?,เข้าอยู่ได้เมื่อไหร่ครับ,เข้าอยู่ได้เมื่อไหร่คะ,khao yuu dai muea-rai khrab,,신규(검수 필요)
+167,부동산,계약 기간은 얼마나 됩니까?,How long is the contract?,สัญญากี่ปีครับ,สัญญากี่ปีคะ,san-yaa gee pee khrab,,신규(검수 필요)
+168,부동산,가구가 포함되어 있습니까?,Is it furnished?,มีเฟอร์นิเจอร์ไหมครับ,มีเฟอร์นิเจอร์ไหมคะ,mee fer-ni-jer mai khrab,,신규(검수 필요)
+169,부동산,지하철역에서 가깝습니까?,Is it close to the subway station?,ใกล้สถานีรถไฟฟ้าไหมครับ,ใกล้สถานีรถไฟฟ้าไหมคะ,glai sa-thaa-nee rot-fai-faa mai khrab,,신규(검수 필요)
+170,부동산,계약서를 천천히 읽고 싶습니다.,I want to read the contract slowly.,ผมขออ่านสัญญาช้า ๆ ครับ,ฉันขออ่านสัญญาช้า ๆ ค่ะ,phom khor aan san-yaa chaa chaa khrab,,신규(검수 필요)
+171,직장,잘 부탁드립니다.,I look forward to working with you.,ฝากเนื้อฝากตัวด้วยครับ,ฝากเนื้อฝากตัวด้วยค่ะ,faak nuea faak tua duay khrab,,신규(검수 필요)
+172,직장,회의는 몇 시입니까?,What time is the meeting?,ประชุมกี่โมงครับ,ประชุมกี่โมงคะ,pra-chum gee mohng khrab,,신규(검수 필요)
+173,직장,잠시 쉬어도 됩니까?,May I take a short break?,ขอพักสักครู่ได้ไหมครับ,ขอพักสักครู่ได้ไหมคะ,khor phak sak khruu dai mai khrab,,신규(검수 필요)
+174,직장,이것을 도와주시겠어요?,Could you help me with this?,ช่วยผมหน่อยได้ไหมครับ,ช่วยฉันหน่อยได้ไหมคะ,chuay phom noi dai mai khrab,,신규(검수 필요)
+175,직장,언제까지 끝내야 합니까?,When is the deadline?,ต้องเสร็จเมื่อไหร่ครับ,ต้องเสร็จเมื่อไหร่คะ,tong set muea-rai khrab,,신규(검수 필요)
+176,직장,다시 설명해 주시겠어요?,Could you explain it again?,ช่วยอธิบายอีกครั้งได้ไหมครับ,ช่วยอธิบายอีกครั้งได้ไหมคะ,chuay a-thi-baai eek khrang dai mai khrab,,신규(검수 필요)
+177,직장,알겠습니다. 바로 하겠습니다.,Understood. I'll do it right away.,เข้าใจแล้วครับ จะทำเลยครับ,เข้าใจแล้วค่ะ จะทำเลยค่ะ,"khao jai laeo khrab, ja tham loei khrab",,신규(검수 필요)
+178,직장,오늘 야근합니까?,Are we working overtime today?,วันนี้ทำโอทีไหมครับ,วันนี้ทำโอทีไหมคะ,wan nee tham oh-thee mai khrab,,신규(검수 필요)
+179,직장,월급날은 언제입니까?,When is payday?,เงินเดือนออกวันไหนครับ,เงินเดือนออกวันไหนคะ,ngern duean ork wan nai khrab,,신규(검수 필요)
+180,직장,휴가를 내고 싶습니다.,I'd like to take a day off.,ผมอยากลาหยุดครับ,ฉันอยากลาหยุดค่ะ,phom yaak laa yut khrab,,신규(검수 필요)
+181,도움,응급 상황입니다.,It's an emergency.,เป็นเหตุฉุกเฉินครับ,เป็นเหตุฉุกเฉินค่ะ,pen het chuk-chern khrab,,신규(검수 필요)
+182,도움,구급차를 불러 주세요.,Please call an ambulance.,ช่วยเรียกรถพยาบาลให้หน่อยครับ,ช่วยเรียกรถพยาบาลให้หน่อยค่ะ,chuay riak rot pha-yaa-baan hai noi khrab,,신규(검수 필요)
+183,도움,불이 났습니다.,There is a fire.,ไฟไหม้ครับ,ไฟไหม้ค่ะ,fai mai khrab,,신규(검수 필요)
+184,도움,여권을 잃어버렸습니다.,I lost my passport.,ผมทำพาสปอร์ตหายครับ,ฉันทำพาสปอร์ตหายค่ะ,phom tham phaat-sa-port haai khrab,,신규(검수 필요)
+185,도움,도둑맞았습니다.,I was robbed.,ผมโดนขโมยของครับ,ฉันโดนขโมยของค่ะ,phom dohn kha-moy khong khrab,,신규(검수 필요)
+186,도움,대사관에 연락하고 싶습니다.,I want to contact my embassy.,ผมอยากติดต่อสถานทูตครับ,ฉันอยากติดต่อสถานทูตค่ะ,phom yaak tit-tor sa-thaan-thuut khrab,,신규(검수 필요)
+187,도움,한국어 통역이 필요합니다.,I need a Korean interpreter.,ผมต้องการล่ามภาษาเกาหลีครับ,ฉันต้องการล่ามภาษาเกาหลีค่ะ,phom tong-gaan laam phaa-saa gao-lee khrab,,신규(검수 필요)
+188,도움,여기가 안전합니까?,Is it safe here?,ที่นี่ปลอดภัยไหมครับ,ที่นี่ปลอดภัยไหมคะ,thee nee plort-phai mai khrab,,신규(검수 필요)
+189,도움,경찰서는 어디입니까?,Where is the police station?,สถานีตำรวจอยู่ที่ไหนครับ,สถานีตำรวจอยู่ที่ไหนคะ,sa-thaa-nee tam-ruat yuu thee nai khrab,,신규(검수 필요)
+190,도움,분실물 센터는 어디입니까?,Where is the lost and found?,ศูนย์ของหายอยู่ที่ไหนครับ,ศูนย์ของหายอยู่ที่ไหนคะ,suun khong haai yuu thee nai khrab,,신규(검수 필요)
+191,일상,주말에 무엇을 하세요?,What do you do on weekends?,วันหยุดสุดสัปดาห์ทำอะไรครับ,วันหยุดสุดสัปดาห์ทำอะไรคะ,wan yut sut sap-daa tham a-rai khrab,,신규(검수 필요)
+192,일상,취미가 무엇입니까?,What are your hobbies?,งานอดิเรกคืออะไรครับ,งานอดิเรกคืออะไรคะ,ngaan a-di-rek khue a-rai khrab,,신규(검수 필요)
+193,일상,한국 음식을 좋아합니까?,Do you like Korean food?,ชอบอาหารเกาหลีไหมครับ,ชอบอาหารเกาหลีไหมคะ,chop aa-haan gao-lee mai khrab,,신규(검수 필요)
+194,일상,가장 좋아하는 음식은 무엇입니까?,What is your favorite food?,อาหารที่ชอบที่สุดคืออะไรครับ,อาหารที่ชอบที่สุดคืออะไรคะ,aa-haan thee chop thee-sut khue a-rai khrab,,신규(검수 필요)
+195,일상,한국은 처음입니까?,Is this your first time in Korea?,มาเกาหลีครั้งแรกหรือครับ,มาเกาหลีครั้งแรกหรือคะ,maa gao-lee khrang raek rue khrab,,신규(검수 필요)
+196,일상,사진 찍어 드릴까요?,Shall I take a photo for you?,ให้ผมถ่ายรูปให้ไหมครับ,ให้ฉันถ่ายรูปให้ไหมคะ,hai phom thaai ruup hai mai khrab,,신규(검수 필요)
+197,일상,연락처를 교환합시다.,Let's exchange contact information.,แลกเบอร์กันเถอะครับ,แลกเบอร์กันเถอะค่ะ,laek ber gan thuh khrab,,신규(검수 필요)
+198,일상,다음에 같이 식사해요.,Let's eat together next time.,ไว้ไปกินข้าวด้วยกันนะครับ,ไว้ไปกินข้าวด้วยกันนะค่ะ,wai pai gin khaao duay gan na khrab,,신규(검수 필요)
+199,일상,한국 생활은 어떻습니까?,How is life in Korea?,ชีวิตที่เกาหลีเป็นยังไงบ้างครับ,ชีวิตที่เกาหลีเป็นยังไงบ้างคะ,chee-wit thee gao-lee pen yang-ngai baang khrab,,신규(검수 필요)
+200,일상,만나서 즐거웠습니다.,It was nice meeting you.,ยินดีที่ได้เจอกันครับ,ยินดีที่ได้เจอกันค่ะ,yin-dee thee dai jer gan khrab,,신규(검수 필요)
