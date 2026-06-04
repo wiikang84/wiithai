@@ -141,7 +141,7 @@ window.THAI_PHRASES = [
   { c: "쇼핑", ko: "영업시간이 어떻게 됩니까?", th: "เปิดกี่โมงถึงกี่โมงครับ", ro: "pert gee mohng thueng gee mohng khrab" },
   { c: "쇼핑", ko: "이것 두 개 주세요.", th: "ขออันนี้สองชิ้นครับ", ro: "khor an nee song chin khrab" },
   { c: "쇼핑", ko: "더 큰 것 있습니까?", th: "มีอันใหญ่กว่านี้ไหมครับ", ro: "mee an yai gwaa nee mai khrab" },
-  { c: "쇼핑", ko: "인기 있는 것은 무엇입니까?", th: "อันไหนขายดีครับ", ro: "an nai khaai dee khrab" },
+  { c: "쇼핑", ko: "인기 있는 것은 무엇입니까?", th: "อันไหนขายดีครับ", ro: "an nai khaai dee khrab", thFemale: "อันไหนขายดีคะ", roFemale: "an nai khaai dee kha" }, // 의문사가 문중이라 여성형 명시 (2026-06-04)
 
   { c: "병원", ko: "병원은 어디에 있습니까?", th: "โรงพยาบาลอยู่ที่ไหนครับ", ro: "rohng-pha-yaa-baan yuu thee nai khrab" },
   { c: "병원", ko: "약국은 어디에 있습니까?", th: "ร้านขายยาอยู่ที่ไหนครับ", ro: "raan khaai yaa yuu thee nai khrab" },
@@ -226,7 +226,9 @@ function makeFemaleThai(text) {
     .replaceAll("ผม", "ฉัน")
     .replaceAll("ครับ", "ค่ะ");
 
-  const questionPatterns = ["ไหมค่ะ", "อะไรค่ะ", "ที่ไหนค่ะ", "เท่าไหร่ค่ะ", "กี่โมงค่ะ"];
+  // const questionPatterns = ["ไหมค่ะ", "อะไรค่ะ", "ที่ไหนค่ะ", "เท่าไหร่ค่ะ", "กี่โมงค่ะ"]; // 구 코드: #101~200 확장 의문문 미포함 (2026-06-04 보강)
+  // 의문문 끝은 ค่ะ가 아니라 คะ. "ไหนค่ะ"는 ที่ไหน/อันไหน/วันไหน 모두 포괄
+  const questionPatterns = ["ไหมค่ะ", "อะไรค่ะ", "ไหนค่ะ", "เท่าไหร่ค่ะ", "กี่โมงค่ะ", "เมื่อไหร่ค่ะ", "กี่ครั้งค่ะ", "กี่ปีค่ะ", "หรือค่ะ", "บ้างค่ะ"];
   questionPatterns.forEach((pattern) => {
     value = value.replaceAll(pattern, pattern.replace("ค่ะ", "คะ"));
   });
