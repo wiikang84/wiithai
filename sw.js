@@ -1,7 +1,7 @@
 // wiiInfo 서비스워커 (2026-06-04 PWA 도입)
 // 배포 시 SW_VERSION을 index.html ?v= / app.js ASSET_VERSION과 같이 올릴 것
 // 주의: controllerchange 자동 reload 금지 (구버전-신버전 충돌로 무한 새로고침 사고 예방)
-const SW_VERSION = "20260604-07";
+const SW_VERSION = "20260604-08";
 const CORE_CACHE = `wiiinfo-core-${SW_VERSION}`;
 const AUDIO_CACHE = "wiiinfo-audio-v1"; // 재생한 mp3만 저장. 음성 파일을 다시 생성하면 v2로 올릴 것
 const RUNTIME_CACHE = "wiiinfo-runtime-v1"; // firebase SDK 등 CDN
@@ -66,7 +66,15 @@ async function cacheFirst(request, cacheName) {
   const cached = await cache.match(request, { ignoreSearch: true });
   if (cached) return cached;
   const response = await fetch(request);
-  if (response.ok) cache.put(request, response.clone());
+  // if (response.ok) cache.put(request, response.clone()); // 구 코드: 206(Range 부분응답)은 put이 실패해서 오디오가 캐시 안 됨 (2026-06-04 수정)
+  if (response.status === 200) {
+    cache.put(request, response.clone()).catch(() => {});
+  } else if (response.status === 206) {
+    // Range 응답은 캐시에 저장할 수 없으므로 전체 파일을 백그라운드로 받아 저장
+    fetch(request.url)
+      .then((full) => { if (full.status === 200) return cache.put(request.url, full); })
+      .catch(() => {});
+  }
   return response;
 }
 
