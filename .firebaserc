@@ -5,9 +5,6 @@
   "targets": {
     "wiigame-448c7": {
       "hosting": {
-        "wiithai": [
-          "wiithai"
-        ],
         "wiiinfo": [
           "wiiinfo"
         ]
