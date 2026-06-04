@@ -1,5 +1,5 @@
 (async function () {
-  const ASSET_VERSION = "20260604-04";
+  const ASSET_VERSION = "20260604-05";
   const LANGUAGES = window.WIIINFO_LANGUAGES || {};
   const LANGUAGE_NAMES = window.WIIINFO_LANGUAGE_NAMES || {};
   const PROFILES = window.WIIINFO_LEARNER_PROFILES || [];
@@ -185,6 +185,27 @@
     ids.add(id);
     localStorage.setItem("wiiinfoTodayLearned", JSON.stringify({ date: todayKey(), ids: [...ids] }));
     todayCount.textContent = ids.size;
+  }
+
+  // Firebase Analytics (2026-06-04 도입) — 어느 나라 사용자가 어떤 언어 조합을 쓰는지 파악용
+  let analytics = null;
+  function initAnalytics() {
+    try {
+      if (window.firebase?.analytics && window.WIIINFO_FIREBASE_CONFIG?.measurementId) {
+        if (!firebase.apps.length) firebase.initializeApp(window.WIIINFO_FIREBASE_CONFIG);
+        analytics = firebase.analytics();
+      }
+    } catch (error) {
+      console.warn("Analytics 초기화 실패 (앱 동작에는 영향 없음)", error);
+    }
+  }
+
+  function track(eventName, params) {
+    try {
+      if (analytics) analytics.logEvent(eventName, params || {});
+    } catch (error) {
+      // 수집 실패는 앱 동작에 영향 주지 않도록 무시
+    }
   }
 
   function getVoice(lang) {
@@ -657,6 +678,7 @@
     detailModal.hidden = false;
     document.body.classList.add("modalOpen");
     detailModal.querySelector(".infoDetailClose").focus();
+    track("open_info_detail", { section: section.id, lang: sourceLang }); // Analytics (2026-06-04)
   }
 
   function closeInfoDetail() {
@@ -714,6 +736,7 @@
       card.querySelector(".speakButton").addEventListener("click", () => {
         speak(targetText, getPhraseAudioUrl(item, targetLang), LANGUAGES[targetLang]?.speech || "ko-KR");
         markLearned(`${targetLang}:${id}`); // 오늘 학습 카운트 (2026-06-04)
+        track("play_phrase_audio", { lang: targetLang, item: audioNumber }); // Analytics (2026-06-04)
       });
       reveal.addEventListener("click", () => {
         card.classList.toggle("hiddenThai");
@@ -785,6 +808,7 @@
         const text = `${item.char} ${item.name}`;
         speak(text, getLetterAudioUrl(item.audioIndex, targetLang), LANGUAGES[targetLang]?.speech || "ko-KR");
         markLearned(`letter-${targetLang}:${formatIndex(item.audioIndex)}`); // 오늘 학습 카운트 (2026-06-04)
+        track("play_letter_audio", { lang: targetLang }); // Analytics (2026-06-04)
       });
       letterList.appendChild(card);
     });
@@ -809,6 +833,7 @@
     targetLang = activeProfile.targets[0];
     localStorage.setItem("wiiinfoProfileId", profileId);
     localStorage.setItem("wiiinfoTargetLang", targetLang);
+    track("select_profile", { profile: profileId, target: targetLang }); // Analytics (2026-06-04)
     state.category = "전체";
     state.search = "";
     searchInput.value = "";
@@ -825,6 +850,7 @@
   function setTarget(lang) {
     targetLang = lang;
     localStorage.setItem("wiiinfoTargetLang", targetLang);
+    track("select_target", { source: sourceLang, target: targetLang }); // Analytics (2026-06-04)
     state.category = "전체";
     state.search = "";
     searchInput.value = "";
@@ -906,8 +932,8 @@
     state.quiz = event.target.checked;
     render();
   });
-  phrasesModeButton.addEventListener("click", () => setMode("phrases"));
-  lettersModeButton.addEventListener("click", () => setMode("letters"));
+  phrasesModeButton.addEventListener("click", () => { setMode("phrases"); track("select_mode", { mode: "phrases" }); }); // Analytics (2026-06-04)
+  lettersModeButton.addEventListener("click", () => { setMode("letters"); track("select_mode", { mode: "letters" }); }); // Analytics (2026-06-04)
   femaleVoiceButton.addEventListener("click", () => setVoice("female"));
   maleVoiceButton.addEventListener("click", () => setVoice("male"));
   homeFlagButton.addEventListener("click", goHome);
@@ -923,6 +949,8 @@
   });
 
   if ("speechSynthesis" in window) speechSynthesis.onvoiceschanged = () => getVoice("th-TH");
+  initAnalytics(); // Analytics (2026-06-04)
+  track("app_start", { profile: profileId, source: sourceLang, target: targetLang });
   const firebasePhrases = await loadFirebasePhrases();
   if (firebasePhrases.length > 0) phrases = firebasePhrases;
 

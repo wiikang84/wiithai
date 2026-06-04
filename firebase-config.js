@@ -4,7 +4,8 @@ window.WIIINFO_FIREBASE_CONFIG = {
   projectId: "wiigame-448c7",
   storageBucket: "wiigame-448c7.firebasestorage.app",
   messagingSenderId: "818513928188",
-  appId: "1:818513928188:web:9018c4024701d0df13dc79"
+  appId: "1:818513928188:web:9018c4024701d0df13dc79",
+  measurementId: "G-4YQ97308W9" // Analytics 도입 (2026-06-04, firebase apps:sdkconfig에서 확인)
 };
 
 window.WIIINFO_FIRESTORE_COLLECTION = "wiiinfoPhrases";
