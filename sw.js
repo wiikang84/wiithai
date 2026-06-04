@@ -1,9 +1,10 @@
 // wiiInfo 서비스워커 (2026-06-04 PWA 도입)
 // 배포 시 SW_VERSION을 index.html ?v= / app.js ASSET_VERSION과 같이 올릴 것
 // 주의: controllerchange 자동 reload 금지 (구버전-신버전 충돌로 무한 새로고침 사고 예방)
-const SW_VERSION = "20260604-10";
+const SW_VERSION = "20260604-11";
 const CORE_CACHE = `wiiinfo-core-${SW_VERSION}`;
-const AUDIO_CACHE = "wiiinfo-audio-v1"; // 재생한 mp3만 저장. 음성 파일을 다시 생성하면 v2로 올릴 것
+// const AUDIO_CACHE = "wiiinfo-audio-v1"; // 구 버전 (2026-06-04 문자 음성 재생성으로 v2 승격)
+const AUDIO_CACHE = "wiiinfo-audio-v2"; // 재생한 mp3만 저장. 음성 파일을 다시 생성하면 버전을 올릴 것
 const RUNTIME_CACHE = "wiiinfo-runtime-v1"; // firebase SDK 등 CDN
 
 const CORE_ASSETS = [
@@ -30,7 +31,11 @@ self.addEventListener("activate", (event) => {
     caches.keys()
       .then((keys) => Promise.all(
         keys
-          .filter((key) => key.startsWith("wiiinfo-core-") && key !== CORE_CACHE)
+          // 구 코드: core 캐시만 정리 → 오디오 캐시 버전업 시 구 버전이 남음 (2026-06-04 보강)
+          .filter((key) =>
+            (key.startsWith("wiiinfo-core-") && key !== CORE_CACHE) ||
+            (key.startsWith("wiiinfo-audio-") && key !== AUDIO_CACHE)
+          )
           .map((key) => caches.delete(key))
       ))
       .then(() => self.clients.claim())

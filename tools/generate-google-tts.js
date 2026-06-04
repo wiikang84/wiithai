@@ -16,6 +16,7 @@ const voiceName = process.env.WIIINFO_TTS_VOICE || "th-TH-Standard-A";
 const languageCode = process.env.WIIINFO_TTS_LANGUAGE || "th-TH";
 const phraseField = process.env.WIIINFO_PHRASE_FIELD || "th";
 const includeLetters = process.env.WIIINFO_INCLUDE_LETTERS !== "false";
+const skipPhrases = process.env.WIIINFO_SKIP_PHRASES === "true"; // 문자 음성만 다시 만들 때 사용 (2026-06-04)
 const letterSource = process.env.WIIINFO_LETTER_SOURCE || "thai";
 const overwrite = process.env.WIIINFO_TTS_OVERWRITE === "true";
 const phrases = process.env.WIIINFO_USE_MULTI_PHRASES === "false"
@@ -129,18 +130,20 @@ async function main() {
   let written = 0;
   let skipped = 0;
 
-  for (const [index, phrase] of phrases.entries()) {
-    const filePath = path.join(phraseDir, `${String(index + 1).padStart(3, "0")}.mp3`);
-    const text = phrase[phraseField];
-    if (!text) {
-      console.log(`skip phrase ${index + 1}: missing ${phraseField}`);
-      skipped += 1;
-      continue;
+  if (!skipPhrases) {
+    for (const [index, phrase] of phrases.entries()) {
+      const filePath = path.join(phraseDir, `${String(index + 1).padStart(3, "0")}.mp3`);
+      const text = phrase[phraseField];
+      if (!text) {
+        console.log(`skip phrase ${index + 1}: missing ${phraseField}`);
+        skipped += 1;
+        continue;
+      }
+      const result = await writeAudio(token, text, filePath);
+      written += result === "write" ? 1 : 0;
+      skipped += result === "skip" ? 1 : 0;
+      console.log(`${result} phrase ${index + 1}: ${text}`);
     }
-    const result = await writeAudio(token, text, filePath);
-    written += result === "write" ? 1 : 0;
-    skipped += result === "skip" ? 1 : 0;
-    console.log(`${result} phrase ${index + 1}: ${text}`);
   }
 
   if (includeLetters) {
@@ -150,7 +153,7 @@ async function main() {
     }
     for (const [index, letter] of letters.entries()) {
       const filePath = path.join(letterDir, `${String(index + 1).padStart(3, "0")}.mp3`);
-      const text = `${letter.char} ${letter.name}`;
+      const text = letter.tts || `${letter.char} ${letter.name}`; // tts 필드가 있으면 자연스러운 발음 텍스트 우선 (2026-06-04)
       const result = await writeAudio(token, text, filePath);
       written += result === "write" ? 1 : 0;
       skipped += result === "skip" ? 1 : 0;
