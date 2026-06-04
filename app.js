@@ -1,5 +1,5 @@
 (async function () {
-  const ASSET_VERSION = "20260604-12";
+  const ASSET_VERSION = "20260604-13";
   const LANGUAGES = window.WIIINFO_LANGUAGES || {};
   const LANGUAGE_NAMES = window.WIIINFO_LANGUAGE_NAMES || {};
   const PROFILES = window.WIIINFO_LEARNER_PROFILES || [];
@@ -1006,8 +1006,11 @@
   if ("speechSynthesis" in window) speechSynthesis.onvoiceschanged = () => getVoice("th-TH");
   initAnalytics(); // Analytics (2026-06-04)
   track("app_start", { profile: profileId, source: sourceLang, target: targetLang });
-  const firebasePhrases = await loadFirebasePhrases();
-  if (firebasePhrases.length > 0) phrases = firebasePhrases;
+  // Firestore 문장 로드 비활성화 (2026-06-04 구조 정리): wiiinfoPhrases 컬렉션이 비어 있어
+  // 매 방문마다 불필요한 쿼리만 발생했음. 콘텐츠는 로컬 js로 운영.
+  // 재활성화: 아래 두 줄 주석 해제 + index.html의 firestore-compat 스크립트 주석 해제
+  // const firebasePhrases = await loadFirebasePhrases();
+  // if (firebasePhrases.length > 0) phrases = firebasePhrases;
 
   refreshCategories();
   resetVisibleLimit();

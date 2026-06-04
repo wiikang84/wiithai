@@ -56,9 +56,11 @@ node tools/generate-voice-batch.js       # 언어×성별 일괄 생성
 
 여성형은 기본 `audio` 폴더(`audio/phrases/001.mp3`), 남성형은 `audio-male/phrases/001.mp3`를 사용합니다. Firestore 사용 시 `thMale`, `thFemale`, `roMale`, `roFemale`, `audioUrlMale` 필드를 넣을 수 있고, `thFemale`이 없으면 앱이 기본 규칙으로 여성형을 자동 생성합니다.
 
-## Firestore (선택)
+## Firestore (현재 비활성화)
 
-앱은 먼저 `wiiinfoPhrases` 컬렉션을 읽고, 데이터가 없으면 로컬 문장(`phrases.js` + `multilingual-data.js`)으로 동작합니다. 현재는 로컬 데이터로 운영 중입니다.
+콘텐츠는 로컬 js(`phrases.js` + `multilingual-data.js`)로 운영합니다. Firestore `wiiinfoPhrases` 로드는 2026-06-04 구조 정리에서 비활성화했습니다 (컬렉션이 비어 있어 매 방문 불필요 쿼리만 발생).
+
+재활성화 방법: `app.js` 하단의 `loadFirebasePhrases()` 호출 주석 해제 + `index.html`의 firestore-compat 스크립트 주석 해제.
 
 ```json
 {
