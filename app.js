@@ -1,5 +1,5 @@
 (async function () {
-  const ASSET_VERSION = "20260604-01";
+  const ASSET_VERSION = "20260604-02";
   const LANGUAGES = window.WIIINFO_LANGUAGES || {};
   const LANGUAGE_NAMES = window.WIIINFO_LANGUAGE_NAMES || {};
   const PROFILES = window.WIIINFO_LEARNER_PROFILES || [];
@@ -19,12 +19,18 @@
     audioUrl: item.audioUrl || `./audio/phrases/${String(index + 1).padStart(3, "0")}.mp3`
   }));
 
+  // 구 키(thaiPhraseFavorites) → 신 키(wiiinfoFavorites) 즐겨찾기 1회 마이그레이션 (2026-06-04)
+  if (!localStorage.getItem("wiiinfoFavorites") && localStorage.getItem("thaiPhraseFavorites")) {
+    localStorage.setItem("wiiinfoFavorites", localStorage.getItem("thaiPhraseFavorites"));
+  }
+
   const state = {
     category: "전체",
     search: "",
     quiz: false,
     info: "life",
-    favorites: new Set(readJson("thaiPhraseFavorites", []))
+    // favorites: new Set(readJson("thaiPhraseFavorites", [])) // 구 키 (2026-06-04 wiiinfoFavorites로 교체)
+    favorites: new Set(readJson("wiiinfoFavorites", []))
   };
 
   const list = document.getElementById("phraseList");
@@ -153,7 +159,8 @@
   }
 
   function saveFavorites() {
-    localStorage.setItem("thaiPhraseFavorites", JSON.stringify([...state.favorites]));
+    // localStorage.setItem("thaiPhraseFavorites", JSON.stringify([...state.favorites])); // 구 키 (2026-06-04 wiiinfoFavorites로 교체)
+    localStorage.setItem("wiiinfoFavorites", JSON.stringify([...state.favorites]));
     favoriteCount.textContent = state.favorites.size;
   }
 
