@@ -1,5 +1,5 @@
 (async function () {
-  const ASSET_VERSION = "20260604-05";
+  const ASSET_VERSION = "20260604-06";
   const LANGUAGES = window.WIIINFO_LANGUAGES || {};
   const LANGUAGE_NAMES = window.WIIINFO_LANGUAGE_NAMES || {};
   const PROFILES = window.WIIINFO_LEARNER_PROFILES || [];
@@ -73,15 +73,40 @@
   const infoPanel = document.querySelector(".infoPanel");
   const detailModal = createInfoDetailModal();
 
+  // URL 딥링크: ?from=국가&learn=언어 (2026-06-04) 예: https://wiiinfo.web.app/?from=th&learn=ko
+  const urlParams = new URLSearchParams(location.search);
+  const urlFrom = (urlParams.get("from") || "").toLowerCase();
+  const urlLearn = (urlParams.get("learn") || "").toLowerCase();
+  const hasValidUrlFrom = PROFILES.some((profile) => profile.id === urlFrom);
+
   let categories = [];
   let currentMode = "phrases";
   let visibleLimit = 0;
   let voiceMode = localStorage.getItem("wiiinfoVoiceMode") || "female";
-  let profileId = localStorage.getItem("wiiinfoProfileId") || preferredProfileId();
+  // let profileId = localStorage.getItem("wiiinfoProfileId") || preferredProfileId(); // 구 코드 (2026-06-04 URL 파라미터 우선)
+  let profileId = hasValidUrlFrom ? urlFrom : (localStorage.getItem("wiiinfoProfileId") || preferredProfileId());
   let activeProfile = getProfile(profileId);
   let sourceLang = activeProfile.source;
-  let targetLang = localStorage.getItem("wiiinfoTargetLang") || activeProfile.targets[0];
+  // let targetLang = localStorage.getItem("wiiinfoTargetLang") || activeProfile.targets[0]; // 구 코드 (2026-06-04 URL 파라미터 우선)
+  let targetLang = activeProfile.targets.includes(urlLearn) ? urlLearn : (localStorage.getItem("wiiinfoTargetLang") || activeProfile.targets[0]);
   if (!activeProfile.targets.includes(targetLang)) targetLang = activeProfile.targets[0];
+  // 딥링크로 열었으면 선택을 저장해 다음 방문에도 유지 (2026-06-04)
+  if (hasValidUrlFrom) {
+    localStorage.setItem("wiiinfoProfileId", profileId);
+    localStorage.setItem("wiiinfoTargetLang", targetLang);
+  }
+
+  // 현재 상태를 URL에 반영 — 주소만 복사해도 같은 화면이 열리는 공유용 딥링크 (2026-06-04)
+  function syncUrl() {
+    try {
+      const params = new URLSearchParams(location.search);
+      params.set("from", profileId);
+      params.set("learn", targetLang);
+      history.replaceState(null, "", `${location.pathname}?${params.toString()}`);
+    } catch (error) {
+      // file:// 등 replaceState 미지원 환경은 무시
+    }
+  }
 
   function readJson(key, fallback) {
     try {
@@ -833,6 +858,7 @@
     targetLang = activeProfile.targets[0];
     localStorage.setItem("wiiinfoProfileId", profileId);
     localStorage.setItem("wiiinfoTargetLang", targetLang);
+    syncUrl(); // 딥링크 URL 갱신 (2026-06-04)
     track("select_profile", { profile: profileId, target: targetLang }); // Analytics (2026-06-04)
     state.category = "전체";
     state.search = "";
@@ -850,6 +876,7 @@
   function setTarget(lang) {
     targetLang = lang;
     localStorage.setItem("wiiinfoTargetLang", targetLang);
+    syncUrl(); // 딥링크 URL 갱신 (2026-06-04)
     track("select_target", { source: sourceLang, target: targetLang }); // Analytics (2026-06-04)
     state.category = "전체";
     state.search = "";
@@ -964,4 +991,5 @@
   renderInfoHub();
   setVoice(voiceMode);
   setMode("phrases");
+  syncUrl(); // 첫 화면부터 주소가 공유 가능한 딥링크가 되도록 (2026-06-04)
 })();
