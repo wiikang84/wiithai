@@ -1,6 +1,6 @@
 {
   "hosting": {
-    "target": "wiithai",
+    "target": "wiiinfo",
     "public": ".",
     "ignore": ["firebase.json", "firestore.rules", "README.md", "**/.*"],
     "headers": [
