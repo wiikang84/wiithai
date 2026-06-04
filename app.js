@@ -1,5 +1,5 @@
 (async function () {
-  const ASSET_VERSION = "20260604-08";
+  const ASSET_VERSION = "20260604-09";
   const LANGUAGES = window.WIIINFO_LANGUAGES || {};
   const LANGUAGE_NAMES = window.WIIINFO_LANGUAGE_NAMES || {};
   const PROFILES = window.WIIINFO_LEARNER_PROFILES || [];
@@ -353,6 +353,8 @@
 
   function speak(text, audioUrl, lang) {
     if (audioUrl) {
+      // 미디어 요청은 SW 캐시에 저장되지 않는 경우가 있어 fetch로도 요청해 오프라인 캐시에 적재 (2026-06-04, HTTP 캐시 덕에 이중 다운로드 부담 없음)
+      if ("serviceWorker" in navigator && navigator.serviceWorker.controller) fetch(audioUrl).catch(() => {});
       const audio = new Audio(audioUrl);
       audio.play().catch(() => speak(text, "", lang));
       return;
