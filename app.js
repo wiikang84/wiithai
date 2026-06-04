@@ -1,5 +1,5 @@
 (async function () {
-  const ASSET_VERSION = "20260604-03";
+  const ASSET_VERSION = "20260604-04";
   const LANGUAGES = window.WIIINFO_LANGUAGES || {};
   const LANGUAGE_NAMES = window.WIIINFO_LANGUAGE_NAMES || {};
   const PROFILES = window.WIIINFO_LEARNER_PROFILES || [];
@@ -168,6 +168,25 @@
     favoriteCount.textContent = state.favorites.size;
   }
 
+  // 오늘 학습 카운트: 오늘 음성을 들은 항목 수 (2026-06-04 구현, 이전엔 항상 0 표시)
+  function todayKey() {
+    const now = new Date();
+    return `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}-${String(now.getDate()).padStart(2, "0")}`;
+  }
+
+  function todayLearnedCount() {
+    const saved = readJson("wiiinfoTodayLearned", { date: "", ids: [] });
+    return saved.date === todayKey() ? saved.ids.length : 0;
+  }
+
+  function markLearned(id) {
+    const saved = readJson("wiiinfoTodayLearned", { date: "", ids: [] });
+    const ids = new Set(saved.date === todayKey() ? saved.ids : []);
+    ids.add(id);
+    localStorage.setItem("wiiinfoTodayLearned", JSON.stringify({ date: todayKey(), ids: [...ids] }));
+    todayCount.textContent = ids.size;
+  }
+
   function getVoice(lang) {
     if (!("speechSynthesis" in window)) return null;
     const voices = speechSynthesis.getVoices();
@@ -309,7 +328,8 @@
     const keyword = state.search.trim().toLowerCase();
     return availablePhrases().filter((item) => {
       const inCategory = state.category === "전체" || item.c === state.category;
-      const text = `${getText(item, sourceLang)} ${getText(item, targetLang)} ${getRoman(item, targetLang)} ${item.c}`.toLowerCase();
+      // const text = `${getText(item, sourceLang)} ${getText(item, targetLang)} ${getRoman(item, targetLang)} ${item.c}`.toLowerCase(); // 구 코드: 카테고리가 한국어 키로만 검색됨 (2026-06-04 번역 라벨 추가)
+      const text = `${getText(item, sourceLang)} ${getText(item, targetLang)} ${getRoman(item, targetLang)} ${item.c} ${categoryLabel(item.c)}`.toLowerCase();
       return inCategory && (!keyword || text.includes(keyword));
     });
   }
@@ -323,14 +343,16 @@
   }
 
   function renderProfileTabs() {
+    // 구 코드: 전부 영어 하드코딩 (Korea, Thailand, ...) — 2026-06-04 자국어 표기로 교체
+    // 국가 선택은 언어를 고르기 전 화면이므로 각 나라를 자국어로 표기 (언어 선택기 표준 패턴)
     const countryNames = {
-      ko: "Korea",
-      th: "Thailand",
-      ja: "Japan",
-      en: "USA",
-      zh: "China",
-      vi: "Vietnam",
-      es: "Spain"
+      ko: "한국",
+      th: "ไทย",
+      ja: "日本",
+      en: "USA · English",
+      zh: "中国",
+      vi: "Việt Nam",
+      es: "España"
     };
     profileTabs.innerHTML = "";
     PROFILES.forEach((profile) => {
@@ -404,7 +426,8 @@
       item.tabIndex = 0;
       item.setAttribute("role", "button");
       item.setAttribute("aria-label", `${card.title} ${detailLabel("viewDetail")}`);
-      item.innerHTML = `<strong>${card.title}</strong><p>${card.text}</p>`;
+      // item.innerHTML = `<strong>${card.title}</strong><p>${card.text}</p>`; // 구 코드 (2026-06-04 escapeHtml 적용)
+      item.innerHTML = `<strong>${escapeHtml(card.title)}</strong><p>${escapeHtml(card.text)}</p>`;
       item.addEventListener("click", () => openInfoDetail(card, selected));
       item.addEventListener("keydown", (event) => {
         if (event.key === "Enter" || event.key === " ") {
@@ -429,9 +452,10 @@
       const image = card.detail?.images?.[0] || {};
       return { ...image, label: card.title };
     });
+    // 2026-06-04 escapeHtml 적용 (구 코드: image.src/alt/label 원본 그대로 삽입)
     visual.innerHTML = images.map((image, index) => image.src
-      ? `<figure class="${index === 0 ? "featured" : ""}" role="button" tabindex="0" data-card-index="${index}" aria-label="${image.label} ${detailLabel("viewDetail")}"><img src="${image.src}" alt="${image.alt || image.label}" loading="lazy" /><figcaption>${image.label}</figcaption></figure>`
-      : `<figure class="imageFallback ${index === 0 ? "featured" : ""}" role="button" tabindex="0" data-card-index="${index}" aria-label="${image.label} ${detailLabel("viewDetail")}"><span>${image.label}</span></figure>`).join("");
+      ? `<figure class="${index === 0 ? "featured" : ""}" role="button" tabindex="0" data-card-index="${index}" aria-label="${escapeHtml(image.label)} ${detailLabel("viewDetail")}"><img src="${escapeHtml(image.src)}" alt="${escapeHtml(image.alt || image.label)}" loading="lazy" /><figcaption>${escapeHtml(image.label)}</figcaption></figure>`
+      : `<figure class="imageFallback ${index === 0 ? "featured" : ""}" role="button" tabindex="0" data-card-index="${index}" aria-label="${escapeHtml(image.label)} ${detailLabel("viewDetail")}"><span>${escapeHtml(image.label)}</span></figure>`).join("");
     visual.querySelectorAll("figure").forEach((figure) => {
       const open = () => {
         const card = section.cards[Number(figure.dataset.cardIndex)];
@@ -450,7 +474,7 @@
         const figure = image.closest("figure");
         if (!figure) return;
         figure.classList.add("imageFallback");
-        figure.innerHTML = `<span>${image.alt || ""}</span>`;
+        figure.innerHTML = `<span>${escapeHtml(image.alt || "")}</span>`; // 2026-06-04 escapeHtml 적용
       }, { once: true });
     });
   }
@@ -572,15 +596,16 @@
 
     detailModal.querySelector(".infoDetailClose").setAttribute("aria-label", detailLabel("close"));
 
+    // 2026-06-04 escapeHtml 적용 (구 코드: image.src/alt/card.title 원본 그대로 삽입)
     gallery.innerHTML = images.map((image, index) => image.src
-      ? `<figure class="${index === 0 ? "featured" : ""}"><img src="${image.src}" alt="${image.alt || card.title}" loading="lazy" /><figcaption>${image.alt || card.title}</figcaption></figure>`
-      : `<figure class="imageFallback featured"><span>${card.title}</span></figure>`).join("");
+      ? `<figure class="${index === 0 ? "featured" : ""}"><img src="${escapeHtml(image.src)}" alt="${escapeHtml(image.alt || card.title)}" loading="lazy" /><figcaption>${escapeHtml(image.alt || card.title)}</figcaption></figure>`
+      : `<figure class="imageFallback featured"><span>${escapeHtml(card.title)}</span></figure>`).join("");
     gallery.querySelectorAll("img").forEach((image) => {
       image.addEventListener("error", () => {
         const figure = image.closest("figure");
         if (!figure) return;
         figure.classList.add("imageFallback");
-        figure.innerHTML = `<span>${image.alt || card.title}</span>`;
+        figure.innerHTML = `<span>${escapeHtml(image.alt || card.title)}</span>`; // 2026-06-04 escapeHtml 적용
       }, { once: true });
     });
 
@@ -593,9 +618,10 @@
       detail.directions ? [detailLabel("directions"), detail.directions] : null,
       detail.hours ? [detailLabel("hours"), detail.hours] : null
     ].filter(Boolean);
-    meta.innerHTML = metaRows.map(([label, value]) => `<div><span>${label}</span><strong>${value}</strong></div>`).join("");
+    // 2026-06-04 escapeHtml 적용 (구 코드: value/mapUrl 원본 그대로 삽입)
+    meta.innerHTML = metaRows.map(([label, value]) => `<div><span>${escapeHtml(label)}</span><strong>${escapeHtml(value)}</strong></div>`).join("");
     if (detail.mapUrl) {
-      meta.innerHTML += `<a class="mapLink" href="${detail.mapUrl}" target="_blank" rel="noopener">${detailLabel("map")}</a>`;
+      meta.innerHTML += `<a class="mapLink" href="${escapeHtml(detail.mapUrl)}" target="_blank" rel="noopener">${detailLabel("map")}</a>`;
     }
 
     actions.innerHTML = (detail.actions || []).map((action, index) => {
@@ -620,10 +646,11 @@
       });
     });
 
+    // 2026-06-04 escapeHtml 적용 (구 코드: group.title/items 원본 그대로 삽입)
     sections.innerHTML = (detail.sections || []).map((group) => `
       <section>
-        <h3>${group.title}</h3>
-        <ul>${(group.items || []).map((item) => `<li>${item}</li>`).join("")}</ul>
+        <h3>${escapeHtml(group.title)}</h3>
+        <ul>${(group.items || []).map((item) => `<li>${escapeHtml(item)}</li>`).join("")}</ul>
       </section>
     `).join("");
 
@@ -647,7 +674,8 @@
     letterList.setAttribute("aria-label", uiText("letterListLabel"));
     totalCount.textContent = items.length;
     favoriteCount.textContent = state.favorites.size;
-    todayCount.textContent = "0";
+    // todayCount.textContent = "0"; // 구 코드: 항상 0 (2026-06-04 실제 카운트로 교체)
+    todayCount.textContent = todayLearnedCount();
 
     visibleItems.forEach((item, index) => {
       const id = item.id || `phrase-${formatIndex(item.audioIndex)}`;
@@ -685,6 +713,7 @@
 
       card.querySelector(".speakButton").addEventListener("click", () => {
         speak(targetText, getPhraseAudioUrl(item, targetLang), LANGUAGES[targetLang]?.speech || "ko-KR");
+        markLearned(`${targetLang}:${id}`); // 오늘 학습 카운트 (2026-06-04)
       });
       reveal.addEventListener("click", () => {
         card.classList.toggle("hiddenThai");
@@ -740,7 +769,8 @@
       return !keyword || text.includes(keyword);
     });
     totalCount.textContent = filtered.length;
-    todayCount.textContent = "0";
+    // todayCount.textContent = "0"; // 구 코드: 항상 0 (2026-06-04 실제 카운트로 교체)
+    todayCount.textContent = todayLearnedCount();
 
     filtered.forEach((item) => {
       const card = letterTemplate.content.firstElementChild.cloneNode(true);
@@ -754,6 +784,7 @@
       card.querySelector(".letterSpeakButton").addEventListener("click", () => {
         const text = `${item.char} ${item.name}`;
         speak(text, getLetterAudioUrl(item.audioIndex, targetLang), LANGUAGES[targetLang]?.speech || "ko-KR");
+        markLearned(`letter-${targetLang}:${formatIndex(item.audioIndex)}`); // 오늘 학습 카운트 (2026-06-04)
       });
       letterList.appendChild(card);
     });
