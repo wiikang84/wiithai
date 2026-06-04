@@ -102,7 +102,7 @@ const WIIINFO_KOREA_INFO_KO = [
     { title: "05. 롯데월드·석촌호수", text: "실내 놀이공원, 쇼핑몰, 호수 산책을 한 코스로 묶기 좋습니다." },
     { title: "06. 남이섬", text: "사진 찍기 좋은 숲길과 드라마 이미지가 강해 가족·커플 여행객에게 잘 맞습니다." },
     { title: "07. 부산 해운대·광안리", text: "바다, 야경, 해산물, 카페 거리까지 외국인이 이해하기 쉬운 부산 대표 코스입니다." },
-    { title: "08. 제주 성산·올레길", text: "자연 풍경, 해안 산책, 사진 명소를 좋아하는 여행객에게 추천하기 좋습니다." },
+    { title: "08. 수원 화성", text: "서울에서 지하철로 가는 유네스코 성곽 도시로, 성곽 산책과 야경, 행궁 골목을 하루에 즐깁니다." },
     { title: "09. 경주 불국사·대릉원", text: "한국 역사와 조용한 도시 분위기를 함께 느낄 수 있는 대표 문화 여행지입니다." },
     { title: "10. 전주 한옥마을", text: "한옥, 한복, 길거리 음식, 전통 분위기를 하루 코스로 즐기기 좋습니다." }
   ] },
@@ -153,7 +153,7 @@ const WIIINFO_KOREA_INFO_EN = [
     { title: "05. Lotte World and Seokchon Lake", text: "Theme park, shopping, and a lake walk in one convenient area." },
     { title: "06. Nami Island", text: "Tree-lined photo spots and drama memories make it popular with couples and families." },
     { title: "07. Busan Haeundae and Gwangalli", text: "Beaches, seafood, cafes, and bridge night views make Busan easy to love." },
-    { title: "08. Jeju Seongsan and Olle Trails", text: "Coastal walks and volcanic scenery are strong choices for nature lovers." },
+    { title: "08. Suwon Hwaseong Fortress", text: "A UNESCO fortress city near Seoul with wall walks, night views, and palace alleys." },
     { title: "09. Gyeongju Bulguksa and Daereungwon", text: "A calm historic city route for Korean heritage and old-capital atmosphere." },
     { title: "10. Jeonju Hanok Village", text: "Hanok streets, hanbok, snacks, and traditional mood work well for a day trip." }
   ] },
@@ -218,7 +218,7 @@ const WIIINFO_LOCALIZED_INFO = {
       { title: "05. ロッテワールド・石村湖", text: "室内遊園地、ショッピングモール、湖の散歩を一つのコースにできます。" },
       { title: "06. 南怡島", text: "写真映えする並木道とドラマのイメージがあり、家族やカップルに合います。" },
       { title: "07. 釜山 海雲台・広安里", text: "海、夜景、海鮮、カフェ通りまで分かりやすい釜山代表コースです。" },
-      { title: "08. 済州 城山・オルレ道", text: "自然風景、海岸散歩、写真スポットが好きな旅行者におすすめです。" },
+      { title: "08. 水原 華城", text: "ソウルから地下鉄で行ける世界遺産の城郭都市。城壁散歩と夜景、行宮の路地が楽しめます。" },
       { title: "09. 慶州 仏国寺・大陵苑", text: "韓国の歴史と静かな古都の雰囲気を感じられる文化旅行地です。" },
       { title: "10. 全州 韓屋村", text: "韓屋、韓服、屋台フード、伝統的な雰囲気を日帰りで楽しめます。" }
     ],
@@ -272,7 +272,7 @@ const WIIINFO_LOCALIZED_INFO = {
       { title: "05. 乐天世界·石村湖", text: "室内游乐园、购物中心和湖边散步可以安排在同一路线。" },
       { title: "06. 南怡岛", text: "林荫路和韩剧形象明显，适合家庭和情侣游客。" },
       { title: "07. 釜山海云台·广安里", text: "大海、夜景、海鲜和咖啡街构成容易理解的釜山代表路线。" },
-      { title: "08. 济州城山·偶来小路", text: "适合喜欢自然风景、海岸散步和拍照景点的旅行者。" },
+      { title: "08. 水原华城", text: "从首尔坐地铁就能到的世界遗产城郭城市，可漫步城墙、看夜景、逛行宫街区。" },
       { title: "09. 庆州佛国寺·大陵苑", text: "可以感受韩国历史和安静古都氛围的文化旅行地。" },
       { title: "10. 全州韩屋村", text: "韩屋、韩服、小吃和传统氛围适合一日游。" }
     ],
@@ -326,7 +326,7 @@ const WIIINFO_LOCALIZED_INFO = {
       { title: "05. Lotte World·Seokchon Lake", text: "สวนสนุกในร่ม ห้าง และเดินเล่นริมทะเลสาบในพื้นที่เดียว" },
       { title: "06. เกาะนามิ", text: "ถนนต้นไม้และภาพจำจากซีรีส์ เหมาะกับครอบครัวและคู่รัก" },
       { title: "07. ปูซาน แฮอุนแด·ควังอัลลี", text: "ทะเล วิวกลางคืน อาหารทะเล และคาเฟ่ในเส้นทางปูซานยอดนิยม" },
-      { title: "08. เชจู ซองซาน·Olle Trail", text: "เหมาะกับคนที่ชอบธรรมชาติ เดินริมทะเล และถ่ายรูป" },
+      { title: "08. ป้อมฮวาซอง ซูวอน", text: "เมืองมรดกโลกใกล้โซล ไปได้ด้วยรถไฟใต้ดิน เดินชมกำแพงเมือง วิวกลางคืน และย่านพระราชวัง" },
       { title: "09. คยองจู พุลกุกซา·แดรึงวอน", text: "เมืองประวัติศาสตร์ที่เงียบและสัมผัสมรดกเกาหลีได้ดี" },
       { title: "10. หมู่บ้านฮันอกจอนจู", text: "ฮันอก ฮันบก อาหารริมทาง และบรรยากาศดั้งเดิมในทริปหนึ่งวัน" }
     ],
@@ -380,7 +380,7 @@ const WIIINFO_LOCALIZED_INFO = {
       { title: "05. Lotte World·Hồ Seokchon", text: "Công viên trong nhà, trung tâm mua sắm và đi dạo quanh hồ trong một khu vực." },
       { title: "06. Đảo Nami", text: "Đường cây đẹp và hình ảnh phim Hàn, hợp với gia đình và cặp đôi." },
       { title: "07. Busan Haeundae·Gwangalli", text: "Biển, cảnh đêm, hải sản và phố cafe của tuyến Busan tiêu biểu." },
-      { title: "08. Jeju Seongsan·Olle Trail", text: "Hợp với người thích thiên nhiên, đi bộ ven biển và chụp ảnh." },
+      { title: "08. Pháo đài Hwaseong Suwon", text: "Di sản UNESCO gần Seoul, đi tàu điện ngầm là tới: dạo tường thành, ngắm cảnh đêm, khu phố hành cung." },
       { title: "09. Gyeongju Bulguksa·Daereungwon", text: "Điểm văn hóa để cảm nhận lịch sử Hàn Quốc và không khí cố đô yên tĩnh." },
       { title: "10. Làng Hanok Jeonju", text: "Hanok, hanbok, đồ ăn đường phố và không khí truyền thống cho chuyến đi một ngày." }
     ],
@@ -434,7 +434,7 @@ const WIIINFO_LOCALIZED_INFO = {
       { title: "05. Lotte World y lago Seokchon", text: "Parque temático cubierto, centro comercial y paseo junto al lago." },
       { title: "06. Isla Nami", text: "Caminos de árboles y recuerdo de dramas, ideal para familias y parejas." },
       { title: "07. Busan Haeundae y Gwangalli", text: "Mar, noche, mariscos y cafés en una ruta representativa de Busan." },
-      { title: "08. Jeju Seongsan y Olle Trails", text: "Para quienes disfrutan naturaleza, costa y fotos." },
+      { title: "08. Fortaleza Hwaseong de Suwon", text: "Ciudad amurallada UNESCO cerca de Seúl: murallas, vistas nocturnas y callejones del palacio." },
       { title: "09. Gyeongju Bulguksa y Daereungwon", text: "Viaje cultural para sentir historia coreana y ambiente de antigua capital." },
       { title: "10. Aldea Hanok de Jeonju", text: "Hanok, hanbok, comida callejera y ambiente tradicional en una ruta de día." }
     ],
@@ -473,95 +473,90 @@ window.WIIINFO_INFO_SECTIONS.zh = WIIINFO_LOCALIZED_INFO.zh;
 window.WIIINFO_INFO_SECTIONS.vi = WIIINFO_LOCALIZED_INFO.vi;
 window.WIIINFO_INFO_SECTIONS.es = WIIINFO_LOCALIZED_INFO.es;
 
-function wiiInfoImage(file, width = 900) {
-  return `https://commons.wikimedia.org/wiki/Special:FilePath/${encodeURIComponent(file)}?width=${width}`;
+// 구 코드: Wikimedia 핫링크(wiiInfoImage)는 느리고 차단(429)·품질 편차 문제가 있어
+// 2026-06-04 자체 호스팅(images/, Unsplash 라이선스 사진을 직접 선별)으로 교체. 출처는 images/CREDITS.md
+// function wiiInfoImage(file, width = 900) {
+//   return `https://commons.wikimedia.org/wiki/Special:FilePath/${encodeURIComponent(file)}?width=${width}`;
+// }
+function wiiLocalImage(file, alt) {
+  return { src: `./images/${file}.jpg`, alt };
 }
 
 const WIIINFO_VISUAL_SETS = {
   palace: [
-    { src: wiiInfoImage("Gyeongbokgung Palace.jpg"), alt: "Gyeongbokgung Palace" },
-    { src: wiiInfoImage("Gyeongbokgung Palace, Seoul (48733400797).jpg"), alt: "Gyeongbokgung courtyard" },
-    { src: wiiInfoImage("Gyeongbokgung - Seoul, South Korea (50605778961).jpg"), alt: "Gyeongbokgung architecture" }
+    wiiLocalImage("gyeongbokgung-1", "Gyeongbokgung Palace rooftops"),
+    wiiLocalImage("gyeongbokgung-2", "Gwanghwamun Gate eaves"),
+    wiiLocalImage("bukchon-hanok", "Bukchon Hanok Village street")
   ],
   tower: [
-    { src: wiiInfoImage("Seoul and N Seoul Tower.jpg"), alt: "N Seoul Tower from Seoul" },
-    { src: wiiInfoImage("N Seoul Tower (6).jpg"), alt: "N Seoul Tower close view" },
-    { src: wiiInfoImage("East View from N-Seoul Tower.jpg"), alt: "View from N Seoul Tower" }
+    wiiLocalImage("namsan-hangang-sunset", "N Seoul Tower over the Han River at sunset"),
+    wiiLocalImage("seoul-skyline-night", "Seoul night skyline with N Seoul Tower"),
+    wiiLocalImage("namsan-night-view", "Sunset city view from Namsan")
   ],
   hongdae: [
-    { src: wiiInfoImage("Myeong-dong street by night.JPG"), alt: "Seoul night street" },
-    { src: wiiInfoImage("Busy street, Seoul.jpg"), alt: "Busy Seoul street" },
-    { src: wiiInfoImage("Seoul Street.jpg"), alt: "Seoul city street" }
+    wiiLocalImage("myeongdong-neon", "Neon alley in Seoul at night"),
+    wiiLocalImage("seoul-neon-alley", "Korean neon signs at night"),
+    wiiLocalImage("seoul-alley-day", "Seoul street in daytime")
   ],
   hangang: [
-    { src: wiiInfoImage("Han River, Seoul, South Korea.jpg"), alt: "Han River Seoul" },
-    { src: wiiInfoImage("Han River (4906629011).jpg"), alt: "Han River park view" },
-    { src: wiiInfoImage("Han River, Seoul (49531954802).jpg"), alt: "Han River skyline" }
+    wiiLocalImage("hangang-park-bench", "Han River park bench"),
+    wiiLocalImage("namsan-hangang-sunset", "Han River sunset with N Seoul Tower"),
+    wiiLocalImage("lotte-tower-sunset", "Lotte World Tower seen across the Han River")
   ],
   lotte: [
-    { src: wiiInfoImage("View of Seokchon Lake.jpg"), alt: "Seokchon Lake and Lotte World" },
-    { src: wiiInfoImage("Lotte World seen from Lotte World Tower.jpg"), alt: "Lotte World and Seokchon Lake" },
-    { src: wiiInfoImage("Lotte World Adventure (5587583207).jpg"), alt: "Lotte World Adventure" }
+    wiiLocalImage("lotte-tower-night", "Lotte World Tower at night"),
+    wiiLocalImage("lotte-tower-sunset", "Lotte World Tower at sunset"),
+    wiiLocalImage("seoul-skyline-night", "Seoul night skyline")
   ],
   nami: [
-    { src: wiiInfoImage("Nami Island Banner.jpg"), alt: "Nami Island tree road" },
-    { src: wiiInfoImage("View of Nami Island.JPG"), alt: "Nami Island view" },
-    { src: wiiInfoImage("Winter Sonata Nami Island.jpg"), alt: "Nami Island photo spot" }
+    wiiLocalImage("nami-island", "Nami Island and the Bukhan River")
   ],
   busan: [
-    { src: wiiInfoImage("Haeundae Beach in Busan.jpg"), alt: "Haeundae Beach" },
-    { src: wiiInfoImage("Gwangalli Beach Busan (31877282438).jpg"), alt: "Gwangalli Beach" },
-    { src: wiiInfoImage("Haeundae Beach 20200522 017.jpg"), alt: "Busan beach" }
+    wiiLocalImage("gwangan-bridge", "Gwangan Bridge in Busan")
   ],
-  jeju: [
-    { src: wiiInfoImage("성산일출봉 천연보호구역 2019년 촬영(출처 문화재청 대변인실).jpg"), alt: "Seongsan Ilchulbong" },
-    { src: wiiInfoImage("Jeju Olle.JPG"), alt: "Jeju Olle trail marker" },
-    { src: wiiInfoImage("Jeju olle trail marker.jpg"), alt: "Jeju Olle trail" }
+  suwon: [
+    wiiLocalImage("suwon-banghwasuryujeong", "Banghwasuryujeong Pavilion at Hwaseong Fortress"),
+    wiiLocalImage("suwon-janganmun", "Janganmun Gate of Hwaseong Fortress")
   ],
   gyeongju: [
-    { src: wiiInfoImage("Bulguksa Temple (6222044051).jpg"), alt: "Bulguksa Temple" },
-    { src: wiiInfoImage("Bulguksa temple main building.jpg"), alt: "Bulguksa main building" },
-    { src: wiiInfoImage("Seokgatap pagoda (Bulguksa).jpg"), alt: "Seokgatap pagoda" }
+    wiiLocalImage("gyeongju-tombs-night", "Gyeongju royal tombs at night"),
+    wiiLocalImage("gyeongju-daereungwon", "Daereungwon tomb mounds in Gyeongju")
   ],
   jeonju: [
-    { src: wiiInfoImage("20240727 Jeonju Hanok Village 001.jpg"), alt: "Jeonju Hanok Village" },
-    { src: wiiInfoImage("Jeonju Hanok Village 20220701 002.jpg"), alt: "Jeonju hanok street" },
-    { src: wiiInfoImage("Jeonju Hanok Village - July 2018 (15).jpg"), alt: "Jeonju traditional houses" }
+    wiiLocalImage("jeonju-hanok", "Jeonju Hanok Village rooftops")
   ],
   civic: [
-    { src: wiiInfoImage("Skyline view from Seoul City (South Korea).jpg"), alt: "Seoul skyline" },
-    { src: wiiInfoImage("Gwangjang Market, Seoul 02.jpg"), alt: "Gwangjang Market in Seoul" },
-    { src: wiiInfoImage("Han River, Seoul (49531954927).jpg"), alt: "Han River and Seoul daily life" }
+    wiiLocalImage("seoul-alley-day", "Everyday Seoul street"),
+    wiiLocalImage("gwangjang-market", "Gwangjang Market food stall"),
+    wiiLocalImage("seoul-subway", "Inside a Seoul subway train")
   ],
   transit: [
-    { src: wiiInfoImage("Han River, Seoul (49531954927).jpg"), alt: "Seoul riverside life" },
-    { src: wiiInfoImage("Gwangjang Market, Seoul 02.jpg"), alt: "Korean market life" },
-    { src: wiiInfoImage("Skyline view from Seoul City (South Korea).jpg"), alt: "Seoul daily skyline" }
+    wiiLocalImage("seoul-subway", "Seoul subway interior"),
+    wiiLocalImage("seoul-alley-day", "Seoul street view")
   ],
   market: [
-    { src: wiiInfoImage("Gwangjang Market, Seoul 02.jpg"), alt: "Gwangjang Market" },
-    { src: wiiInfoImage("Korea-Seoul-Dongdaemun Market-01.jpg"), alt: "Dongdaemun Market" },
-    { src: wiiInfoImage("Gwangjang Market, Seoul 2020-02-01.jpg"), alt: "Korean market food" }
+    wiiLocalImage("gwangjang-market", "Gwangjang Market street food"),
+    wiiLocalImage("myeongdong-neon", "Seoul shopping street at night")
   ],
   skyline: [
-    { src: wiiInfoImage("Skyline view from Seoul City (South Korea).jpg"), alt: "Seoul skyline" },
-    { src: wiiInfoImage("Seoul Skyline Night 2018.jpg"), alt: "Seoul night skyline" },
-    { src: wiiInfoImage("Han River, Seoul (49531954927).jpg"), alt: "Han River skyline" }
+    wiiLocalImage("seoul-skyline-night", "Seoul skyline at night"),
+    wiiLocalImage("namsan-night-view", "Sunset over Seoul"),
+    wiiLocalImage("lotte-tower-night", "Lotte World Tower night view")
   ],
   hanokLife: [
-    { src: wiiInfoImage("20240727 Jeonju Hanok Village 001.jpg"), alt: "Hanok village" },
-    { src: wiiInfoImage("Gyeongbokgung Palace.jpg"), alt: "Korean palace" },
-    { src: wiiInfoImage("Gyeongbokgung Palace, Seoul (48733400797).jpg"), alt: "Korean traditional architecture" }
+    wiiLocalImage("bukchon-hanok", "Bukchon Hanok Village"),
+    wiiLocalImage("seoul-house-alley", "Quiet residential alley in Seoul"),
+    wiiLocalImage("gyeongbokgung-1", "Korean palace architecture")
   ],
   housing: [
-    { src: wiiInfoImage("Nowon-gu Apartment buildings with Lotte World Tower.jpg"), alt: "Apartment buildings in Seoul" },
-    { src: wiiInfoImage("Cityscape of Yeouido skyscrapers and Hangang Railway Bridge 20240501113854.jpg"), alt: "Seoul residential cityscape" },
-    { src: wiiInfoImage("Hangang Railway Bridge and Yeouido.jpg"), alt: "Yeouido and Hangang in Seoul" }
+    wiiLocalImage("seoul-apartments", "Seoul apartment buildings with Namsan Tower"),
+    wiiLocalImage("seoul-house-alley", "Seoul residential alley"),
+    wiiLocalImage("seoul-skyline-night", "Seoul residential skyline")
   ],
   realty: [
-    { src: wiiInfoImage("Nowon-gu Apartment buildings with Lotte World Tower.jpg"), alt: "Seoul apartment buildings" },
-    { src: wiiInfoImage("Cityscape of Yeouido skyscrapers and Hangang Railway Bridge 20240501113854.jpg"), alt: "Seoul buildings and Hangang" },
-    { src: wiiInfoImage("Seoul Skyline Night 2018.jpg"), alt: "Seoul night skyline" }
+    wiiLocalImage("seoul-apartments", "Apartment complexes in Seoul"),
+    wiiLocalImage("lotte-tower-night", "Seoul landmark tower"),
+    wiiLocalImage("seoul-skyline-night", "Seoul night cityscape")
   ]
 };
 
@@ -1350,17 +1345,17 @@ const WIIINFO_TRAVEL_DETAILS_KO = {
       { title: "주의사항", items: ["여름 성수기 숙소 가격이 오릅니다.", "해변 축제 기간은 교통이 복잡합니다.", "수영 가능 기간과 안전 구역을 확인합니다."] }
     ]
   },
-  "08. 제주 성산·올레길": {
-    images: WIIINFO_VISUAL_SETS.jeju,
-    lead: "화산 지형, 해안 산책, 일출 풍경을 좋아하는 여행객에게 좋은 자연 코스입니다.",
-    address: "제주특별자치도 서귀포시 성산읍 일출로 284-12",
-    directions: "제주공항에서 동부권 버스, 렌터카, 택시 이동",
-    hours: "성산일출봉 탐방 시간은 계절별 확인",
-    mapUrl: "https://www.google.com/maps/search/?api=1&query=Seongsan+Ilchulbong",
+  "08. 수원 화성": {
+    images: WIIINFO_VISUAL_SETS.suwon,
+    lead: "서울에서 지하철로 갈 수 있는 유네스코 세계유산 성곽 도시 하루 코스입니다.",
+    address: "경기도 수원시 팔달구 정조로 825 (화성행궁)",
+    directions: "지하철 1호선·수인분당선 수원역 → 버스·택시 10~15분",
+    hours: "성곽길은 상시 개방, 화성행궁은 운영시간 확인",
+    mapUrl: "https://www.google.com/maps/search/?api=1&query=Hwaseong+Fortress+Suwon",
     sections: [
-      { title: "추천 동선", items: ["성산일출봉", "광치기해변", "해안 카페", "올레길 일부 구간", "우도 선택"] },
-      { title: "사진 포인트", items: ["정상 전망", "광치기해변에서 보는 성산", "해안 산책길"] },
-      { title: "주의사항", items: ["바람이 강한 날이 많습니다.", "비가 오면 탐방로가 미끄럽습니다.", "렌터카 이용 시 주차 시간을 고려합니다."] }
+      { title: "추천 동선", items: ["화성행궁", "장안문", "성곽길 산책(서장대 전망)", "방화수류정·용연", "행리단길 카페"] },
+      { title: "사진 포인트", items: ["서장대에서 보는 수원 시내", "방화수류정과 용연 연못", "야간 조명이 켜진 성곽"] },
+      { title: "주의사항", items: ["성곽길에 오르막이 있어 편한 신발이 좋습니다.", "여름 낮에는 그늘이 적습니다.", "야경을 보려면 조명 점등 시간을 확인합니다."] }
     ]
   },
   "09. 경주 불국사·대릉원": {
@@ -1455,13 +1450,13 @@ const WIIINFO_TRAVEL_DETAILS_EN = {
       { title: "Cautions", items: ["Hotels get expensive in summer high season.", "Traffic gets heavy during beach events.", "Check swimming season and safe swimming zones."] }
     ]
   },
-  "08. Jeju Seongsan and Olle Trails": {
-    ...WIIINFO_TRAVEL_DETAILS_KO["08. 제주 성산·올레길"],
-    lead: "A nature-focused Jeju route for volcanic scenery, coastal walks, and sunrise views.",
+  "08. Suwon Hwaseong Fortress": {
+    ...WIIINFO_TRAVEL_DETAILS_KO["08. 수원 화성"],
+    lead: "A UNESCO fortress city you can reach from Seoul by subway, with wall walks and night views.",
     sections: [
-      { title: "Suggested route", items: ["Seongsan Ilchulbong", "Gwangchigi Beach", "Coastal cafe", "Part of an Olle trail", "Optional Udo Island trip"] },
-      { title: "Photo points", items: ["View from the peak", "Seongsan seen from Gwangchigi Beach", "Coastal walking trails"] },
-      { title: "Cautions", items: ["Jeju can be very windy.", "Trails may be slippery after rain.", "If renting a car, allow time for parking."] }
+      { title: "Suggested route", items: ["Hwaseong Haenggung Palace", "Janganmun Gate", "Fortress wall walk (Seojangdae view)", "Banghwasuryujeong Pavilion and Yongyeon Pond", "Haengnidan-gil cafes"] },
+      { title: "Photo points", items: ["Suwon city view from Seojangdae", "Banghwasuryujeong over Yongyeon Pond", "Illuminated fortress walls at night"] },
+      { title: "Cautions", items: ["Wear comfortable shoes for uphill wall sections.", "There is little shade on summer afternoons.", "Check the lighting hours for night views."] }
     ]
   },
   "09. Gyeongju Bulguksa and Daereungwon": {
@@ -1555,7 +1550,7 @@ const WIIINFO_ADDRESS_ROMAN = [
   "240 Olympic-ro, Songpa-gu, Seoul",
   "1 Namiseom-gil, Namsan-myeon, Chuncheon-si, Gangwon-do",
   "Haeundae Beach-ro, Haeundae-gu / Gwangalli Beach-ro, Suyeong-gu, Busan",
-  "284-12 Ilchul-ro, Seongsan-eup, Seogwipo-si, Jeju",
+  "825 Jeongjo-ro, Paldal-gu, Suwon-si, Gyeonggi-do",
   "385 Bulguk-ro and Gyerim-ro area, Gyeongju-si, Gyeongsangbuk-do",
   "99 Girin-daero area, Wansan-gu, Jeonju-si, Jeonbuk"
 ];

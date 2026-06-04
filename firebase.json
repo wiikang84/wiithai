@@ -23,7 +23,7 @@
         ]
       },
       {
-        "source": "**/*.@(png|webmanifest)",
+        "source": "**/*.@(png|jpg|webmanifest)",
         "headers": [
           {
             "key": "Cache-Control",

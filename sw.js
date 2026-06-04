@@ -1,11 +1,12 @@
 // wiiInfo 서비스워커 (2026-06-04 PWA 도입)
 // 배포 시 SW_VERSION을 index.html ?v= / app.js ASSET_VERSION과 같이 올릴 것
 // 주의: controllerchange 자동 reload 금지 (구버전-신버전 충돌로 무한 새로고침 사고 예방)
-const SW_VERSION = "20260604-15";
+const SW_VERSION = "20260604-16";
 const CORE_CACHE = `wiiinfo-core-${SW_VERSION}`;
 // const AUDIO_CACHE = "wiiinfo-audio-v1"; // 구 버전 (2026-06-04 문자 음성 재생성으로 v2 승격)
 const AUDIO_CACHE = "wiiinfo-audio-v4"; // 재생한 mp3만 저장. 음성 파일을 다시 생성하면 버전을 올릴 것 (v3: 2026-06-04 th/ko 전체 재생성 + 문장 200 확장)
 const RUNTIME_CACHE = "wiiinfo-runtime-v1"; // firebase SDK 등 CDN
+const IMAGE_CACHE = "wiiinfo-images-v1"; // 가이드 사진 (2026-06-04 자체 호스팅 전환)
 
 const CORE_ASSETS = [
   "./",
@@ -34,7 +35,8 @@ self.addEventListener("activate", (event) => {
           // 구 코드: core 캐시만 정리 → 오디오 캐시 버전업 시 구 버전이 남음 (2026-06-04 보강)
           .filter((key) =>
             (key.startsWith("wiiinfo-core-") && key !== CORE_CACHE) ||
-            (key.startsWith("wiiinfo-audio-") && key !== AUDIO_CACHE)
+            (key.startsWith("wiiinfo-audio-") && key !== AUDIO_CACHE) ||
+            (key.startsWith("wiiinfo-images-") && key !== IMAGE_CACHE)
           )
           .map((key) => caches.delete(key))
       ))
@@ -50,6 +52,12 @@ self.addEventListener("fetch", (event) => {
   // mp3: 캐시 우선 — 한 번 들은 음성은 오프라인에서도 재생 (전체 선캐시는 용량 문제로 안 함)
   if (url.pathname.endsWith(".mp3")) {
     event.respondWith(cacheFirst(request, AUDIO_CACHE));
+    return;
+  }
+
+  // 가이드 사진: 캐시 우선 (잘 안 바뀌는 정적 자산, 2026-06-04)
+  if (url.origin === location.origin && url.pathname.includes("/images/")) {
+    event.respondWith(cacheFirst(request, IMAGE_CACHE));
     return;
   }
 

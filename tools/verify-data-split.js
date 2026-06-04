@@ -28,6 +28,7 @@ const out = {
 };
 console.log(JSON.stringify(out, null, 2));
 
-const ok = out.infoLangs.length === 7 && out.koFirstCardHasDetail && out.multiPhrases === 100 && out.thTravelDetailSections > 0;
+// const ok = ... out.multiPhrases === 100 ... // 구 기준 (2026-06-04 문장 200 확장 반영)
+const ok = out.infoLangs.length === 7 && out.koFirstCardHasDetail && out.multiPhrases === 200 && out.thTravelDetailSections > 0;
 console.log(ok ? "PASS" : "FAIL");
 process.exit(ok ? 0 : 1);
