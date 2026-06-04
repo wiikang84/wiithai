@@ -2,7 +2,7 @@
   "hosting": {
     "target": "wiiinfo",
     "public": ".",
-    "ignore": ["firebase.json", "firestore.rules", "README.md", "**/.*", "tools/**", "review/**"],
+    "ignore": ["firebase.json", "firestore.rules", "README.md", "**/.*", "**/tools/**", "**/review/**"],
     "headers": [
       {
         "source": "**/*.@(html|js|css)",
