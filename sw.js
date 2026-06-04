@@ -1,7 +1,7 @@
 // wiiInfo 서비스워커 (2026-06-04 PWA 도입)
 // 배포 시 SW_VERSION을 index.html ?v= / app.js ASSET_VERSION과 같이 올릴 것
 // 주의: controllerchange 자동 reload 금지 (구버전-신버전 충돌로 무한 새로고침 사고 예방)
-const SW_VERSION = "20260604-09";
+const SW_VERSION = "20260604-10";
 const CORE_CACHE = `wiiinfo-core-${SW_VERSION}`;
 const AUDIO_CACHE = "wiiinfo-audio-v1"; // 재생한 mp3만 저장. 음성 파일을 다시 생성하면 v2로 올릴 것
 const RUNTIME_CACHE = "wiiinfo-runtime-v1"; // firebase SDK 등 CDN
@@ -13,6 +13,7 @@ const CORE_ASSETS = [
   "./app.js",
   "./phrases.js",
   "./multilingual-data.js",
+  "./data/info-guide.js",
   "./firebase-config.js",
   "./manifest.webmanifest",
   "./icons/icon-192.png",

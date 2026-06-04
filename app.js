@@ -1,11 +1,32 @@
 (async function () {
-  const ASSET_VERSION = "20260604-09";
+  const ASSET_VERSION = "20260604-10";
   const LANGUAGES = window.WIIINFO_LANGUAGES || {};
   const LANGUAGE_NAMES = window.WIIINFO_LANGUAGE_NAMES || {};
   const PROFILES = window.WIIINFO_LEARNER_PROFILES || [];
   const UI_COPY = window.WIIINFO_UI_COPY || {};
   const CATEGORY_LABELS = window.WIIINFO_CATEGORY_LABELS || {};
-  const INFO_SECTIONS = window.WIIINFO_INFO_SECTIONS || {};
+  // const INFO_SECTIONS = window.WIIINFO_INFO_SECTIONS || {}; // 구 코드: 가이드 데이터가 data/info-guide.js로 분리되어 지연 로드됨 (2026-06-04)
+  function getInfoSections() {
+    return window.WIIINFO_INFO_SECTIONS || {};
+  }
+
+  // Korea info 가이드(215KB)를 필요 시점에 동적 로드 — 초기 로딩 경량화 (2026-06-04)
+  let infoGuideLoad = null;
+  function loadInfoGuide() {
+    if (getInfoSections().ko) return Promise.resolve();
+    if (infoGuideLoad) return infoGuideLoad;
+    infoGuideLoad = new Promise((resolve) => {
+      const script = document.createElement("script");
+      script.src = `./data/info-guide.js?v=${ASSET_VERSION}`;
+      script.onload = () => resolve();
+      script.onerror = () => {
+        infoGuideLoad = null; // 실패 시 다음 호출에서 재시도
+        resolve();
+      };
+      document.head.appendChild(script);
+    });
+    return infoGuideLoad;
+  }
   const AUDIO_FOLDERS = {
     ja: { female: "audio-ja", male: "audio-ja-male" },
     en: { female: "audio-en", male: "audio-en-male" },
@@ -447,7 +468,12 @@
 
   function renderInfoHub() {
     if (!infoTabs || !infoCards) return;
-    const sections = INFO_SECTIONS[sourceLang] || INFO_SECTIONS.ko || [];
+    loadInfoGuide().then(renderInfoHubNow); // 가이드 데이터 지연 로드 후 렌더 (2026-06-04)
+  }
+
+  function renderInfoHubNow() {
+    // const sections = INFO_SECTIONS[sourceLang] || INFO_SECTIONS.ko || []; // 구 코드 (2026-06-04 지연 로드 전환)
+    const sections = getInfoSections()[sourceLang] || getInfoSections().ko || [];
     const selected = sections.find((section) => section.id === state.info) || sections[0];
     if (!selected) return;
     state.info = selected.id;
