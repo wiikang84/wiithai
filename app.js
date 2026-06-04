@@ -1,8 +1,8 @@
 (async function () {
-  const ASSET_VERSION = "20260602-24";
-  const LANGUAGES = window.WIITHAI_LANGUAGES || {};
+  const ASSET_VERSION = "20260604-01";
+  const LANGUAGES = window.WIIINFO_LANGUAGES || {};
   const LANGUAGE_NAMES = window.WIIINFO_LANGUAGE_NAMES || {};
-  const PROFILES = window.WIITHAI_LEARNER_PROFILES || [];
+  const PROFILES = window.WIIINFO_LEARNER_PROFILES || [];
   const UI_COPY = window.WIIINFO_UI_COPY || {};
   const CATEGORY_LABELS = window.WIIINFO_CATEGORY_LABELS || {};
   const INFO_SECTIONS = window.WIIINFO_INFO_SECTIONS || {};
@@ -13,7 +13,7 @@
     vi: { female: "audio-vi", male: "audio-vi-male" },
     es: { female: "audio-es", male: "audio-es-male" }
   };
-  let phrases = (window.WIITHAI_MULTI_PHRASES || window.THAI_PHRASES || []).map((item, index) => ({
+  let phrases = (window.WIIINFO_MULTI_PHRASES || window.THAI_PHRASES || []).map((item, index) => ({
     ...item,
     audioIndex: Number(item.audioIndex || item.n || index + 1),
     audioUrl: item.audioUrl || `./audio/phrases/${String(index + 1).padStart(3, "0")}.mp3`
@@ -66,11 +66,11 @@
   let categories = [];
   let currentMode = "phrases";
   let visibleLimit = 0;
-  let voiceMode = localStorage.getItem("wiiinfoVoiceMode") || localStorage.getItem("wiithaiVoiceMode") || "female";
-  let profileId = localStorage.getItem("wiiinfoProfileId") || localStorage.getItem("wiithaiProfileId") || preferredProfileId();
+  let voiceMode = localStorage.getItem("wiiinfoVoiceMode") || "female";
+  let profileId = localStorage.getItem("wiiinfoProfileId") || preferredProfileId();
   let activeProfile = getProfile(profileId);
   let sourceLang = activeProfile.source;
-  let targetLang = localStorage.getItem("wiiinfoTargetLang") || localStorage.getItem("wiithaiTargetLang") || activeProfile.targets[0];
+  let targetLang = localStorage.getItem("wiiinfoTargetLang") || activeProfile.targets[0];
   if (!activeProfile.targets.includes(targetLang)) targetLang = activeProfile.targets[0];
 
   function readJson(key, fallback) {
@@ -101,16 +101,16 @@
   }
 
   async function loadFirebasePhrases() {
-    if (!window.firebase || !window.WIITHAI_FIREBASE_CONFIG) return [];
+    if (!window.firebase || !window.WIIINFO_FIREBASE_CONFIG) return [];
     try {
-      if (!firebase.apps.length) firebase.initializeApp(window.WIITHAI_FIREBASE_CONFIG);
-      const collection = window.WIITHAI_FIRESTORE_COLLECTION || "wiithaiPhrases";
+      if (!firebase.apps.length) firebase.initializeApp(window.WIIINFO_FIREBASE_CONFIG);
+      const collection = window.WIIINFO_FIRESTORE_COLLECTION || "wiiinfoPhrases";
       const snapshot = await firebase.firestore().collection(collection).where("isActive", "==", true).get();
 
       return snapshot.docs.map((doc, index) => {
         const data = doc.data();
         const audioIndex = Number(data.audioIndex || data.n || data.sortOrder || index + 1);
-        const extra = window.WIITHAI_EXTRA_PHRASES?.[audioIndex - 1] || {};
+        const extra = window.WIIINFO_EXTRA_PHRASES?.[audioIndex - 1] || {};
         const baseThai = data.th || "";
         const baseRoman = data.roman || data.ro || "";
         return {
@@ -119,10 +119,10 @@
           ko: data.ko || "",
           th: baseThai,
           thMale: data.thMale || baseThai,
-          thFemale: data.thFemale || (window.WIITHAI_MAKE_FEMALE_THAI ? window.WIITHAI_MAKE_FEMALE_THAI(baseThai) : baseThai),
+          thFemale: data.thFemale || (window.WIIINFO_MAKE_FEMALE_THAI ? window.WIIINFO_MAKE_FEMALE_THAI(baseThai) : baseThai),
           ro: baseRoman,
           roMale: data.roMale || baseRoman,
-          roFemale: data.roFemale || (window.WIITHAI_MAKE_FEMALE_ROMAN ? window.WIITHAI_MAKE_FEMALE_ROMAN(baseRoman) : baseRoman),
+          roFemale: data.roFemale || (window.WIIINFO_MAKE_FEMALE_ROMAN ? window.WIIINFO_MAKE_FEMALE_ROMAN(baseRoman) : baseRoman),
           en: data.en || extra.en || "",
           ja: data.ja || extra.ja || "",
           zh: data.zh || extra.zh || "",

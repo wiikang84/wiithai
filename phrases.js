@@ -129,8 +129,8 @@ function makeFemaleRoman(text) {
     .replaceAll("khrab", "kha");
 }
 
-window.WIITHAI_MAKE_FEMALE_THAI = makeFemaleThai;
-window.WIITHAI_MAKE_FEMALE_ROMAN = makeFemaleRoman;
+window.WIIINFO_MAKE_FEMALE_THAI = makeFemaleThai;
+window.WIIINFO_MAKE_FEMALE_ROMAN = makeFemaleRoman;
 
 window.THAI_PHRASES = window.THAI_PHRASES.map((phrase, index) => ({
   ...phrase,

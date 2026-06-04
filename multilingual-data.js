@@ -1,4 +1,4 @@
-window.WIITHAI_LANGUAGES = {
+window.WIIINFO_LANGUAGES = {
   ko: { label: "한국어", native: "한국어", flag: "🇰🇷", speech: "ko-KR" },
   th: { label: "태국어", native: "ไทย", flag: "🇹🇭", speech: "th-TH" },
   ja: { label: "일본어", native: "日本語", flag: "🇯🇵", speech: "ja-JP" },
@@ -18,7 +18,7 @@ window.WIIINFO_LANGUAGE_NAMES = {
   es: { ko: "Coreano", th: "Tailandés", ja: "Japonés", en: "Inglés", zh: "Chino", vi: "Vietnamita", es: "Español" }
 };
 
-window.WIITHAI_LEARNER_PROFILES = [
+window.WIIINFO_LEARNER_PROFILES = [
   { id: "ko", label: "한국인이 배워요", native: "한국어 기준", flag: "🇰🇷", source: "ko", targets: ["th", "ja", "en", "zh", "vi", "es"] },
   { id: "th", label: "คนไทยเรียน", native: "태국어 기준", flag: "🇹🇭", source: "th", targets: ["ko", "ja", "en", "zh", "vi", "es"] },
   { id: "ja", label: "日本人が学ぶ", native: "일본어 기준", flag: "🇯🇵", source: "ja", targets: ["ko", "th", "en", "zh", "vi", "es"] },
@@ -1768,7 +1768,7 @@ enrichWiiInfoDetails(window.WIIINFO_INFO_SECTIONS.ko, "ko");
 enrichWiiInfoDetails(window.WIIINFO_INFO_SECTIONS.en, "en");
 ["th", "ja", "zh", "vi", "es"].forEach((lang) => enrichWiiInfoDetails(window.WIIINFO_INFO_SECTIONS[lang], lang));
 
-window.WIITHAI_EXTRA_PHRASES = [
+window.WIIINFO_EXTRA_PHRASES = [
   { en: "Hello.", ja: "こんにちは。", zh: "你好。", vi: "Xin chào.", es: "Hola.", ro: { en: "hello", ja: "konnichiwa", zh: "ni hao", vi: "sin chao", es: "ola" } },
   { en: "Hello. Nice to meet you.", ja: "こんにちは。お会いできてうれしいです。", zh: "你好。很高兴认识你。", vi: "Xin chào. Rất vui được gặp bạn.", es: "Hola. Encantado de conocerte.", ro: { en: "hello, nice to meet you", ja: "konnichiwa, o-ai dekite ureshii desu", zh: "ni hao, hen gao xing ren shi ni", vi: "sin chao, rat vui duoc gap ban", es: "ola, en-kan-ta-do de ko-no-ser-te" } },
   { en: "Thank you.", ja: "ありがとうございます。", zh: "谢谢。", vi: "Cảm ơn.", es: "Gracias.", ro: { en: "thank you", ja: "arigatou gozaimasu", zh: "xie xie", vi: "kam un", es: "gra-syas" } },
@@ -1871,8 +1871,8 @@ window.WIITHAI_EXTRA_PHRASES = [
   { en: "I'll check it.", ja: "確認してみます。", zh: "我会确认一下。", vi: "Tôi sẽ kiểm tra.", es: "Lo revisaré.", ro: { en: "I'll check it", ja: "kakunin shite mimasu", zh: "wo hui que ren yi xia", vi: "toi se kiem tra", es: "lo re-vi-sa-re" } }
 ];
 
-window.WIITHAI_MULTI_PHRASES = (window.THAI_PHRASES || []).map((phrase, index) => {
-  const extra = window.WIITHAI_EXTRA_PHRASES[index] || {};
+window.WIIINFO_MULTI_PHRASES = (window.THAI_PHRASES || []).map((phrase, index) => {
+  const extra = window.WIIINFO_EXTRA_PHRASES[index] || {};
   return {
     ...phrase,
     en: extra.en || "",

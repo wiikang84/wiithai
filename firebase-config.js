@@ -1,4 +1,4 @@
-window.WIITHAI_FIREBASE_CONFIG = {
+window.WIIINFO_FIREBASE_CONFIG = {
   apiKey: "AIzaSyCV4nNKfCxxtmkzw868uc7nSFTbYciyGpA",
   authDomain: "wiigame-448c7.firebaseapp.com",
   projectId: "wiigame-448c7",
@@ -7,4 +7,4 @@ window.WIITHAI_FIREBASE_CONFIG = {
   appId: "1:818513928188:web:9018c4024701d0df13dc79"
 };
 
-window.WIITHAI_FIRESTORE_COLLECTION = "wiithaiPhrases";
+window.WIIINFO_FIRESTORE_COLLECTION = "wiiinfoPhrases";

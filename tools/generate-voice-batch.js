@@ -19,12 +19,12 @@ for (const task of tasks) {
     cwd: process.cwd(),
     env: {
       ...process.env,
-      WIITHAI_AUDIO_ROOT: task.root,
-      WIITHAI_TTS_LANGUAGE: task.lang,
-      WIITHAI_TTS_VOICE: task.voice,
-      WIITHAI_PHRASE_FIELD: task.field,
-      WIITHAI_LETTER_SOURCE: task.letters,
-      WIITHAI_TTS_OVERWRITE: "true"
+      WIIINFO_AUDIO_ROOT: task.root,
+      WIIINFO_TTS_LANGUAGE: task.lang,
+      WIIINFO_TTS_VOICE: task.voice,
+      WIIINFO_PHRASE_FIELD: task.field,
+      WIIINFO_LETTER_SOURCE: task.letters,
+      WIIINFO_TTS_OVERWRITE: "true"
     },
     stdio: "inherit"
   });

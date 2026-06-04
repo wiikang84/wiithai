@@ -9,18 +9,18 @@ require("../multilingual-data.js");
 
 const projectId = process.env.GOOGLE_CLOUD_PROJECT || "wiigame-448c7";
 const root = path.resolve(__dirname, "..");
-const audioRoot = process.env.WIITHAI_AUDIO_ROOT || "audio";
+const audioRoot = process.env.WIIINFO_AUDIO_ROOT || "audio";
 const phraseDir = path.join(root, audioRoot, "phrases");
 const letterDir = path.join(root, audioRoot, "letters");
-const voiceName = process.env.WIITHAI_TTS_VOICE || "th-TH-Standard-A";
-const languageCode = process.env.WIITHAI_TTS_LANGUAGE || "th-TH";
-const phraseField = process.env.WIITHAI_PHRASE_FIELD || "th";
-const includeLetters = process.env.WIITHAI_INCLUDE_LETTERS !== "false";
-const letterSource = process.env.WIITHAI_LETTER_SOURCE || "thai";
-const overwrite = process.env.WIITHAI_TTS_OVERWRITE === "true";
-const phrases = process.env.WIITHAI_USE_MULTI_PHRASES === "false"
+const voiceName = process.env.WIIINFO_TTS_VOICE || "th-TH-Standard-A";
+const languageCode = process.env.WIIINFO_TTS_LANGUAGE || "th-TH";
+const phraseField = process.env.WIIINFO_PHRASE_FIELD || "th";
+const includeLetters = process.env.WIIINFO_INCLUDE_LETTERS !== "false";
+const letterSource = process.env.WIIINFO_LETTER_SOURCE || "thai";
+const overwrite = process.env.WIIINFO_TTS_OVERWRITE === "true";
+const phrases = process.env.WIIINFO_USE_MULTI_PHRASES === "false"
   ? THAI_PHRASES
-  : (global.WIITHAI_MULTI_PHRASES || THAI_PHRASES);
+  : (global.WIIINFO_MULTI_PHRASES || THAI_PHRASES);
 const letterSources = {
   thai: global.THAI_LETTERS,
   th: global.THAI_LETTERS,

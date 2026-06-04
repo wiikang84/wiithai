@@ -1,4 +1,4 @@
-# wiithai
+# wiiInfo
 
 태국어 초급 학습용 테스트 앱입니다. 처음 버전은 API 비용 없이 브라우저 내장 음성 기능(`speechSynthesis`)으로 태국어 발음을 듣습니다.
 
@@ -15,7 +15,7 @@ gcloud services enable texttospeech.googleapis.com --project wiigame-448c7
 node tools/generate-google-tts.js
 ```
 
-기본 음성은 `th-TH-Standard-A`입니다. 다른 음성을 쓰려면 `WIITHAI_TTS_VOICE` 환경변수를 지정합니다.
+기본 음성은 `th-TH-Standard-A`입니다. 다른 음성을 쓰려면 `WIIINFO_TTS_VOICE` 환경변수를 지정합니다.
 
 ## 현재 기능
 
@@ -50,7 +50,7 @@ Firestore를 사용할 때는 필요하면 `thMale`, `thFemale`, `roMale`, `roFe
 
 ## Firebase 방향
 
-현재 문장은 `phrases.js`에 들어 있습니다. 앱은 먼저 `wiigame-448c7` Firebase 프로젝트의 `wiithaiPhrases` 컬렉션을 읽고, 데이터가 없으면 로컬 문장으로 동작합니다.
+현재 문장은 `phrases.js`에 들어 있습니다. 앱은 먼저 `wiigame-448c7` Firebase 프로젝트의 `wiiinfoPhrases` 컬렉션을 읽고, 데이터가 없으면 로컬 문장으로 동작합니다.
 
 ```json
 {
@@ -65,4 +65,4 @@ Firestore를 사용할 때는 필요하면 `thMale`, `thFemale`, `roMale`, `roFe
 }
 ```
 
-컬렉션명: `wiithaiPhrases`
+컬렉션명: `wiiinfoPhrases`
