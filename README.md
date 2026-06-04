@@ -79,4 +79,16 @@ node tools/generate-voice-batch.js       # 언어×성별 일괄 생성
 firebase deploy --only hosting:wiiinfo
 ```
 
-배포 시 `index.html`의 `?v=` 버전과 `app.js`의 `ASSET_VERSION`을 같이 올립니다. (예: `20260604-01` → `20260604-02`)
+배포 시 버전 3곳을 같이 올립니다. (예: `20260604-06` → `20260604-07`)
+
+1. `index.html`의 `?v=` (5곳)
+2. `app.js`의 `ASSET_VERSION`
+3. `sw.js`의 `SW_VERSION`
+
+## PWA
+
+- `manifest.webmanifest` + `sw.js`(서비스워커) + `icons/`로 홈화면 설치와 오프라인 동작을 지원합니다.
+- 캐시 전략: html/js/css는 네트워크 우선(오프라인일 때만 캐시), mp3는 재생한 파일만 캐시(캐시 우선).
+- ⚠️ 서비스워커에 `controllerchange` 자동 reload 코드를 추가하지 말 것 (무한 새로고침 사고 예방).
+- 음성 mp3를 다시 생성했을 때는 `sw.js`의 `AUDIO_CACHE` 이름을 올려서(v1→v2) 기기에 저장된 옛 음성을 비웁니다.
+- 아이콘 재생성: `tools/make-icons.ps1`

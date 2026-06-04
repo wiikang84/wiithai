@@ -1,5 +1,5 @@
 (async function () {
-  const ASSET_VERSION = "20260604-06";
+  const ASSET_VERSION = "20260604-07";
   const LANGUAGES = window.WIIINFO_LANGUAGES || {};
   const LANGUAGE_NAMES = window.WIIINFO_LANGUAGE_NAMES || {};
   const PROFILES = window.WIIINFO_LEARNER_PROFILES || [];
@@ -992,4 +992,12 @@
   setVoice(voiceMode);
   setMode("phrases");
   syncUrl(); // 첫 화면부터 주소가 공유 가능한 딥링크가 되도록 (2026-06-04)
+
+  // PWA 서비스워커 등록 (2026-06-04) — 홈화면 설치 + 오프라인 학습 지원
+  // 주의: controllerchange reload 등 자동 새로고침 코드를 추가하지 말 것 (무한 새로고침 사고 예방)
+  if ("serviceWorker" in navigator && (location.protocol === "https:" || location.hostname === "localhost")) {
+    navigator.serviceWorker.register("./sw.js").catch(() => {
+      // 등록 실패해도 앱 동작에는 영향 없음
+    });
+  }
 })();
