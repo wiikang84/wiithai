@@ -1,5 +1,5 @@
 (async function () {
-  const ASSET_VERSION = "20260604-02";
+  const ASSET_VERSION = "20260604-03";
   const LANGUAGES = window.WIIINFO_LANGUAGES || {};
   const LANGUAGE_NAMES = window.WIIINFO_LANGUAGE_NAMES || {};
   const PROFILES = window.WIIINFO_LEARNER_PROFILES || [];
@@ -13,11 +13,15 @@
     vi: { female: "audio-vi", male: "audio-vi-male" },
     es: { female: "audio-es", male: "audio-es-male" }
   };
-  let phrases = (window.WIIINFO_MULTI_PHRASES || window.THAI_PHRASES || []).map((item, index) => ({
-    ...item,
-    audioIndex: Number(item.audioIndex || item.n || index + 1),
-    audioUrl: item.audioUrl || `./audio/phrases/${String(index + 1).padStart(3, "0")}.mp3`
-  }));
+  let phrases = (window.WIIINFO_MULTI_PHRASES || window.THAI_PHRASES || []).map((item, index) => {
+    const audioIndex = Number(item.audioIndex || item.n || index + 1);
+    return {
+      ...item,
+      audioIndex,
+      // audioUrl: item.audioUrl || `./audio/phrases/${String(index + 1).padStart(3, "0")}.mp3` // 구 코드: 배열 순서 기준이라 n/audioIndex 지정 시 여성 음성이 어긋남 (2026-06-04 audioIndex 기준으로 수정)
+      audioUrl: item.audioUrl || `./audio/phrases/${String(audioIndex).padStart(3, "0")}.mp3`
+    };
+  });
 
   // 구 키(thaiPhraseFavorites) → 신 키(wiiinfoFavorites) 즐겨찾기 1회 마이그레이션 (2026-06-04)
   if (!localStorage.getItem("wiiinfoFavorites") && localStorage.getItem("thaiPhraseFavorites")) {
