@@ -893,54 +893,6 @@ h1 {
   line-height: 1.45;
 }
 
-.feedbackPanel {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
-  align-items: center;
-  gap: 16px;
-  margin: 14px 0 0;
-  padding: 18px;
-  border: 1px solid var(--line);
-  border-radius: 18px;
-  background: #fff;
-  box-shadow: 0 8px 24px rgba(36, 52, 71, 0.07);
-}
-
-.feedbackPanel h2 {
-  margin: 0;
-  color: var(--ink);
-  font-size: 21px;
-  line-height: 1.25;
-}
-
-.feedbackPanel p:not(.controlLabel) {
-  margin: 6px 0 0;
-  color: var(--muted);
-  font-weight: 750;
-  line-height: 1.45;
-}
-
-.feedbackLink {
-  min-height: 46px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0 18px;
-  border-radius: 999px;
-  background: var(--ink);
-  color: #fff;
-  font-weight: 900;
-  text-decoration: none;
-  white-space: nowrap;
-}
-
-.feedbackLink:hover,
-.feedbackLink:focus-visible {
-  background: #172536;
-  outline: 3px solid rgba(0, 167, 165, 0.18);
-  outline-offset: 2px;
-}
-
 .phraseList,
 .letterList {
   display: grid;
@@ -1387,15 +1339,6 @@ h1 {
   .infoDetailActions {
     display: grid;
     grid-template-columns: 1fr;
-  }
-
-  .feedbackPanel {
-    grid-template-columns: 1fr;
-    padding: 14px;
-  }
-
-  .feedbackLink {
-    width: 100%;
   }
 
   .stats div {

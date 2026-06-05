@@ -24,7 +24,7 @@ Use this checklist before public launch to find confusing wording, missing guide
 7. Open Letters mode and read the first Korean letter card.
 8. Open Korea info guide and view one detail card.
 9. Find the freshness line such as `Last checked: 2026-06`.
-10. Send feedback from the bottom feedback panel.
+10. Tell the tester to say one confusing point and one missing item out loud.
 
 ## What To Observe
 
@@ -33,18 +33,18 @@ Use this checklist before public launch to find confusing wording, missing guide
 - Does audio play quickly enough on mobile data?
 - Does any card text overflow or feel cramped?
 - Does the guide feel trustworthy enough for pre-launch use?
-- Does the feedback link include current page, language, mode, and version?
+- Can the tester clearly explain what was confusing or missing?
 
 ## Pass Criteria
 
 - No console errors in the tested user flow.
 - No horizontal overflow on 390px mobile width.
 - User can complete 8 of 10 missions without help.
-- At least 2 testers submit feedback successfully.
+- At least 2 testers provide usable feedback notes.
 - Any legal, visa, medical, real estate, or contract confusion is logged before broader promotion.
 
 ## Launch Notes
 
 - Public promotion remains intentionally on hold until content confidence improves.
 - Thai and Vietnamese phrase translations still need native review before heavy marketing.
-- Static guide pages and sitemap expansion should be handled after the feedback loop is working.
+- Static guide pages and sitemap expansion should be handled after manual tester feedback is reviewed.
