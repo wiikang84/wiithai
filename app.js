@@ -1,10 +1,11 @@
 (async function () {
-  const ASSET_VERSION = "20260604-16";
+  const ASSET_VERSION = "20260605-01";
   const LANGUAGES = window.WIIINFO_LANGUAGES || {};
   const LANGUAGE_NAMES = window.WIIINFO_LANGUAGE_NAMES || {};
   const PROFILES = window.WIIINFO_LEARNER_PROFILES || [];
   const UI_COPY = window.WIIINFO_UI_COPY || {};
   const CATEGORY_LABELS = window.WIIINFO_CATEGORY_LABELS || {};
+  const SEARCH_KEYWORDS = window.WIIINFO_SEARCH_KEYWORDS || {};
   // const INFO_SECTIONS = window.WIIINFO_INFO_SECTIONS || {}; // 구 코드: 가이드 데이터가 data/info-guide.js로 분리되어 지연 로드됨 (2026-06-04)
   function getInfoSections() {
     return window.WIIINFO_INFO_SECTIONS || {};
@@ -208,6 +209,13 @@
     return CATEGORY_LABELS[sourceLang]?.[category] || CATEGORY_LABELS.ko?.[category] || category;
   }
 
+  function categorySearchText(category) {
+    const keywordGroups = SEARCH_KEYWORDS.categories || {};
+    const labels = Object.values(CATEGORY_LABELS).map((labelsByLang) => labelsByLang?.[category]).filter(Boolean);
+    const aliases = Object.values(keywordGroups).flatMap((keywordsByLang) => keywordsByLang?.[category] || []);
+    return [...new Set([...labels, ...aliases])].join(" ");
+  }
+
   function saveFavorites() {
     // localStorage.setItem("thaiPhraseFavorites", JSON.stringify([...state.favorites])); // 구 키 (2026-06-04 wiiinfoFavorites로 교체)
     localStorage.setItem("wiiinfoFavorites", JSON.stringify([...state.favorites]));
@@ -398,7 +406,7 @@
     return availablePhrases().filter((item) => {
       const inCategory = state.category === "전체" || item.c === state.category;
       // const text = `${getText(item, sourceLang)} ${getText(item, targetLang)} ${getRoman(item, targetLang)} ${item.c}`.toLowerCase(); // 구 코드: 카테고리가 한국어 키로만 검색됨 (2026-06-04 번역 라벨 추가)
-      const text = `${getText(item, sourceLang)} ${getText(item, targetLang)} ${getRoman(item, targetLang)} ${item.c} ${categoryLabel(item.c)}`.toLowerCase();
+      const text = `${getText(item, sourceLang)} ${getText(item, targetLang)} ${getRoman(item, targetLang)} ${item.c} ${categoryLabel(item.c)} ${categorySearchText(item.c)}`.toLowerCase();
       return inCategory && (!keyword || text.includes(keyword));
     });
   }

@@ -97,6 +97,74 @@ window.WIIINFO_CATEGORY_LABELS = {
   es: { "전체": "Todo", "인사": "Saludos", "자기소개": "Presentación", "기초응답": "Respuestas básicas", "숫자/시간": "Números/Hora", "이동": "Transporte", "식당": "Comida", "쇼핑": "Compras", "도움": "Ayuda", "일상": "Vida diaria", "한국생활": "Vida en Corea", "병원": "Hospital/Farmacia", "은행": "Banco/Trámites", "숙소": "Alojamiento", "부동산": "Inmobiliaria", "직장": "Trabajo" }
 };
 
+window.WIIINFO_SEARCH_KEYWORDS = {
+  categories: {
+    ko: {
+      "이동": ["교통", "지하철", "버스", "택시", "길찾기", "공항", "환승"],
+      "도움": ["응급", "긴급", "분실", "경찰", "도와", "위험"],
+      "병원": ["아파요", "진료", "의사", "약", "약국", "응급실", "보험"],
+      "은행": ["계좌", "송금", "카드", "현금", "ATM", "행정", "외국인등록", "비자"],
+      "숙소": ["호텔", "게스트하우스", "체크인", "체크아웃", "방"],
+      "부동산": ["집", "방", "월세", "전세", "보증금", "계약", "입주", "집구하기"],
+      "직장": ["일", "회사", "근무", "출근", "퇴근", "월급", "휴가", "작업장"]
+    },
+    th: {
+      "이동": ["รถไฟใต้ดิน", "รถบัส", "แท็กซี่", "สนามบิน", "เปลี่ยนสาย", "ทางไป"],
+      "도움": ["ฉุกเฉิน", "ตำรวจ", "หลงทาง", "หาย", "ช่วย", "อันตราย"],
+      "병원": ["โรงพยาบาล", "คลินิก", "ร้านยา", "ยา", "หมอ", "ประกัน", "เจ็บ", "ป่วย"],
+      "은행": ["บัญชี", "ธนาคาร", "โอนเงิน", "บัตร", "ATM", "ราชการ", "วีซ่า", "บัตรต่างชาติ"],
+      "숙소": ["โรงแรม", "ที่พัก", "เช็กอิน", "เช็กเอาต์", "ห้องพัก"],
+      "부동산": ["หาบ้าน", "เช่าบ้าน", "ห้องเช่า", "ค่าเช่า", "เงินมัดจำ", "สัญญา", "ย้ายเข้า"],
+      "직장": ["งาน", "ที่ทำงาน", "บริษัท", "เข้างาน", "เลิกงาน", "เงินเดือน", "วันหยุด"]
+    },
+    ja: {
+      "이동": ["交通", "地下鉄", "バス", "タクシー", "空港", "乗り換え", "道順"],
+      "도움": ["緊急", "警察", "迷子", "紛失", "助けて", "危険"],
+      "병원": ["病院", "薬局", "薬", "医者", "診察", "保険", "痛い"],
+      "은행": ["銀行", "口座", "送金", "カード", "ATM", "手続き", "ビザ", "外国人登録"],
+      "숙소": ["ホテル", "宿", "チェックイン", "チェックアウト", "部屋"],
+      "부동산": ["部屋探し", "家探し", "家賃", "保証金", "契約", "入居", "不動産"],
+      "직장": ["仕事", "職場", "会社", "出勤", "退勤", "給料", "休暇"]
+    },
+    en: {
+      "이동": ["subway", "metro", "bus", "taxi", "airport", "transfer", "directions", "transport"],
+      "도움": ["emergency", "police", "lost", "help", "danger", "stolen", "embassy"],
+      "병원": ["hospital", "clinic", "pharmacy", "medicine", "doctor", "insurance", "sick", "pain"],
+      "은행": ["bank", "account", "transfer", "card", "cash", "ATM", "admin", "visa", "alien card", "arc"],
+      "숙소": ["hotel", "hostel", "guesthouse", "check in", "checkout", "room"],
+      "부동산": ["rent", "deposit", "monthly rent", "contract", "housing", "real estate", "room", "move in"],
+      "직장": ["work", "job", "workplace", "company", "payday", "salary", "overtime", "day off"]
+    },
+    zh: {
+      "이동": ["地铁", "公交", "巴士", "出租车", "机场", "换乘", "路线", "交通"],
+      "도움": ["紧急", "警察", "迷路", "丢失", "帮助", "危险", "大使馆"],
+      "병원": ["医院", "诊所", "药店", "药", "医生", "保险", "生病", "疼"],
+      "은행": ["银行", "账户", "转账", "银行卡", "现金", "ATM", "手续", "签证", "外国人登录证"],
+      "숙소": ["酒店", "旅馆", "住宿", "入住", "退房", "房间"],
+      "부동산": ["找房", "租房", "房租", "押金", "保证金", "合同", "入住", "房地产"],
+      "직장": ["工作", "职场", "公司", "上班", "下班", "工资", "加班", "请假"]
+    },
+    vi: {
+      "이동": ["tàu điện ngầm", "xe buýt", "taxi", "sân bay", "chuyển tuyến", "đường đi", "giao thông"],
+      "도움": ["khẩn cấp", "cảnh sát", "lạc đường", "mất", "giúp", "nguy hiểm", "đại sứ quán"],
+      "병원": ["bệnh viện", "phòng khám", "nhà thuốc", "thuốc", "bác sĩ", "bảo hiểm", "đau", "ốm"],
+      "은행": ["ngân hàng", "tài khoản", "chuyển tiền", "thẻ", "tiền mặt", "ATM", "thủ tục", "visa", "thẻ người nước ngoài"],
+      "숙소": ["khách sạn", "nhà nghỉ", "chỗ ở", "nhận phòng", "trả phòng", "phòng"],
+      "부동산": ["tìm nhà", "thuê nhà", "tiền thuê", "tiền cọc", "hợp đồng", "dọn vào", "bất động sản"],
+      "직장": ["công việc", "nơi làm việc", "công ty", "đi làm", "tan ca", "lương", "tăng ca", "nghỉ phép"]
+    },
+    es: {
+      "이동": ["metro", "bus", "taxi", "aeropuerto", "transbordo", "direcciones", "transporte"],
+      "도움": ["emergencia", "policía", "perdido", "ayuda", "peligro", "robado", "embajada"],
+      "병원": ["hospital", "clínica", "farmacia", "medicina", "doctor", "seguro", "enfermo", "dolor"],
+      "은행": ["banco", "cuenta", "transferencia", "tarjeta", "efectivo", "ATM", "trámite", "visa", "tarjeta de extranjero"],
+      "숙소": ["hotel", "hostal", "alojamiento", "check in", "checkout", "habitación"],
+      "부동산": ["alquiler", "depósito", "renta", "contrato", "vivienda", "inmobiliaria", "habitación", "mudanza"],
+      "직장": ["trabajo", "empresa", "oficina", "salario", "horas extra", "descanso", "permiso"]
+    }
+  }
+};
+
 // ⚠️ WIIINFO_INFO_SECTIONS(Korea info 가이드 생성기, 구 100~1769행)는 data/info-guide.js로 이동 (2026-06-04)
 // app.js의 loadInfoGuide()가 지연 로드. 로드 전까지는 빈 객체.
 window.WIIINFO_INFO_SECTIONS = window.WIIINFO_INFO_SECTIONS || {};
