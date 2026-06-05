@@ -1,5 +1,5 @@
 (async function () {
-  const ASSET_VERSION = "20260605-02";
+  const ASSET_VERSION = "20260605-03";
   const LANGUAGES = window.WIIINFO_LANGUAGES || {};
   const LANGUAGE_NAMES = window.WIIINFO_LANGUAGE_NAMES || {};
   const PROFILES = window.WIIINFO_LEARNER_PROFILES || [];
@@ -121,6 +121,10 @@
   const infoSummary = document.getElementById("infoSummary");
   const infoCards = document.getElementById("infoCards");
   const infoPanel = document.querySelector(".infoPanel");
+  const feedbackEyebrow = document.getElementById("feedbackEyebrow");
+  const feedbackTitle = document.getElementById("feedbackTitle");
+  const feedbackBody = document.getElementById("feedbackBody");
+  const feedbackLink = document.getElementById("feedbackLink");
   const detailModal = createInfoDetailModal();
 
   // URL 딥링크: ?from=국가&learn=언어 (2026-06-04) 예: https://wiiinfo.web.app/?from=th&learn=ko
@@ -350,6 +354,30 @@
   function versionedAudioUrl(url) {
     if (!url || /^(https?:|data:|blob:)/.test(url)) return url;
     return `${url}${url.includes("?") ? "&" : "?"}v=${ASSET_VERSION}`;
+  }
+
+  function feedbackIssueUrl() {
+    const title = `[wiiInfo feedback] ${sourceLang}->${targetLang}`;
+    const body = [
+      "## Context",
+      `- Page: ${location.href}`,
+      `- From: ${sourceLang}`,
+      `- Learn: ${targetLang}`,
+      `- Mode: ${currentMode}`,
+      `- Category: ${state.category}`,
+      `- Search: ${state.search || "(empty)"}`,
+      `- App version: ${ASSET_VERSION}`,
+      "",
+      "## Feedback",
+      "- What was confusing?",
+      "- What was missing?",
+      "- What looked wrong?",
+      "",
+      "## Device",
+      navigator.userAgent
+    ].join("\n");
+    const params = new URLSearchParams({ title, body });
+    return `https://github.com/wiikang84/wiithai/issues/new?${params.toString()}`;
   }
 
   function getThaiText(item) {
@@ -1027,6 +1055,13 @@
     maleVoiceButton.textContent = uiText("male");
     quizLabel.textContent = uiText("quiz");
     searchInput.placeholder = currentMode === "letters" ? uiText("searchLetters") : uiText("searchPhrases");
+    if (feedbackEyebrow) feedbackEyebrow.textContent = uiText("feedbackEyebrow");
+    if (feedbackTitle) feedbackTitle.textContent = uiText("feedbackTitle");
+    if (feedbackBody) feedbackBody.textContent = uiText("feedbackBody");
+    if (feedbackLink) {
+      feedbackLink.textContent = uiText("feedbackAction");
+      feedbackLink.href = feedbackIssueUrl();
+    }
   }
 
   function updateHeroFlag() {
@@ -1064,6 +1099,12 @@
     visibleLimit += getPhrasePageSize();
     render();
   });
+  if (feedbackLink) {
+    feedbackLink.addEventListener("click", () => {
+      feedbackLink.href = feedbackIssueUrl();
+      track("open_feedback", { source: sourceLang, target: targetLang, mode: currentMode });
+    });
+  }
   window.addEventListener("resize", () => {
     if (currentMode !== "phrases") return;
     const pageSize = getPhrasePageSize();

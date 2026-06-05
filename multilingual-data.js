@@ -35,7 +35,10 @@ window.WIIINFO_UI_COPY = {
     phrases: "문장", letters: "문자", female: "여성", male: "남성", quiz: "기준 언어 먼저 보기",
     searchPhrases: "문장, 뜻, 발음 검색", searchLetters: "문자, 이름, 발음 검색", hide: "가리기",
     infoEyebrow: "Korea info by Wii", phraseListLabel: "문장 목록", letterListLabel: "문자 목록",
-    showMore: "{count}개 더보기", showingCount: "{visible}/{total}개 표시 중"
+    showMore: "{count}개 더보기", showingCount: "{visible}/{total}개 표시 중",
+    feedbackEyebrow: "론칭 준비", feedbackTitle: "wiiInfo 개선 의견 보내기",
+    feedbackBody: "이해하기 어려운 부분, 빠진 정보, 틀린 내용을 알려주세요.",
+    feedbackAction: "의견 보내기"
   },
   th: {
     total: "รายการเรียน", favorites: "บันทึก", today: "เรียนวันนี้", audience: "Choose your country",
@@ -43,7 +46,10 @@ window.WIIINFO_UI_COPY = {
     phrases: "ประโยค", letters: "ตัวอักษร", female: "หญิง", male: "ชาย", quiz: "ดูภาษาของฉันก่อน",
     searchPhrases: "ค้นหาประโยค ความหมาย หรือเสียงอ่าน", searchLetters: "ค้นหาตัวอักษรหรือเสียง", hide: "ซ่อน",
     infoEyebrow: "ข้อมูลเกาหลี by Wii", phraseListLabel: "รายการประโยค", letterListLabel: "รายการตัวอักษร",
-    showMore: "ดูเพิ่ม {count} รายการ", showingCount: "แสดง {visible}/{total} รายการ"
+    showMore: "ดูเพิ่ม {count} รายการ", showingCount: "แสดง {visible}/{total} รายการ",
+    feedbackEyebrow: "เตรียมเปิดใช้งาน", feedbackTitle: "ช่วยปรับปรุง wiiInfo",
+    feedbackBody: "บอกเราว่าส่วนไหนเข้าใจยาก ขาดข้อมูล หรือไม่ถูกต้อง",
+    feedbackAction: "ส่งความคิดเห็น"
   },
   ja: {
     total: "学習項目", favorites: "お気に入り", today: "今日の学習", audience: "Choose your country",
@@ -51,7 +57,10 @@ window.WIIINFO_UI_COPY = {
     phrases: "文章", letters: "文字", female: "女性", male: "男性", quiz: "自分の言語を先に見る",
     searchPhrases: "文章・意味・発音を検索", searchLetters: "文字・名前・発音を検索", hide: "隠す",
     infoEyebrow: "Korea info by Wii", phraseListLabel: "文章リスト", letterListLabel: "文字リスト",
-    showMore: "{count}件もっと見る", showingCount: "{visible}/{total}件を表示中"
+    showMore: "{count}件もっと見る", showingCount: "{visible}/{total}件を表示中",
+    feedbackEyebrow: "公開準備", feedbackTitle: "wiiInfoを改善する",
+    feedbackBody: "分かりにくい点、足りない情報、間違いを教えてください。",
+    feedbackAction: "フィードバック"
   },
   en: {
     total: "Items", favorites: "Saved", today: "Today", audience: "Choose your country",
@@ -59,7 +68,10 @@ window.WIIINFO_UI_COPY = {
     phrases: "Phrases", letters: "Letters", female: "Female", male: "Male", quiz: "Show my language first",
     searchPhrases: "Search phrase, meaning, or pronunciation", searchLetters: "Search letters or sounds", hide: "Hide",
     infoEyebrow: "Korea info by Wii", phraseListLabel: "Phrase list", letterListLabel: "Letter list",
-    showMore: "Show {count} more", showingCount: "Showing {visible}/{total}"
+    showMore: "Show {count} more", showingCount: "Showing {visible}/{total}",
+    feedbackEyebrow: "Launch prep", feedbackTitle: "Help improve wiiInfo",
+    feedbackBody: "Tell us what was hard to understand, missing, or wrong.",
+    feedbackAction: "Send feedback"
   },
   zh: {
     total: "学习项目", favorites: "收藏", today: "今日学习", audience: "Choose your country",
@@ -67,7 +79,10 @@ window.WIIINFO_UI_COPY = {
     phrases: "句子", letters: "文字", female: "女声", male: "男声", quiz: "先看我的语言",
     searchPhrases: "搜索句子、意思或发音", searchLetters: "搜索文字或发音", hide: "隐藏",
     infoEyebrow: "韩国信息 by Wii", phraseListLabel: "句子列表", letterListLabel: "文字列表",
-    showMore: "再看 {count} 个", showingCount: "正在显示 {visible}/{total}"
+    showMore: "再看 {count} 个", showingCount: "正在显示 {visible}/{total}",
+    feedbackEyebrow: "上线准备", feedbackTitle: "帮助改进 wiiInfo",
+    feedbackBody: "请告诉我们哪里难懂、缺少信息或有错误。",
+    feedbackAction: "发送反馈"
   },
   vi: {
     total: "Bài học", favorites: "Đã lưu", today: "Hôm nay", audience: "Choose your country",
@@ -75,7 +90,10 @@ window.WIIINFO_UI_COPY = {
     phrases: "Câu", letters: "Chữ cái", female: "Nữ", male: "Nam", quiz: "Xem ngôn ngữ của tôi trước",
     searchPhrases: "Tìm câu, nghĩa hoặc phát âm", searchLetters: "Tìm chữ cái hoặc âm", hide: "Ẩn",
     infoEyebrow: "Thông tin Hàn Quốc by Wii", phraseListLabel: "Danh sách câu", letterListLabel: "Danh sách chữ cái",
-    showMore: "Xem thêm {count}", showingCount: "Đang hiển thị {visible}/{total}"
+    showMore: "Xem thêm {count}", showingCount: "Đang hiển thị {visible}/{total}",
+    feedbackEyebrow: "Chuẩn bị ra mắt", feedbackTitle: "Giúp cải thiện wiiInfo",
+    feedbackBody: "Hãy cho biết phần khó hiểu, thiếu thông tin hoặc chưa đúng.",
+    feedbackAction: "Gửi góp ý"
   },
   es: {
     total: "Lecciones", favorites: "Guardado", today: "Hoy", audience: "Choose your country",
@@ -83,7 +101,10 @@ window.WIIINFO_UI_COPY = {
     phrases: "Frases", letters: "Letras", female: "Mujer", male: "Hombre", quiz: "Ver mi idioma primero",
     searchPhrases: "Buscar frase, significado o pronunciación", searchLetters: "Buscar letras o sonidos", hide: "Ocultar",
     infoEyebrow: "Información de Corea by Wii", phraseListLabel: "Lista de frases", letterListLabel: "Lista de letras",
-    showMore: "Ver {count} más", showingCount: "Mostrando {visible}/{total}"
+    showMore: "Ver {count} más", showingCount: "Mostrando {visible}/{total}",
+    feedbackEyebrow: "Preparación", feedbackTitle: "Ayuda a mejorar wiiInfo",
+    feedbackBody: "Cuéntanos qué fue difícil, qué falta o qué está mal.",
+    feedbackAction: "Enviar comentario"
   }
 };
 

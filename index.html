@@ -20,7 +20,7 @@
     <link rel="manifest" href="./manifest.webmanifest" />
     <meta name="theme-color" content="#00a7a5" />
     <link rel="apple-touch-icon" href="./icons/icon-192.png" />
-    <link rel="stylesheet" href="./styles.css?v=20260605-02" />
+    <link rel="stylesheet" href="./styles.css?v=20260605-03" />
   </head>
   <body>
     <main class="app">
@@ -116,6 +116,15 @@
           <div id="infoCards" class="infoCards"></div>
         </div>
       </section>
+
+      <section class="feedbackPanel" aria-label="Feedback">
+        <div>
+          <p id="feedbackEyebrow" class="controlLabel">Launch prep</p>
+          <h2 id="feedbackTitle">Help improve wiiInfo</h2>
+          <p id="feedbackBody">Tell us what was hard to understand, missing, or wrong.</p>
+        </div>
+        <a id="feedbackLink" class="feedbackLink" href="https://github.com/wiikang84/wiithai/issues/new" target="_blank" rel="noopener">Send feedback</a>
+      </section>
     </main>
 
     <template id="phraseCardTemplate">
@@ -155,9 +164,9 @@
     <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-app-compat.js"></script>
     <!-- <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore-compat.js"></script> Firestore 문장 로드 비활성화로 미사용 (2026-06-04, 재활성화 시 주석 해제) -->
     <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-analytics-compat.js"></script>
-    <script src="./firebase-config.js?v=20260605-02"></script>
-    <script src="./phrases.js?v=20260605-02"></script>
-    <script src="./multilingual-data.js?v=20260605-02"></script>
-    <script src="./app.js?v=20260605-02"></script>
+    <script src="./firebase-config.js?v=20260605-03"></script>
+    <script src="./phrases.js?v=20260605-03"></script>
+    <script src="./multilingual-data.js?v=20260605-03"></script>
+    <script src="./app.js?v=20260605-03"></script>
   </body>
 </html>
