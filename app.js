@@ -1,5 +1,5 @@
 (async function () {
-  const ASSET_VERSION = "20260605-04";
+  const ASSET_VERSION = "20260605-05";
   const LANGUAGES = window.WIIINFO_LANGUAGES || {};
   const LANGUAGE_NAMES = window.WIIINFO_LANGUAGE_NAMES || {};
   const PROFILES = window.WIIINFO_LEARNER_PROFILES || [];
@@ -112,6 +112,9 @@
   const modeLabel = document.getElementById("modeLabel");
   const voiceLabel = document.getElementById("voiceLabel");
   const quizLabel = document.getElementById("quizLabel");
+  const authButton = document.getElementById("authButton");
+  const authStatus = document.getElementById("authStatus");
+  const authSyncStatus = document.getElementById("authSyncStatus");
   const heroFlagEmoji = document.getElementById("heroFlagEmoji");
   const heroTargetFlagEmoji = document.getElementById("heroTargetFlagEmoji");
   const countryQuestion = document.getElementById("countryQuestion");
@@ -133,6 +136,11 @@
   let currentMode = "phrases";
   let visibleLimit = 0;
   let voiceMode = localStorage.getItem("wiiinfoVoiceMode") || "female";
+  let auth = null;
+  let db = null;
+  let currentUser = null;
+  let firebaseReady = false;
+  let syncTimer = null;
   // let profileId = localStorage.getItem("wiiinfoProfileId") || preferredProfileId(); // 구 코드 (2026-06-04 URL 파라미터 우선)
   let profileId = hasValidUrlFrom ? urlFrom : (localStorage.getItem("wiiinfoProfileId") || preferredProfileId());
   let activeProfile = getProfile(profileId);
@@ -248,6 +256,129 @@
     // localStorage.setItem("thaiPhraseFavorites", JSON.stringify([...state.favorites])); // 구 키 (2026-06-04 wiiinfoFavorites로 교체)
     localStorage.setItem("wiiinfoFavorites", JSON.stringify([...state.favorites]));
     favoriteCount.textContent = state.favorites.size;
+    queueCloudFavoriteSync();
+  }
+
+  function getFirebaseApp() {
+    if (!window.firebase || !window.WIIINFO_FIREBASE_CONFIG) return null;
+    if (!firebase.apps.length) firebase.initializeApp(window.WIIINFO_FIREBASE_CONFIG);
+    firebaseReady = true;
+    return firebase.app();
+  }
+
+  function authText(key, fallback) {
+    return uiText(key) || fallback;
+  }
+
+  function updateAuthUi(statusKey) {
+    if (!authButton || !authStatus || !authSyncStatus) return;
+    const signedIn = !!currentUser;
+    const unavailable = statusKey === "authUnavailable";
+    authButton.disabled = unavailable;
+    authButton.textContent = signedIn ? authText("authSignOut", "Sign out") : authText("authSignIn", "Sign in with Google");
+    authStatus.textContent = signedIn
+      ? authText("authSignedIn", "Signed in").replace("{name}", currentUser.displayName || currentUser.email || "Google")
+      : authText("authGuest", "Guest mode");
+    const key = statusKey || (signedIn ? "authSyncCloud" : "authSyncLocal");
+    authSyncStatus.textContent = authText(key, signedIn ? "Saved items sync with your Google account." : "Saved items stay on this device.");
+  }
+
+  async function initAuth() {
+    try {
+      getFirebaseApp();
+      if (!window.firebase?.auth || !window.firebase?.firestore) {
+        updateAuthUi("authSyncLocal");
+        return;
+      }
+      if (!window.WIIINFO_AUTH_ENABLED) {
+        updateAuthUi("authUnavailable");
+        return;
+      }
+      auth = firebase.auth();
+      db = firebase.firestore();
+      auth.onAuthStateChanged(async (user) => {
+        currentUser = user;
+        updateAuthUi(user ? "authSyncing" : "authSyncLocal");
+        if (user) await mergeCloudFavorites(user);
+      });
+    } catch (error) {
+      updateAuthUi("authSyncError");
+    }
+  }
+
+  async function toggleAuth() {
+    try {
+      if (!auth) await initAuth();
+      if (!auth) return;
+      if (currentUser) {
+        await auth.signOut();
+        track("sign_out", { source: sourceLang });
+        return;
+      }
+      const provider = new firebase.auth.GoogleAuthProvider();
+      provider.setCustomParameters({ prompt: "select_account" });
+      await auth.signInWithPopup(provider);
+      track("sign_in_google", { source: sourceLang });
+    } catch (error) {
+      updateAuthUi("authSyncError");
+    }
+  }
+
+  function userDoc(user) {
+    if (!db || !user) return null;
+    return db.collection("users").doc(user.uid);
+  }
+
+  async function mergeCloudFavorites(user) {
+    const ref = userDoc(user);
+    if (!ref) return;
+    try {
+      const snap = await ref.get();
+      const data = snap.exists ? snap.data() : {};
+      const remoteIds = Array.isArray(data.favoriteIds) ? data.favoriteIds.filter(Boolean) : [];
+      const merged = [...new Set([...remoteIds, ...state.favorites])];
+      state.favorites = new Set(merged);
+      localStorage.setItem("wiiinfoFavorites", JSON.stringify(merged));
+      favoriteCount.textContent = state.favorites.size;
+      if (currentMode === "letters") renderLetters();
+      else render();
+      await writeUserDoc(user, merged, !snap.exists);
+      updateAuthUi("authSyncCloud");
+    } catch (error) {
+      updateAuthUi("authSyncError");
+    }
+  }
+
+  async function writeUserDoc(user, favoriteIds, isNew) {
+    const ref = userDoc(user);
+    if (!ref) return;
+    const now = firebase.firestore.FieldValue.serverTimestamp();
+    const payload = {
+      email: user.email || "",
+      displayName: user.displayName || "",
+      photoURL: user.photoURL || "",
+      preferredFrom: profileId,
+      preferredLearn: targetLang,
+      favoriteIds,
+      updatedAt: now,
+      lastLoginAt: now
+    };
+    if (isNew) payload.createdAt = now;
+    await ref.set(payload, { merge: true });
+  }
+
+  function queueCloudFavoriteSync() {
+    if (!currentUser || !db || !firebaseReady) return;
+    window.clearTimeout(syncTimer);
+    syncTimer = window.setTimeout(async () => {
+      try {
+        updateAuthUi("authSyncing");
+        await writeUserDoc(currentUser, [...state.favorites], false);
+        updateAuthUi("authSyncCloud");
+      } catch (error) {
+        updateAuthUi("authSyncError");
+      }
+    }, 450);
   }
 
   // 오늘 학습 카운트: 오늘 음성을 들은 항목 수 (2026-06-04 구현, 이전엔 항상 0 표시)
@@ -274,7 +405,7 @@
   function initAnalytics() {
     try {
       if (window.firebase?.analytics && window.WIIINFO_FIREBASE_CONFIG?.measurementId) {
-        if (!firebase.apps.length) firebase.initializeApp(window.WIIINFO_FIREBASE_CONFIG);
+        getFirebaseApp();
         analytics = firebase.analytics();
       }
     } catch (error) {
@@ -1027,6 +1158,7 @@
     maleVoiceButton.textContent = uiText("male");
     quizLabel.textContent = uiText("quiz");
     searchInput.placeholder = currentMode === "letters" ? uiText("searchLetters") : uiText("searchPhrases");
+    updateAuthUi();
   }
 
   function updateHeroFlag() {
@@ -1060,6 +1192,7 @@
   femaleVoiceButton.addEventListener("click", () => setVoice("female"));
   maleVoiceButton.addEventListener("click", () => setVoice("male"));
   homeFlagButton.addEventListener("click", goHome);
+  authButton?.addEventListener("click", toggleAuth);
   loadMoreButton.addEventListener("click", () => {
     visibleLimit += getPhrasePageSize();
     render();
@@ -1085,11 +1218,13 @@
   saveFavorites();
   updateStaticLabels();
   updateHeroFlag();
+  updateAuthUi();
   renderProfileTabs();
   renderTargetTabs();
   renderInfoHub();
   setVoice(voiceMode);
   setMode("phrases");
+  initAuth();
   syncUrl(); // 첫 화면부터 주소가 공유 가능한 딥링크가 되도록 (2026-06-04)
 
   // PWA 서비스워커 등록 (2026-06-04) — 홈화면 설치 + 오프라인 학습 지원

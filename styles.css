@@ -268,6 +268,61 @@ h1 {
   line-height: 1.35;
 }
 
+.authStrip {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 12px;
+  margin: 12px 0 0;
+  padding: 12px 14px;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: #fff;
+  box-shadow: 0 8px 24px rgba(36, 52, 71, 0.06);
+}
+
+.authStatus {
+  margin: 0;
+  color: var(--ink);
+  font-size: 14px;
+  font-weight: 900;
+  line-height: 1.25;
+}
+
+.authSyncStatus {
+  margin: 4px 0 0;
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 750;
+  line-height: 1.35;
+}
+
+.authButton {
+  min-height: 40px;
+  padding: 0 14px;
+  border: 1px solid rgba(36, 52, 71, 0.14);
+  border-radius: 999px;
+  background: var(--ink);
+  color: #fff;
+  cursor: pointer;
+  font-weight: 900;
+  white-space: nowrap;
+}
+
+.authButton:hover,
+.authButton:focus-visible {
+  background: #172536;
+  outline: 3px solid rgba(0, 167, 165, 0.18);
+  outline-offset: 2px;
+}
+
+.authButton:disabled {
+  cursor: not-allowed;
+  background: #d8dde5;
+  color: #707784;
+  box-shadow: none;
+}
+
 .speakButton,
 .revealButton,
 .starButton,
@@ -1226,6 +1281,15 @@ h1 {
   .learningChooser {
     grid-template-columns: 1fr;
     gap: 8px;
+  }
+
+  .authStrip {
+    grid-template-columns: 1fr;
+    padding: 12px;
+  }
+
+  .authButton {
+    width: 100%;
   }
 
   .modeTabs,

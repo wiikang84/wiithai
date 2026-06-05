@@ -35,7 +35,11 @@ window.WIIINFO_UI_COPY = {
     phrases: "문장", letters: "문자", female: "여성", male: "남성", quiz: "기준 언어 먼저 보기",
     searchPhrases: "문장, 뜻, 발음 검색", searchLetters: "문자, 이름, 발음 검색", hide: "가리기",
     infoEyebrow: "Korea info by Wii", phraseListLabel: "문장 목록", letterListLabel: "문자 목록",
-    showMore: "{count}개 더보기", showingCount: "{visible}/{total}개 표시 중"
+    showMore: "{count}개 더보기", showingCount: "{visible}/{total}개 표시 중",
+    authGuest: "게스트 모드", authSignedIn: "{name} 로그인 중", authSignIn: "Google 로그인",
+    authSignOut: "로그아웃", authSyncLocal: "즐겨찾기는 이 기기에만 저장됩니다.",
+    authSyncCloud: "즐겨찾기가 Google 계정에 동기화됩니다.", authSyncing: "저장 중...",
+    authSyncError: "로그인 또는 동기화 확인이 필요합니다.", authUnavailable: "Firebase Console에서 Google 로그인을 먼저 활성화해야 합니다."
   },
   th: {
     total: "รายการเรียน", favorites: "บันทึก", today: "เรียนวันนี้", audience: "Choose your country",
@@ -43,7 +47,11 @@ window.WIIINFO_UI_COPY = {
     phrases: "ประโยค", letters: "ตัวอักษร", female: "หญิง", male: "ชาย", quiz: "ดูภาษาของฉันก่อน",
     searchPhrases: "ค้นหาประโยค ความหมาย หรือเสียงอ่าน", searchLetters: "ค้นหาตัวอักษรหรือเสียง", hide: "ซ่อน",
     infoEyebrow: "ข้อมูลเกาหลี by Wii", phraseListLabel: "รายการประโยค", letterListLabel: "รายการตัวอักษร",
-    showMore: "ดูเพิ่ม {count} รายการ", showingCount: "แสดง {visible}/{total} รายการ"
+    showMore: "ดูเพิ่ม {count} รายการ", showingCount: "แสดง {visible}/{total} รายการ",
+    authGuest: "โหมดผู้เยี่ยมชม", authSignedIn: "เข้าสู่ระบบ: {name}", authSignIn: "เข้าสู่ระบบ Google",
+    authSignOut: "ออกจากระบบ", authSyncLocal: "รายการบันทึกอยู่ในเครื่องนี้เท่านั้น",
+    authSyncCloud: "รายการบันทึกซิงค์กับบัญชี Google แล้ว", authSyncing: "กำลังบันทึก...",
+    authSyncError: "ต้องตรวจสอบการเข้าสู่ระบบหรือการซิงค์", authUnavailable: "ต้องเปิด Google Login ใน Firebase Console ก่อน"
   },
   ja: {
     total: "学習項目", favorites: "お気に入り", today: "今日の学習", audience: "Choose your country",
@@ -51,7 +59,11 @@ window.WIIINFO_UI_COPY = {
     phrases: "文章", letters: "文字", female: "女性", male: "男性", quiz: "自分の言語を先に見る",
     searchPhrases: "文章・意味・発音を検索", searchLetters: "文字・名前・発音を検索", hide: "隠す",
     infoEyebrow: "Korea info by Wii", phraseListLabel: "文章リスト", letterListLabel: "文字リスト",
-    showMore: "{count}件もっと見る", showingCount: "{visible}/{total}件を表示中"
+    showMore: "{count}件もっと見る", showingCount: "{visible}/{total}件を表示中",
+    authGuest: "ゲストモード", authSignedIn: "{name}でログイン中", authSignIn: "Googleでログイン",
+    authSignOut: "ログアウト", authSyncLocal: "保存項目はこの端末に保存されます。",
+    authSyncCloud: "保存項目をGoogleアカウントに同期します。", authSyncing: "保存中...",
+    authSyncError: "ログインまたは同期を確認してください。", authUnavailable: "Firebase ConsoleでGoogleログインを有効にしてください。"
   },
   en: {
     total: "Items", favorites: "Saved", today: "Today", audience: "Choose your country",
@@ -59,7 +71,11 @@ window.WIIINFO_UI_COPY = {
     phrases: "Phrases", letters: "Letters", female: "Female", male: "Male", quiz: "Show my language first",
     searchPhrases: "Search phrase, meaning, or pronunciation", searchLetters: "Search letters or sounds", hide: "Hide",
     infoEyebrow: "Korea info by Wii", phraseListLabel: "Phrase list", letterListLabel: "Letter list",
-    showMore: "Show {count} more", showingCount: "Showing {visible}/{total}"
+    showMore: "Show {count} more", showingCount: "Showing {visible}/{total}",
+    authGuest: "Guest mode", authSignedIn: "Signed in as {name}", authSignIn: "Sign in with Google",
+    authSignOut: "Sign out", authSyncLocal: "Saved items stay on this device.",
+    authSyncCloud: "Saved items sync with your Google account.", authSyncing: "Saving...",
+    authSyncError: "Check sign-in or sync settings.", authUnavailable: "Enable Google sign-in in Firebase Console first."
   },
   zh: {
     total: "学习项目", favorites: "收藏", today: "今日学习", audience: "Choose your country",
@@ -67,7 +83,11 @@ window.WIIINFO_UI_COPY = {
     phrases: "句子", letters: "文字", female: "女声", male: "男声", quiz: "先看我的语言",
     searchPhrases: "搜索句子、意思或发音", searchLetters: "搜索文字或发音", hide: "隐藏",
     infoEyebrow: "韩国信息 by Wii", phraseListLabel: "句子列表", letterListLabel: "文字列表",
-    showMore: "再看 {count} 个", showingCount: "正在显示 {visible}/{total}"
+    showMore: "再看 {count} 个", showingCount: "正在显示 {visible}/{total}",
+    authGuest: "访客模式", authSignedIn: "已登录：{name}", authSignIn: "使用 Google 登录",
+    authSignOut: "退出登录", authSyncLocal: "收藏仅保存在此设备。",
+    authSyncCloud: "收藏会同步到 Google 帐号。", authSyncing: "正在保存...",
+    authSyncError: "请检查登录或同步设置。", authUnavailable: "请先在 Firebase Console 启用 Google 登录。"
   },
   vi: {
     total: "Bài học", favorites: "Đã lưu", today: "Hôm nay", audience: "Choose your country",
@@ -75,7 +95,11 @@ window.WIIINFO_UI_COPY = {
     phrases: "Câu", letters: "Chữ cái", female: "Nữ", male: "Nam", quiz: "Xem ngôn ngữ của tôi trước",
     searchPhrases: "Tìm câu, nghĩa hoặc phát âm", searchLetters: "Tìm chữ cái hoặc âm", hide: "Ẩn",
     infoEyebrow: "Thông tin Hàn Quốc by Wii", phraseListLabel: "Danh sách câu", letterListLabel: "Danh sách chữ cái",
-    showMore: "Xem thêm {count}", showingCount: "Đang hiển thị {visible}/{total}"
+    showMore: "Xem thêm {count}", showingCount: "Đang hiển thị {visible}/{total}",
+    authGuest: "Chế độ khách", authSignedIn: "Đã đăng nhập: {name}", authSignIn: "Đăng nhập Google",
+    authSignOut: "Đăng xuất", authSyncLocal: "Mục đã lưu chỉ ở thiết bị này.",
+    authSyncCloud: "Mục đã lưu đồng bộ với tài khoản Google.", authSyncing: "Đang lưu...",
+    authSyncError: "Hãy kiểm tra đăng nhập hoặc đồng bộ.", authUnavailable: "Trước tiên hãy bật Google Login trong Firebase Console."
   },
   es: {
     total: "Lecciones", favorites: "Guardado", today: "Hoy", audience: "Choose your country",
@@ -83,7 +107,11 @@ window.WIIINFO_UI_COPY = {
     phrases: "Frases", letters: "Letras", female: "Mujer", male: "Hombre", quiz: "Ver mi idioma primero",
     searchPhrases: "Buscar frase, significado o pronunciación", searchLetters: "Buscar letras o sonidos", hide: "Ocultar",
     infoEyebrow: "Información de Corea by Wii", phraseListLabel: "Lista de frases", letterListLabel: "Lista de letras",
-    showMore: "Ver {count} más", showingCount: "Mostrando {visible}/{total}"
+    showMore: "Ver {count} más", showingCount: "Mostrando {visible}/{total}",
+    authGuest: "Modo invitado", authSignedIn: "Sesión iniciada: {name}", authSignIn: "Iniciar con Google",
+    authSignOut: "Cerrar sesión", authSyncLocal: "Guardados solo en este dispositivo.",
+    authSyncCloud: "Guardados sincronizados con tu cuenta de Google.", authSyncing: "Guardando...",
+    authSyncError: "Revisa el inicio de sesión o la sincronización.", authUnavailable: "Activa Google Login en Firebase Console primero."
   }
 };
 
