@@ -880,6 +880,19 @@ h1 {
   line-height: 1.5;
 }
 
+.infoFreshness {
+  grid-column: 1 / -1;
+  margin: 2px 0 0;
+  padding: 12px 14px;
+  border: 1px solid #edf0f4;
+  border-radius: 12px;
+  background: #f8fafc;
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 800;
+  line-height: 1.45;
+}
+
 .phraseList,
 .letterList {
   display: grid;

@@ -1,11 +1,39 @@
 (async function () {
-  const ASSET_VERSION = "20260605-01";
+  const ASSET_VERSION = "20260605-02";
   const LANGUAGES = window.WIIINFO_LANGUAGES || {};
   const LANGUAGE_NAMES = window.WIIINFO_LANGUAGE_NAMES || {};
   const PROFILES = window.WIIINFO_LEARNER_PROFILES || [];
   const UI_COPY = window.WIIINFO_UI_COPY || {};
   const CATEGORY_LABELS = window.WIIINFO_CATEGORY_LABELS || {};
   const SEARCH_KEYWORDS = window.WIIINFO_SEARCH_KEYWORDS || {};
+  const INFO_DEFAULT_UPDATED = "2026-06";
+  const INFO_OFFICIAL_CHECK_SECTIONS = new Set(["life", "housing", "realty", "safety", "warning"]);
+  const KOREAN_LETTER_META = {
+    "ㄱ": { kind: "consonant", name: "기역", roman: "g/k", example: "가(ga)", desc: { ko: "ㄱ/ㅋ에 가까운 소리", en: "close to g/k", th: "เสียงใกล้ ก/ค", ja: "g/kに近い音", zh: "接近 g/k 的音", vi: "gần âm g/k", es: "sonido parecido a g/k" } },
+    "ㄴ": { kind: "consonant", name: "니은", roman: "n", example: "나(na)", desc: { ko: "ㄴ 소리", en: "n sound", th: "เสียงใกล้ น", ja: "nの音", zh: "n 音", vi: "âm n", es: "sonido n" } },
+    "ㄷ": { kind: "consonant", name: "디귿", roman: "d/t", example: "다(da)", desc: { ko: "ㄷ/ㅌ에 가까운 소리", en: "close to d/t", th: "เสียงใกล้ ด/ท", ja: "d/tに近い音", zh: "接近 d/t 的音", vi: "gần âm d/t", es: "sonido parecido a d/t" } },
+    "ㄹ": { kind: "consonant", name: "리을", roman: "r/l", example: "라(ra)", desc: { ko: "ㄹ 소리", en: "between r and l", th: "เสียงอยู่ระหว่าง ร และ ล", ja: "rとlの間に近い音", zh: "介于 r 和 l 之间", vi: "giữa âm r và l", es: "entre r y l" } },
+    "ㅁ": { kind: "consonant", name: "미음", roman: "m", example: "마(ma)", desc: { ko: "ㅁ 소리", en: "m sound", th: "เสียงใกล้ ม", ja: "mの音", zh: "m 音", vi: "âm m", es: "sonido m" } },
+    "ㅂ": { kind: "consonant", name: "비읍", roman: "b/p", example: "바(ba)", desc: { ko: "ㅂ/ㅍ에 가까운 소리", en: "close to b/p", th: "เสียงใกล้ บ/ป", ja: "b/pに近い音", zh: "接近 b/p 的音", vi: "gần âm b/p", es: "sonido parecido a b/p" } },
+    "ㅅ": { kind: "consonant", name: "시옷", roman: "s", example: "사(sa)", desc: { ko: "ㅅ 소리", en: "s sound", th: "เสียงใกล้ ซ/ส", ja: "sの音", zh: "s 音", vi: "âm s", es: "sonido s" } },
+    "ㅇ": { kind: "consonant", name: "이응", roman: "ng/silent", example: "아(a), 강(gang)", desc: { ko: "초성에서는 소리 없음, 받침에서는 ㅇ 소리", en: "silent at the start, ng at the end", th: "ต้นพยางค์ไม่มีเสียง ท้ายพยางค์เป็น ng", ja: "語頭では無音、終声ではng", zh: "音节开头不发音，收尾为 ng", vi: "đầu âm tiết câm, cuối âm tiết là ng", es: "muda al inicio, ng al final" } },
+    "ㅈ": { kind: "consonant", name: "지읒", roman: "j", example: "자(ja)", desc: { ko: "ㅈ 소리", en: "j sound", th: "เสียงใกล้ จ", ja: "jに近い音", zh: "接近 j 的音", vi: "gần âm j", es: "sonido parecido a j" } },
+    "ㅊ": { kind: "consonant", name: "치읓", roman: "ch", example: "차(cha)", desc: { ko: "ㅊ 소리", en: "ch sound", th: "เสียงใกล้ ช", ja: "chに近い音", zh: "接近 ch 的音", vi: "gần âm ch", es: "sonido ch" } },
+    "ㅋ": { kind: "consonant", name: "키읔", roman: "k", example: "카(ka)", desc: { ko: "강한 ㅋ 소리", en: "strong k sound", th: "เสียงใกล้ ค/ข", ja: "強いkの音", zh: "较强的 k 音", vi: "âm k bật hơi", es: "sonido k fuerte" } },
+    "ㅌ": { kind: "consonant", name: "티읕", roman: "t", example: "타(ta)", desc: { ko: "강한 ㅌ 소리", en: "strong t sound", th: "เสียงใกล้ ท", ja: "強いtの音", zh: "较强的 t 音", vi: "âm t bật hơi", es: "sonido t fuerte" } },
+    "ㅍ": { kind: "consonant", name: "피읖", roman: "p", example: "파(pa)", desc: { ko: "강한 ㅍ 소리", en: "strong p sound", th: "เสียงใกล้ พ/ผ", ja: "強いpの音", zh: "较强的 p 音", vi: "âm p bật hơi", es: "sonido p fuerte" } },
+    "ㅎ": { kind: "consonant", name: "히읗", roman: "h", example: "하(ha)", desc: { ko: "ㅎ 소리", en: "h sound", th: "เสียงใกล้ ห", ja: "hの音", zh: "h 音", vi: "âm h", es: "sonido h" } },
+    "ㅏ": { kind: "vowel", name: "아", roman: "a", example: "아(a)", desc: { ko: "아 소리", en: "a as in ah", th: "เสียง อา", ja: "アに近い音", zh: "类似 a 的音", vi: "âm a", es: "sonido a abierto" } },
+    "ㅑ": { kind: "vowel", name: "야", roman: "ya", example: "야(ya)", desc: { ko: "야 소리", en: "ya sound", th: "เสียง ยา", ja: "ヤに近い音", zh: "ya 音", vi: "âm ya", es: "sonido ya" } },
+    "ㅓ": { kind: "vowel", name: "어", roman: "eo", example: "어(eo)", desc: { ko: "어 소리", en: "eo, like a broad uh/aw", th: "เสียง ออ/เออ", ja: "オ/アの中間に近い音", zh: "类似 eo 的音", vi: "âm eo/ơ", es: "sonido eo, entre o y a" } },
+    "ㅕ": { kind: "vowel", name: "여", roman: "yeo", example: "여(yeo)", desc: { ko: "여 소리", en: "yeo sound", th: "เสียง ยอ/เยอ", ja: "ヨ/ヤの中間に近い音", zh: "yeo 音", vi: "âm yeo", es: "sonido yeo" } },
+    "ㅗ": { kind: "vowel", name: "오", roman: "o", example: "오(o)", desc: { ko: "오 소리", en: "o sound", th: "เสียง โอ", ja: "オの音", zh: "o 音", vi: "âm o", es: "sonido o" } },
+    "ㅛ": { kind: "vowel", name: "요", roman: "yo", example: "요(yo)", desc: { ko: "요 소리", en: "yo sound", th: "เสียง โย", ja: "ヨの音", zh: "yo 音", vi: "âm yo", es: "sonido yo" } },
+    "ㅜ": { kind: "vowel", name: "우", roman: "u", example: "우(u)", desc: { ko: "우 소리", en: "u/oo sound", th: "เสียง อู", ja: "ウの音", zh: "u 音", vi: "âm u", es: "sonido u" } },
+    "ㅠ": { kind: "vowel", name: "유", roman: "yu", example: "유(yu)", desc: { ko: "유 소리", en: "yu sound", th: "เสียง ยู", ja: "ユの音", zh: "yu 音", vi: "âm yu", es: "sonido yu" } },
+    "ㅡ": { kind: "vowel", name: "으", roman: "eu", example: "으(eu)", desc: { ko: "으 소리", en: "eu, a flat vowel", th: "เสียง อือ", ja: "ウを横に広げる音", zh: "eu 音，扁平元音", vi: "âm eu/ư", es: "sonido eu, vocal plana" } },
+    "ㅣ": { kind: "vowel", name: "이", roman: "i", example: "이(i)", desc: { ko: "이 소리", en: "i/ee sound", th: "เสียง อี", ja: "イの音", zh: "i 音", vi: "âm i", es: "sonido i" } }
+  };
   // const INFO_SECTIONS = window.WIIINFO_INFO_SECTIONS || {}; // 구 코드: 가이드 데이터가 data/info-guide.js로 분리되어 지연 로드됨 (2026-06-04)
   function getInfoSections() {
     return window.WIIINFO_INFO_SECTIONS || {};
@@ -592,16 +620,46 @@
 
   function detailLabel(key) {
     const labels = {
-      ko: { address: "주소", directions: "가는 방법", hours: "운영/시간", map: "지도 보기", source: "자료 기준", copied: "복사됨", close: "상세 닫기", viewDetail: "상세 보기", favoriteAdd: "즐겨찾기 추가", favoriteRemove: "즐겨찾기 해제", showLanguage: "{language} 보기", speechUnsupported: "이 브라우저는 음성 읽기를 지원하지 않습니다.", answer: "정답", listen: "듣기" },
-      en: { address: "Address", directions: "How to get there", hours: "Hours", map: "Open map", source: "Reference", copied: "Copied", close: "Close details", viewDetail: "View details", favoriteAdd: "Save item", favoriteRemove: "Remove saved item", showLanguage: "Show {language}", speechUnsupported: "This browser does not support speech playback.", answer: "answer", listen: "Listen" },
-      ja: { address: "住所", directions: "行き方", hours: "時間", map: "地図を見る", source: "参考", copied: "コピー済み", close: "詳細を閉じる", viewDetail: "詳細を見る", favoriteAdd: "保存に追加", favoriteRemove: "保存を解除", showLanguage: "{language}を見る", speechUnsupported: "このブラウザは音声再生に対応していません。", answer: "答え", listen: "聞く" },
-      th: { address: "ที่อยู่", directions: "วิธีเดินทาง", hours: "เวลา", map: "เปิดแผนที่", source: "แหล่งข้อมูล", copied: "คัดลอกแล้ว", close: "ปิดรายละเอียด", viewDetail: "ดูรายละเอียด", favoriteAdd: "บันทึกรายการ", favoriteRemove: "ลบรายการที่บันทึก", showLanguage: "ดู{language}", speechUnsupported: "เบราว์เซอร์นี้ไม่รองรับการเล่นเสียง", answer: "คำตอบ", listen: "ฟัง" },
-      zh: { address: "地址", directions: "交通方式", hours: "时间", map: "查看地图", source: "参考", copied: "已复制", close: "关闭详情", viewDetail: "查看详情", favoriteAdd: "添加收藏", favoriteRemove: "取消收藏", showLanguage: "查看{language}", speechUnsupported: "此浏览器不支持语音播放。", answer: "答案", listen: "收听" },
-      vi: { address: "Địa chỉ", directions: "Cách đi", hours: "Thời gian", map: "Mở bản đồ", source: "Nguồn tham khảo", copied: "Đã sao chép", close: "Đóng chi tiết", viewDetail: "Xem chi tiết", favoriteAdd: "Lưu mục", favoriteRemove: "Bỏ lưu mục", showLanguage: "Xem {language}", speechUnsupported: "Trình duyệt này không hỗ trợ phát giọng nói.", answer: "đáp án", listen: "Nghe" },
-      es: { address: "Dirección", directions: "Cómo llegar", hours: "Horario", map: "Abrir mapa", source: "Referencia", copied: "Copiado", close: "Cerrar detalles", viewDetail: "Ver detalles", favoriteAdd: "Guardar elemento", favoriteRemove: "Quitar guardado", showLanguage: "Ver {language}", speechUnsupported: "Este navegador no admite reproducción de voz.", answer: "respuesta", listen: "Escuchar" }
+      ko: { address: "주소", directions: "가는 방법", hours: "운영/시간", map: "지도 보기", source: "자료 기준", copied: "복사됨", close: "상세 닫기", viewDetail: "상세 보기", favoriteAdd: "즐겨찾기 추가", favoriteRemove: "즐겨찾기 해제", showLanguage: "{language} 보기", speechUnsupported: "이 브라우저는 음성 읽기를 지원하지 않습니다.", answer: "정답", listen: "듣기", lastChecked: "최종 확인", officialCheck: "비자, 계약, 의료, 행정 정보는 공식 기관에서 다시 확인하세요." },
+      en: { address: "Address", directions: "How to get there", hours: "Hours", map: "Open map", source: "Reference", copied: "Copied", close: "Close details", viewDetail: "View details", favoriteAdd: "Save item", favoriteRemove: "Remove saved item", showLanguage: "Show {language}", speechUnsupported: "This browser does not support speech playback.", answer: "answer", listen: "Listen", lastChecked: "Last checked", officialCheck: "Confirm visa, contract, medical, and public-office details with official sources." },
+      ja: { address: "住所", directions: "行き方", hours: "時間", map: "地図を見る", source: "参考", copied: "コピー済み", close: "詳細を閉じる", viewDetail: "詳細を見る", favoriteAdd: "保存に追加", favoriteRemove: "保存を解除", showLanguage: "{language}を見る", speechUnsupported: "このブラウザは音声再生に対応していません。", answer: "答え", listen: "聞く", lastChecked: "最終確認", officialCheck: "ビザ、契約、医療、行政情報は公式機関で再確認してください。" },
+      th: { address: "ที่อยู่", directions: "วิธีเดินทาง", hours: "เวลา", map: "เปิดแผนที่", source: "แหล่งข้อมูล", copied: "คัดลอกแล้ว", close: "ปิดรายละเอียด", viewDetail: "ดูรายละเอียด", favoriteAdd: "บันทึกรายการ", favoriteRemove: "ลบรายการที่บันทึก", showLanguage: "ดู{language}", speechUnsupported: "เบราว์เซอร์นี้ไม่รองรับการเล่นเสียง", answer: "คำตอบ", listen: "ฟัง", lastChecked: "ตรวจล่าสุด", officialCheck: "ข้อมูลวีซ่า สัญญา การแพทย์ และราชการควรตรวจซ้ำกับหน่วยงานทางการ" },
+      zh: { address: "地址", directions: "交通方式", hours: "时间", map: "查看地图", source: "参考", copied: "已复制", close: "关闭详情", viewDetail: "查看详情", favoriteAdd: "添加收藏", favoriteRemove: "取消收藏", showLanguage: "查看{language}", speechUnsupported: "此浏览器不支持语音播放。", answer: "答案", listen: "收听", lastChecked: "最后确认", officialCheck: "签证、合同、医疗和行政信息请以官方机构为准。" },
+      vi: { address: "Địa chỉ", directions: "Cách đi", hours: "Thời gian", map: "Mở bản đồ", source: "Nguồn tham khảo", copied: "Đã sao chép", close: "Đóng chi tiết", viewDetail: "Xem chi tiết", favoriteAdd: "Lưu mục", favoriteRemove: "Bỏ lưu mục", showLanguage: "Xem {language}", speechUnsupported: "Trình duyệt này không hỗ trợ phát giọng nói.", answer: "đáp án", listen: "Nghe", lastChecked: "Cập nhật lần cuối", officialCheck: "Hãy xác nhận lại thông tin visa, hợp đồng, y tế và hành chính với cơ quan chính thức." },
+      es: { address: "Dirección", directions: "Cómo llegar", hours: "Horario", map: "Abrir mapa", source: "Referencia", copied: "Copiado", close: "Cerrar detalles", viewDetail: "Ver detalles", favoriteAdd: "Guardar elemento", favoriteRemove: "Quitar guardado", showLanguage: "Ver {language}", speechUnsupported: "Este navegador no admite reproducción de voz.", answer: "respuesta", listen: "Escuchar", lastChecked: "Última revisión", officialCheck: "Confirma datos de visa, contrato, salud y trámites con fuentes oficiales." }
     };
     const lang = labels[sourceLang] ? sourceLang : "en";
     return labels[lang][key] || key;
+  }
+
+  function infoFreshnessText(section, card) {
+    const updated = card.updated || section.updated || INFO_DEFAULT_UPDATED;
+    const officialCheck = card.officialCheck ?? section.officialCheck ?? INFO_OFFICIAL_CHECK_SECTIONS.has(section.id);
+    const parts = [`${detailLabel("lastChecked")}: ${updated}`];
+    if (officialCheck) parts.push(detailLabel("officialCheck"));
+    return parts.join(" · ");
+  }
+
+  function koreanLetterTypeLabel(kind) {
+    const labels = {
+      consonant: { ko: "한글 자음", en: "Korean consonant", th: "พยัญชนะเกาหลี", ja: "韓国語の子音", zh: "韩语辅音", vi: "Phụ âm tiếng Hàn", es: "Consonante coreana" },
+      vowel: { ko: "한글 모음", en: "Korean vowel", th: "สระเกาหลี", ja: "韓国語の母音", zh: "韩语元音", vi: "Nguyên âm tiếng Hàn", es: "Vocal coreana" }
+    };
+    return labels[kind]?.[sourceLang] || labels[kind]?.en || kind;
+  }
+
+  function displayLetter(item) {
+    if (targetLang !== "ko") return item;
+    const meta = KOREAN_LETTER_META[item.char];
+    if (!meta) return item;
+    const desc = meta.desc[sourceLang] || meta.desc.en;
+    return {
+      ...item,
+      type: koreanLetterTypeLabel(meta.kind),
+      name: meta.name,
+      sound: `${meta.roman} · ${desc}`,
+      example: meta.example
+    };
   }
 
   function escapeHtml(value) {
@@ -734,7 +792,7 @@
         <h3>${escapeHtml(group.title)}</h3>
         <ul>${(group.items || []).map((item) => `<li>${escapeHtml(item)}</li>`).join("")}</ul>
       </section>
-    `).join("");
+    `).join("") + `<p class="infoFreshness">${escapeHtml(infoFreshnessText(section, card))}</p>`;
 
     detailModal.hidden = false;
     document.body.classList.add("modalOpen");
@@ -849,7 +907,8 @@
     list.setAttribute("aria-label", uiText("phraseListLabel"));
     letterList.setAttribute("aria-label", uiText("letterListLabel"));
     const filtered = letters.filter((item) => {
-      const text = `${item.type} ${item.char} ${item.name} ${item.sound} ${item.example}`.toLowerCase();
+      const display = displayLetter(item);
+      const text = `${display.type} ${display.char} ${display.name} ${display.sound} ${display.example}`.toLowerCase();
       return !keyword || text.includes(keyword);
     });
     totalCount.textContent = filtered.length;
@@ -857,14 +916,15 @@
     todayCount.textContent = todayLearnedCount();
 
     filtered.forEach((item) => {
+      const display = displayLetter(item);
       const card = letterTemplate.content.firstElementChild.cloneNode(true);
       const audioNumber = formatIndex(item.audioIndex);
       card.dataset.audioFile = audioNumber;
       card.querySelector(".letterNumber").textContent = `#${audioNumber}`;
-      card.querySelector(".letter").textContent = item.char;
-      card.querySelector(".letterName").textContent = `${item.type} · ${item.name}`;
-      card.querySelector(".letterSound").textContent = item.sound;
-      card.querySelector(".letterExample").textContent = item.example;
+      card.querySelector(".letter").textContent = display.char;
+      card.querySelector(".letterName").textContent = `${display.type} · ${display.name}`;
+      card.querySelector(".letterSound").textContent = display.sound;
+      card.querySelector(".letterExample").textContent = display.example;
       card.querySelector(".letterSpeakButton").addEventListener("click", () => {
         const text = `${item.char} ${item.name}`;
         speak(text, getLetterAudioUrl(item.audioIndex, targetLang), LANGUAGES[targetLang]?.speech || "ko-KR");
