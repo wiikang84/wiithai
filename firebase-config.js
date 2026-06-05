@@ -10,4 +10,4 @@ window.WIIINFO_FIREBASE_CONFIG = {
 
 window.WIIINFO_FIRESTORE_COLLECTION = "wiiinfoPhrases";
 // Firebase Console > Authentication에서 Google 로그인 제공업체를 활성화한 뒤 true로 바꿀 것
-window.WIIINFO_AUTH_ENABLED = false;
+window.WIIINFO_AUTH_ENABLED = true;
