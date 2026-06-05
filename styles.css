@@ -323,6 +323,60 @@ h1 {
   box-shadow: none;
 }
 
+.appFooter {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin: 28px 0 8px;
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.appFooter a {
+  color: var(--ink);
+  text-decoration: none;
+}
+
+.appFooter a:hover,
+.appFooter a:focus-visible {
+  text-decoration: underline;
+}
+
+.privacyPage {
+  max-width: 760px;
+  min-height: 100vh;
+  margin: 0 auto;
+  padding: 32px 18px 48px;
+}
+
+.privacyPage h1 {
+  color: var(--ink);
+  font-size: 34px;
+  line-height: 1.08;
+}
+
+.privacyPage section {
+  margin-top: 24px;
+}
+
+.privacyPage h2 {
+  margin: 0 0 8px;
+  font-size: 18px;
+}
+
+.privacyPage p,
+.privacyPage li {
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.65;
+}
+
+.privacyPage a {
+  color: var(--teal);
+  font-weight: 900;
+}
+
 .speakButton,
 .revealButton,
 .starButton,
