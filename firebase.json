@@ -10,6 +10,18 @@
           {
             "key": "Cache-Control",
             "value": "no-cache, max-age=0"
+          },
+          {
+            "key": "Content-Security-Policy",
+            "value": "default-src 'self'; script-src 'self' https://www.gstatic.com https://apis.google.com https://www.googletagmanager.com 'unsafe-inline'; connect-src 'self' https://*.googleapis.com https://*.firebaseio.com https://firestore.googleapis.com https://identitytoolkit.googleapis.com https://securetoken.googleapis.com https://www.google-analytics.com https://region1.google-analytics.com https://firebase.googleapis.com; img-src 'self' data: https://lh3.googleusercontent.com https://www.gstatic.com; style-src 'self' 'unsafe-inline'; frame-src https://*.firebaseapp.com https://accounts.google.com; media-src 'self'; manifest-src 'self'; base-uri 'self'; form-action 'self'"
+          },
+          {
+            "key": "X-Content-Type-Options",
+            "value": "nosniff"
+          },
+          {
+            "key": "Referrer-Policy",
+            "value": "strict-origin-when-cross-origin"
           }
         ]
       },
@@ -51,6 +63,13 @@
             "value": "public, max-age=86400"
           }
         ]
+      }
+    ],
+    "redirects": [
+      {
+        "source": "/docs/**",
+        "destination": "/",
+        "type": 301
       }
     ],
     "rewrites": [
