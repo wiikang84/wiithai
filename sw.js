@@ -1,7 +1,7 @@
 // wiiInfo 서비스워커 (2026-06-04 PWA 도입)
 // 배포 시 SW_VERSION을 index.html ?v= / app.js ASSET_VERSION과 같이 올릴 것
 // 주의: controllerchange 자동 reload 금지 (구버전-신버전 충돌로 무한 새로고침 사고 예방)
-const SW_VERSION = "20260605-07";
+const SW_VERSION = "20260608-01";
 const CORE_CACHE = `wiiinfo-core-${SW_VERSION}`;
 // const AUDIO_CACHE = "wiiinfo-audio-v1"; // 구 버전 (2026-06-04 문자 음성 재생성으로 v2 승격)
 const AUDIO_CACHE = "wiiinfo-audio-v4"; // 재생한 mp3만 저장. 음성 파일을 다시 생성하면 버전을 올릴 것 (v3: 2026-06-04 th/ko 전체 재생성 + 문장 200 확장)
@@ -82,15 +82,19 @@ async function cacheFirst(request, cacheName) {
   if (cached) return cached;
   const response = await fetch(request);
   // if (response.ok) cache.put(request, response.clone()); // 구 코드: 206(Range 부분응답)은 put이 실패해서 오디오가 캐시 안 됨 (2026-06-04 수정)
-  if (response.status === 200) {
+  if (response.status === 200 && isAudioResponse(response)) {
     cache.put(request, response.clone()).catch(() => {});
   } else if (response.status === 206) {
     // Range 응답은 캐시에 저장할 수 없으므로 전체 파일을 백그라운드로 받아 저장
     fetch(request.url)
-      .then((full) => { if (full.status === 200) return cache.put(request.url, full); })
+      .then((full) => { if (full.status === 200 && isAudioResponse(full)) return cache.put(request.url, full); })
       .catch(() => {});
   }
   return response;
+}
+
+function isAudioResponse(response) {
+  return (response.headers.get("content-type") || "").toLowerCase().startsWith("audio/");
 }
 
 async function networkFirst(request, cacheName) {

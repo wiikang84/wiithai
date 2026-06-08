@@ -8,7 +8,53 @@ service cloud.firestore {
     }
 
     match /users/{userId} {
-      allow read, create, update, delete: if request.auth != null && request.auth.uid == userId;
+      allow read: if signedInOwner(userId);
+      allow create, update: if signedInOwner(userId) && validUserProfile();
+      allow delete: if false;
+    }
+
+    function signedInOwner(userId) {
+      return request.auth != null && request.auth.uid == userId;
+    }
+
+    function validUserProfile() {
+      return request.resource.data.keys().hasOnly([
+        "uid",
+        "email",
+        "displayName",
+        "photoURL",
+        "favoriteIds",
+        "preferredFrom",
+        "preferredLearn",
+        "createdAt",
+        "updatedAt",
+        "lastLoginAt"
+      ])
+      && request.resource.data.uid == request.auth.uid
+      && optionalString("email", 320)
+      && optionalString("displayName", 120)
+      && optionalString("photoURL", 1000)
+      && optionalString("preferredFrom", 20)
+      && optionalString("preferredLearn", 20)
+      && optionalFavorites()
+      && optionalTimestamp("createdAt")
+      && optionalTimestamp("updatedAt")
+      && optionalTimestamp("lastLoginAt");
+    }
+
+    function optionalString(field, maxLength) {
+      return !(field in request.resource.data)
+        || (request.resource.data[field] is string && request.resource.data[field].size() <= maxLength);
+    }
+
+    function optionalFavorites() {
+      return !("favoriteIds" in request.resource.data)
+        || (request.resource.data.favoriteIds is list && request.resource.data.favoriteIds.size() <= 500);
+    }
+
+    function optionalTimestamp(field) {
+      return !(field in request.resource.data)
+        || request.resource.data[field] is timestamp;
     }
   }
 }

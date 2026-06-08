@@ -1,5 +1,5 @@
 (async function () {
-  const ASSET_VERSION = "20260605-07";
+  const ASSET_VERSION = "20260608-01";
   const LANGUAGES = window.WIIINFO_LANGUAGES || {};
   const LANGUAGE_NAMES = window.WIIINFO_LANGUAGE_NAMES || {};
   const PROFILES = window.WIIINFO_LEARNER_PROFILES || [];
@@ -354,6 +354,7 @@
     if (!ref) return;
     const now = firebase.firestore.FieldValue.serverTimestamp();
     const payload = {
+      uid: user.uid,
       email: user.email || "",
       displayName: user.displayName || "",
       photoURL: user.photoURL || "",
@@ -780,7 +781,7 @@
   }
 
   function displayLetter(item) {
-    if (targetLang !== "ko") return item;
+    if (targetLang !== "ko") return displayNonKoreanLetter(item);
     const meta = KOREAN_LETTER_META[item.char];
     if (!meta) return item;
     const desc = meta.desc[sourceLang] || meta.desc.en;
@@ -790,6 +791,38 @@
       name: meta.name,
       sound: `${meta.roman} · ${desc}`,
       example: meta.example
+    };
+  }
+
+  function displayNonKoreanLetter(item) {
+    if (sourceLang === "ko") return item;
+    const typeLabels = {
+      th: {
+        "자음": { en: "Thai consonant", th: "พยัญชนะไทย", ja: "タイ語の子音", zh: "泰语辅音", vi: "Phụ âm tiếng Thái", es: "Consonante tailandesa" },
+        "모음": { en: "Thai vowel", th: "สระไทย", ja: "タイ語の母音", zh: "泰语元音", vi: "Nguyên âm tiếng Thái", es: "Vocal tailandesa" }
+      },
+      ja: {
+        "히라가나": { en: "Hiragana", th: "ฮิรางานะ", ja: "ひらがな", zh: "平假名", vi: "Hiragana", es: "Hiragana" },
+        "가타카나": { en: "Katakana", th: "คาตาคานะ", ja: "カタカナ", zh: "片假名", vi: "Katakana", es: "Katakana" }
+      },
+      en: {
+        "알파벳": { en: "Alphabet", th: "อักษรอังกฤษ", ja: "英字", zh: "英文字母", vi: "Bảng chữ cái", es: "Alfabeto" }
+      },
+      zh: {
+        "성조": { en: "Tone", th: "วรรณยุกต์จีน", ja: "声調", zh: "声调", vi: "Thanh điệu", es: "Tono" },
+        "기초 한자": { en: "Basic character", th: "ตัวอักษรจีนพื้นฐาน", ja: "基本漢字", zh: "基础汉字", vi: "Chữ Hán cơ bản", es: "Carácter básico" }
+      }
+    };
+    const clean = (value) => String(value || "")
+      .replace(/\s*·\s*[\u3131-\u318e\uac00-\ud7a3].*$/u, "")
+      .replace(/\s+[\u3131-\u318e\uac00-\ud7a3][\u3131-\u318e\uac00-\ud7a3\s()~·/]*$/u, "")
+      .trim();
+    const fallbackType = typeLabels[targetLang]?.[item.type]?.[sourceLang] || typeLabels[targetLang]?.[item.type]?.en || item.type;
+    return {
+      ...item,
+      type: fallbackType,
+      sound: clean(item.sound) || item.name || item.char,
+      example: clean(item.example) || item.char
     };
   }
 
@@ -868,9 +901,12 @@
     detailModal.querySelector(".infoDetailClose").setAttribute("aria-label", detailLabel("close"));
 
     // 2026-06-04 escapeHtml 적용 (구 코드: image.src/alt/card.title 원본 그대로 삽입)
-    gallery.innerHTML = images.map((image, index) => image.src
-      ? `<figure class="${index === 0 ? "featured" : ""}"><img src="${escapeHtml(image.src)}" alt="${escapeHtml(image.alt || card.title)}" loading="lazy" /><figcaption>${escapeHtml(image.alt || card.title)}</figcaption></figure>`
-      : `<figure class="imageFallback featured"><span>${escapeHtml(card.title)}</span></figure>`).join("");
+    gallery.innerHTML = images.map((image, index) => {
+      const countBadge = images.length > 1 ? `<span class="galleryCount">${index + 1}/${images.length}</span>` : "";
+      return image.src
+        ? `<figure class="${index === 0 ? "featured" : ""}"><img src="${escapeHtml(image.src)}" alt="${escapeHtml(image.alt || card.title)}" loading="lazy" />${countBadge}<figcaption>${escapeHtml(image.alt || card.title)}</figcaption></figure>`
+        : `<figure class="imageFallback featured"><span>${escapeHtml(card.title)}</span></figure>`;
+    }).join("");
     gallery.querySelectorAll("img").forEach((image) => {
       image.addEventListener("error", () => {
         const figure = image.closest("figure");

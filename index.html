@@ -20,13 +20,13 @@
     <link rel="manifest" href="./manifest.webmanifest" />
     <meta name="theme-color" content="#00a7a5" />
     <link rel="apple-touch-icon" href="./icons/icon-192.png" />
-    <link rel="stylesheet" href="./styles.css?v=20260605-07" />
+    <link rel="stylesheet" href="./styles.css?v=20260608-01" />
   </head>
   <body>
     <main class="app">
       <header class="appHeader">
         <section class="hero">
-          <button id="homeFlagButton" class="flagMark" type="button" aria-label="Go home">
+          <button id="homeFlagButton" class="flagMark" type="button" aria-label="Reset language selection">
             <span id="heroFlagEmoji" class="heroFlagEmoji heroSourceFlag flagVisual flag-ko">KR</span>
             <span class="heroRoute">
               <span class="heroArrow">→</span>
@@ -85,6 +85,7 @@
       <section class="filterBar" aria-label="Search and categories">
         <input id="searchInput" type="search" aria-label="Search phrases and letters" placeholder="Search phrase, meaning, or pronunciation" />
         <div id="categoryTabs" class="tabs"></div>
+        <p class="scrollHint">Swipe sideways for more categories.</p>
         <label class="toggle">
           <input id="quizToggle" type="checkbox" />
           <span id="quizLabel">Show my language first</span>
@@ -115,6 +116,7 @@
 
       <section class="infoHub" aria-label="Korea life info">
         <div id="infoTabs" class="infoTabs" aria-label="Choose life info"></div>
+        <p class="scrollHint">Swipe sideways for more Korea info.</p>
         <div class="infoPanel">
           <div>
             <p id="infoEyebrow" class="controlLabel">Korea info by Wii</p>
@@ -127,6 +129,7 @@
 
       <footer class="appFooter">
         <a href="./privacy.html">Privacy</a>
+        <a href="https://github.com/wiikang84/wiithai/issues" rel="noopener noreferrer">Feedback</a>
         <span>wiiInfo</span>
       </footer>
     </main>
@@ -169,9 +172,9 @@
     <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-auth-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-analytics-compat.js"></script>
-    <script src="./firebase-config.js?v=20260605-07"></script>
-    <script src="./phrases.js?v=20260605-07"></script>
-    <script src="./multilingual-data.js?v=20260605-07"></script>
-    <script src="./app.js?v=20260605-07"></script>
+    <script src="./firebase-config.js?v=20260608-01"></script>
+    <script src="./phrases.js?v=20260608-01"></script>
+    <script src="./multilingual-data.js?v=20260608-01"></script>
+    <script src="./app.js?v=20260608-01"></script>
   </body>
 </html>
