@@ -1,5 +1,5 @@
 (async function () {
-  const ASSET_VERSION = "20260608-01";
+  const ASSET_VERSION = "20260611-01";
   const LANGUAGES = window.WIIINFO_LANGUAGES || {};
   const LANGUAGE_NAMES = window.WIIINFO_LANGUAGE_NAMES || {};
   const PROFILES = window.WIIINFO_LEARNER_PROFILES || [];
