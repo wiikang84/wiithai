@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>wiiInfo · 내 주변 가게</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<style>
+  :root{
+    --c-primary:#FB6514; --c-primary-press:#E2540A; --c-primary-weak:#FFF1E8;
+    --c-success:#15A66E; --c-success-weak:#E7F7F0; --c-danger:#E5484D;
+    --c-ink-900:#1A1A1A; --c-ink-700:#4A4A4A; --c-ink-500:#8A8A8A; --c-ink-300:#E2E2E0;
+    --c-bg:#fff; --c-bg-soft:#F7F7F5;
+    --r-card:16px; --r-chip:999px; --r-btn:12px;
+    --shadow:0 1px 2px rgba(0,0,0,.04),0 4px 16px rgba(0,0,0,.06);
+    --font:"Apple SD Gothic Neo","Noto Sans KR","Noto Sans Thai",system-ui,sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+  body{font-family:var(--font);background:#000;display:flex;justify-content:center}
+  .phone{width:100%;max-width:430px;min-height:100vh;background:var(--c-bg-soft);position:relative;overflow:hidden}
+
+  /* 헤더 */
+  header{background:#fff;padding:14px 16px 10px;position:sticky;top:0;z-index:20;box-shadow:0 1px 0 rgba(0,0,0,.05)}
+  .loc{font-size:17px;font-weight:800;color:var(--c-ink-900);display:flex;align-items:center;gap:4px}
+  .loc .pin{color:var(--c-primary)}
+  .langbar{display:flex;gap:6px;margin-top:10px}
+  .lang{flex:1;padding:8px 0;border:1px solid var(--c-ink-300);background:#fff;border-radius:var(--r-chip);
+        font-size:13px;font-weight:700;color:var(--c-ink-500);cursor:pointer;transition:.15s}
+  .lang.on{background:var(--c-primary);color:#fff;border-color:var(--c-primary)}
+  .search{margin-top:10px;background:var(--c-bg-soft);border-radius:var(--r-btn);padding:11px 14px;
+          font-size:14px;color:var(--c-ink-500);display:flex;gap:8px;align-items:center}
+
+  /* 필터칩 */
+  .chips{display:flex;gap:7px;padding:12px 16px 4px;overflow-x:auto;scrollbar-width:none}
+  .chips::-webkit-scrollbar{display:none}
+  .chip{flex:none;padding:7px 14px;border:1px solid var(--c-ink-300);background:#fff;border-radius:var(--r-chip);
+        font-size:13px;font-weight:600;color:var(--c-ink-700);cursor:pointer;white-space:nowrap}
+  .chip.on{background:var(--c-ink-900);color:#fff;border-color:var(--c-ink-900)}
+
+  /* 토글바 */
+  .togglebar{display:flex;justify-content:space-between;align-items:center;padding:8px 16px 4px}
+  .count{font-size:13px;color:var(--c-ink-500);font-weight:600}
+  .toggle{font-size:13px;font-weight:700;color:var(--c-primary);background:var(--c-primary-weak);
+          padding:7px 14px;border-radius:var(--r-chip);border:none;cursor:pointer}
+
+  /* 리스트 */
+  .list{padding:8px 16px 90px}
+  .card{background:#fff;border-radius:var(--r-card);box-shadow:var(--shadow);padding:12px;margin-bottom:11px;
+        display:flex;gap:12px;cursor:pointer;transition:.1s}
+  .card:active{transform:scale(.985)}
+  .thumb{width:74px;height:74px;border-radius:12px;background:linear-gradient(135deg,#FFE3CE,#FFD0AE);
+         flex:none;display:flex;align-items:center;justify-content:center;font-size:30px}
+  .info{flex:1;min-width:0}
+  .nm{font-size:15.5px;font-weight:800;color:var(--c-ink-900);display:flex;align-items:center;gap:6px}
+  .badge{font-size:10px;font-weight:800;padding:2px 7px;border-radius:6px;background:var(--c-success-weak);color:var(--c-success)}
+  .meta{font-size:12.5px;color:var(--c-ink-500);margin-top:4px;display:flex;align-items:center;gap:6px}
+  .dot{width:7px;height:7px;border-radius:50%;background:var(--c-success);display:inline-block}
+  .dot.off{background:var(--c-ink-300)}
+  .natchip{font-size:11px;font-weight:700;color:var(--c-primary-press);background:var(--c-primary-weak);padding:2px 8px;border-radius:6px}
+  .items{font-size:12.5px;color:var(--c-ink-700);margin-top:6px;line-height:1.4}
+
+  /* 지도(더미) */
+  .map{display:none;height:calc(100vh - 220px);margin:8px 16px;border-radius:16px;
+       background:#E8EFE9 url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40"><circle cx="20" cy="20" r="2" fill="%23cfe0d2"/></svg>') ;
+       position:relative;box-shadow:var(--shadow);overflow:hidden}
+  .map .me{position:absolute;left:50%;top:55%;width:18px;height:18px;background:#3b82f6;border:3px solid #fff;border-radius:50%;box-shadow:0 0 0 6px rgba(59,130,246,.2)}
+  .pin2{position:absolute;font-size:13px;font-weight:800;color:#fff;background:var(--c-primary);padding:5px 9px;border-radius:14px;box-shadow:var(--shadow);transform:translate(-50%,-100%);white-space:nowrap}
+  .pin2.g{background:var(--c-success)}
+
+  /* 상세 */
+  .sheet{position:fixed;inset:0;background:rgba(0,0,0,.4);z-index:50;display:none;align-items:flex-end;justify-content:center}
+  .sheet.open{display:flex}
+  .sheetbox{width:100%;max-width:430px;background:#fff;border-radius:22px 22px 0 0;max-height:88vh;overflow-y:auto;animation:up .25s}
+  @keyframes up{from{transform:translateY(100%)}to{transform:translateY(0)}}
+  .hero{height:170px;background:linear-gradient(135deg,#FFE3CE,#FFD0AE);display:flex;align-items:center;justify-content:center;font-size:60px;position:relative}
+  .close{position:absolute;top:12px;left:12px;width:34px;height:34px;background:rgba(255,255,255,.9);border-radius:50%;border:none;font-size:18px;cursor:pointer}
+  .dbody{padding:18px 18px 28px}
+  .dnm{font-size:20px;font-weight:800;color:var(--c-ink-900);display:flex;align-items:center;gap:8px}
+  .drow{display:flex;gap:10px;font-size:14px;color:var(--c-ink-700);margin-top:12px;align-items:flex-start}
+  .drow .ic{width:20px;flex:none;text-align:center}
+  .ditems{background:var(--c-bg-soft);border-radius:12px;padding:12px 14px;margin-top:14px;font-size:13.5px;color:var(--c-ink-700);line-height:1.5}
+  .dact{display:flex;gap:10px;margin-top:18px}
+  .dbtn{flex:1;padding:14px;border-radius:var(--r-btn);font-size:15px;font-weight:800;cursor:pointer;border:none}
+  .dbtn.line{background:#fff;border:1.5px solid var(--c-ink-300);color:var(--c-ink-900)}
+  .dbtn.fill{background:var(--c-primary);color:#fff}
+
+  .demo-tag{position:fixed;top:0;left:50%;transform:translateX(-50%);background:#111;color:#fff;font-size:10px;padding:3px 10px;border-radius:0 0 8px 8px;z-index:99;opacity:.55;letter-spacing:.5px}
+</style>
+</head>
+<body>
+<div class="phone">
+  <div class="demo-tag">DEMO · wiiInfo</div>
+  <header>
+    <div class="loc"><span class="pin">📍</span> <span id="t-loc">울산 남구</span> ▾</div>
+    <div class="langbar">
+      <button class="lang on" data-lang="ko" onclick="setLang('ko')">한국어</button>
+      <button class="lang" data-lang="th" onclick="setLang('th')">ภาษาไทย</button>
+      <button class="lang" data-lang="vi" onclick="setLang('vi')">Tiếng Việt</button>
+    </div>
+    <div class="search">🔍 <span id="t-search">가게·음식·나라 검색</span></div>
+  </header>
+
+  <div class="chips" id="chips"></div>
+
+  <div class="togglebar">
+    <span class="count"><span id="t-near">내 주변</span> 5</span>
+    <button class="toggle" id="toggleBtn" onclick="toggleMap()">🗺 <span id="t-map">지도</span></button>
+  </div>
+
+  <div class="list" id="list"></div>
+
+  <div class="map" id="map">
+    <div class="me"></div>
+    <div class="pin2 g" style="left:38%;top:40%">🟢</div>
+    <div class="pin2" style="left:62%;top:48%">🟠</div>
+    <div class="pin2 g" style="left:30%;top:62%">🟢</div>
+    <div class="pin2" style="left:70%;top:66%">🟠</div>
+    <div class="pin2" style="left:50%;top:30%">🟠</div>
+  </div>
+</div>
+
+<!-- 상세 -->
+<div class="sheet" id="sheet" onclick="if(event.target===this)closeSheet()">
+  <div class="sheetbox">
+    <div class="hero" id="d-emoji">🛒<button class="close" onclick="closeSheet()">✕</button></div>
+    <div class="dbody">
+      <div class="dnm"><span id="d-nm"></span> <span class="badge" id="d-open"></span></div>
+      <div class="meta" style="margin-top:6px"><span class="natchip" id="d-nat"></span></div>
+      <div class="drow"><span class="ic">📍</span><span id="d-addr"></span></div>
+      <div class="drow"><span class="ic">🕐</span><span id="d-hours"></span></div>
+      <div class="drow"><span class="ic">📞</span><span id="d-phone"></span></div>
+      <div class="ditems"><b id="t-items">취급 품목</b><br><span id="d-items"></span></div>
+      <div class="dact">
+        <button class="dbtn line" id="d-call">📞 <span id="t-call">전화</span></button>
+        <button class="dbtn fill" id="d-nav">🧭 <span id="t-nav">길찾기</span></button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+// ===== 다국어 UI =====
+const UI = {
+  ko:{loc:"울산 남구",search:"가게·음식·나라 검색",near:"내 주변",map:"지도",open:"영업중",closed:"영업종료",
+      items:"취급 품목",call:"전화",nav:"길찾기",all:"전체",
+      chips:["전체","베트남","태국","중앙아·할랄","중국","식료품"]},
+  th:{loc:"อุลซาน นัมกู",search:"ค้นหาร้าน·อาหาร·ประเทศ",near:"ใกล้ฉัน",map:"แผนที่",open:"เปิดอยู่",closed:"ปิดแล้ว",
+      items:"สินค้าที่จำหน่าย",call:"โทร",nav:"นำทาง",all:"ทั้งหมด",
+      chips:["ทั้งหมด","เวียดนาม","ไทย","เอเชียกลาง·ฮาลาล","จีน","ของชำ"]},
+  vi:{loc:"Ulsan Nam-gu",search:"Tìm cửa hàng·món ăn·quốc gia",near:"Gần tôi",map:"Bản đồ",open:"Đang mở",closed:"Đã đóng",
+      items:"Sản phẩm",call:"Gọi",nav:"Chỉ đường",all:"Tất cả",
+      chips:["Tất cả","Việt Nam","Thái Lan","Trung Á·Halal","Trung Quốc","Tạp hóa"]}
+};
+
+// ===== 가게 더미 데이터 (울산 실제 + 가상) =====
+const STORES = [
+  {emoji:"🛒", open:true, dist:"0.5km", nat:{ko:"베트남",th:"เวียดนาม",vi:"Việt Nam"},
+   nm:{ko:"사이공 마트",th:"ไซ่ง่อน มาร์ท",vi:"Sài Gòn Mart"},
+   addr:{ko:"울산 남구 무거동 12-3",th:"อุลซาน นัมกู มูกอดง 12-3",vi:"Ulsan Nam-gu Mugeo-dong 12-3"},
+   hours:{ko:"매일 09:00–22:00",th:"ทุกวัน 09:00–22:00",vi:"Hằng ngày 09:00–22:00"},
+   phone:"052-123-4567",
+   items:{ko:"쌀국수 재료 · 느억맘(피쉬소스) · 라이스페이퍼 · 연유커피",
+          th:"เส้นเฝอ · น้ำปลา · แผ่นแป้งเปาะเปี๊ยะ · กาแฟนมข้น",
+          vi:"Bánh phở · Nước mắm · Bánh tráng · Cà phê sữa"}},
+
+  {emoji:"🏪", open:true, dist:"0.8km", nat:{ko:"동남아 종합",th:"เอเชียตะวันออกเฉียงใต้",vi:"Đông Nam Á"},
+   nm:{ko:"피드백 아시아마트",th:"ฟีดแบ็ค เอเชียมาร์ท",vi:"Feedback Asia Mart"},
+   addr:{ko:"울산 남구 달동 왕생로66번길 7",th:"อุลซาน นัมกู ทัลดง",vi:"Ulsan Nam-gu Dal-dong"},
+   hours:{ko:"12:00–21:00 (월 휴무)",th:"12:00–21:00 (หยุดวันจันทร์)",vi:"12:00–21:00 (Nghỉ thứ Hai)"},
+   phone:"052-267-6766",
+   items:{ko:"아시아 식료품 · 냉동식품 · 향신료 · 라면",
+          th:"ของชำเอเชีย · อาหารแช่แข็ง · เครื่องเทศ · บะหมี่กึ่งสำเร็จรูป",
+          vi:"Tạp hóa châu Á · Đồ đông lạnh · Gia vị · Mì gói"}},
+
+  {emoji:"🥩", open:false, dist:"2.1km", nat:{ko:"중앙아·할랄",th:"เอเชียกลาง·ฮาลาล",vi:"Trung Á·Halal"},
+   nm:{ko:"미야스노이 구르만",th:"มยัสนอย กูร์มาน",vi:"Myasnoy Gurman"},
+   addr:{ko:"울산 동구 방어진순환도로",th:"อุลซาน ทงกู",vi:"Ulsan Dong-gu"},
+   hours:{ko:"10:00–21:00",th:"10:00–21:00",vi:"10:00–21:00"},
+   phone:"052-200-1234",
+   items:{ko:"할랄 정육 · 말린 과일 · 차(茶) · 중앙아시아 빵",
+          th:"เนื้อฮาลาล · ผลไม้อบแห้ง · ชา · ขนมปังเอเชียกลาง",
+          vi:"Thịt Halal · Trái cây khô · Trà · Bánh mì Trung Á"}},
+
+  {emoji:"🛒", open:true, dist:"1.2km", nat:{ko:"태국·베트남",th:"ไทย·เวียดนาม",vi:"Thái·Việt"},
+   nm:{ko:"아시아마트 (언양)",th:"เอเชียมาร์ท (ออนยาง)",vi:"Asia Mart (Eonyang)"},
+   addr:{ko:"울산 울주군 언양읍 반구대로 830",th:"อุลซาน อุลจู ออนยาง",vi:"Ulsan Ulju Eonyang"},
+   hours:{ko:"10:00–20:00",th:"10:00–20:00",vi:"10:00–20:00"},
+   phone:"052-254-0126",
+   items:{ko:"태국·베트남·인니 수입식품 · 코코넛밀크 · 카레 페이스트",
+          th:"อาหารนำเข้าไทย·เวียดนาม·อินโด · กะทิ · พริกแกง",
+          vi:"Thực phẩm NK Thái·Việt·Indo · Nước cốt dừa · Cà ri"}},
+
+  {emoji:"🌶️", open:true, dist:"1.5km", nat:{ko:"태국",th:"ไทย",vi:"Thái Lan"},
+   nm:{ko:"방콕 그로서리",th:"กรุงเทพ โกรเซอรี่",vi:"Bangkok Grocery"},
+   addr:{ko:"울산 남구 삼산동",th:"อุลซาน นัมกู ซัมซันดง",vi:"Ulsan Nam-gu Samsan-dong"},
+   hours:{ko:"11:00–22:00",th:"11:00–22:00",vi:"11:00–22:00"},
+   phone:"052-987-6543",
+   items:{ko:"코코넛밀크 · 똠얌 페이스트 · 재스민쌀 · 팜슈가 · 태국 라면",
+          th:"กะทิ · พริกต้มยำ · ข้าวหอมมะลิ · น้ำตาลปี๊บ · มาม่าไทย",
+          vi:"Nước cốt dừa · Tom yum · Gạo thơm · Đường thốt nốt · Mì Thái"}}
+];
+
+let lang="ko";
+function setLang(l){
+  lang=l;
+  document.querySelectorAll('.lang').forEach(b=>b.classList.toggle('on',b.dataset.lang===l));
+  render();
+}
+function t(k){return UI[lang][k];}
+
+function render(){
+  document.documentElement.lang = lang;
+  document.getElementById('t-loc').textContent=t('loc');
+  document.getElementById('t-search').textContent=t('search');
+  document.getElementById('t-near').textContent=t('near');
+  document.getElementById('t-map').textContent=t('map');
+  document.getElementById('t-items').textContent=t('items');
+  document.getElementById('t-call').textContent=t('call');
+  document.getElementById('t-nav').textContent=t('nav');
+
+  // 칩
+  const chips=document.getElementById('chips');
+  chips.innerHTML=UI[lang].chips.map((c,i)=>`<div class="chip${i===0?' on':''}">${c}</div>`).join('');
+
+  // 리스트
+  const list=document.getElementById('list');
+  list.innerHTML=STORES.map((s,i)=>`
+    <div class="card" onclick="openSheet(${i})">
+      <div class="thumb">${s.emoji}</div>
+      <div class="info">
+        <div class="nm">${s.nm[lang]} ${s.open?`<span class="badge">${t('open')}</span>`:''}</div>
+        <div class="meta"><span class="dot ${s.open?'':'off'}"></span> ${s.open?t('open'):t('closed')} · ${s.dist}</div>
+        <div class="meta"><span class="natchip">${s.nat[lang]}</span></div>
+        <div class="items">🛍️ ${s.items[lang]}</div>
+      </div>
+    </div>`).join('');
+}
+
+function openSheet(i){
+  const s=STORES[i];
+  document.getElementById('d-emoji').firstChild.textContent=s.emoji;
+  document.getElementById('d-nm').textContent=s.nm[lang];
+  const ob=document.getElementById('d-open');
+  ob.textContent=s.open?t('open'):t('closed');
+  ob.style.background=s.open?'var(--c-success-weak)':'#f0f0ee';
+  ob.style.color=s.open?'var(--c-success)':'var(--c-ink-500)';
+  document.getElementById('d-nat').textContent=s.nat[lang];
+  document.getElementById('d-addr').textContent=s.addr[lang];
+  document.getElementById('d-hours').textContent=s.hours[lang];
+  document.getElementById('d-phone').textContent=s.phone;
+  document.getElementById('d-items').textContent=s.items[lang];
+  document.getElementById('d-call').innerHTML='📞 '+t('call');
+  document.getElementById('d-nav').innerHTML='🧭 '+t('nav');
+  document.getElementById('sheet').classList.add('open');
+}
+function closeSheet(){document.getElementById('sheet').classList.remove('open');}
+
+let mapOn=false;
+function toggleMap(){
+  mapOn=!mapOn;
+  document.getElementById('map').style.display=mapOn?'block':'none';
+  document.getElementById('list').style.display=mapOn?'none':'block';
+  document.getElementById('toggleBtn').innerHTML=mapOn?('☰ '+(lang==='ko'?'목록':lang==='th'?'รายการ':'Danh sách')):('🗺 '+t('map'));
+}
+
+render();
+</script>
+</body>
+</html>
