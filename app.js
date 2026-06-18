@@ -1,5 +1,5 @@
 (async function () {
-  const ASSET_VERSION = "20260618-25";
+  const ASSET_VERSION = "20260618-26";
   const LANGUAGES = window.WIIINFO_LANGUAGES || {};
   const LANGUAGE_NAMES = window.WIIINFO_LANGUAGE_NAMES || {};
   const PROFILES = window.WIIINFO_LEARNER_PROFILES || [];
@@ -15,6 +15,8 @@
   const WELCOME_HELLO = { ko: "환영해요", en: "Welcome", th: "ยินดีต้อนรับ", vi: "Chào mừng", zh: "欢迎", ja: "ようこそ", es: "Bienvenido" };
   // [2026-06-18] 공유 버튼 라벨 (QR 획득루프)
   const SHARE_LABEL = { ko: "공유", en: "Share", th: "แชร์", vi: "Chia sẻ", zh: "分享", ja: "共有", es: "Compartir" };
+  // [2026-06-18 T12] 오늘 휴무 배지 (owner가 긴급휴무 켜면 손님 화면에 표시)
+  const CLOSED_LABEL = { ko: "오늘 휴무", en: "Closed today", th: "วันนี้ปิด", vi: "Hôm nay đóng cửa", zh: "今日休息", ja: "本日休み", es: "Cerrado hoy" };
   // [2026-06-18 T7] 역할 체계 (개발팀: role 안 박고 계산. master=이메일 화이트리스트, owner=stores 소유권, member 기본)
   const MASTER_EMAILS = ["dy17715@naver.com", "tmzkt2@gmail.com", "ironyjk@gmail.com", "dylab177151@gmail.com"];
   const ROLE_LABEL = {
@@ -693,7 +695,10 @@
     const coupon = place.coupon?.title ? `<p class="placeCouponPill">🎟 ${escapeHtml(localizedValue(place.coupon.title))}</p>` : "";
     // 상태 배지: 인증/확인필요/데모 (색 점 + 텍스트)
     const badgeClass = place.source === "demo-seed" ? "placeBadge--demo" : place.verified ? "placeBadge--ok" : "placeBadge--check";
-    const statusBadge = `<span class="placeBadge ${badgeClass}">${escapeHtml(sourceBadge)}</span>`;
+    const closedToday = !!(place.holidayClosed && place.holidayClosed.active);
+    const statusBadge = closedToday
+      ? `<span class="placeBadge placeBadge--closed">${escapeHtml(CLOSED_LABEL[sourceLang] || "Closed today")}</span>`
+      : `<span class="placeBadge ${badgeClass}">${escapeHtml(sourceBadge)}</span>`;
     // 사진 있으면 <img>, 없으면 카테고리별 컬러 플레이스홀더 + 큰 이모지 + 이니셜 워터마크
     const emoji = escapeHtml(place.emoji || "🛒");
     const initial = escapeHtml((localizedValue(place.name) || "?").slice(0, 1));
@@ -1895,7 +1900,8 @@
           name: d.name || {}, address: d.address || {}, lat: d.lat, lng: d.lng,
           phone: d.phone || "", hours: d.hours || {}, items: d.items || {}, coupon: d.coupon || null,
           photo: d.photo || null,
-          ownerUid: d.ownerUid || null, ownerStatus: d.ownerStatus || null
+          ownerUid: d.ownerUid || null, ownerStatus: d.ownerStatus || null,
+          holidayClosed: d.holidayClosed || null
         });
       });
       if (state.appTab === "nearby") renderPlaces();

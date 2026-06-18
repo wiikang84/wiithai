@@ -389,6 +389,8 @@ button {
 .placeBadge--ok::before { background: var(--positive); }
 .placeBadge--check::before { background: var(--warn); }
 .placeBadge--demo::before { background: var(--muted); }
+.placeBadge--closed { color: var(--danger); font-weight: var(--w-bold); }
+.placeBadge--closed::before { background: var(--danger); }
 
 /* 바디 */
 .placeCardBody {
