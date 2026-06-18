@@ -151,7 +151,8 @@
             if (snap.empty) { claimList.innerHTML = "<p class='notice'>대기 중인 신청이 없습니다.</p>"; return; }
             claimList.innerHTML = snap.docs.map((doc) => {
               const c = doc.data();
-              return `<div class="storeRow"><div><strong>${esc(c.storeName || "(가게명 없음)")}</strong><br><small>${esc(c.applicantName || "")} · ${esc(c.phone || "")} · ${esc(c.applicantEmail || "")}</small></div><div style="display:flex;gap:6px;"><button class="primaryBtn" style="min-height:38px;padding:0 14px;width:auto;" data-approve="${esc(doc.id)}">승인</button><button class="ghostBtn" data-reject="${esc(doc.id)}">반려</button></div></div>`;
+              const docs = (c.documents || []).map((dd) => `<a href="${esc(dd.url)}" target="_blank" rel="noopener" style="display:inline-block;margin-top:5px;margin-right:8px;font-size:12px;color:#e8602c;text-decoration:underline;">📎 ${esc(dd.type === "business-license" ? "사업자등록증" : "서류")}</a>`).join("");
+              return `<div class="storeRow"><div><strong>${esc(c.storeName || "(가게명 없음)")}</strong><br><small>${esc(c.applicantName || "")} · ${esc(c.phone || "")} · ${esc(c.applicantEmail || "")}</small><br>${docs || "<small style='color:#c0392b;'>⚠ 첨부 서류 없음</small>"}</div><div style="display:flex;gap:6px;"><button class="primaryBtn" style="min-height:38px;padding:0 14px;width:auto;" data-approve="${esc(doc.id)}">승인</button><button class="ghostBtn" data-reject="${esc(doc.id)}">반려</button></div></div>`;
             }).join("");
             claimList.querySelectorAll("[data-approve]").forEach((b) => b.addEventListener("click", () => approveClaim(b.dataset.approve)));
             claimList.querySelectorAll("[data-reject]").forEach((b) => b.addEventListener("click", () => rejectClaim(b.dataset.reject)));

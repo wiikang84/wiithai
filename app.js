@@ -1,5 +1,5 @@
 (async function () {
-  const ASSET_VERSION = "20260618-26";
+  const ASSET_VERSION = "20260618-27";
   const LANGUAGES = window.WIIINFO_LANGUAGES || {};
   const LANGUAGE_NAMES = window.WIIINFO_LANGUAGE_NAMES || {};
   const PROFILES = window.WIIINFO_LEARNER_PROFILES || [];
@@ -1812,28 +1812,47 @@
   // [2026-06-18 T8] 사장님 등록 신청 → ownerClaims pending 저장 (운영자가 store-admin에서 심사)
   async function submitOwnerClaim() {
     const msg = document.getElementById("oc_msg");
+    const submitBtn = document.getElementById("oc_submit");
     const store = (document.getElementById("oc_store")?.value || "").trim();
     const name = (document.getElementById("oc_name")?.value || "").trim();
     const phone = (document.getElementById("oc_phone")?.value || "").trim();
+    const license = document.getElementById("oc_license")?.files[0];
     if (!currentUser) { if (msg) msg.textContent = "로그인이 필요합니다."; return; }
     if (!store || !name || !phone) { if (msg) msg.textContent = "가게 이름·성함·연락처를 모두 입력해주세요."; return; }
-    if (!db) { if (msg) msg.textContent = "연결 오류로 신청할 수 없습니다."; return; }
-    if (msg) msg.textContent = "신청 중...";
+    if (!license) { if (msg) msg.textContent = "사업자등록증을 첨부해주세요 (필수)."; return; }
+    if (!db || !firebase.storage) { if (msg) msg.textContent = "연결 오류로 신청할 수 없습니다."; return; }
+    if (submitBtn) submitBtn.disabled = true;
+    if (msg) msg.textContent = "서류 업로드 중...";
     try {
-      await db.collection("ownerClaims").add({
+      // [2026-06-18] claimId 먼저 생성 → 서류 Storage 업로드 → set 1회(documents 포함). create만 허용하는 rules와 맞물림
+      const ref = db.collection("ownerClaims").doc();
+      const claimId = ref.id;
+      const storage = firebase.storage();
+      async function up(file, type) {
+        const path = `owner-docs/${currentUser.uid}/${claimId}/${type}-${Date.now()}-${file.name}`;
+        const snap = await storage.ref(path).put(file);
+        return { type, url: await snap.ref.getDownloadURL(), fileName: file.name, uploadedAt: Date.now() };
+      }
+      const documents = [await up(license, "business-license")];
+      const extras = document.getElementById("oc_extra")?.files || [];
+      for (let i = 0; i < extras.length; i++) documents.push(await up(extras[i], "other"));
+      await ref.set({
         uid: currentUser.uid,
         applicantEmail: currentUser.email || "",
         applicantName: name,
         phone: phone,
         storeName: store,
+        documents: documents,
         status: "pending",
         createdAt: firebase.firestore.FieldValue.serverTimestamp()
       });
-      if (msg) msg.textContent = "✓ 신청이 접수됐어요. 운영자 확인 후 연락드립니다.";
-      ["oc_store", "oc_name", "oc_phone"].forEach((id) => { const el = document.getElementById(id); if (el) el.value = ""; });
-      track("owner_claim_submit", {});
+      if (msg) msg.textContent = "✓ 신청이 접수됐어요 (서류 포함). 운영자 확인 후 연락드립니다.";
+      ["oc_store", "oc_name", "oc_phone", "oc_license", "oc_extra"].forEach((id) => { const el = document.getElementById(id); if (el) el.value = ""; });
+      track("owner_claim_submit", { docs: documents.length });
     } catch (error) {
       if (msg) msg.textContent = "신청 실패: " + error.message;
+    } finally {
+      if (submitBtn) submitBtn.disabled = false;
     }
   }
   loadMoreButton.addEventListener("click", () => {

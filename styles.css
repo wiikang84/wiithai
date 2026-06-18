@@ -2490,3 +2490,7 @@ h1 {
 .ownerClaimForm input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-wash); outline: none; }
 .ownerClaimSubmit { min-height: 46px; border: 0; border-radius: var(--r-md); background: var(--accent); color: #fff; font-weight: var(--w-bold); cursor: pointer; }
 .ownerClaimMsg { margin: 2px 0 0; font-size: 13px; color: var(--text-secondary); }
+.ownerDocLabel { font-size: 12px; font-weight: var(--w-med); color: var(--text-secondary); margin-top: 2px; }
+.ownerDocLabel .req { color: var(--danger); }
+.ownerDocHint { color: var(--muted); font-weight: var(--w-reg); }
+.ownerFileInput { font-size: 13px; color: var(--text-secondary); padding: 6px 0; }

@@ -20,7 +20,7 @@
     <link rel="manifest" href="./manifest.webmanifest" />
     <meta name="theme-color" content="#e8602c" />
     <link rel="apple-touch-icon" href="./icons/icon-192.png" />
-    <link rel="stylesheet" href="./styles.css?v=20260618-26" />
+    <link rel="stylesheet" href="./styles.css?v=20260618-27" />
   </head>
   <body>
     <!-- [2026-06-18 P1-b] 첫 방문 언어 선택 온보딩. 저장된 언어가 없고 딥링크(?from=)도 없을 때만 표시.
@@ -222,6 +222,10 @@
             <input id="oc_store" type="text" placeholder="가게 이름" />
             <input id="oc_name" type="text" placeholder="사장님 성함" />
             <input id="oc_phone" type="tel" placeholder="연락처 (휴대폰)" />
+            <label class="ownerDocLabel">사업자등록증 <span class="req">*필수</span> <span class="ownerDocHint">(이미지 또는 PDF, 5MB 이하)</span></label>
+            <input id="oc_license" type="file" accept="image/*,application/pdf" class="ownerFileInput" />
+            <label class="ownerDocLabel">추가 서류 <span class="ownerDocHint">(선택 · 영업신고증 등 여러 개 가능)</span></label>
+            <input id="oc_extra" type="file" accept="image/*,application/pdf" multiple class="ownerFileInput" />
             <button id="oc_submit" class="ownerClaimSubmit" type="button">신청 제출</button>
             <p id="oc_msg" class="ownerClaimMsg"></p>
           </div>
@@ -297,14 +301,15 @@
       </article>
     </template>
 
-    <script src="./vendor/firebase/10.12.5/firebase-app-compat.js?v=20260618-26"></script>
-    <script src="./vendor/firebase/10.12.5/firebase-auth-compat.js?v=20260618-26"></script>
-    <script src="./vendor/firebase/10.12.5/firebase-firestore-compat.js?v=20260618-26"></script>
-    <script src="./vendor/firebase/10.12.5/firebase-analytics-compat.js?v=20260618-26"></script>
-    <script src="./firebase-config.js?v=20260618-26"></script>
-    <script src="./phrases.js?v=20260618-26"></script>
-    <script src="./multilingual-data.js?v=20260618-26"></script>
-    <script src="./data/places.js?v=20260618-26"></script>
-    <script src="./app.js?v=20260618-26"></script>
+    <script src="./vendor/firebase/10.12.5/firebase-app-compat.js?v=20260618-27"></script>
+    <script src="./vendor/firebase/10.12.5/firebase-auth-compat.js?v=20260618-27"></script>
+    <script src="./vendor/firebase/10.12.5/firebase-firestore-compat.js?v=20260618-27"></script>
+    <script src="./vendor/firebase/10.12.5/firebase-storage-compat.js?v=20260618-27"></script>
+    <script src="./vendor/firebase/10.12.5/firebase-analytics-compat.js?v=20260618-27"></script>
+    <script src="./firebase-config.js?v=20260618-27"></script>
+    <script src="./phrases.js?v=20260618-27"></script>
+    <script src="./multilingual-data.js?v=20260618-27"></script>
+    <script src="./data/places.js?v=20260618-27"></script>
+    <script src="./app.js?v=20260618-27"></script>
   </body>
 </html>
