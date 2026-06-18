@@ -1,5 +1,5 @@
 (async function () {
-  const ASSET_VERSION = "20260618-01";
+  const ASSET_VERSION = "20260618-02";
   const LANGUAGES = window.WIIINFO_LANGUAGES || {};
   const LANGUAGE_NAMES = window.WIIINFO_LANGUAGE_NAMES || {};
   const PROFILES = window.WIIINFO_LEARNER_PROFILES || [];
@@ -1230,9 +1230,16 @@
   function safeUrl(value) {
     const raw = String(value || "").trim();
     if (!raw) return "";
-    if (/^(\/|\.|#|\?)/.test(raw)) return raw;
-    if (/^(https?:|tel:|mailto:)/i.test(raw)) return raw;
-    return "";
+    if (/^(\/\/|\\\\)/.test(raw)) return "";
+    if (/^(#|\?)/.test(raw)) return raw;
+    if (/^\/(?!\/)/.test(raw)) return raw;
+    try {
+      const parsed = new URL(raw, window.location.origin);
+      if (parsed.origin === window.location.origin && /^\.{1,2}\//.test(raw)) return raw;
+      return ["http:", "https:", "tel:", "mailto:"].includes(parsed.protocol) ? raw : "";
+    } catch {
+      return "";
+    }
   }
 
   function detailText(key, replacements = {}) {
@@ -1697,6 +1704,9 @@
   resetVisibleLimit();
   saveFavorites();
   updateStaticLabels();
+  // [2026-06-18] 부팅 시 발견탭·하단내비 등 정적 라벨을 선택 언어(sourceLang) 기준으로 갱신.
+  // 기존엔 setProfile/위치설정 때만 호출돼 첫 화면이 index.html의 한국어 하드코딩 그대로 떴음.
+  updatePlaceStaticLabels();
   updateHeroFlag();
   updateAuthUi();
   renderProfileTabs();
