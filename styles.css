@@ -457,8 +457,8 @@ button {
   margin: 0;
   padding: 3px 9px;
   border-radius: var(--r-pill);
-  background: #fff6e6;
-  color: #9a6b00;
+  background: var(--surface-sunk);
+  color: var(--warn);
   font-size: 12px;
   font-weight: var(--w-med);
 }
@@ -496,9 +496,9 @@ button {
   position: relative;
   min-height: min(62vh, 560px);
   overflow: hidden;
-  border: 1px solid #dfe7df;
+  border: 1px solid var(--line);
   border-radius: 18px;
-  background: #e8efe9;
+  background: var(--surface-sunk);
   box-shadow: var(--shadow);
 }
 
@@ -653,8 +653,8 @@ button {
 .placeDetailCoupon {
   padding: 13px 14px;
   border-radius: 14px;
-  background: #fff8dd;
-  color: #8a5b00;
+  background: var(--surface-sunk);
+  color: var(--warn);
   font-weight: 900;
 }
 
@@ -1704,7 +1704,7 @@ h1 {
 
 .callAction {
   border-color: transparent;
-  background: #e94949;
+  background: var(--danger);
   color: #fff;
 }
 
