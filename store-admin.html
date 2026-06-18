@@ -65,6 +65,7 @@
         </div>
         <div class="field"><label>취급 품목 (선택)</label><input id="f_items" placeholder="라면, 향신료, 냉동식품" /></div>
         <div class="field"><label>점주 연락처 / 메모 (선택)</label><input id="f_owner" placeholder="사장님 연락처, 인수인계 메모" /></div>
+        <div class="field"><label>대표 사진 URL (선택)</label><input id="f_photo" placeholder="https://... (가게 외관/음식 사진, 없으면 컬러 카드로 표시)" /></div>
         <button id="saveBtn" class="primaryBtn" type="button">점포 등록</button>
         <p id="saveMsg" class="notice"></p>
       </div>
@@ -149,6 +150,7 @@
             hours: langObj(document.getElementById("f_hours").value.trim()),
             items: langObj(document.getElementById("f_items").value.trim()),
             ownerNote: document.getElementById("f_owner").value.trim(),
+            photo: document.getElementById("f_photo").value.trim() || null,
             verified: false,
             source: "master-form",
             createdBy: currentUser.uid,
@@ -157,7 +159,7 @@
           };
           db.collection("stores").add(data).then(() => {
             saveMsg.textContent = "✓ 등록 완료";
-            ["f_name_ko", "f_name_en", "f_nat", "f_address", "f_phone", "f_hours", "f_items", "f_owner"].forEach((id) => { document.getElementById(id).value = ""; });
+            ["f_name_ko", "f_name_en", "f_nat", "f_address", "f_phone", "f_hours", "f_items", "f_owner", "f_photo"].forEach((id) => { document.getElementById(id).value = ""; });
             saveBtn.disabled = false;
             loadStores();
           }).catch((err) => { saveMsg.textContent = "저장 실패: " + err.message; saveBtn.disabled = false; });

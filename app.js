@@ -1,5 +1,5 @@
 (async function () {
-  const ASSET_VERSION = "20260618-20";
+  const ASSET_VERSION = "20260618-21";
   const LANGUAGES = window.WIIINFO_LANGUAGES || {};
   const LANGUAGE_NAMES = window.WIIINFO_LANGUAGE_NAMES || {};
   const PROFILES = window.WIIINFO_LEARNER_PROFILES || [];
@@ -823,7 +823,8 @@
       : `https://map.kakao.com/link/search/${encodeURIComponent(localizedValue(place.name))}`;
     const dBadgeClass = place.source === "demo-seed" ? "placeBadge--demo" : place.verified ? "placeBadge--ok" : "placeBadge--check";
     const dBadge = place.source === "demo-seed" ? "DEMO" : place.verified ? placeUi("verified") : placeUi("needCheck");
-    placeDetailHero.innerHTML = `${escapeHtml(place.emoji || "🛒")}<span class="placeBadge ${dBadgeClass}">${escapeHtml(dBadge)}</span>`;
+    const dPhoto = place.photo ? `<img class="placePhotoImg" src="${escapeHtml(safeUrl(place.photo))}" alt="${escapeHtml(localizedValue(place.name))}" loading="lazy" />` : escapeHtml(place.emoji || "🛒");
+    placeDetailHero.innerHTML = `${dPhoto}<span class="placeBadge ${dBadgeClass}">${escapeHtml(dBadge)}</span>`;
     placeDetailMeta.textContent = `${placeCategoryLabel(place.category)} · ${(place.nationalities || []).map(placeNationalityLabel).join(" · ") || placeUi("all")}`;
     placeDetailTitle.textContent = localizedValue(place.name);
     placeDetailItems.textContent = localizedValue(place.items);
@@ -1824,7 +1825,8 @@
           category: d.category || "grocery", nationalities: d.nationalities || [],
           emoji: d.emoji || emojiByCat[d.category] || "🛒",
           name: d.name || {}, address: d.address || {}, lat: d.lat, lng: d.lng,
-          phone: d.phone || "", hours: d.hours || {}, items: d.items || {}, coupon: d.coupon || null
+          phone: d.phone || "", hours: d.hours || {}, items: d.items || {}, coupon: d.coupon || null,
+          photo: d.photo || null
         });
       });
       if (state.appTab === "nearby") renderPlaces();
