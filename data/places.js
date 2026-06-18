@@ -114,7 +114,7 @@ window.WIIINFO_PLACES = [
     verified: false,
     category: "halal",
     nationalities: ["central-asia", "uzbekistan", "halal"],
-    emoji: "🥩",
+    emoji: "🛒",
     name: {
       ko: "동구 할랄 식료품",
       en: "Dong-gu Halal Grocery",
