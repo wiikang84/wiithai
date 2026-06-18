@@ -2198,3 +2198,43 @@ h1 {
 @media (max-width: 360px) {
   .langOnboardingGrid { grid-template-columns: 1fr; }
 }
+
+/* [2026-06-18] 발견 헤더 언어 바꾸기 버튼 + 온보딩 닫기 버튼 */
+.placeHeaderActions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: flex-end;
+  flex-shrink: 0;
+}
+.placeLangButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 8px 12px;
+  border: 1.5px solid var(--accent);
+  border-radius: 999px;
+  background: var(--surface);
+  color: var(--accent-dark);
+  font-size: 13px;
+  font-weight: 800;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: transform 0.1s;
+}
+.placeLangButton:active { transform: scale(0.97); }
+.langOnboardingCard { position: relative; }
+.langOnboardingClose {
+  position: absolute;
+  top: 10px;
+  right: 12px;
+  width: 34px;
+  height: 34px;
+  border: none;
+  background: transparent;
+  font-size: 26px;
+  line-height: 1;
+  color: var(--muted);
+  cursor: pointer;
+}
+.langOnboardingClose[hidden] { display: none; }

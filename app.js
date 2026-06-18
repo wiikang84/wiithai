@@ -1,5 +1,5 @@
 (async function () {
-  const ASSET_VERSION = "20260618-05";
+  const ASSET_VERSION = "20260618-06";
   const LANGUAGES = window.WIIINFO_LANGUAGES || {};
   const LANGUAGE_NAMES = window.WIIINFO_LANGUAGE_NAMES || {};
   const PROFILES = window.WIIINFO_LEARNER_PROFILES || [];
@@ -8,6 +8,8 @@
   const SEARCH_KEYWORDS = window.WIIINFO_SEARCH_KEYWORDS || {};
   const PLACES = window.WIIINFO_PLACES || [];
   const PLACE_COPY = window.WIIINFO_PLACE_COPY || {};
+  // [2026-06-18] 언어 버튼/온보딩에 표시할 각 언어의 자국어 이름
+  const LANG_NATIVE = { ko: "한국어", th: "ไทย", ja: "日本語", en: "English", zh: "中文", vi: "Tiếng Việt", es: "Español" };
   const INFO_DEFAULT_UPDATED = "2026-06";
   const INFO_OFFICIAL_CHECK_SECTIONS = new Set(["life", "housing", "realty", "safety", "warning"]);
   const DEFAULT_LOCATION = { lat: 35.5359, lng: 129.3248, label: "울산 남구" };
@@ -164,6 +166,9 @@
   const placeSeedNote = document.getElementById("placeSeedNote");
   const placeLocationButton = document.getElementById("placeLocationButton");
   const placeLocationLabel = document.getElementById("placeLocationLabel");
+  const placeLangButton = document.getElementById("placeLangButton");
+  const placeLangLabel = document.getElementById("placeLangLabel");
+  const langOnboardingClose = document.getElementById("langOnboardingClose");
   const placeSearchInput = document.getElementById("placeSearchInput");
   const placeCategoryTabs = document.getElementById("placeCategoryTabs");
   const placeNationalityTabs = document.getElementById("placeNationalityTabs");
@@ -828,6 +833,7 @@
     if (placeTitle) placeTitle.textContent = placeUi("nearby");
     if (placeSeedNote) placeSeedNote.textContent = placeUi("seedNote");
     if (placeLocationLabel) placeLocationLabel.textContent = state.userLocation?.label || placeUi("location");
+    if (placeLangLabel) placeLangLabel.textContent = LANG_NATIVE[sourceLang] || sourceLang;
     if (placeSearchInput) placeSearchInput.placeholder = placeUi("search");
     if (savedTitle) savedTitle.textContent = placeUi("saved");
     if (meTitle) meTitle.textContent = placeUi("profileTitle");
@@ -994,16 +1000,17 @@
   }
 
   // [2026-06-18 P1-b] 첫 방문 언어 선택 온보딩 — 선택 즉시 setProfile()로 전역 언어 확정 후 닫힘
-  function showLangOnboarding() {
+  // allowClose=false(첫 방문): 선택을 강제 → 닫기 숨김. true(언어 바꾸기 버튼): 닫기 허용.
+  function showLangOnboarding(allowClose = false) {
     const overlay = document.getElementById("langOnboarding");
     const grid = document.getElementById("langOnboardingGrid");
     if (!overlay || !grid) return;
-    const countryNames = { ko: "한국어", th: "ไทย", ja: "日本語", en: "English", zh: "中文", vi: "Tiếng Việt", es: "Español" };
     grid.innerHTML = "";
     PROFILES.forEach((profile) => {
       const button = document.createElement("button");
       button.type = "button";
-      button.innerHTML = `<span class="flag">${profile.flag}</span><span>${countryNames[profile.source] || profile.label}</span>`;
+      button.className = profile.id === profileId ? "active" : "";
+      button.innerHTML = `<span class="flag">${profile.flag}</span><span>${LANG_NATIVE[profile.source] || profile.label}</span>`;
       button.addEventListener("click", () => {
         setProfile(profile.id); // 전역 언어 확정 + localStorage 저장 + 전체 라벨 갱신(발견탭·내비 포함)
         overlay.hidden = true;
@@ -1011,8 +1018,9 @@
       });
       grid.appendChild(button);
     });
+    if (langOnboardingClose) langOnboardingClose.hidden = !allowClose;
     overlay.hidden = false;
-    track("onboarding_shown", {});
+    track("onboarding_shown", { mode: allowClose ? "change" : "first" });
   }
 
   function renderTargetTabs() {
@@ -1693,6 +1701,12 @@
       updatePlaceStaticLabels();
     }, { enableHighAccuracy: false, timeout: 7000, maximumAge: 300000 });
   });
+  // [2026-06-18] 언어 바꾸기 버튼 → 선택 카드 재표시(닫기 허용) / 닫기 버튼 → 변경 취소
+  placeLangButton?.addEventListener("click", () => showLangOnboarding(true));
+  langOnboardingClose?.addEventListener("click", () => {
+    const overlay = document.getElementById("langOnboarding");
+    if (overlay) overlay.hidden = true;
+  });
   placeDetailClose?.addEventListener("click", closePlaceDetail);
   placeDetailOverlay?.addEventListener("click", (event) => {
     if (event.target === placeDetailOverlay) closePlaceDetail();
@@ -1737,7 +1751,9 @@
   setMode("phrases");
   setAppTab(state.appTab);
   initAuth();
-  syncUrl(); // 첫 화면부터 주소가 공유 가능한 딥링크가 되도록 (2026-06-04)
+  // syncUrl(); // 구: 첫 화면부터 URL에 ?from= 자동 기록 (2026-06-04)
+  //            → 그 URL로는 온보딩이 영영 안 뜨는 원인이라 자동 호출 제거 (2026-06-18).
+  //            언어를 실제 선택할 때(setProfile/setTarget L1558·1576)만 syncUrl 호출해 공유 링크 유지.
 
   // [2026-06-18 P1-b] 첫 방문이면 언어 선택 온보딩 표시 (저장된 언어/딥링크 있으면 건너뜀)
   if (needsLangOnboarding) showLangOnboarding();
