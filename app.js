@@ -1,5 +1,5 @@
 (async function () {
-  const ASSET_VERSION = "20260618-19";
+  const ASSET_VERSION = "20260618-20";
   const LANGUAGES = window.WIIINFO_LANGUAGES || {};
   const LANGUAGE_NAMES = window.WIIINFO_LANGUAGE_NAMES || {};
   const PROFILES = window.WIIINFO_LEARNER_PROFILES || [];
@@ -1807,6 +1807,29 @@
 
   // [2026-06-18] QR/공유 딥링크: ?place=<id> → 발견 탭 + 해당 가게 상세 바로 열기
   if (urlPlace) { setAppTab("nearby"); openPlaceDetail(urlPlace); }
+
+  // [2026-06-18] master 등록 점포(Firestore stores)를 정적 places에 머지 — 실패 시 정적만(graceful)
+  loadFirebaseStores();
+  async function loadFirebaseStores() {
+    if (!window.firebase || !window.WIIINFO_FIREBASE_CONFIG) return;
+    try {
+      if (!firebase.apps.length) firebase.initializeApp(window.WIIINFO_FIREBASE_CONFIG);
+      const snap = await firebase.firestore().collection("stores").limit(200).get();
+      const emojiByCat = { grocery: "🛒", restaurant: "🍽️", halal: "🛒" };
+      snap.docs.forEach((doc) => {
+        if (PLACES.some((item) => item.id === doc.id)) return;
+        const d = doc.data();
+        PLACES.push({
+          id: doc.id, source: d.source || "master-form", verified: !!d.verified,
+          category: d.category || "grocery", nationalities: d.nationalities || [],
+          emoji: d.emoji || emojiByCat[d.category] || "🛒",
+          name: d.name || {}, address: d.address || {}, lat: d.lat, lng: d.lng,
+          phone: d.phone || "", hours: d.hours || {}, items: d.items || {}, coupon: d.coupon || null
+        });
+      });
+      if (state.appTab === "nearby") renderPlaces();
+    } catch (error) { /* Firestore 미연결/실패 시 정적 places만 사용 */ }
+  }
 
   // PWA 서비스워커 등록 (2026-06-04) — 홈화면 설치 + 오프라인 학습 지원
   // 주의: controllerchange reload 등 자동 새로고침 코드를 추가하지 말 것 (무한 새로고침 사고 예방)
