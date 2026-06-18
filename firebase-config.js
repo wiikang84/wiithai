@@ -11,3 +11,6 @@ window.WIIINFO_FIREBASE_CONFIG = {
 window.WIIINFO_FIRESTORE_COLLECTION = "wiiinfoPhrases";
 // Firebase Console > Authentication에서 Google 로그인 제공업체를 활성화한 뒤 true로 바꿀 것
 window.WIIINFO_AUTH_ENABLED = true;
+// Kakao Developers > 앱 > 플랫폼 키의 JavaScript Key.
+// 등록 도메인 예: https://wiiinfo.web.app, http://localhost:5173 또는 실제 테스트 포트
+window.WIIINFO_KAKAO_JS_KEY = "02feb593e5336ca301b1e5a08eaf4612";
