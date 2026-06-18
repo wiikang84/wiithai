@@ -1,5 +1,5 @@
 (async function () {
-  const ASSET_VERSION = "20260618-08";
+  const ASSET_VERSION = "20260618-09";
   const LANGUAGES = window.WIIINFO_LANGUAGES || {};
   const LANGUAGE_NAMES = window.WIIINFO_LANGUAGE_NAMES || {};
   const PROFILES = window.WIIINFO_LEARNER_PROFILES || [];
@@ -651,24 +651,38 @@
   function renderPlaceCard(place) {
     const saved = state.savedPlaceIds.has(place.id);
     const sourceBadge = place.source === "demo-seed" ? "DEMO" : place.verified ? placeUi("verified") : placeUi("needCheck");
-    const nationalities = (place.nationalities || []).slice(0, 3).map((item) => `<span>${escapeHtml(placeNationalityLabel(item))}</span>`).join("");
+    const nationalities = (place.nationalities || []).slice(0, 3).map((item) => `<span class="placeNat">${escapeHtml(placeNationalityLabel(item))}</span>`).join("");
     const coupon = place.coupon?.title ? `<p class="placeCouponPill">🎟 ${escapeHtml(localizedValue(place.coupon.title))}</p>` : "";
+    // 상태 배지: 인증/확인필요/데모 (색 점 + 텍스트)
+    const badgeClass = place.source === "demo-seed" ? "placeBadge--demo" : place.verified ? "placeBadge--ok" : "placeBadge--check";
+    const statusBadge = `<span class="placeBadge ${badgeClass}">${escapeHtml(sourceBadge)}</span>`;
+    // 사진 있으면 <img>, 없으면 카테고리별 컬러 플레이스홀더 + 큰 이모지 + 이니셜 워터마크
+    const emoji = escapeHtml(place.emoji || "🛒");
+    const initial = escapeHtml((localizedValue(place.name) || "?").slice(0, 1));
+    const cat = escapeHtml(place.category || "all");
+    const photoInner = place.photo
+      ? `<img class="placePhotoImg" src="${escapeHtml(safeUrl(place.photo))}" alt="${escapeHtml(localizedValue(place.name))}" loading="lazy" />`
+      : `<span class="placePhotoEmoji">${emoji}</span><span class="placePhotoInitial">${initial}</span>`;
     return `
       <article class="placeCard" data-place-id="${escapeHtml(place.id)}">
         <button class="placeCardMain" type="button" data-place-open="${escapeHtml(place.id)}">
-          <span class="placeThumb">${escapeHtml(place.emoji || "🛒")}</span>
+          <span class="placePhoto placePhoto--${cat}">
+            ${photoInner}
+            ${statusBadge}
+          </span>
           <span class="placeCardBody">
             <span class="placeCardHead">
               <strong>${escapeHtml(localizedValue(place.name))}</strong>
-              <em>${escapeHtml(sourceBadge)}</em>
             </span>
-            <span class="placeMeta">📍 ${escapeHtml(distanceLabel(place))} · ${escapeHtml(localizedValue(place.address))}</span>
-            <span class="placeTags">${nationalities}</span>
+            <span class="placeMeta">${escapeHtml(distanceLabel(place))} · ${escapeHtml(localizedValue(place.address))}</span>
             <span class="placeItems">${escapeHtml(localizedValue(place.items))}</span>
-            ${coupon}
+            <span class="placeCardFoot">
+              <span class="placeTags">${nationalities}</span>
+              ${coupon}
+            </span>
           </span>
         </button>
-        <button class="placeSaveButton ${saved ? "active" : ""}" type="button" data-place-save="${escapeHtml(place.id)}" aria-pressed="${String(saved)}">${saved ? "★" : "☆"}</button>
+        <button class="placeSaveButton ${saved ? "active" : ""}" type="button" data-place-save="${escapeHtml(place.id)}" aria-pressed="${String(saved)}">${saved ? "♥" : "♡"}</button>
       </article>
     `;
   }
