@@ -2,7 +2,7 @@
   "hosting": {
     "target": "wiiinfo",
     "public": ".",
-    "ignore": ["firebase.json", "firestore.rules", "README.md", "**/.*", "**/tools/**", "**/review/**", "**/docs/**"],
+    "ignore": ["firebase.json", "firestore.rules", "README.md", "**/.*", "**/.brave-cdp-*/**", "**/.brave-profile-only/**", "**/tools/**", "**/review/**", "**/docs/**"],
     "headers": [
       {
         "source": "/",
