@@ -1,5 +1,5 @@
 (async function () {
-  const ASSET_VERSION = "20260618-18";
+  const ASSET_VERSION = "20260618-19";
   const LANGUAGES = window.WIIINFO_LANGUAGES || {};
   const LANGUAGE_NAMES = window.WIIINFO_LANGUAGE_NAMES || {};
   const PROFILES = window.WIIINFO_LEARNER_PROFILES || [];
@@ -821,7 +821,9 @@
     const routeUrl = place.lat && place.lng
       ? `https://map.kakao.com/link/to/${encodeURIComponent(localizedValue(place.name))},${place.lat},${place.lng}`
       : `https://map.kakao.com/link/search/${encodeURIComponent(localizedValue(place.name))}`;
-    placeDetailHero.textContent = place.emoji || "🛒";
+    const dBadgeClass = place.source === "demo-seed" ? "placeBadge--demo" : place.verified ? "placeBadge--ok" : "placeBadge--check";
+    const dBadge = place.source === "demo-seed" ? "DEMO" : place.verified ? placeUi("verified") : placeUi("needCheck");
+    placeDetailHero.innerHTML = `${escapeHtml(place.emoji || "🛒")}<span class="placeBadge ${dBadgeClass}">${escapeHtml(dBadge)}</span>`;
     placeDetailMeta.textContent = `${placeCategoryLabel(place.category)} · ${(place.nationalities || []).map(placeNationalityLabel).join(" · ") || placeUi("all")}`;
     placeDetailTitle.textContent = localizedValue(place.name);
     placeDetailItems.textContent = localizedValue(place.items);
