@@ -89,7 +89,7 @@
     <script>
       (function () {
         // [2026-06-18] master 점포 등록 데모. master 판별은 이메일 화이트리스트(데모). 정식은 Custom Claims 예정.
-        const MASTER_EMAILS = ["dy17715@naver.com", "tmzkt2@gmail.com", "ironyjk@gmail.com", "dylab177151@gmail.com"];
+        const MASTER_EMAILS = window.WIIINFO_MASTER_EMAILS || ["dy17715@naver.com", "tmzkt2@gmail.com", "ironyjk@gmail.com", "dylab177151@gmail.com"];
         const loginBtn = document.getElementById("loginBtn");
         const authMsg = document.getElementById("authMsg");
         const formCard = document.getElementById("formCard");

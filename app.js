@@ -1,5 +1,5 @@
 (async function () {
-  const ASSET_VERSION = "20260618-27";
+  const ASSET_VERSION = "20260618-28";
   const LANGUAGES = window.WIIINFO_LANGUAGES || {};
   const LANGUAGE_NAMES = window.WIIINFO_LANGUAGE_NAMES || {};
   const PROFILES = window.WIIINFO_LEARNER_PROFILES || [];
@@ -18,7 +18,7 @@
   // [2026-06-18 T12] 오늘 휴무 배지 (owner가 긴급휴무 켜면 손님 화면에 표시)
   const CLOSED_LABEL = { ko: "오늘 휴무", en: "Closed today", th: "วันนี้ปิด", vi: "Hôm nay đóng cửa", zh: "今日休息", ja: "本日休み", es: "Cerrado hoy" };
   // [2026-06-18 T7] 역할 체계 (개발팀: role 안 박고 계산. master=이메일 화이트리스트, owner=stores 소유권, member 기본)
-  const MASTER_EMAILS = ["dy17715@naver.com", "tmzkt2@gmail.com", "ironyjk@gmail.com", "dylab177151@gmail.com"];
+  const MASTER_EMAILS = window.WIIINFO_MASTER_EMAILS || ["dy17715@naver.com", "tmzkt2@gmail.com", "ironyjk@gmail.com", "dylab177151@gmail.com"];
   const ROLE_LABEL = {
     member: { ko: "회원", en: "Member", th: "สมาชิก", vi: "Thành viên", zh: "会员", ja: "会員", es: "Miembro" },
     owner: { ko: "사장님", en: "Owner", th: "เจ้าของร้าน", vi: "Chủ quán", zh: "店主", ja: "店主", es: "Dueño" },
@@ -1910,9 +1910,8 @@
       const snap = await firebase.firestore().collection("stores").limit(200).get();
       const emojiByCat = { grocery: "🛒", restaurant: "🍽️", halal: "🛒" };
       snap.docs.forEach((doc) => {
-        if (PLACES.some((item) => item.id === doc.id)) return;
         const d = doc.data();
-        PLACES.push({
+        const place = {
           id: doc.id, source: d.source || "master-form", verified: !!d.verified,
           category: d.category || "grocery", nationalities: d.nationalities || [],
           emoji: d.emoji || emojiByCat[d.category] || "🛒",
@@ -1921,9 +1920,14 @@
           photo: d.photo || null,
           ownerUid: d.ownerUid || null, ownerStatus: d.ownerStatus || null,
           holidayClosed: d.holidayClosed || null
-        });
+        };
+        // [2026-06-18 M2] id 충돌 시 Firestore가 정적 시드를 덮어씀(운영자 갱신 반영). 없으면 추가
+        const idx = PLACES.findIndex((item) => item.id === doc.id);
+        if (idx >= 0) PLACES[idx] = place; else PLACES.push(place);
       });
       if (state.appTab === "nearby") renderPlaces();
+      // [2026-06-18 M3] Firestore 머지 후 역할 재계산(owner 판정이 머지 전이면 틀림 → 여기서 갱신)
+      if (currentUser) updateAuthUi();
     } catch (error) { /* Firestore 미연결/실패 시 정적 places만 사용 */ }
   }
 
