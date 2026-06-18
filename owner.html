@@ -79,7 +79,7 @@
         const storesCard = document.getElementById("storesCard");
         const editCard = document.getElementById("editCard");
         const myStores = document.getElementById("myStores");
-        let db = null, auth = null, currentUser = null, currentStoreId = null;
+        let db = null, auth = null, currentUser = null, currentStoreId = null, currentStoreHours = {};
 
         try { firebase.initializeApp(window.WIIINFO_FIREBASE_CONFIG); auth = firebase.auth(); db = firebase.firestore(); }
         catch (e) { authMsg.textContent = "Firebase 초기화 실패: " + e.message; }
@@ -118,6 +118,7 @@
           db.collection("stores").doc(storeId).get().then((doc) => {
             const d = doc.data();
             currentStoreId = storeId;
+            currentStoreHours = d.hours || {}; // [2026-06-18 H1] 기존 다국어 hours 보존 (저장 시 ko만 갱신, 나머지 언어 유지)
             document.getElementById("editTitle").textContent = (d.name && d.name.ko) || "내 가게";
             document.getElementById("editAddr").textContent = "📍 " + ((d.address && d.address.ko) || "") + " (주소·상호 변경은 운영자에게)";
             document.getElementById("e_closed").checked = !!(d.holidayClosed && d.holidayClosed.active);
@@ -138,7 +139,7 @@
           msg.textContent = "저장 중...";
           const update = {
             holidayClosed: { active: document.getElementById("e_closed").checked },
-            hours: { ko: document.getElementById("e_hours").value.trim() },
+            hours: Object.assign({}, currentStoreHours, { ko: document.getElementById("e_hours").value.trim() }),
             photo: document.getElementById("e_photo").value.trim() || null,
             updatedAt: firebase.firestore.FieldValue.serverTimestamp()
           };

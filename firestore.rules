@@ -27,7 +27,13 @@ service cloud.firestore {
     }
     function onlyOwnerEditableFields() {
       return request.resource.data.diff(resource.data).affectedKeys()
-        .hasOnly(["hours", "items", "photo", "holidayClosed", "updatedAt"]);
+        .hasOnly(["hours", "items", "photo", "holidayClosed", "updatedAt"])
+        && (!("hours" in request.resource.data) || request.resource.data.hours is map)
+        && (!("items" in request.resource.data) || request.resource.data.items is map)
+        && (!("photo" in request.resource.data) || request.resource.data.photo == null
+            || (request.resource.data.photo is string && request.resource.data.photo.size() < 2000))
+        && (!("holidayClosed" in request.resource.data)
+            || request.resource.data.holidayClosed.keys().hasOnly(["active"]));
     }
 
     // [2026-06-18 T8] 사장님 등록 신청. 본인만 create(pending), 본인/운영자 read, 운영자만 처리
@@ -35,7 +41,10 @@ service cloud.firestore {
       allow read: if isMaster() || (request.auth != null && resource.data.uid == request.auth.uid);
       allow create: if request.auth != null
         && request.resource.data.uid == request.auth.uid
-        && request.resource.data.status == "pending";
+        && request.resource.data.status == "pending"
+        && request.resource.data.storeName is string
+        && request.resource.data.storeName.size() < 200
+        && request.resource.data.documents is list;
       allow update, delete: if isMaster();
     }
 

@@ -164,12 +164,19 @@
             const claimDoc = await db.collection("ownerClaims").doc(claimId).get();
             const c = claimDoc.data();
             // 가게명이 등록 점포와 일치하면 ownerUid 자동 연결 + ownerStatus verified
-            const matched = await db.collection("stores").where("name.ko", "==", c.storeName).limit(1).get();
-            if (!matched.empty) {
+            // [2026-06-18 M5] 동명 가게 오연결 방지: 정확히 1곳일 때만 자동연결
+            const matched = await db.collection("stores").where("name.ko", "==", c.storeName).get();
+            if (matched.size === 1) {
               await matched.docs[0].ref.update({ ownerUid: c.uid, ownerStatus: "verified" });
+              await db.collection("ownerClaims").doc(claimId).update({ status: "approved" });
+              alert("승인 + 가게 소유권 연결 완료. 신청자가 사장님으로 관리할 수 있습니다.");
+            } else if (matched.size === 0) {
+              await db.collection("ownerClaims").doc(claimId).update({ status: "approved" });
+              alert("승인했습니다. 단 '" + c.storeName + "'와 일치하는 등록 점포가 없어 소유권 자동연결은 안 됐습니다. 점포를 먼저 등록한 뒤 다시 연결하세요.");
+            } else {
+              alert("⚠ '" + c.storeName + "' 동명 점포가 " + matched.size + "곳이라 오연결 방지를 위해 자동연결을 막았습니다. 정확한 가게 확인 후 수동 연결이 필요합니다. (승인 보류)");
+              return;
             }
-            await db.collection("ownerClaims").doc(claimId).update({ status: "approved" });
-            alert(matched.empty ? "승인했습니다. (일치하는 등록 점포가 없어 자동 연결은 안 됨 — 점포 먼저 등록 후 다시 연결하세요)" : "승인 + 가게 소유권 연결 완료. 이제 신청자가 사장님으로 관리할 수 있습니다.");
             loadClaims();
           } catch (err) { alert("승인 실패: " + err.message); }
         }
