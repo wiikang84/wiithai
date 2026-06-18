@@ -1,5 +1,5 @@
 (async function () {
-  const ASSET_VERSION = "20260618-07";
+  const ASSET_VERSION = "20260618-08";
   const LANGUAGES = window.WIIINFO_LANGUAGES || {};
   const LANGUAGE_NAMES = window.WIIINFO_LANGUAGE_NAMES || {};
   const PROFILES = window.WIIINFO_LEARNER_PROFILES || [];
@@ -10,6 +10,9 @@
   const PLACE_COPY = window.WIIINFO_PLACE_COPY || {};
   // [2026-06-18] 언어 버튼/온보딩에 표시할 각 언어의 자국어 이름
   const LANG_NATIVE = { ko: "한국어", th: "ไทย", ja: "日本語", en: "English", zh: "中文", vi: "Tiếng Việt", es: "Español" };
+  // [2026-06-18] 온보딩 국기 버튼의 각 언어 환영 한마디 (마케팅팀 카피)
+  // ⚠️ th/vi는 출시 전 원어민 검수 권장
+  const WELCOME_HELLO = { ko: "환영해요", en: "Welcome", th: "ยินดีต้อนรับ", vi: "Chào mừng", zh: "欢迎", ja: "ようこそ", es: "Bienvenido" };
   const INFO_DEFAULT_UPDATED = "2026-06";
   const INFO_OFFICIAL_CHECK_SECTIONS = new Set(["life", "housing", "realty", "safety", "warning"]);
   const DEFAULT_LOCATION = { lat: 35.5359, lng: 129.3248, label: "울산 남구" };
@@ -1010,7 +1013,7 @@
       const button = document.createElement("button");
       button.type = "button";
       button.className = profile.id === profileId ? "active" : "";
-      button.innerHTML = `<span class="flag">${profile.flag}</span><span>${LANG_NATIVE[profile.source] || profile.label}</span>`;
+      button.innerHTML = `<span class="flag">${profile.flag}</span><span class="langName">${LANG_NATIVE[profile.source] || profile.label}</span><span class="langHello">${WELCOME_HELLO[profile.source] || ""}</span>`;
       button.addEventListener("click", () => {
         setProfile(profile.id); // 전역 언어 확정 + localStorage 저장 + 전체 라벨 갱신(발견탭·내비 포함)
         overlay.hidden = true;
