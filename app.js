@@ -1,5 +1,5 @@
 (async function () {
-  const ASSET_VERSION = "20260618-16";
+  const ASSET_VERSION = "20260618-17";
   const LANGUAGES = window.WIIINFO_LANGUAGES || {};
   const LANGUAGE_NAMES = window.WIIINFO_LANGUAGE_NAMES || {};
   const PROFILES = window.WIIINFO_LEARNER_PROFILES || [];
@@ -13,6 +13,8 @@
   // [2026-06-18] 온보딩 국기 버튼의 각 언어 환영 한마디 (마케팅팀 카피)
   // ⚠️ th/vi는 출시 전 원어민 검수 권장
   const WELCOME_HELLO = { ko: "환영해요", en: "Welcome", th: "ยินดีต้อนรับ", vi: "Chào mừng", zh: "欢迎", ja: "ようこそ", es: "Bienvenido" };
+  // [2026-06-18] 공유 버튼 라벨 (QR 획득루프)
+  const SHARE_LABEL = { ko: "공유", en: "Share", th: "แชร์", vi: "Chia sẻ", zh: "分享", ja: "共有", es: "Compartir" };
   const INFO_DEFAULT_UPDATED = "2026-06";
   const INFO_OFFICIAL_CHECK_SECTIONS = new Set(["life", "housing", "realty", "safety", "warning"]);
   const DEFAULT_LOCATION = { lat: 35.5359, lng: 129.3248, label: "울산 남구" };
@@ -207,6 +209,7 @@
   const urlParams = new URLSearchParams(location.search);
   const urlFrom = (urlParams.get("from") || "").toLowerCase();
   const urlLearn = (urlParams.get("learn") || "").toLowerCase();
+  const urlPlace = (urlParams.get("place") || "").trim(); // [2026-06-18] QR/공유 딥링크: 가게 상세 직접 열기 (영업 QR 포스터 진입점)
   const hasValidUrlFrom = PROFILES.some((profile) => profile.id === urlFrom);
   // [2026-06-18 P1-b] 첫 방문(저장된 언어 없음 + 딥링크 아님) → 진입 시 언어 선택 온보딩 표시
   const needsLangOnboarding = !localStorage.getItem("wiiinfoProfileId") && !hasValidUrlFrom;
@@ -698,6 +701,30 @@
         if (button.closest(".placeDetailActions")) openPlaceDetail(button.dataset.placeSave);
       });
     });
+    container.querySelectorAll("[data-place-share]").forEach((button) => {
+      button.addEventListener("click", (event) => {
+        event.stopPropagation();
+        sharePlace(button.dataset.placeShare, button);
+      });
+    });
+  }
+
+  // [2026-06-18] 가게 공유 — QR/링크 진입점. ?place=<id>&from=<lang> 딥링크 생성
+  function sharePlace(placeId, button) {
+    const place = PLACES.find((item) => item.id === placeId);
+    if (!place) return;
+    const url = `${location.origin}${location.pathname}?place=${encodeURIComponent(placeId)}&from=${encodeURIComponent(profileId)}`;
+    track("share_place", { place: placeId, source: sourceLang });
+    if (navigator.share) {
+      navigator.share({ title: `${localizedValue(place.name)} · wiiInfo`, url }).catch(() => {});
+    } else if (navigator.clipboard) {
+      navigator.clipboard.writeText(url).then(() => {
+        if (!button) return;
+        const original = button.textContent;
+        button.textContent = "✓";
+        setTimeout(() => { button.textContent = original; }, 1200);
+      }).catch(() => {});
+    }
   }
 
   function renderPlaces() {
@@ -814,6 +841,7 @@
       ${place.phone ? `<a class="detailAction callAction" href="tel:${escapeHtml(place.phone)}">📞 ${escapeHtml(placeUi("call"))}</a>` : ""}
       <a class="detailAction" href="${escapeHtml(routeUrl)}" target="_blank" rel="noopener">🧭 ${escapeHtml(placeUi("route"))}</a>
       <button class="detailAction" type="button" data-place-save="${escapeHtml(place.id)}">${saved ? "★" : "☆"} ${escapeHtml(saved ? placeUi("savedPlace") : placeUi("save"))}</button>
+      <button class="detailAction" type="button" data-place-share="${escapeHtml(place.id)}">🔗 ${escapeHtml(SHARE_LABEL[sourceLang] || "Share")}</button>
     `;
     bindPlaceCardEvents(placeDetailActions);
     placeDetailOverlay.hidden = false;
@@ -1774,6 +1802,9 @@
 
   // [2026-06-18 P1-b] 첫 방문이면 언어 선택 온보딩 표시 (저장된 언어/딥링크 있으면 건너뜀)
   if (needsLangOnboarding) showLangOnboarding();
+
+  // [2026-06-18] QR/공유 딥링크: ?place=<id> → 발견 탭 + 해당 가게 상세 바로 열기
+  if (urlPlace) { setAppTab("nearby"); openPlaceDetail(urlPlace); }
 
   // PWA 서비스워커 등록 (2026-06-04) — 홈화면 설치 + 오프라인 학습 지원
   // 주의: controllerchange reload 등 자동 새로고침 코드를 추가하지 말 것 (무한 새로고침 사고 예방)
