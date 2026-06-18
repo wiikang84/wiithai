@@ -12,6 +12,12 @@ service cloud.firestore {
       allow write: if false;
     }
 
+    // [2026-06-18] master 운영자 점포 등록(store-admin.html). 정식 단계에서 Custom Claims로 승격 예정
+    match /stores/{storeId} {
+      allow read: if true;
+      allow create, update, delete: if isMaster();
+    }
+
     match /coupons/{couponId} {
       allow read: if true;
       allow write: if false;
@@ -25,6 +31,12 @@ service cloud.firestore {
 
     function signedInOwner(userId) {
       return request.auth != null && request.auth.uid == userId;
+    }
+
+    function isMaster() {
+      return request.auth != null && request.auth.token.email in [
+        "dy17715@naver.com", "tmzkt2@gmail.com", "ironyjk@gmail.com", "dylab177151@gmail.com"
+      ];
     }
 
     function validUserProfile() {
