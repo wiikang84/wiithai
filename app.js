@@ -1,5 +1,5 @@
 (async function () {
-  const ASSET_VERSION = "20260618-22";
+  const ASSET_VERSION = "20260618-23";
   const LANGUAGES = window.WIIINFO_LANGUAGES || {};
   const LANGUAGE_NAMES = window.WIIINFO_LANGUAGE_NAMES || {};
   const PROFILES = window.WIIINFO_LEARNER_PROFILES || [];
@@ -15,6 +15,21 @@
   const WELCOME_HELLO = { ko: "환영해요", en: "Welcome", th: "ยินดีต้อนรับ", vi: "Chào mừng", zh: "欢迎", ja: "ようこそ", es: "Bienvenido" };
   // [2026-06-18] 공유 버튼 라벨 (QR 획득루프)
   const SHARE_LABEL = { ko: "공유", en: "Share", th: "แชร์", vi: "Chia sẻ", zh: "分享", ja: "共有", es: "Compartir" };
+  // [2026-06-18 T7] 역할 체계 (개발팀: role 안 박고 계산. master=이메일 화이트리스트, owner=stores 소유권, member 기본)
+  const MASTER_EMAILS = ["dy17715@naver.com", "tmzkt2@gmail.com", "ironyjk@gmail.com", "dylab177151@gmail.com"];
+  const ROLE_LABEL = {
+    member: { ko: "회원", en: "Member", th: "สมาชิก", vi: "Thành viên", zh: "会员", ja: "会員", es: "Miembro" },
+    owner: { ko: "사장님", en: "Owner", th: "เจ้าของร้าน", vi: "Chủ quán", zh: "店主", ja: "店主", es: "Dueño" },
+    master: { ko: "운영자", en: "Admin", th: "ผู้ดูแล", vi: "Quản trị", zh: "管理员", ja: "管理者", es: "Admin" }
+  };
+  function isMasterEmail(email) { return MASTER_EMAILS.includes((email || "").toLowerCase()); }
+  // owner 판별: 내 uid가 ownerUid인 (인증된) 매장 보유 시 — T9 승인 후 동작. 지금은 master/member 우선
+  function getRole(user) {
+    if (!user) return null;
+    if (isMasterEmail(user.email)) return "master";
+    if (PLACES.some((p) => p.ownerUid === user.uid && p.ownerStatus === "verified")) return "owner";
+    return "member";
+  }
   const INFO_DEFAULT_UPDATED = "2026-06";
   const INFO_OFFICIAL_CHECK_SECTIONS = new Set(["life", "housing", "realty", "safety", "warning"]);
   const DEFAULT_LOCATION = { lat: 35.5359, lng: 129.3248, label: "울산 남구" };
@@ -190,6 +205,11 @@
   const meAuthButton = document.getElementById("meAuthButton");
   const meAuthStatus = document.getElementById("meAuthStatus");
   const meAuthSyncStatus = document.getElementById("meAuthSyncStatus");
+  const meProfile = document.getElementById("meProfile");
+  const mePhoto = document.getElementById("mePhoto");
+  const meName = document.getElementById("meName");
+  const meEmail = document.getElementById("meEmail");
+  const meRoleBadge = document.getElementById("meRoleBadge");
   const ownerRegisterButton = document.getElementById("ownerRegisterButton");
   const ownerRegisterNote = document.getElementById("ownerRegisterNote");
   const placeDetailOverlay = document.getElementById("placeDetailOverlay");
@@ -372,6 +392,21 @@
       view.status.textContent = statusText;
       view.sync.textContent = syncText;
     });
+
+    // [2026-06-18 T7] 내 정보 프로필 + 역할 배지(회원/사장님/운영자)
+    if (meProfile) {
+      meProfile.hidden = !signedIn;
+      if (signedIn) {
+        if (mePhoto) { mePhoto.src = currentUser.photoURL || ""; mePhoto.hidden = !currentUser.photoURL; }
+        if (meName) meName.textContent = currentUser.displayName || currentUser.email || "";
+        if (meEmail) meEmail.textContent = currentUser.email || "";
+        const role = getRole(currentUser);
+        if (meRoleBadge && role) {
+          meRoleBadge.textContent = (ROLE_LABEL[role] && (ROLE_LABEL[role][sourceLang] || ROLE_LABEL[role].en)) || role;
+          meRoleBadge.className = `roleBadge roleBadge--${role}`;
+        }
+      }
+    }
   }
 
   async function initAuth() {

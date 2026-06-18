@@ -2437,3 +2437,45 @@ h1 {
   cursor: pointer;
 }
 .langOnboardingClose[hidden] { display: none; }
+
+/* [2026-06-18 T7] 내 정보 프로필 + 역할 배지(회원/사장님/운영자) */
+.meProfile {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 14px 16px;
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  background: var(--surface);
+  box-shadow: var(--shadow-sm);
+}
+.meProfile[hidden] { display: none; }
+.meProfileLeft { display: flex; align-items: center; gap: 12px; min-width: 0; }
+.mePhoto {
+  width: 48px;
+  height: 48px;
+  border-radius: var(--r-pill);
+  object-fit: cover;
+  background: var(--accent-wash);
+  flex: 0 0 auto;
+}
+.mePhoto[hidden] { display: none; }
+.meProfileText { display: grid; min-width: 0; }
+.meProfileText strong { font-size: 16px; font-weight: var(--w-bold); color: var(--text); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.meEmail { font-size: 12px; color: var(--muted); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.roleBadge {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 11px;
+  border-radius: var(--r-pill);
+  font-size: 12px;
+  font-weight: var(--w-med);
+  white-space: nowrap;
+}
+.roleBadge--member { background: var(--surface-sunk); color: var(--text-secondary); border: 1px solid var(--line); }
+.roleBadge--owner { background: var(--accent-wash); color: var(--accent-ink); }
+.roleBadge--owner::before { content: "🏪 "; }
+.roleBadge--master { background: var(--ink); color: var(--surface); }
+.roleBadge--master::before { content: "🛡 "; }
