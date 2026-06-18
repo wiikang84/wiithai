@@ -18,6 +18,15 @@ service cloud.firestore {
       allow create, update, delete: if isMaster();
     }
 
+    // [2026-06-18 T8] 사장님 등록 신청. 본인만 create(pending), 본인/운영자 read, 운영자만 처리
+    match /ownerClaims/{claimId} {
+      allow read: if isMaster() || (request.auth != null && resource.data.uid == request.auth.uid);
+      allow create: if request.auth != null
+        && request.resource.data.uid == request.auth.uid
+        && request.resource.data.status == "pending";
+      allow update, delete: if isMaster();
+    }
+
     match /coupons/{couponId} {
       allow read: if true;
       allow write: if false;

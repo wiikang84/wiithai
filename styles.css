@@ -2479,3 +2479,12 @@ h1 {
 .roleBadge--owner::before { content: "🏪 "; }
 .roleBadge--master { background: var(--ink); color: var(--surface); }
 .roleBadge--master::before { content: "🛡 "; }
+
+/* [2026-06-18 T8] 사장님 등록 신청 폼 */
+.ownerClaimForm { display: grid; gap: 8px; margin-top: 10px; padding: 14px; border: 1px solid var(--line); border-radius: var(--r-md); background: var(--surface-sunk); }
+.ownerClaimForm[hidden] { display: none; }
+.ownerClaimHint { margin: 0 0 4px; font-size: 12px; color: var(--muted); line-height: 1.5; }
+.ownerClaimForm input { min-height: 44px; padding: 0 13px; border: 1px solid var(--line); border-radius: var(--r-md); background: var(--surface); color: var(--text); font: inherit; }
+.ownerClaimForm input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-wash); outline: none; }
+.ownerClaimSubmit { min-height: 46px; border: 0; border-radius: var(--r-md); background: var(--accent); color: #fff; font-weight: var(--w-bold); cursor: pointer; }
+.ownerClaimMsg { margin: 2px 0 0; font-size: 13px; color: var(--text-secondary); }

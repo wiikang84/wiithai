@@ -1,5 +1,5 @@
 (async function () {
-  const ASSET_VERSION = "20260618-23";
+  const ASSET_VERSION = "20260618-24";
   const LANGUAGES = window.WIIINFO_LANGUAGES || {};
   const LANGUAGE_NAMES = window.WIIINFO_LANGUAGE_NAMES || {};
   const PROFILES = window.WIIINFO_LEARNER_PROFILES || [];
@@ -1797,9 +1797,40 @@
     if (event.target === placeDetailOverlay) closePlaceDetail();
   });
   ownerRegisterButton?.addEventListener("click", () => {
-    ownerRegisterNote.textContent = placeUi("ownerNote");
     track("owner_register_interest", { source: sourceLang });
+    const form = document.getElementById("ownerClaimForm");
+    if (!form) return;
+    if (!currentUser) { if (ownerRegisterNote) ownerRegisterNote.textContent = "먼저 Google 로그인을 해주세요."; return; }
+    form.hidden = !form.hidden;
   });
+  document.getElementById("oc_submit")?.addEventListener("click", submitOwnerClaim);
+  // [2026-06-18 T8] 사장님 등록 신청 → ownerClaims pending 저장 (운영자가 store-admin에서 심사)
+  async function submitOwnerClaim() {
+    const msg = document.getElementById("oc_msg");
+    const store = (document.getElementById("oc_store")?.value || "").trim();
+    const name = (document.getElementById("oc_name")?.value || "").trim();
+    const phone = (document.getElementById("oc_phone")?.value || "").trim();
+    if (!currentUser) { if (msg) msg.textContent = "로그인이 필요합니다."; return; }
+    if (!store || !name || !phone) { if (msg) msg.textContent = "가게 이름·성함·연락처를 모두 입력해주세요."; return; }
+    if (!db) { if (msg) msg.textContent = "연결 오류로 신청할 수 없습니다."; return; }
+    if (msg) msg.textContent = "신청 중...";
+    try {
+      await db.collection("ownerClaims").add({
+        uid: currentUser.uid,
+        applicantEmail: currentUser.email || "",
+        applicantName: name,
+        phone: phone,
+        storeName: store,
+        status: "pending",
+        createdAt: firebase.firestore.FieldValue.serverTimestamp()
+      });
+      if (msg) msg.textContent = "✓ 신청이 접수됐어요. 운영자 확인 후 연락드립니다.";
+      ["oc_store", "oc_name", "oc_phone"].forEach((id) => { const el = document.getElementById(id); if (el) el.value = ""; });
+      track("owner_claim_submit", {});
+    } catch (error) {
+      if (msg) msg.textContent = "신청 실패: " + error.message;
+    }
+  }
   loadMoreButton.addEventListener("click", () => {
     visibleLimit += getPhrasePageSize();
     render();
