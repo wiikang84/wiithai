@@ -1,0 +1,29 @@
+rules_version = '2';
+
+// [2026-06-18] 사장님 등록 신청 서류(사업자등록증 등) 보관.
+// 본인만 업로드, 운영자(master)만 열람 — 사업자등록증은 개인정보라 일반 공개 금지.
+service firebase.storage {
+  match /b/{bucket}/o {
+
+    // 사장님 신청 첨부 서류: owner-docs/{uid}/{claimId}/{fileName}
+    match /owner-docs/{uid}/{allPaths=**} {
+      allow read: if isMaster();
+      allow write: if request.auth != null
+        && request.auth.uid == uid
+        && request.resource.size < 5 * 1024 * 1024
+        && (request.resource.contentType.matches('image/.*')
+            || request.resource.contentType == 'application/pdf');
+    }
+
+    // 그 외 경로는 기본 차단
+    match /{allPaths=**} {
+      allow read, write: if false;
+    }
+  }
+
+  function isMaster() {
+    return request.auth != null && request.auth.token.email in [
+      'dy17715@naver.com', 'tmzkt2@gmail.com', 'ironyjk@gmail.com', 'dylab177151@gmail.com'
+    ];
+  }
+}
