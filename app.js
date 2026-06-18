@@ -1,5 +1,5 @@
 (async function () {
-  const ASSET_VERSION = "20260618-03";
+  const ASSET_VERSION = "20260618-04";
   const LANGUAGES = window.WIIINFO_LANGUAGES || {};
   const LANGUAGE_NAMES = window.WIIINFO_LANGUAGE_NAMES || {};
   const PROFILES = window.WIIINFO_LEARNER_PROFILES || [];
@@ -200,6 +200,8 @@
   const urlFrom = (urlParams.get("from") || "").toLowerCase();
   const urlLearn = (urlParams.get("learn") || "").toLowerCase();
   const hasValidUrlFrom = PROFILES.some((profile) => profile.id === urlFrom);
+  // [2026-06-18 P1-b] 첫 방문(저장된 언어 없음 + 딥링크 아님) → 진입 시 언어 선택 온보딩 표시
+  const needsLangOnboarding = !localStorage.getItem("wiiinfoProfileId") && !hasValidUrlFrom;
 
   let categories = [];
   let currentMode = "phrases";
@@ -991,6 +993,28 @@
     });
   }
 
+  // [2026-06-18 P1-b] 첫 방문 언어 선택 온보딩 — 선택 즉시 setProfile()로 전역 언어 확정 후 닫힘
+  function showLangOnboarding() {
+    const overlay = document.getElementById("langOnboarding");
+    const grid = document.getElementById("langOnboardingGrid");
+    if (!overlay || !grid) return;
+    const countryNames = { ko: "한국어", th: "ไทย", ja: "日本語", en: "English", zh: "中文", vi: "Tiếng Việt", es: "Español" };
+    grid.innerHTML = "";
+    PROFILES.forEach((profile) => {
+      const button = document.createElement("button");
+      button.type = "button";
+      button.innerHTML = `<span class="flag">${profile.flag}</span><span>${countryNames[profile.source] || profile.label}</span>`;
+      button.addEventListener("click", () => {
+        setProfile(profile.id); // 전역 언어 확정 + localStorage 저장 + 전체 라벨 갱신(발견탭·내비 포함)
+        overlay.hidden = true;
+        track("onboarding_select_language", { profile: profile.id });
+      });
+      grid.appendChild(button);
+    });
+    overlay.hidden = false;
+    track("onboarding_shown", {});
+  }
+
   function renderTargetTabs() {
     targetTabs.innerHTML = "";
     activeProfile.targets.forEach((lang) => {
@@ -1703,10 +1727,7 @@
   refreshCategories();
   resetVisibleLimit();
   saveFavorites();
-  updateStaticLabels();
-  // [2026-06-18] 부팅 시 발견탭·하단내비 등 정적 라벨을 선택 언어(sourceLang) 기준으로 갱신.
-  // 기존엔 setProfile/위치설정 때만 호출돼 첫 화면이 index.html의 한국어 하드코딩 그대로 떴음.
-  updatePlaceStaticLabels();
+  updateStaticLabels(); // 내부에서 updatePlaceStaticLabels()까지 호출 → 부팅 시 발견탭·하단내비 라벨도 sourceLang 기준으로 갱신됨
   updateHeroFlag();
   updateAuthUi();
   renderProfileTabs();
@@ -1717,6 +1738,9 @@
   setAppTab(state.appTab);
   initAuth();
   syncUrl(); // 첫 화면부터 주소가 공유 가능한 딥링크가 되도록 (2026-06-04)
+
+  // [2026-06-18 P1-b] 첫 방문이면 언어 선택 온보딩 표시 (저장된 언어/딥링크 있으면 건너뜀)
+  if (needsLangOnboarding) showLangOnboarding();
 
   // PWA 서비스워커 등록 (2026-06-04) — 홈화면 설치 + 오프라인 학습 지원
   // 주의: controllerchange reload 등 자동 새로고침 코드를 추가하지 말 것 (무한 새로고침 사고 예방)

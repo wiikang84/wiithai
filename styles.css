@@ -2133,3 +2133,68 @@ h1 {
     height: 44px;
   }
 }
+
+/* [2026-06-18 P1-b] 첫 방문 언어 선택 온보딩 */
+.langOnboarding {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: linear-gradient(160deg, var(--accent) 0%, var(--accent-dark) 100%);
+}
+.langOnboarding[hidden] { display: none; }
+.langOnboardingCard {
+  width: 100%;
+  max-width: 420px;
+  background: var(--surface);
+  border-radius: 22px;
+  padding: 28px 22px 24px;
+  box-shadow: var(--shadow);
+  text-align: center;
+}
+.langOnboardingBrand {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  color: var(--accent-dark);
+}
+.langOnboardingTitle {
+  margin: 6px 0 4px;
+  font-size: 24px;
+  font-weight: 800;
+  color: var(--text);
+}
+.langOnboardingSub {
+  margin: 0 0 20px;
+  font-size: 13px;
+  color: var(--muted);
+}
+.langOnboardingGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+.langOnboardingGrid button {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 12px;
+  border: 1.5px solid var(--line);
+  border-radius: 14px;
+  background: var(--surface);
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text);
+  cursor: pointer;
+  transition: border-color 0.15s, transform 0.1s;
+}
+.langOnboardingGrid button:hover { border-color: var(--accent); }
+.langOnboardingGrid button:active { transform: scale(0.97); }
+.langOnboardingGrid button .flag { font-size: 22px; line-height: 1; }
+@media (max-width: 360px) {
+  .langOnboardingGrid { grid-template-columns: 1fr; }
+}
