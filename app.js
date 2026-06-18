@@ -1,5 +1,5 @@
 (async function () {
-  const ASSET_VERSION = "20260618-21";
+  const ASSET_VERSION = "20260618-22";
   const LANGUAGES = window.WIIINFO_LANGUAGES || {};
   const LANGUAGE_NAMES = window.WIIINFO_LANGUAGE_NAMES || {};
   const PROFILES = window.WIIINFO_LEARNER_PROFILES || [];
@@ -786,8 +786,10 @@
     kakaoMapLoad = new Promise((resolve, reject) => {
       const script = document.createElement("script");
       script.src = `https://dapi.kakao.com/v2/maps/sdk.js?appkey=${encodeURIComponent(key)}&autoload=false&libraries=services`;
-      script.onload = () => window.kakao?.maps?.load(resolve);
-      script.onerror = reject;
+      // [2026-06-18] 8초 타임아웃 — 도메인 미등록/네트워크 지연 시 무한 대기 방지 → 폴백으로 떨어지게
+      const timer = setTimeout(() => { kakaoMapLoad = null; reject(new Error("kakao map load timeout")); }, 8000);
+      script.onload = () => { clearTimeout(timer); window.kakao?.maps?.load(resolve); };
+      script.onerror = () => { clearTimeout(timer); kakaoMapLoad = null; reject(new Error("kakao map load error")); };
       document.head.appendChild(script);
     });
     return kakaoMapLoad;
