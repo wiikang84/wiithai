@@ -16,11 +16,15 @@
 - Public URL: `https://wiiinfo.web.app`
 - Firebase project: `wiigame-448c7`
 - Hosting target: `hosting:wiiinfo`
-- Current main app remains the 7-language phrase/Korea info app.
-- As of 2026-06-17, the new grocery-store pivot is represented locally by `demo.html`.
-  - `demo.html` is a separate demo page, not yet integrated into `index.html` / `app.js`.
-  - It contains a Carrot-style mobile demo with Korean/Thai/Vietnamese UI, store list, category chips, list/map toggle, and store detail sheet.
-  - Git status showed `demo.html` as untracked when this note was created.
+- As of 2026-06-18, the grocery-store pivot has started moving into the main app:
+  - `index.html` now has four app tabs: nearby stores, saved stores, learn, and my info.
+  - Existing phrase/Korea info features are preserved under the learn tab.
+  - `data/places.js` contains local seed place data and multilingual place UI copy.
+  - `app.js` renders local places, filters, list/map toggle, detail sheet, saved places, and a Kakao Maps loader.
+  - `firebase-config.js` has `window.WIIINFO_KAKAO_JS_KEY = ""`; fill this with the Kakao JavaScript key to enable the live map.
+  - `firebase.json` CSP allows Kakao map script/image/connect domains.
+  - `firestore.rules` now reserves public-read `places`/`coupons` and allows `users.savedPlaceIds`.
+- `demo.html` remains a standalone sales demo, but the implementation direction is now the main app.
 
 ## Source Materials
 - Product/business research source folder: `C:\Users\fathe\dy-openwork\open`

@@ -7,6 +7,16 @@ service cloud.firestore {
       allow write: if false;
     }
 
+    match /places/{placeId} {
+      allow read: if true;
+      allow write: if false;
+    }
+
+    match /coupons/{couponId} {
+      allow read: if true;
+      allow write: if false;
+    }
+
     match /users/{userId} {
       allow read: if signedInOwner(userId);
       allow create, update: if signedInOwner(userId) && validUserProfile();
@@ -24,6 +34,9 @@ service cloud.firestore {
         "displayName",
         "photoURL",
         "favoriteIds",
+        "savedPlaceIds",
+        "nationality",
+        "preferredLang",
         "preferredFrom",
         "preferredLearn",
         "createdAt",
@@ -34,9 +47,12 @@ service cloud.firestore {
       && optionalString("email", 320)
       && optionalString("displayName", 120)
       && optionalString("photoURL", 1000)
+      && optionalString("nationality", 40)
+      && optionalString("preferredLang", 20)
       && optionalString("preferredFrom", 20)
       && optionalString("preferredLearn", 20)
       && optionalFavorites()
+      && optionalSavedPlaces()
       && optionalTimestamp("createdAt")
       && optionalTimestamp("updatedAt")
       && optionalTimestamp("lastLoginAt");
@@ -50,6 +66,11 @@ service cloud.firestore {
     function optionalFavorites() {
       return !("favoriteIds" in request.resource.data)
         || (request.resource.data.favoriteIds is list && request.resource.data.favoriteIds.size() <= 500);
+    }
+
+    function optionalSavedPlaces() {
+      return !("savedPlaceIds" in request.resource.data)
+        || (request.resource.data.savedPlaceIds is list && request.resource.data.savedPlaceIds.size() <= 500);
     }
 
     function optionalTimestamp(field) {

@@ -1,13 +1,34 @@
 (async function () {
-  const ASSET_VERSION = "20260611-01";
+  const ASSET_VERSION = "20260618-01";
   const LANGUAGES = window.WIIINFO_LANGUAGES || {};
   const LANGUAGE_NAMES = window.WIIINFO_LANGUAGE_NAMES || {};
   const PROFILES = window.WIIINFO_LEARNER_PROFILES || [];
   const UI_COPY = window.WIIINFO_UI_COPY || {};
   const CATEGORY_LABELS = window.WIIINFO_CATEGORY_LABELS || {};
   const SEARCH_KEYWORDS = window.WIIINFO_SEARCH_KEYWORDS || {};
+  const PLACES = window.WIIINFO_PLACES || [];
+  const PLACE_COPY = window.WIIINFO_PLACE_COPY || {};
   const INFO_DEFAULT_UPDATED = "2026-06";
   const INFO_OFFICIAL_CHECK_SECTIONS = new Set(["life", "housing", "realty", "safety", "warning"]);
+  const DEFAULT_LOCATION = { lat: 35.5359, lng: 129.3248, label: "울산 남구" };
+  const PLACE_CATEGORY_LABELS = {
+    all: { ko: "전체", en: "All", th: "ทั้งหมด", ja: "すべて", zh: "全部", vi: "Tất cả", es: "Todo" },
+    grocery: { ko: "식료품", en: "Grocery", th: "ของชำ", ja: "食材店", zh: "食品店", vi: "Tạp hóa", es: "Comestibles" },
+    halal: { ko: "할랄", en: "Halal", th: "ฮาลาล", ja: "ハラル", zh: "清真", vi: "Halal", es: "Halal" },
+    restaurant: { ko: "식당", en: "Restaurant", th: "ร้านอาหาร", ja: "飲食店", zh: "餐厅", vi: "Nhà hàng", es: "Restaurante" },
+    remittance: { ko: "송금", en: "Remittance", th: "โอนเงิน", ja: "送金", zh: "汇款", vi: "Chuyển tiền", es: "Remesas" },
+    mobile: { ko: "통신", en: "Mobile", th: "มือถือ", ja: "通信", zh: "通信", vi: "Di động", es: "Móvil" }
+  };
+  const PLACE_NATIONALITY_LABELS = {
+    all: { ko: "전 국적", en: "All countries", th: "ทุกประเทศ", ja: "全ての国", zh: "所有国家", vi: "Mọi quốc gia", es: "Todos" },
+    vietnam: { ko: "베트남", en: "Vietnam", th: "เวียดนาม", ja: "ベトナム", zh: "越南", vi: "Việt Nam", es: "Vietnam" },
+    thai: { ko: "태국", en: "Thailand", th: "ไทย", ja: "タイ", zh: "泰国", vi: "Thái Lan", es: "Tailandia" },
+    "southeast-asia": { ko: "동남아", en: "Southeast Asia", th: "เอเชียตะวันออกเฉียงใต้", ja: "東南アジア", zh: "东南亚", vi: "Đông Nam Á", es: "Sudeste Asiático" },
+    "central-asia": { ko: "중앙아", en: "Central Asia", th: "เอเชียกลาง", ja: "中央アジア", zh: "中亚", vi: "Trung Á", es: "Asia Central" },
+    indonesia: { ko: "인도네시아", en: "Indonesia", th: "อินโดนีเซีย", ja: "インドネシア", zh: "印度尼西亚", vi: "Indonesia", es: "Indonesia" },
+    uzbekistan: { ko: "우즈벡", en: "Uzbekistan", th: "อุซเบกิสถาน", ja: "ウズベキスタン", zh: "乌兹别克斯坦", vi: "Uzbekistan", es: "Uzbekistán" },
+    halal: { ko: "할랄", en: "Halal", th: "ฮาลาล", ja: "ハラル", zh: "清真", vi: "Halal", es: "Halal" }
+  };
   const KOREAN_LETTER_META = {
     "ㄱ": { kind: "consonant", name: "기역", roman: "g/k", example: "가(ga)", desc: { ko: "ㄱ/ㅋ에 가까운 소리", en: "close to g/k", th: "เสียงใกล้ ก/ค", ja: "g/kに近い音", zh: "接近 g/k 的音", vi: "gần âm g/k", es: "sonido parecido a g/k" } },
     "ㄴ": { kind: "consonant", name: "니은", roman: "n", example: "나(na)", desc: { ko: "ㄴ 소리", en: "n sound", th: "เสียงใกล้ น", ja: "nの音", zh: "n 音", vi: "âm n", es: "sonido n" } },
@@ -79,6 +100,13 @@
   }
 
   const state = {
+    appTab: localStorage.getItem("wiiinfoAppTab") || "nearby",
+    placeSearch: "",
+    placeCategory: "all",
+    placeNationality: "all",
+    placeView: "list",
+    userLocation: null,
+    savedPlaceIds: new Set(readJson("wiiinfoSavedPlaces", [])),
     category: "전체",
     search: "",
     quiz: false,
@@ -125,6 +153,47 @@
   const infoCards = document.getElementById("infoCards");
   const infoPanel = document.querySelector(".infoPanel");
   const detailModal = createInfoDetailModal();
+  const appViews = {
+    nearby: document.getElementById("nearbyView"),
+    saved: document.getElementById("savedView"),
+    learn: document.getElementById("learnView"),
+    me: document.getElementById("meView")
+  };
+  const bottomNavButtons = [...document.querySelectorAll(".bottomNav [data-app-tab]")];
+  const placeTitle = document.getElementById("placeTitle");
+  const placeSeedNote = document.getElementById("placeSeedNote");
+  const placeLocationButton = document.getElementById("placeLocationButton");
+  const placeLocationLabel = document.getElementById("placeLocationLabel");
+  const placeSearchInput = document.getElementById("placeSearchInput");
+  const placeCategoryTabs = document.getElementById("placeCategoryTabs");
+  const placeNationalityTabs = document.getElementById("placeNationalityTabs");
+  const placeResultCount = document.getElementById("placeResultCount");
+  const placeViewToggle = document.getElementById("placeViewToggle");
+  const placeList = document.getElementById("placeList");
+  const placeMapPanel = document.getElementById("placeMapPanel");
+  const placeMap = document.getElementById("placeMap");
+  const placeMapStatus = document.getElementById("placeMapStatus");
+  const savedTitle = document.getElementById("savedTitle");
+  const savedPlaceList = document.getElementById("savedPlaceList");
+  const meTitle = document.getElementById("meTitle");
+  const meText = document.getElementById("meText");
+  const meAuthButton = document.getElementById("meAuthButton");
+  const meAuthStatus = document.getElementById("meAuthStatus");
+  const meAuthSyncStatus = document.getElementById("meAuthSyncStatus");
+  const ownerRegisterButton = document.getElementById("ownerRegisterButton");
+  const ownerRegisterNote = document.getElementById("ownerRegisterNote");
+  const placeDetailOverlay = document.getElementById("placeDetailOverlay");
+  const placeDetailClose = document.getElementById("placeDetailClose");
+  const placeDetailHero = document.getElementById("placeDetailHero");
+  const placeDetailMeta = document.getElementById("placeDetailMeta");
+  const placeDetailTitle = document.getElementById("placeDetailTitle");
+  const placeDetailItems = document.getElementById("placeDetailItems");
+  const placeDetailRows = document.getElementById("placeDetailRows");
+  const placeDetailCoupon = document.getElementById("placeDetailCoupon");
+  const placeDetailActions = document.getElementById("placeDetailActions");
+  let kakaoMapLoad = null;
+  let kakaoMapInstance = null;
+  let kakaoMarkers = [];
 
   // URL 딥링크: ?from=국가&learn=언어 (2026-06-04) 예: https://wiiinfo.web.app/?from=th&learn=ko
   const urlParams = new URLSearchParams(location.search);
@@ -160,7 +229,7 @@
       const params = new URLSearchParams(location.search);
       params.set("from", profileId);
       params.set("learn", targetLang);
-      history.replaceState(null, "", `${location.pathname}?${params.toString()}`);
+      history.replaceState(null, "", `${location.pathname}?${params.toString()}${location.hash || ""}`);
     } catch (error) {
       // file:// 등 replaceState 미지원 환경은 무시
     }
@@ -271,16 +340,25 @@
   }
 
   function updateAuthUi(statusKey) {
-    if (!authButton || !authStatus || !authSyncStatus) return;
     const signedIn = !!currentUser;
     const unavailable = statusKey === "authUnavailable";
-    authButton.disabled = unavailable;
-    authButton.textContent = signedIn ? authText("authSignOut", "Sign out") : authText("authSignIn", "Sign in with Google");
-    authStatus.textContent = signedIn
+    const buttonText = signedIn ? authText("authSignOut", "Sign out") : authText("authSignIn", "Sign in with Google");
+    const statusText = signedIn
       ? authText("authSignedIn", "Signed in").replace("{name}", currentUser.displayName || currentUser.email || "Google")
       : authText("authGuest", "Guest mode");
     const key = statusKey || (signedIn ? "authSyncCloud" : "authSyncLocal");
-    authSyncStatus.textContent = authText(key, signedIn ? "Saved items sync with your Google account." : "Saved items stay on this device.");
+    const syncText = authText(key, signedIn ? "Saved items sync with your Google account." : "Saved items stay on this device.");
+
+    [
+      { button: authButton, status: authStatus, sync: authSyncStatus },
+      { button: meAuthButton, status: meAuthStatus, sync: meAuthSyncStatus }
+    ].forEach((view) => {
+      if (!view.button || !view.status || !view.sync) return;
+      view.button.disabled = unavailable;
+      view.button.textContent = buttonText;
+      view.status.textContent = statusText;
+      view.sync.textContent = syncText;
+    });
   }
 
   async function initAuth() {
@@ -451,6 +529,316 @@
 
   function uiText(key) {
     return UI_COPY[sourceLang]?.[key] || UI_COPY.ko?.[key] || key;
+  }
+
+  function placeUi(key) {
+    return PLACE_COPY[sourceLang]?.[key] || PLACE_COPY.en?.[key] || PLACE_COPY.ko?.[key] || key;
+  }
+
+  function localizedValue(value, fallback = "") {
+    if (!value) return fallback;
+    if (typeof value === "string") return value;
+    return value[sourceLang] || value.en || value.ko || Object.values(value).find(Boolean) || fallback;
+  }
+
+  function placeCategoryLabel(category) {
+    const labels = PLACE_CATEGORY_LABELS[category] || PLACE_CATEGORY_LABELS.all;
+    return labels[sourceLang] || labels.en || labels.ko || category;
+  }
+
+  function placeNationalityLabel(nationality) {
+    const labels = PLACE_NATIONALITY_LABELS[nationality] || PLACE_NATIONALITY_LABELS.all;
+    return labels[sourceLang] || labels.en || labels.ko || nationality;
+  }
+
+  function savePlaceIds() {
+    localStorage.setItem("wiiinfoSavedPlaces", JSON.stringify([...state.savedPlaceIds]));
+  }
+
+  function toggleSavedPlace(placeId) {
+    if (state.savedPlaceIds.has(placeId)) state.savedPlaceIds.delete(placeId);
+    else state.savedPlaceIds.add(placeId);
+    savePlaceIds();
+    renderPlaces();
+    renderSavedPlaces();
+    track("toggle_saved_place", { place: placeId, saved: state.savedPlaceIds.has(placeId) });
+  }
+
+  function availablePlaceCategories() {
+    return ["all", ...Array.from(new Set(PLACES.map((place) => place.category).filter(Boolean)))];
+  }
+
+  function availablePlaceNationalities() {
+    return ["all", ...Array.from(new Set(PLACES.flatMap((place) => place.nationalities || []).filter(Boolean)))];
+  }
+
+  function placeSearchText(place) {
+    return [
+      localizedValue(place.name),
+      localizedValue(place.address),
+      localizedValue(place.items),
+      placeCategoryLabel(place.category),
+      ...(place.nationalities || []).map(placeNationalityLabel),
+      ...(place.tags || [])
+    ].join(" ").toLowerCase();
+  }
+
+  function filteredPlaces(scope = "all") {
+    const keyword = state.placeSearch.trim().toLowerCase();
+    const location = state.userLocation || DEFAULT_LOCATION;
+    return PLACES
+      .filter((place) => scope !== "saved" || state.savedPlaceIds.has(place.id))
+      .filter((place) => state.placeCategory === "all" || place.category === state.placeCategory)
+      .filter((place) => state.placeNationality === "all" || (place.nationalities || []).includes(state.placeNationality))
+      .filter((place) => !keyword || placeSearchText(place).includes(keyword))
+      .map((place) => ({ ...place, distanceKm: distanceKm(location, place) }))
+      .sort((a, b) => (a.distanceKm ?? 999) - (b.distanceKm ?? 999));
+  }
+
+  function distanceKm(origin, place) {
+    if (!origin?.lat || !origin?.lng || !place?.lat || !place?.lng) return null;
+    const radius = 6371;
+    const toRad = (value) => value * Math.PI / 180;
+    const dLat = toRad(place.lat - origin.lat);
+    const dLng = toRad(place.lng - origin.lng);
+    const lat1 = toRad(origin.lat);
+    const lat2 = toRad(place.lat);
+    const a = Math.sin(dLat / 2) ** 2 + Math.cos(lat1) * Math.cos(lat2) * Math.sin(dLng / 2) ** 2;
+    return radius * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+  }
+
+  function distanceLabel(place) {
+    if (place.distanceKm == null) return placeUi("needCheck");
+    if (place.distanceKm < 1) return `${Math.round(place.distanceKm * 1000)}m`;
+    return `${place.distanceKm.toFixed(place.distanceKm < 10 ? 1 : 0)}km`;
+  }
+
+  function renderPlaceFilters() {
+    if (!placeCategoryTabs || !placeNationalityTabs) return;
+    renderPlaceChipGroup(placeCategoryTabs, availablePlaceCategories(), state.placeCategory, (category) => {
+      state.placeCategory = category;
+      renderPlaces();
+    }, placeCategoryLabel);
+    renderPlaceChipGroup(placeNationalityTabs, availablePlaceNationalities(), state.placeNationality, (nationality) => {
+      state.placeNationality = nationality;
+      renderPlaces();
+    }, placeNationalityLabel);
+  }
+
+  function renderPlaceChipGroup(container, values, activeValue, onSelect, labelFn) {
+    container.innerHTML = "";
+    values.forEach((value) => {
+      const button = document.createElement("button");
+      button.type = "button";
+      button.className = value === activeValue ? "active" : "";
+      button.textContent = labelFn(value);
+      button.setAttribute("aria-pressed", String(value === activeValue));
+      button.addEventListener("click", () => onSelect(value));
+      container.appendChild(button);
+    });
+  }
+
+  function renderPlaceCard(place) {
+    const saved = state.savedPlaceIds.has(place.id);
+    const sourceBadge = place.source === "demo-seed" ? "DEMO" : place.verified ? placeUi("verified") : placeUi("needCheck");
+    const nationalities = (place.nationalities || []).slice(0, 3).map((item) => `<span>${escapeHtml(placeNationalityLabel(item))}</span>`).join("");
+    const coupon = place.coupon?.title ? `<p class="placeCouponPill">🎟 ${escapeHtml(localizedValue(place.coupon.title))}</p>` : "";
+    return `
+      <article class="placeCard" data-place-id="${escapeHtml(place.id)}">
+        <button class="placeCardMain" type="button" data-place-open="${escapeHtml(place.id)}">
+          <span class="placeThumb">${escapeHtml(place.emoji || "🛒")}</span>
+          <span class="placeCardBody">
+            <span class="placeCardHead">
+              <strong>${escapeHtml(localizedValue(place.name))}</strong>
+              <em>${escapeHtml(sourceBadge)}</em>
+            </span>
+            <span class="placeMeta">📍 ${escapeHtml(distanceLabel(place))} · ${escapeHtml(localizedValue(place.address))}</span>
+            <span class="placeTags">${nationalities}</span>
+            <span class="placeItems">${escapeHtml(localizedValue(place.items))}</span>
+            ${coupon}
+          </span>
+        </button>
+        <button class="placeSaveButton ${saved ? "active" : ""}" type="button" data-place-save="${escapeHtml(place.id)}" aria-pressed="${String(saved)}">${saved ? "★" : "☆"}</button>
+      </article>
+    `;
+  }
+
+  function bindPlaceCardEvents(container) {
+    container.querySelectorAll("[data-place-open]").forEach((button) => {
+      button.addEventListener("click", () => openPlaceDetail(button.dataset.placeOpen));
+    });
+    container.querySelectorAll("[data-place-save]").forEach((button) => {
+      button.addEventListener("click", (event) => {
+        event.stopPropagation();
+        toggleSavedPlace(button.dataset.placeSave);
+        if (button.closest(".placeDetailActions")) openPlaceDetail(button.dataset.placeSave);
+      });
+    });
+  }
+
+  function renderPlaces() {
+    if (!placeList) return;
+    renderPlaceFilters();
+    const places = filteredPlaces();
+    placeResultCount.textContent = `${places.length} ${placeUi("results")}`;
+    placeViewToggle.innerHTML = state.placeView === "map"
+      ? `☰ <span>${escapeHtml(placeUi("list"))}</span>`
+      : `🗺 <span>${escapeHtml(placeUi("map"))}</span>`;
+    placeList.hidden = state.placeView === "map";
+    placeMapPanel.hidden = state.placeView !== "map";
+    placeList.innerHTML = places.length
+      ? places.map(renderPlaceCard).join("")
+      : `<div class="emptyState">${escapeHtml(placeUi("noResults"))}</div>`;
+    bindPlaceCardEvents(placeList);
+    if (state.placeView === "map") renderPlaceMap(places);
+  }
+
+  function renderSavedPlaces() {
+    if (!savedPlaceList) return;
+    const places = filteredPlaces("saved");
+    savedTitle.textContent = placeUi("saved");
+    savedPlaceList.innerHTML = places.length
+      ? places.map(renderPlaceCard).join("")
+      : `<div class="emptyState">${escapeHtml(placeUi("noSaved"))}</div>`;
+    bindPlaceCardEvents(savedPlaceList);
+  }
+
+  function renderPlaceMap(places) {
+    if (!placeMap || !placeMapStatus) return;
+    const key = String(window.WIIINFO_KAKAO_JS_KEY || "").trim();
+    if (!key) {
+      renderFallbackPlaceMap(places);
+      placeMapStatus.textContent = placeUi("mapNeedsKey");
+      return;
+    }
+    placeMapStatus.textContent = "";
+    renderKakaoPlaceMap(places, key).catch(() => {
+      renderFallbackPlaceMap(places);
+      placeMapStatus.textContent = placeUi("mapLoadFailed");
+    });
+  }
+
+  function renderFallbackPlaceMap(places) {
+    if (!placeMap) return;
+    const points = places.map((place, index) => {
+      const left = 24 + ((index * 17) % 56);
+      const top = 24 + ((index * 23) % 52);
+      return `<button class="fallbackMapPin" type="button" style="left:${left}%;top:${top}%" data-place-open="${escapeHtml(place.id)}">${escapeHtml(place.emoji || "🛒")}</button>`;
+    }).join("");
+    placeMap.innerHTML = `<div class="fallbackMapGrid"></div><span class="fallbackMapMe"></span>${points}`;
+    bindPlaceCardEvents(placeMap);
+  }
+
+  function loadKakaoMap(key) {
+    if (window.kakao?.maps) return Promise.resolve();
+    if (kakaoMapLoad) return kakaoMapLoad;
+    kakaoMapLoad = new Promise((resolve, reject) => {
+      const script = document.createElement("script");
+      script.src = `https://dapi.kakao.com/v2/maps/sdk.js?appkey=${encodeURIComponent(key)}&autoload=false&libraries=services`;
+      script.onload = () => window.kakao?.maps?.load(resolve);
+      script.onerror = reject;
+      document.head.appendChild(script);
+    });
+    return kakaoMapLoad;
+  }
+
+  async function renderKakaoPlaceMap(places, key) {
+    await loadKakaoMap(key);
+    const centerPlace = places.find((place) => place.lat && place.lng) || PLACES[0] || DEFAULT_LOCATION;
+    const center = new kakao.maps.LatLng(centerPlace.lat || DEFAULT_LOCATION.lat, centerPlace.lng || DEFAULT_LOCATION.lng);
+    if (!kakaoMapInstance) {
+      kakaoMapInstance = new kakao.maps.Map(placeMap, { center, level: 6 });
+    } else {
+      kakaoMapInstance.setCenter(center);
+    }
+    kakaoMarkers.forEach((marker) => marker.setMap(null));
+    kakaoMarkers = places.filter((place) => place.lat && place.lng).map((place) => {
+      const marker = new kakao.maps.Marker({
+        map: kakaoMapInstance,
+        position: new kakao.maps.LatLng(place.lat, place.lng),
+        title: localizedValue(place.name)
+      });
+      kakao.maps.event.addListener(marker, "click", () => openPlaceDetail(place.id));
+      return marker;
+    });
+  }
+
+  function openPlaceDetail(placeId) {
+    const place = PLACES.find((item) => item.id === placeId);
+    if (!place || !placeDetailOverlay) return;
+    const saved = state.savedPlaceIds.has(place.id);
+    const routeUrl = place.lat && place.lng
+      ? `https://map.kakao.com/link/to/${encodeURIComponent(localizedValue(place.name))},${place.lat},${place.lng}`
+      : `https://map.kakao.com/link/search/${encodeURIComponent(localizedValue(place.name))}`;
+    placeDetailHero.textContent = place.emoji || "🛒";
+    placeDetailMeta.textContent = `${placeCategoryLabel(place.category)} · ${(place.nationalities || []).map(placeNationalityLabel).join(" · ") || placeUi("all")}`;
+    placeDetailTitle.textContent = localizedValue(place.name);
+    placeDetailItems.textContent = localizedValue(place.items);
+    placeDetailRows.innerHTML = `
+      <div><span>📍</span><strong>${escapeHtml(localizedValue(place.address))}</strong></div>
+      <div><span>🕐</span><strong>${escapeHtml(localizedValue(place.hours))}</strong></div>
+      <div><span>✓</span><strong>${escapeHtml(place.verified ? placeUi("verified") : placeUi("needCheck"))}</strong></div>
+    `;
+    if (place.coupon?.title) {
+      placeDetailCoupon.hidden = false;
+      placeDetailCoupon.textContent = `🎟 ${localizedValue(place.coupon.title)}`;
+    } else {
+      placeDetailCoupon.hidden = true;
+      placeDetailCoupon.textContent = "";
+    }
+    placeDetailActions.innerHTML = `
+      ${place.phone ? `<a class="detailAction callAction" href="tel:${escapeHtml(place.phone)}">📞 ${escapeHtml(placeUi("call"))}</a>` : ""}
+      <a class="detailAction" href="${escapeHtml(routeUrl)}" target="_blank" rel="noopener">🧭 ${escapeHtml(placeUi("route"))}</a>
+      <button class="detailAction" type="button" data-place-save="${escapeHtml(place.id)}">${saved ? "★" : "☆"} ${escapeHtml(saved ? placeUi("savedPlace") : placeUi("save"))}</button>
+    `;
+    bindPlaceCardEvents(placeDetailActions);
+    placeDetailOverlay.hidden = false;
+    document.body.classList.add("modalOpen");
+    placeDetailClose.focus();
+    track("open_place_detail", { place: place.id, source: sourceLang });
+  }
+
+  function closePlaceDetail() {
+    if (!placeDetailOverlay) return;
+    placeDetailOverlay.hidden = true;
+    document.body.classList.remove("modalOpen");
+  }
+
+  function setAppTab(tab) {
+    if (!appViews[tab]) tab = "nearby";
+    state.appTab = tab;
+    localStorage.setItem("wiiinfoAppTab", tab);
+    Object.entries(appViews).forEach(([key, element]) => {
+      if (element) element.hidden = key !== tab;
+    });
+    bottomNavButtons.forEach((button) => {
+      const active = button.dataset.appTab === tab;
+      button.classList.toggle("active", active);
+      button.setAttribute("aria-pressed", String(active));
+    });
+    if (tab === "nearby") renderPlaces();
+    if (tab === "saved") renderSavedPlaces();
+    window.scrollTo({ top: 0, behavior: "smooth" });
+    track("select_app_tab", { tab });
+  }
+
+  function updatePlaceStaticLabels() {
+    if (placeTitle) placeTitle.textContent = placeUi("nearby");
+    if (placeSeedNote) placeSeedNote.textContent = placeUi("seedNote");
+    if (placeLocationLabel) placeLocationLabel.textContent = state.userLocation?.label || placeUi("location");
+    if (placeSearchInput) placeSearchInput.placeholder = placeUi("search");
+    if (savedTitle) savedTitle.textContent = placeUi("saved");
+    if (meTitle) meTitle.textContent = placeUi("profileTitle");
+    if (meText) meText.textContent = placeUi("profileText");
+    if (ownerRegisterButton) ownerRegisterButton.textContent = placeUi("ownerCta");
+    if (ownerRegisterNote) ownerRegisterNote.textContent = placeUi("ownerNote");
+    bottomNavButtons.forEach((button) => {
+      const tab = button.dataset.appTab;
+      const label = button.querySelector("span");
+      if (label) label.textContent = placeUi(tab);
+    });
+    renderPlaces();
+    renderSavedPlaces();
   }
 
   function languageName(lang) {
@@ -1194,6 +1582,7 @@
     maleVoiceButton.textContent = uiText("male");
     quizLabel.textContent = uiText("quiz");
     searchInput.placeholder = currentMode === "letters" ? uiText("searchLetters") : uiText("searchPhrases");
+    updatePlaceStaticLabels();
     updateAuthUi();
   }
 
@@ -1229,6 +1618,43 @@
   maleVoiceButton.addEventListener("click", () => setVoice("male"));
   homeFlagButton.addEventListener("click", goHome);
   authButton?.addEventListener("click", toggleAuth);
+  meAuthButton?.addEventListener("click", toggleAuth);
+  bottomNavButtons.forEach((button) => {
+    button.addEventListener("click", () => setAppTab(button.dataset.appTab));
+  });
+  placeSearchInput?.addEventListener("input", (event) => {
+    state.placeSearch = event.target.value;
+    renderPlaces();
+  });
+  placeViewToggle?.addEventListener("click", () => {
+    state.placeView = state.placeView === "map" ? "list" : "map";
+    renderPlaces();
+    track("toggle_place_view", { view: state.placeView });
+  });
+  placeLocationButton?.addEventListener("click", () => {
+    if (!navigator.geolocation) return;
+    navigator.geolocation.getCurrentPosition((position) => {
+      state.userLocation = {
+        lat: position.coords.latitude,
+        lng: position.coords.longitude,
+        label: placeUi("nearby")
+      };
+      updatePlaceStaticLabels();
+      renderPlaces();
+      track("set_place_location", { source: "geolocation" });
+    }, () => {
+      state.userLocation = null;
+      updatePlaceStaticLabels();
+    }, { enableHighAccuracy: false, timeout: 7000, maximumAge: 300000 });
+  });
+  placeDetailClose?.addEventListener("click", closePlaceDetail);
+  placeDetailOverlay?.addEventListener("click", (event) => {
+    if (event.target === placeDetailOverlay) closePlaceDetail();
+  });
+  ownerRegisterButton?.addEventListener("click", () => {
+    ownerRegisterNote.textContent = placeUi("ownerNote");
+    track("owner_register_interest", { source: sourceLang });
+  });
   loadMoreButton.addEventListener("click", () => {
     visibleLimit += getPhrasePageSize();
     render();
@@ -1238,6 +1664,9 @@
     const pageSize = getPhrasePageSize();
     if (!visibleLimit || visibleLimit < pageSize) visibleLimit = pageSize;
     render();
+  });
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape" && placeDetailOverlay && !placeDetailOverlay.hidden) closePlaceDetail();
   });
 
   if ("speechSynthesis" in window) speechSynthesis.onvoiceschanged = () => getVoice("th-TH");
@@ -1260,6 +1689,7 @@
   renderInfoHub();
   setVoice(voiceMode);
   setMode("phrases");
+  setAppTab(state.appTab);
   initAuth();
   syncUrl(); // 첫 화면부터 주소가 공유 가능한 딥링크가 되도록 (2026-06-04)
 

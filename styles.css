@@ -45,8 +45,544 @@ button {
 .app {
   width: min(1180px, 100%);
   margin: 0 auto;
-  padding: 22px 16px 52px;
+  padding: 22px 16px 104px;
   overflow-x: clip;
+}
+
+.appView {
+  min-width: 0;
+}
+
+.sectionHead {
+  display: grid;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+
+.sectionHead h2 {
+  margin: 0;
+  color: var(--ink);
+  font-size: 30px;
+  line-height: 1.15;
+}
+
+.sectionHead p:not(.eyebrow) {
+  margin: 0;
+  color: var(--muted);
+  font-weight: 750;
+  line-height: 1.5;
+}
+
+.placeView,
+.savedView,
+.meView {
+  display: grid;
+  gap: 14px;
+}
+
+.placeHeader {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: end;
+  gap: 16px;
+  padding: 22px;
+  border-radius: 20px;
+  background:
+    linear-gradient(135deg, rgba(26, 26, 26, 0.92), rgba(20, 90, 78, 0.84)),
+    linear-gradient(90deg, #fb6514, #15a66e);
+  color: #fff;
+  box-shadow: var(--shadow);
+}
+
+.placeHeader h1 {
+  font-size: clamp(32px, 7vw, 56px);
+  line-height: 1.02;
+}
+
+.placeSeedNote {
+  max-width: 660px;
+  margin: 10px 0 0;
+  color: rgba(255, 255, 255, 0.82);
+  font-size: 14px;
+  font-weight: 750;
+  line-height: 1.5;
+}
+
+.placeLocationButton {
+  min-height: 44px;
+  padding: 0 15px;
+  border: 1px solid rgba(255, 255, 255, 0.34);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.12);
+  color: #fff;
+  cursor: pointer;
+  font-weight: 900;
+  white-space: nowrap;
+}
+
+.placeSearchPanel {
+  display: grid;
+  gap: 10px;
+  padding: 14px;
+  border: 1px solid #ece9e2;
+  border-radius: 18px;
+  background: #fff;
+  box-shadow: 0 8px 24px rgba(36, 52, 71, 0.06);
+}
+
+#placeSearchInput {
+  width: 100%;
+  min-height: 48px;
+  padding: 0 16px;
+  border: 1px solid #e5e1d9;
+  border-radius: 14px;
+  background: #f8f8f6;
+  outline: none;
+  font-weight: 750;
+}
+
+#placeSearchInput:focus {
+  border-color: #fb6514;
+  box-shadow: 0 0 0 4px rgba(251, 101, 20, 0.14);
+}
+
+.placeChips {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding-bottom: 2px;
+  overscroll-behavior-x: contain;
+  -webkit-overflow-scrolling: touch;
+}
+
+.placeChips button {
+  flex: 0 0 auto;
+  min-height: 36px;
+  padding: 0 13px;
+  border: 1px solid #e5e1d9;
+  border-radius: 999px;
+  background: #fff;
+  color: #565f6b;
+  cursor: pointer;
+  font-weight: 900;
+}
+
+.placeChips.compact button {
+  min-height: 32px;
+  font-size: 13px;
+}
+
+.placeChips button.active {
+  border-color: #1a1a1a;
+  background: #1a1a1a;
+  color: #fff;
+}
+
+.placeToolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.placeToolbar strong {
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 900;
+}
+
+.placeViewToggle {
+  min-height: 36px;
+  padding: 0 14px;
+  border: 0;
+  border-radius: 999px;
+  background: #fff1e8;
+  color: #e2540a;
+  cursor: pointer;
+  font-weight: 900;
+}
+
+.placeList {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 12px;
+}
+
+.placeCard {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 42px;
+  gap: 8px;
+  min-height: 154px;
+  padding: 12px;
+  border: 1px solid #ece9e2;
+  border-radius: 16px;
+  background: #fff;
+  box-shadow: 0 10px 26px rgba(36, 52, 71, 0.08);
+}
+
+.placeCardMain {
+  display: grid;
+  grid-template-columns: 78px minmax(0, 1fr);
+  gap: 12px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+  text-align: left;
+}
+
+.placeThumb {
+  width: 78px;
+  height: 78px;
+  display: grid;
+  place-items: center;
+  border-radius: 14px;
+  background:
+    linear-gradient(135deg, rgba(251, 101, 20, 0.16), rgba(21, 166, 110, 0.14)),
+    #f8f8f6;
+  font-size: 34px;
+}
+
+.placeCardBody,
+.placeCardHead {
+  min-width: 0;
+}
+
+.placeCardBody {
+  display: grid;
+  gap: 6px;
+}
+
+.placeCardHead {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.placeCardHead strong {
+  min-width: 0;
+  overflow: hidden;
+  color: var(--ink);
+  font-size: 17px;
+  line-height: 1.25;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.placeCardHead em {
+  flex: 0 0 auto;
+  padding: 3px 7px;
+  border-radius: 7px;
+  background: #e7f7f0;
+  color: #117a53;
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 900;
+}
+
+.placeMeta,
+.placeItems {
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 750;
+  line-height: 1.4;
+}
+
+.placeItems {
+  color: #3e4753;
+}
+
+.placeTags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+.placeTags span,
+.placeCouponPill {
+  width: fit-content;
+  margin: 0;
+  padding: 3px 8px;
+  border-radius: 8px;
+  background: #fff1e8;
+  color: #b94708;
+  font-size: 12px;
+  font-weight: 900;
+}
+
+.placeCouponPill {
+  background: #fff8dd;
+  color: #8a5b00;
+}
+
+.placeSaveButton {
+  width: 40px;
+  height: 40px;
+  border: 0;
+  border-radius: 999px;
+  background: #f1f3f5;
+  color: #9098a3;
+  cursor: pointer;
+  font-size: 22px;
+  font-weight: 900;
+}
+
+.placeSaveButton.active {
+  background: #ffc857;
+  color: #1a1a1a;
+}
+
+.placeMapPanel {
+  display: grid;
+  gap: 8px;
+}
+
+.placeMap {
+  position: relative;
+  min-height: min(62vh, 560px);
+  overflow: hidden;
+  border: 1px solid #dfe7df;
+  border-radius: 18px;
+  background: #e8efe9;
+  box-shadow: var(--shadow);
+}
+
+.fallbackMapGrid {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(90deg, rgba(255, 255, 255, 0.42) 1px, transparent 1px) 0 0 / 44px 44px,
+    linear-gradient(rgba(255, 255, 255, 0.42) 1px, transparent 1px) 0 0 / 44px 44px,
+    radial-gradient(circle at 36% 44%, rgba(21, 166, 110, 0.2), transparent 24%),
+    radial-gradient(circle at 66% 58%, rgba(251, 101, 20, 0.18), transparent 24%);
+}
+
+.fallbackMapMe {
+  position: absolute;
+  left: 50%;
+  top: 55%;
+  width: 18px;
+  height: 18px;
+  border: 3px solid #fff;
+  border-radius: 999px;
+  background: #3b82f6;
+  box-shadow: 0 0 0 7px rgba(59, 130, 246, 0.18);
+}
+
+.fallbackMapPin {
+  position: absolute;
+  min-width: 36px;
+  min-height: 36px;
+  border: 0;
+  border-radius: 999px;
+  background: #fb6514;
+  box-shadow: 0 8px 18px rgba(36, 52, 71, 0.22);
+  cursor: pointer;
+  transform: translate(-50%, -50%);
+}
+
+.placeMapStatus {
+  margin: 0;
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 850;
+}
+
+.emptyState {
+  min-height: 140px;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  border: 1px dashed #d8d8d4;
+  border-radius: 16px;
+  background: #fff;
+  color: var(--muted);
+  font-weight: 850;
+  text-align: center;
+}
+
+.placeDetailOverlay {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  display: grid;
+  place-items: end center;
+  padding: 18px;
+  background: rgba(25, 33, 46, 0.62);
+}
+
+.placeDetail {
+  position: relative;
+  width: min(620px, 100%);
+  max-height: min(92vh, 860px);
+  overflow: auto;
+  border-radius: 22px;
+  background: #fff;
+  box-shadow: 0 28px 70px rgba(0, 0, 0, 0.3);
+}
+
+.placeDetailClose {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  z-index: 1;
+  width: 40px;
+  height: 40px;
+  border: 0;
+  border-radius: 999px;
+  background: rgba(25, 33, 46, 0.84);
+  color: #fff;
+  cursor: pointer;
+  font-size: 26px;
+  line-height: 1;
+}
+
+.placeDetailHero {
+  height: 180px;
+  display: grid;
+  place-items: center;
+  background:
+    linear-gradient(135deg, rgba(251, 101, 20, 0.2), rgba(21, 166, 110, 0.17)),
+    #f8f8f6;
+  font-size: 74px;
+}
+
+.placeDetailBody {
+  display: grid;
+  gap: 13px;
+  padding: 20px;
+}
+
+.placeDetailMeta {
+  margin: 0;
+  color: #b94708;
+  font-size: 13px;
+  font-weight: 900;
+}
+
+.placeDetail h2 {
+  margin: 0;
+  color: var(--ink);
+  font-size: 28px;
+  line-height: 1.18;
+}
+
+.placeDetailItems {
+  margin: 0;
+  color: #3e4753;
+  font-size: 15px;
+  font-weight: 800;
+  line-height: 1.5;
+}
+
+.placeDetailRows {
+  display: grid;
+  gap: 8px;
+}
+
+.placeDetailRows div {
+  display: grid;
+  grid-template-columns: 28px minmax(0, 1fr);
+  gap: 8px;
+  padding: 12px;
+  border-radius: 13px;
+  background: #f8fafc;
+  color: var(--ink);
+}
+
+.placeDetailRows strong {
+  min-width: 0;
+  line-height: 1.45;
+}
+
+.placeDetailCoupon {
+  padding: 13px 14px;
+  border-radius: 14px;
+  background: #fff8dd;
+  color: #8a5b00;
+  font-weight: 900;
+}
+
+.placeDetailActions {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.mePanel {
+  display: grid;
+  gap: 12px;
+}
+
+.compactAuth {
+  margin: 0;
+}
+
+.ownerRegisterButton {
+  min-height: 52px;
+  border: 0;
+  border-radius: 14px;
+  background: #fb6514;
+  color: #fff;
+  cursor: pointer;
+  font-weight: 900;
+}
+
+.ownerRegisterNote {
+  margin: 0;
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 800;
+  line-height: 1.5;
+}
+
+.bottomNav {
+  position: fixed;
+  left: 50%;
+  bottom: 14px;
+  z-index: 45;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(68px, 1fr));
+  width: min(520px, calc(100% - 24px));
+  min-height: 64px;
+  padding: 7px;
+  border: 1px solid rgba(36, 52, 71, 0.12);
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.94);
+  box-shadow: 0 18px 46px rgba(25, 33, 46, 0.2);
+  backdrop-filter: blur(16px);
+  transform: translateX(-50%);
+}
+
+.bottomNav button {
+  display: grid;
+  place-items: center;
+  gap: 3px;
+  min-width: 0;
+  min-height: 50px;
+  border: 0;
+  border-radius: 14px;
+  background: transparent;
+  color: #6d7481;
+  cursor: pointer;
+  font-size: 17px;
+  font-weight: 900;
+}
+
+.bottomNav button span {
+  max-width: 100%;
+  overflow: hidden;
+  font-size: 11px;
+  line-height: 1.1;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.bottomNav button.active {
+  background: #1a1a1a;
+  color: #fff;
 }
 
 .appHeader {
@@ -1268,7 +1804,74 @@ h1 {
 
 @media (max-width: 680px) {
   .app {
-    padding: 10px 12px 42px;
+    padding: 10px 12px 96px;
+  }
+
+  .placeHeader {
+    grid-template-columns: 1fr;
+    gap: 12px;
+    padding: 18px;
+  }
+
+  .placeLocationButton {
+    justify-self: start;
+  }
+
+  .placeSearchPanel {
+    margin: 0 -2px;
+    padding: 12px;
+  }
+
+  .placeList {
+    grid-template-columns: 1fr;
+  }
+
+  .placeCard {
+    grid-template-columns: minmax(0, 1fr) 40px;
+    min-height: 148px;
+  }
+
+  .placeCardMain {
+    grid-template-columns: 70px minmax(0, 1fr);
+  }
+
+  .placeThumb {
+    width: 70px;
+    height: 70px;
+    font-size: 30px;
+  }
+
+  .placeCardHead {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .placeCardHead strong {
+    white-space: normal;
+  }
+
+  .placeMap {
+    min-height: 58vh;
+  }
+
+  .placeDetailOverlay {
+    padding: 0;
+  }
+
+  .placeDetail {
+    width: 100%;
+    max-height: 94vh;
+    border-radius: 22px 22px 0 0;
+  }
+
+  .placeDetailActions {
+    grid-template-columns: 1fr;
+  }
+
+  .bottomNav {
+    bottom: 10px;
+    border-radius: 18px;
   }
 
   .hero {

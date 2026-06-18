@@ -20,119 +20,197 @@
     <link rel="manifest" href="./manifest.webmanifest" />
     <meta name="theme-color" content="#00a7a5" />
     <link rel="apple-touch-icon" href="./icons/icon-192.png" />
-    <link rel="stylesheet" href="./styles.css?v=20260611-01" />
+    <link rel="stylesheet" href="./styles.css?v=20260618-01" />
   </head>
   <body>
     <main class="app">
-      <header class="appHeader">
-        <section class="hero">
-          <button id="homeFlagButton" class="flagMark" type="button" aria-label="Reset language selection">
-            <span id="heroFlagEmoji" class="heroFlagEmoji heroSourceFlag flagVisual flag-ko">KR</span>
-            <span class="heroRoute">
-              <span class="heroArrow">→</span>
-              <span id="heroTargetFlagEmoji" class="heroFlagEmoji heroTargetFlag flagVisual flag-th">TH</span>
-            </span>
-          </button>
-          <div class="heroCopy">
-            <p class="eyebrow">Language · Life · Realty</p>
-            <h1>wiiInfo</h1>
-            <p class="brandLine">Info by Wii · Korea info by Wii</p>
-            <p class="subtitle">Choose your language and learn practical phrases, Korea life info, and real estate basics.</p>
+      <section id="nearbyView" class="appView placeView" aria-label="Nearby stores">
+        <header class="placeHeader">
+          <div>
+            <p class="eyebrow">wiiInfo Local</p>
+            <h1 id="placeTitle">내 주변</h1>
+            <p id="placeSeedNote" class="placeSeedNote">현재 가게 정보는 영업용 시드입니다. 방문 전 현장 확인이 필요합니다.</p>
+          </div>
+          <button id="placeLocationButton" class="placeLocationButton" type="button">📍 <span id="placeLocationLabel">울산 남구</span></button>
+        </header>
+
+        <section class="placeSearchPanel" aria-label="Store search and filters">
+          <input id="placeSearchInput" type="search" aria-label="Search stores" placeholder="가게, 음식, 나라 검색" />
+          <div id="placeCategoryTabs" class="placeChips" aria-label="Store category filter"></div>
+          <div id="placeNationalityTabs" class="placeChips compact" aria-label="Nationality filter"></div>
+          <div class="placeToolbar">
+            <strong id="placeResultCount">0 등록 가게</strong>
+            <button id="placeViewToggle" class="placeViewToggle" type="button">🗺 <span>지도</span></button>
           </div>
         </section>
-      </header>
 
-      <section class="authStrip" aria-label="Account">
-        <div>
-          <p id="authStatus" class="authStatus">Guest mode</p>
-          <p id="authSyncStatus" class="authSyncStatus">Saved items stay on this device.</p>
-        </div>
-        <button id="authButton" class="authButton" type="button">Sign in with Google</button>
+        <section id="placeList" class="placeList" aria-label="Store list"></section>
+        <section id="placeMapPanel" class="placeMapPanel" aria-label="Store map" hidden>
+          <div id="placeMap" class="placeMap"></div>
+          <p id="placeMapStatus" class="placeMapStatus"></p>
+        </section>
       </section>
 
-      <section class="controls" aria-label="Learning filters">
-        <div class="controlGrid">
-          <div class="countryChooser">
-            <div class="chooserHead">
-              <p id="audienceLabel" class="controlLabel">Choose your country</p>
-              <strong id="countryQuestion">Which country are you from?</strong>
-            </div>
-            <div id="profileTabs" class="countryTabs profileTabs" aria-label="Choose country"></div>
-          </div>
-          <div class="learningChooser">
-            <div>
-              <p id="targetLabel" class="controlLabel">Learn</p>
-              <div id="targetTabs" class="targetTabs" aria-label="Choose language to learn"></div>
-            </div>
-            <div>
-              <p id="modeLabel" class="controlLabel">Mode</p>
-              <div class="modeTabs" aria-label="Learning mode">
-                <button id="phrasesModeButton" class="active" type="button">Phrases</button>
-                <button id="lettersModeButton" type="button">Letters</button>
-              </div>
-            </div>
-            <div>
-              <p id="voiceLabel" class="controlLabel">Voice</p>
-              <div class="voiceTabs" aria-label="Choose voice">
-                <button id="femaleVoiceButton" class="active" type="button">Female</button>
-                <button id="maleVoiceButton" type="button">Male</button>
-              </div>
-            </div>
-          </div>
+      <section id="savedView" class="appView savedView" aria-label="Saved stores" hidden>
+        <div class="sectionHead">
+          <p class="eyebrow">wiiInfo Local</p>
+          <h2 id="savedTitle">저장</h2>
         </div>
+        <section id="savedPlaceList" class="placeList" aria-label="Saved store list"></section>
       </section>
 
-      <section class="filterBar" aria-label="Search and categories">
-        <input id="searchInput" type="search" aria-label="Search phrases and letters" placeholder="Search phrase, meaning, or pronunciation" />
-        <div id="categoryTabs" class="tabs"></div>
-        <p class="scrollHint">Swipe sideways for more categories.</p>
-        <label class="toggle">
-          <input id="quizToggle" type="checkbox" />
-          <span id="quizLabel">Show my language first</span>
-        </label>
-      </section>
+      <section id="learnView" class="appView learnView" aria-label="Learn Korean and Korea life info" hidden>
+        <header class="appHeader">
+          <section class="hero">
+            <button id="homeFlagButton" class="flagMark" type="button" aria-label="Reset language selection">
+              <span id="heroFlagEmoji" class="heroFlagEmoji heroSourceFlag flagVisual flag-ko">KR</span>
+              <span class="heroRoute">
+                <span class="heroArrow">→</span>
+                <span id="heroTargetFlagEmoji" class="heroFlagEmoji heroTargetFlag flagVisual flag-th">TH</span>
+              </span>
+            </button>
+            <div class="heroCopy">
+              <p class="eyebrow">Language · Life · Realty</p>
+              <h1>wiiInfo</h1>
+              <p class="brandLine">Info by Wii · Korea info by Wii</p>
+              <p class="subtitle">Choose your language and learn practical phrases, Korea life info, and real estate basics.</p>
+            </div>
+          </section>
+        </header>
 
-      <section class="stats" aria-label="Learning status">
-        <div class="statCard teal">
-          <span id="totalCount">0</span>
-          <small>Items</small>
-        </div>
-        <div class="statCard coral">
-          <span id="favoriteCount">0</span>
-          <small>Saved</small>
-        </div>
-        <div class="statCard yellow">
-          <span id="todayCount">0</span>
-          <small>Today</small>
-        </div>
-      </section>
-
-      <section id="phraseList" class="phraseList" aria-label="Phrase list"></section>
-      <div id="loadMoreWrap" class="loadMoreWrap" hidden>
-        <button id="loadMoreButton" class="loadMoreButton" type="button">Show more</button>
-        <p id="loadMoreMeta" class="loadMoreMeta"></p>
-      </div>
-      <section id="letterList" class="letterList" aria-label="Letter list" hidden></section>
-
-      <section class="infoHub" aria-label="Korea life info">
-        <div id="infoTabs" class="infoTabs" aria-label="Choose life info"></div>
-        <p class="scrollHint">Swipe sideways for more Korea info.</p>
-        <div class="infoPanel">
+        <section class="authStrip" aria-label="Account">
           <div>
-            <p id="infoEyebrow" class="controlLabel">Korea info by Wii</p>
-            <h2 id="infoTitle">Life in Korea</h2>
-            <p id="infoSummary">Check travel, life, housing, and real estate basics in one place.</p>
+            <p id="authStatus" class="authStatus">Guest mode</p>
+            <p id="authSyncStatus" class="authSyncStatus">Saved items stay on this device.</p>
           </div>
-          <div id="infoCards" class="infoCards"></div>
+          <button id="authButton" class="authButton" type="button">Sign in with Google</button>
+        </section>
+
+        <section class="controls" aria-label="Learning filters">
+          <div class="controlGrid">
+            <div class="countryChooser">
+              <div class="chooserHead">
+                <p id="audienceLabel" class="controlLabel">Choose your country</p>
+                <strong id="countryQuestion">Which country are you from?</strong>
+              </div>
+              <div id="profileTabs" class="countryTabs profileTabs" aria-label="Choose country"></div>
+            </div>
+            <div class="learningChooser">
+              <div>
+                <p id="targetLabel" class="controlLabel">Learn</p>
+                <div id="targetTabs" class="targetTabs" aria-label="Choose language to learn"></div>
+              </div>
+              <div>
+                <p id="modeLabel" class="controlLabel">Mode</p>
+                <div class="modeTabs" aria-label="Learning mode">
+                  <button id="phrasesModeButton" class="active" type="button">Phrases</button>
+                  <button id="lettersModeButton" type="button">Letters</button>
+                </div>
+              </div>
+              <div>
+                <p id="voiceLabel" class="controlLabel">Voice</p>
+                <div class="voiceTabs" aria-label="Choose voice">
+                  <button id="femaleVoiceButton" class="active" type="button">Female</button>
+                  <button id="maleVoiceButton" type="button">Male</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="filterBar" aria-label="Search and categories">
+          <input id="searchInput" type="search" aria-label="Search phrases and letters" placeholder="Search phrase, meaning, or pronunciation" />
+          <div id="categoryTabs" class="tabs"></div>
+          <p class="scrollHint">Swipe sideways for more categories.</p>
+          <label class="toggle">
+            <input id="quizToggle" type="checkbox" />
+            <span id="quizLabel">Show my language first</span>
+          </label>
+        </section>
+
+        <section class="stats" aria-label="Learning status">
+          <div class="statCard teal">
+            <span id="totalCount">0</span>
+            <small>Items</small>
+          </div>
+          <div class="statCard coral">
+            <span id="favoriteCount">0</span>
+            <small>Saved</small>
+          </div>
+          <div class="statCard yellow">
+            <span id="todayCount">0</span>
+            <small>Today</small>
+          </div>
+        </section>
+
+        <section id="phraseList" class="phraseList" aria-label="Phrase list"></section>
+        <div id="loadMoreWrap" class="loadMoreWrap" hidden>
+          <button id="loadMoreButton" class="loadMoreButton" type="button">Show more</button>
+          <p id="loadMoreMeta" class="loadMoreMeta"></p>
         </div>
+        <section id="letterList" class="letterList" aria-label="Letter list" hidden></section>
+
+        <section class="infoHub" aria-label="Korea life info">
+          <div id="infoTabs" class="infoTabs" aria-label="Choose life info"></div>
+          <p class="scrollHint">Swipe sideways for more Korea info.</p>
+          <div class="infoPanel">
+            <div>
+              <p id="infoEyebrow" class="controlLabel">Korea info by Wii</p>
+              <h2 id="infoTitle">Life in Korea</h2>
+              <p id="infoSummary">Check travel, life, housing, and real estate basics in one place.</p>
+            </div>
+            <div id="infoCards" class="infoCards"></div>
+          </div>
+        </section>
+
+        <footer class="appFooter">
+          <a href="./privacy.html">Privacy</a>
+          <a href="https://github.com/wiikang84/wiithai/issues" rel="noopener noreferrer">Feedback</a>
+          <span>wiiInfo</span>
+        </footer>
       </section>
 
-      <footer class="appFooter">
-        <a href="./privacy.html">Privacy</a>
-        <a href="https://github.com/wiikang84/wiithai/issues" rel="noopener noreferrer">Feedback</a>
-        <span>wiiInfo</span>
-      </footer>
+      <section id="meView" class="appView meView" aria-label="My info" hidden>
+        <div class="sectionHead">
+          <p class="eyebrow">wiiInfo</p>
+          <h2 id="meTitle">wiiInfo 설정</h2>
+          <p id="meText">언어, 로그인, 저장 항목은 기존 wiiInfo 기능과 함께 사용됩니다.</p>
+        </div>
+        <div class="mePanel">
+          <div class="authStrip compactAuth" aria-label="Account">
+            <div>
+              <p id="meAuthStatus" class="authStatus">Guest mode</p>
+              <p id="meAuthSyncStatus" class="authSyncStatus">Saved items stay on this device.</p>
+            </div>
+            <button id="meAuthButton" class="authButton" type="button">Sign in with Google</button>
+          </div>
+          <button id="ownerRegisterButton" class="ownerRegisterButton" type="button">우리 가게 등록 신청</button>
+          <p id="ownerRegisterNote" class="ownerRegisterNote">초기에는 무료 등록, 무료 노출, 수수료 없이 운영합니다.</p>
+        </div>
+      </section>
     </main>
+
+    <nav class="bottomNav" aria-label="wiiInfo navigation">
+      <button class="active" type="button" data-app-tab="nearby">⌂ <span>내 주변</span></button>
+      <button type="button" data-app-tab="saved">♡ <span>저장</span></button>
+      <button type="button" data-app-tab="learn">文 <span>배우기</span></button>
+      <button type="button" data-app-tab="me">☻ <span>내 정보</span></button>
+    </nav>
+
+    <div id="placeDetailOverlay" class="placeDetailOverlay" hidden>
+      <section class="placeDetail" role="dialog" aria-modal="true" aria-labelledby="placeDetailTitle">
+        <button id="placeDetailClose" class="placeDetailClose" type="button" aria-label="Close details">×</button>
+        <div id="placeDetailHero" class="placeDetailHero"></div>
+        <div class="placeDetailBody">
+          <p id="placeDetailMeta" class="placeDetailMeta"></p>
+          <h2 id="placeDetailTitle"></h2>
+          <p id="placeDetailItems" class="placeDetailItems"></p>
+          <div id="placeDetailRows" class="placeDetailRows"></div>
+          <div id="placeDetailCoupon" class="placeDetailCoupon" hidden></div>
+          <div id="placeDetailActions" class="placeDetailActions"></div>
+        </div>
+      </section>
+    </div>
 
     <template id="phraseCardTemplate">
       <article class="phraseCard">
@@ -168,13 +246,14 @@
       </article>
     </template>
 
-    <script src="./vendor/firebase/10.12.5/firebase-app-compat.js?v=20260611-01"></script>
-    <script src="./vendor/firebase/10.12.5/firebase-auth-compat.js?v=20260611-01"></script>
-    <script src="./vendor/firebase/10.12.5/firebase-firestore-compat.js?v=20260611-01"></script>
-    <script src="./vendor/firebase/10.12.5/firebase-analytics-compat.js?v=20260611-01"></script>
-    <script src="./firebase-config.js?v=20260611-01"></script>
-    <script src="./phrases.js?v=20260611-01"></script>
-    <script src="./multilingual-data.js?v=20260611-01"></script>
-    <script src="./app.js?v=20260611-01"></script>
+    <script src="./vendor/firebase/10.12.5/firebase-app-compat.js?v=20260618-01"></script>
+    <script src="./vendor/firebase/10.12.5/firebase-auth-compat.js?v=20260618-01"></script>
+    <script src="./vendor/firebase/10.12.5/firebase-firestore-compat.js?v=20260618-01"></script>
+    <script src="./vendor/firebase/10.12.5/firebase-analytics-compat.js?v=20260618-01"></script>
+    <script src="./firebase-config.js?v=20260618-01"></script>
+    <script src="./phrases.js?v=20260618-01"></script>
+    <script src="./multilingual-data.js?v=20260618-01"></script>
+    <script src="./data/places.js?v=20260618-01"></script>
+    <script src="./app.js?v=20260618-01"></script>
   </body>
 </html>
