@@ -1224,6 +1224,17 @@
     }[char]));
   }
 
+  // [2026-06-18 보안] href/src 출력용 URL 스킴 화이트리스트.
+  // http(s)/tel/mailto/상대경로(/, ./, #, ?)만 허용하고 javascript:·data: 등 위험 스킴은 빈 문자열로 차단.
+  // (현재 데이터는 정적 시드지만, 점포/점주 데이터를 Firestore 등 외부에서 받기 시작하면 필수 방어선)
+  function safeUrl(value) {
+    const raw = String(value || "").trim();
+    if (!raw) return "";
+    if (/^(\/|\.|#|\?)/.test(raw)) return raw;
+    if (/^(https?:|tel:|mailto:)/i.test(raw)) return raw;
+    return "";
+  }
+
   function detailText(key, replacements = {}) {
     return Object.entries(replacements).reduce((text, [name, value]) => text.replace(`{${name}}`, value), detailLabel(key));
   }
@@ -1324,7 +1335,11 @@
       if (action.type === "copy") {
         return `<button type="button" class="detailAction copyAction" data-action-index="${index}">${label}</button>`;
       }
-      const href = action.type === "tel" ? `tel:${action.value}` : action.href;
+      // [2026-06-18 보안] tel 값은 숫자/+/-/공백만 남기고, link href는 safeUrl로 스킴 검증
+      // const href = action.type === "tel" ? `tel:${action.value}` : action.href;
+      const href = action.type === "tel"
+        ? `tel:${String(action.value || "").replace(/[^0-9+\-\s]/g, "")}`
+        : safeUrl(action.href);
       return `<a class="detailAction ${action.type === "tel" ? "callAction" : ""}" href="${escapeHtml(href)}" ${action.type === "link" ? "target=\"_blank\" rel=\"noopener\"" : ""}>${label}</a>`;
     }).join("");
     actions.hidden = !(detail.actions || []).length;
