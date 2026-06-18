@@ -563,7 +563,7 @@ button {
   display: grid;
   place-items: end center;
   padding: 18px;
-  background: rgba(25, 33, 46, 0.62);
+  background: rgba(20, 14, 9, 0.58);
 }
 
 .placeDetail {
@@ -593,12 +593,11 @@ button {
 }
 
 .placeDetailHero {
-  height: 180px;
+  aspect-ratio: 16 / 9;
+  height: auto;
   display: grid;
   place-items: center;
-  background:
-    linear-gradient(135deg, rgba(251, 101, 20, 0.2), rgba(21, 166, 110, 0.17)),
-    #f8f8f6;
+  background: linear-gradient(135deg, var(--accent-wash), var(--surface-soft));
   font-size: 74px;
 }
 
@@ -610,9 +609,9 @@ button {
 
 .placeDetailMeta {
   margin: 0;
-  color: #b94708;
+  color: var(--accent-ink);
   font-size: 13px;
-  font-weight: 900;
+  font-weight: var(--w-med);
 }
 
 .placeDetail h2 {
@@ -624,9 +623,9 @@ button {
 
 .placeDetailItems {
   margin: 0;
-  color: #3e4753;
+  color: var(--text-secondary);
   font-size: 15px;
-  font-weight: 800;
+  font-weight: var(--w-reg);
   line-height: 1.5;
 }
 
@@ -1683,7 +1682,7 @@ h1 {
   justify-content: center;
   gap: 8px;
   padding: 0 16px;
-  border: 1px solid rgba(36, 52, 71, 0.12);
+  border: 1px solid var(--line);
   border-radius: 999px;
   background: var(--surface);
   color: var(--ink);
