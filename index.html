@@ -20,7 +20,7 @@
     <link rel="manifest" href="./manifest.webmanifest" />
     <meta name="theme-color" content="#00a7a5" />
     <link rel="apple-touch-icon" href="./icons/icon-192.png" />
-    <link rel="stylesheet" href="./styles.css?v=20260618-09" />
+    <link rel="stylesheet" href="./styles.css?v=20260618-10" />
   </head>
   <body>
     <!-- [2026-06-18 P1-b] 첫 방문 언어 선택 온보딩. 저장된 언어가 없고 딥링크(?from=)도 없을 때만 표시.
@@ -210,10 +210,22 @@
     </main>
 
     <nav class="bottomNav" aria-label="wiiInfo navigation">
-      <button class="active" type="button" data-app-tab="nearby">⌂ <span>내 주변</span></button>
-      <button type="button" data-app-tab="saved">♡ <span>저장</span></button>
-      <button type="button" data-app-tab="learn">文 <span>배우기</span></button>
-      <button type="button" data-app-tab="me">☻ <span>내 정보</span></button>
+      <button class="active" type="button" data-app-tab="nearby">
+        <svg class="navIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.5 12 3l9 7.5"/><path d="M5 9.5V20a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V9.5"/></svg>
+        <span>내 주변</span>
+      </button>
+      <button type="button" data-app-tab="saved">
+        <svg class="navIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M20.8 6.6a5.5 5.5 0 0 0-7.8 0L12 7.6l-1-1a5.5 5.5 0 1 0-7.8 7.8l1 1L12 23l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8Z"/></svg>
+        <span>저장</span>
+      </button>
+      <button type="button" data-app-tab="learn">
+        <svg class="navIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M2 5.5A2.5 2.5 0 0 1 4.5 3H11v17H4.5A2.5 2.5 0 0 0 2 21.5V5.5Z"/><path d="M22 5.5A2.5 2.5 0 0 0 19.5 3H13v17h6.5a2.5 2.5 0 0 1 2.5 2.5V5.5Z"/></svg>
+        <span>배우기</span>
+      </button>
+      <button type="button" data-app-tab="me">
+        <svg class="navIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg>
+        <span>내 정보</span>
+      </button>
     </nav>
 
     <div id="placeDetailOverlay" class="placeDetailOverlay" hidden>
@@ -265,14 +277,14 @@
       </article>
     </template>
 
-    <script src="./vendor/firebase/10.12.5/firebase-app-compat.js?v=20260618-09"></script>
-    <script src="./vendor/firebase/10.12.5/firebase-auth-compat.js?v=20260618-09"></script>
-    <script src="./vendor/firebase/10.12.5/firebase-firestore-compat.js?v=20260618-09"></script>
-    <script src="./vendor/firebase/10.12.5/firebase-analytics-compat.js?v=20260618-09"></script>
-    <script src="./firebase-config.js?v=20260618-09"></script>
-    <script src="./phrases.js?v=20260618-09"></script>
-    <script src="./multilingual-data.js?v=20260618-09"></script>
-    <script src="./data/places.js?v=20260618-09"></script>
-    <script src="./app.js?v=20260618-09"></script>
+    <script src="./vendor/firebase/10.12.5/firebase-app-compat.js?v=20260618-10"></script>
+    <script src="./vendor/firebase/10.12.5/firebase-auth-compat.js?v=20260618-10"></script>
+    <script src="./vendor/firebase/10.12.5/firebase-firestore-compat.js?v=20260618-10"></script>
+    <script src="./vendor/firebase/10.12.5/firebase-analytics-compat.js?v=20260618-10"></script>
+    <script src="./firebase-config.js?v=20260618-10"></script>
+    <script src="./phrases.js?v=20260618-10"></script>
+    <script src="./multilingual-data.js?v=20260618-10"></script>
+    <script src="./data/places.js?v=20260618-10"></script>
+    <script src="./app.js?v=20260618-10"></script>
   </body>
 </html>
