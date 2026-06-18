@@ -1,19 +1,89 @@
 :root {
-  color-scheme: light;
-  font-family: "Segoe UI", "Noto Sans Thai", "Noto Sans KR", Arial, sans-serif;
-  --bg: #f6f7f9;
+  color-scheme: light dark;
+  /* Pretendard 우선(로드 시) → 없으면 시스템/Noto 폴백 */
+  font-family: "Pretendard Variable", Pretendard, -apple-system, "Segoe UI", "Noto Sans KR", "Noto Sans Thai", "Noto Sans SC", "Noto Sans JP", Arial, sans-serif;
+
+  /* === 하이브리드 디자인 토큰 (B 웜로컬 베이스 + A 미니멀 규율) 2026-06-18 === */
+  /* 배경/서피스 — 크림 톤 */
+  --bg: #fbf7f2;
   --surface: #ffffff;
-  --surface-strong: #fff2d8;
-  --text: #19212e;
-  --muted: #6d7481;
-  --line: #eadfce;
-  --accent: #00a7a5;
-  --accent-dark: #087d7b;
-  --ink: #243447;
-  --coral: #ff6b5f;
-  --yellow: #ffc857;
-  --green: #2bb673;
-  --shadow: 0 14px 36px rgba(36, 52, 71, 0.12);
+  --surface-strong: #fdf3ea;   /* 기존명 유지: 부드러운 강조 면 */
+  --surface-soft: #fdf3ea;
+  --surface-sunk: #f4efe8;
+
+  /* 텍스트 — 따뜻한 브라운 4단계 */
+  --text: #2b2017;
+  --text-secondary: #6c5f52;
+  --muted: #9a8d7e;
+  --faint: #c2b6a8;
+  --ink: #2b2017;              /* 기존명 유지 → text와 동일 */
+
+  /* 라인 — 따뜻한 경계 */
+  --line: #efe6da;
+  --line-strong: #e3d8c9;
+
+  /* 액센트 — 테라코타 단일 */
+  --accent: #e8602c;
+  --accent-dark: #c64d1d;      /* 기존명 유지 → press */
+  --accent-press: #c64d1d;
+  --accent-ink: #c64d1d;
+  --accent-wash: #fdeee6;
+  --coral: #e8602c;            /* 기존 coral → 액센트로 통일 */
+
+  /* 상태색 — 기능 표시 전용(장식 아님) */
+  --positive: #4f9d69;
+  --green: #4f9d69;            /* 기존명 유지 */
+  --warn: #f2a541;
+  --yellow: #f2a541;           /* 기존명 유지 */
+  --danger: #d65745;
+
+  /* 그림자 — 따뜻하고 옅게 */
+  --shadow: 0 4px 16px rgba(80, 55, 35, 0.09);   /* 기존명 유지 → md급 */
+  --shadow-sm: 0 1px 2px rgba(80, 55, 35, 0.05), 0 1px 3px rgba(80, 55, 35, 0.06);
+  --shadow-md: 0 4px 16px rgba(80, 55, 35, 0.09);
+  --shadow-lg: 0 16px 40px rgba(80, 55, 35, 0.14);
+
+  /* 라운드 */
+  --r-sm: 10px; --r-md: 14px; --r-lg: 18px; --r-pill: 999px;
+
+  /* 굵기 3단(A 규율: 900 떡칠 → 3단계로) */
+  --w-reg: 400; --w-med: 600; --w-bold: 800;
+
+  /* 스페이싱(4px 베이스) */
+  --s1: 4px; --s2: 8px; --s3: 12px; --s4: 16px; --s5: 24px; --s6: 32px;
+}
+
+/* 따뜻한 다크모드(B) — 순흑 금지, 차콜 브라운 */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #1c1714;
+    --surface: #251e1a;
+    --surface-strong: #2e251f;
+    --surface-soft: #2e251f;
+    --surface-sunk: #201a16;
+    --text: #f3e9df;
+    --text-secondary: #c0b1a3;
+    --muted: #8a7a6c;
+    --faint: #6b5d50;
+    --ink: #f3e9df;
+    --line: #3a2f27;
+    --line-strong: #473a30;
+    --accent: #ff7a45;
+    --accent-dark: #ff8d5e;
+    --accent-press: #ff8d5e;
+    --accent-ink: #ff8d5e;
+    --accent-wash: #3a261c;
+    --coral: #ff7a45;
+    --positive: #6cb583;
+    --green: #6cb583;
+    --warn: #f4b860;
+    --yellow: #f4b860;
+    --danger: #e87361;
+    --shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
+    --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.5);
+    --shadow-lg: 0 16px 40px rgba(0, 0, 0, 0.6);
+  }
 }
 
 * {
