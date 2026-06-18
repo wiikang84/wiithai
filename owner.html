@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>wiiInfo · 내 가게 관리 (사장님)</title>
+    <meta name="robots" content="noindex" />
+    <link rel="stylesheet" href="./styles.css?v=20260618-25" />
+    <style>
+      /* [2026-06-18 T11] 사장님(owner) 매장 관리 — 인증된 본인 가게의 운영필드만 편집. 한국어, 타이핑 최소 */
+      .ownerWrap { width: min(640px, 100%); margin: 0 auto; padding: 24px 16px 80px; display: grid; gap: 16px; }
+      .oCard { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r-lg); box-shadow: var(--shadow-sm); padding: 20px; }
+      .oCard h2 { margin: 0 0 4px; font-size: 20px; font-weight: var(--w-bold); color: var(--text); }
+      .oCard p.sub { margin: 0 0 14px; font-size: 13px; color: var(--muted); }
+      .primaryBtn { min-height: 50px; border: 0; border-radius: var(--r-md); background: var(--accent); color: #fff; font-weight: var(--w-bold); font-size: 16px; cursor: pointer; width: 100%; }
+      .primaryBtn:disabled { background: var(--surface-sunk); color: var(--faint); }
+      .storeRow { display: flex; justify-content: space-between; align-items: center; gap: 10px; padding: 14px 0; border-bottom: 1px solid var(--line); cursor: pointer; }
+      .storeRow:last-child { border-bottom: 0; }
+      .storeRow strong { font-size: 16px; color: var(--text); }
+      .storeRow small { color: var(--muted); }
+      .field { display: grid; gap: 6px; margin-bottom: 14px; }
+      .field label { font-size: 13px; font-weight: var(--w-med); color: var(--text-secondary); }
+      .field input { min-height: 46px; padding: 0 13px; border: 1px solid var(--line); border-radius: var(--r-md); background: var(--surface-sunk); color: var(--text); font: inherit; }
+      .field input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-wash); outline: none; }
+      .closedRow { display: flex; align-items: center; justify-content: space-between; padding: 16px; border: 1px solid var(--line); border-radius: var(--r-md); background: var(--surface-sunk); margin-bottom: 14px; }
+      .closedRow strong { font-size: 16px; color: var(--text); }
+      .switch { position: relative; width: 56px; height: 32px; flex: 0 0 auto; }
+      .switch input { opacity: 0; width: 0; height: 0; }
+      .slider { position: absolute; inset: 0; background: var(--line-strong); border-radius: 999px; transition: 0.2s; }
+      .slider::before { content: ""; position: absolute; width: 26px; height: 26px; left: 3px; top: 3px; background: #fff; border-radius: 50%; transition: 0.2s; }
+      .switch input:checked + .slider { background: var(--danger); }
+      .switch input:checked + .slider::before { transform: translateX(24px); }
+      .readonly { font-size: 13px; color: var(--muted); margin: 0 0 14px; }
+      .notice { font-size: 13px; color: var(--text-secondary); line-height: 1.6; }
+      .ghostBtn { min-height: 40px; padding: 0 14px; border: 1px solid var(--line); border-radius: var(--r-pill); background: var(--surface); color: var(--text-secondary); cursor: pointer; font-weight: var(--w-med); }
+      .hidden { display: none !important; }
+      .roleBadge { display: inline-flex; align-items: center; padding: 4px 11px; border-radius: var(--r-pill); font-size: 12px; font-weight: var(--w-med); background: var(--accent-wash); color: var(--accent-ink); }
+    </style>
+  </head>
+  <body>
+    <main class="ownerWrap">
+      <div class="oCard">
+        <h2>내 가게 관리 <span class="roleBadge">🏪 사장님</span></h2>
+        <p class="sub">인증된 본인 가게의 영업시간·휴무·사진을 직접 관리합니다. 상호·주소는 운영자만 변경할 수 있어요.</p>
+        <div id="authArea">
+          <button id="loginBtn" class="primaryBtn">Google 로그인</button>
+          <p id="authMsg" class="notice"></p>
+        </div>
+      </div>
+
+      <div id="storesCard" class="oCard hidden">
+        <h2>내 가게</h2>
+        <div id="myStores"></div>
+      </div>
+
+      <div id="editCard" class="oCard hidden">
+        <h2 id="editTitle"></h2>
+        <p id="editAddr" class="readonly"></p>
+        <div class="closedRow">
+          <strong>오늘 임시휴무</strong>
+          <label class="switch"><input type="checkbox" id="e_closed" /><span class="slider"></span></label>
+        </div>
+        <div class="field"><label>영업시간</label><input id="e_hours" placeholder="예: 평일 09:00~21:00, 일요일 휴무" /></div>
+        <div class="field"><label>대표 사진 URL</label><input id="e_photo" placeholder="https://... (가게/음식 사진)" /></div>
+        <button id="e_save" class="primaryBtn">변경사항 저장</button>
+        <p id="e_msg" class="notice"></p>
+        <p style="margin-top:14px;"><button id="backBtn" class="ghostBtn">← 가게 목록</button></p>
+      </div>
+    </main>
+
+    <script src="./vendor/firebase/10.12.5/firebase-app-compat.js?v=20260618-25"></script>
+    <script src="./vendor/firebase/10.12.5/firebase-auth-compat.js?v=20260618-25"></script>
+    <script src="./vendor/firebase/10.12.5/firebase-firestore-compat.js?v=20260618-25"></script>
+    <script src="./firebase-config.js?v=20260618-25"></script>
+    <script>
+      (function () {
+        const loginBtn = document.getElementById("loginBtn");
+        const authMsg = document.getElementById("authMsg");
+        const storesCard = document.getElementById("storesCard");
+        const editCard = document.getElementById("editCard");
+        const myStores = document.getElementById("myStores");
+        let db = null, auth = null, currentUser = null, currentStoreId = null;
+
+        try { firebase.initializeApp(window.WIIINFO_FIREBASE_CONFIG); auth = firebase.auth(); db = firebase.firestore(); }
+        catch (e) { authMsg.textContent = "Firebase 초기화 실패: " + e.message; }
+
+        function esc(s) { return String(s == null ? "" : s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c])); }
+
+        loginBtn.addEventListener("click", () => {
+          const p = new firebase.auth.GoogleAuthProvider();
+          p.setCustomParameters({ prompt: "select_account" });
+          auth.signInWithPopup(p).catch((err) => { authMsg.textContent = "로그인 실패: " + err.message; });
+        });
+
+        auth && auth.onAuthStateChanged((user) => {
+          currentUser = user;
+          if (!user) { authMsg.textContent = "사장님 계정으로 로그인하세요."; storesCard.classList.add("hidden"); editCard.classList.add("hidden"); loginBtn.classList.remove("hidden"); return; }
+          authMsg.textContent = `${user.email} 로그인됨`;
+          loginBtn.classList.add("hidden");
+          loadMyStores();
+        });
+
+        function loadMyStores() {
+          storesCard.classList.remove("hidden");
+          editCard.classList.add("hidden");
+          myStores.innerHTML = "<p class='notice'>불러오는 중...</p>";
+          db.collection("stores").where("ownerUid", "==", currentUser.uid).where("ownerStatus", "==", "verified").get().then((snap) => {
+            if (snap.empty) { myStores.innerHTML = "<p class='notice'>인증된 내 가게가 없습니다. 메인 앱 '내 정보 → 우리 가게 등록 신청'에서 신청하고 운영자 승인을 받으세요.</p>"; return; }
+            myStores.innerHTML = snap.docs.map((doc) => {
+              const d = doc.data();
+              return `<div class="storeRow" data-edit="${esc(doc.id)}"><div><strong>${esc((d.name && d.name.ko) || "(이름없음)")}</strong><br><small>${esc((d.address && d.address.ko) || "")}</small></div><span class="ghostBtn">관리 ›</span></div>`;
+            }).join("");
+            myStores.querySelectorAll("[data-edit]").forEach((row) => row.addEventListener("click", () => openEdit(row.dataset.edit)));
+          }).catch((err) => { myStores.innerHTML = `<p class='notice'>로드 실패: ${esc(err.message)}</p>`; });
+        }
+
+        function openEdit(storeId) {
+          db.collection("stores").doc(storeId).get().then((doc) => {
+            const d = doc.data();
+            currentStoreId = storeId;
+            document.getElementById("editTitle").textContent = (d.name && d.name.ko) || "내 가게";
+            document.getElementById("editAddr").textContent = "📍 " + ((d.address && d.address.ko) || "") + " (주소·상호 변경은 운영자에게)";
+            document.getElementById("e_closed").checked = !!(d.holidayClosed && d.holidayClosed.active);
+            document.getElementById("e_hours").value = (d.hours && d.hours.ko) || "";
+            document.getElementById("e_photo").value = d.photo || "";
+            document.getElementById("e_msg").textContent = "";
+            storesCard.classList.add("hidden");
+            editCard.classList.remove("hidden");
+            window.scrollTo({ top: 0 });
+          });
+        }
+
+        document.getElementById("backBtn").addEventListener("click", loadMyStores);
+
+        document.getElementById("e_save").addEventListener("click", () => {
+          if (!currentStoreId) return;
+          const msg = document.getElementById("e_msg");
+          msg.textContent = "저장 중...";
+          const update = {
+            holidayClosed: { active: document.getElementById("e_closed").checked },
+            hours: { ko: document.getElementById("e_hours").value.trim() },
+            photo: document.getElementById("e_photo").value.trim() || null,
+            updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+          };
+          db.collection("stores").doc(currentStoreId).update(update)
+            .then(() => { msg.textContent = "✓ 저장됐어요. 손님 화면에 곧 반영됩니다."; })
+            .catch((err) => { msg.textContent = "저장 실패: " + err.message; });
+        });
+      })();
+    </script>
+  </body>
+</html>

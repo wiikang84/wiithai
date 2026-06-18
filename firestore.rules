@@ -15,7 +15,19 @@ service cloud.firestore {
     // [2026-06-18] master 운영자 점포 등록(store-admin.html). 정식 단계에서 Custom Claims로 승격 예정
     match /stores/{storeId} {
       allow read: if true;
-      allow create, update, delete: if isMaster();
+      allow create, delete: if isMaster();
+      // [2026-06-18 T10] master는 전체, 인증된 owner는 자기 가게의 운영필드만
+      allow update: if isMaster() || (isVerifiedOwner(storeId) && onlyOwnerEditableFields());
+    }
+
+    function isVerifiedOwner(storeId) {
+      return request.auth != null
+        && resource.data.ownerUid == request.auth.uid
+        && resource.data.ownerStatus == "verified";
+    }
+    function onlyOwnerEditableFields() {
+      return request.resource.data.diff(resource.data).affectedKeys()
+        .hasOnly(["hours", "items", "photo", "holidayClosed", "updatedAt"]);
     }
 
     // [2026-06-18 T8] 사장님 등록 신청. 본인만 create(pending), 본인/운영자 read, 운영자만 처리
