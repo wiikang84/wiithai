@@ -1,12 +1,12 @@
 {
-  "name": "wiiInfo — Korea info & language learning",
+  "name": "wiiInfo — Local food & shops in your language",
   "short_name": "wiiInfo",
-  "description": "Learn practical phrases and Korea life info in 7 languages. Info by Wii.",
+  "description": "Find local restaurants, marts and shops near you in your own language. For foreigners living in Korea. 7 languages.",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
-  "background_color": "#f6f7f9",
-  "theme_color": "#00a7a5",
+  "background_color": "#fbf7f2",
+  "theme_color": "#e8602c",
   "icons": [
     { "src": "./icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
     { "src": "./icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
