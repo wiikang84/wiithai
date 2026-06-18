@@ -1,5 +1,5 @@
 (async function () {
-  const ASSET_VERSION = "20260618-24";
+  const ASSET_VERSION = "20260618-25";
   const LANGUAGES = window.WIIINFO_LANGUAGES || {};
   const LANGUAGE_NAMES = window.WIIINFO_LANGUAGE_NAMES || {};
   const PROFILES = window.WIIINFO_LEARNER_PROFILES || [];
@@ -1894,7 +1894,8 @@
           emoji: d.emoji || emojiByCat[d.category] || "🛒",
           name: d.name || {}, address: d.address || {}, lat: d.lat, lng: d.lng,
           phone: d.phone || "", hours: d.hours || {}, items: d.items || {}, coupon: d.coupon || null,
-          photo: d.photo || null
+          photo: d.photo || null,
+          ownerUid: d.ownerUid || null, ownerStatus: d.ownerStatus || null
         });
       });
       if (state.appTab === "nearby") renderPlaces();

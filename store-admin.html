@@ -70,6 +70,12 @@
         <p id="saveMsg" class="notice"></p>
       </div>
 
+      <div id="claimCard" class="adminCard hidden">
+        <h2>사장님 등록 신청 <span class="pill">심사</span></h2>
+        <p class="sub">승인하면 신청자(owner)가 해당 가게를 직접 관리할 수 있습니다. 가게명이 등록 점포와 일치하면 자동 연결됩니다.</p>
+        <div id="claimList"></div>
+      </div>
+
       <div id="listCard" class="adminCard hidden">
         <h2>등록된 점포</h2>
         <div id="storeList"></div>
@@ -91,6 +97,8 @@
         const saveBtn = document.getElementById("saveBtn");
         const saveMsg = document.getElementById("saveMsg");
         const storeList = document.getElementById("storeList");
+        const claimCard = document.getElementById("claimCard");
+        const claimList = document.getElementById("claimList");
         let db = null, auth = null, currentUser = null;
 
         try {
@@ -111,13 +119,15 @@
 
         auth && auth.onAuthStateChanged((user) => {
           currentUser = user;
-          if (!user) { authMsg.textContent = "운영자 계정으로 로그인하세요."; formCard.classList.add("hidden"); listCard.classList.add("hidden"); loginBtn.classList.remove("hidden"); return; }
-          if (!isMaster(user)) { authMsg.textContent = `${user.email} 은(는) 운영자 권한이 없습니다.`; formCard.classList.add("hidden"); listCard.classList.add("hidden"); return; }
+          if (!user) { authMsg.textContent = "운영자 계정으로 로그인하세요."; formCard.classList.add("hidden"); listCard.classList.add("hidden"); claimCard.classList.add("hidden"); loginBtn.classList.remove("hidden"); return; }
+          if (!isMaster(user)) { authMsg.textContent = `${user.email} 은(는) 운영자 권한이 없습니다.`; formCard.classList.add("hidden"); listCard.classList.add("hidden"); claimCard.classList.add("hidden"); return; }
           authMsg.textContent = `${user.email} (운영자) 로그인됨`;
           loginBtn.classList.add("hidden");
           formCard.classList.remove("hidden");
           listCard.classList.remove("hidden");
+          claimCard.classList.remove("hidden");
           loadStores();
+          loadClaims();
         });
 
         function loadStores() {
@@ -133,6 +143,40 @@
               db.collection("stores").doc(b.dataset.del).delete().then(loadStores);
             }));
           }).catch((err) => { storeList.innerHTML = `<p class='notice'>목록 로드 실패: ${esc(err.message)}</p>`; });
+        }
+
+        function loadClaims() {
+          claimList.innerHTML = "<p class='notice'>불러오는 중...</p>";
+          db.collection("ownerClaims").where("status", "==", "pending").limit(50).get().then((snap) => {
+            if (snap.empty) { claimList.innerHTML = "<p class='notice'>대기 중인 신청이 없습니다.</p>"; return; }
+            claimList.innerHTML = snap.docs.map((doc) => {
+              const c = doc.data();
+              return `<div class="storeRow"><div><strong>${esc(c.storeName || "(가게명 없음)")}</strong><br><small>${esc(c.applicantName || "")} · ${esc(c.phone || "")} · ${esc(c.applicantEmail || "")}</small></div><div style="display:flex;gap:6px;"><button class="primaryBtn" style="min-height:38px;padding:0 14px;width:auto;" data-approve="${esc(doc.id)}">승인</button><button class="ghostBtn" data-reject="${esc(doc.id)}">반려</button></div></div>`;
+            }).join("");
+            claimList.querySelectorAll("[data-approve]").forEach((b) => b.addEventListener("click", () => approveClaim(b.dataset.approve)));
+            claimList.querySelectorAll("[data-reject]").forEach((b) => b.addEventListener("click", () => rejectClaim(b.dataset.reject)));
+          }).catch((err) => { claimList.innerHTML = `<p class='notice'>신청 로드 실패: ${esc(err.message)}</p>`; });
+        }
+
+        async function approveClaim(claimId) {
+          try {
+            const claimDoc = await db.collection("ownerClaims").doc(claimId).get();
+            const c = claimDoc.data();
+            // 가게명이 등록 점포와 일치하면 ownerUid 자동 연결 + ownerStatus verified
+            const matched = await db.collection("stores").where("name.ko", "==", c.storeName).limit(1).get();
+            if (!matched.empty) {
+              await matched.docs[0].ref.update({ ownerUid: c.uid, ownerStatus: "verified" });
+            }
+            await db.collection("ownerClaims").doc(claimId).update({ status: "approved" });
+            alert(matched.empty ? "승인했습니다. (일치하는 등록 점포가 없어 자동 연결은 안 됨 — 점포 먼저 등록 후 다시 연결하세요)" : "승인 + 가게 소유권 연결 완료. 이제 신청자가 사장님으로 관리할 수 있습니다.");
+            loadClaims();
+          } catch (err) { alert("승인 실패: " + err.message); }
+        }
+
+        async function rejectClaim(claimId) {
+          if (!confirm("이 신청을 반려할까요?")) return;
+          try { await db.collection("ownerClaims").doc(claimId).update({ status: "rejected" }); loadClaims(); }
+          catch (err) { alert("반려 실패: " + err.message); }
         }
 
         saveBtn.addEventListener("click", () => {
