@@ -1,5 +1,5 @@
 (async function () {
-  const ASSET_VERSION = "20260619-03";
+  const ASSET_VERSION = "20260619-04";
   const LANGUAGES = window.WIIINFO_LANGUAGES || {};
   const LANGUAGE_NAMES = window.WIIINFO_LANGUAGE_NAMES || {};
   const PROFILES = window.WIIINFO_LEARNER_PROFILES || [];
@@ -882,9 +882,11 @@
     const place = PLACES.find((item) => item.id === placeId);
     if (!place || !placeDetailOverlay) return;
     const saved = state.savedPlaceIds.has(place.id);
+    // [2026-06-19] 길찾기: 좌표 있으면 좌표 목적지, 없으면(수집 데이터) 한국어 주소로 검색 — 이름만으론 동명 가게 오인. 주소 없으면 이름.
+    const koAddr = (place.address && place.address.ko) || localizedValue(place.address) || "";
     const routeUrl = place.lat && place.lng
       ? `https://map.kakao.com/link/to/${encodeURIComponent(localizedValue(place.name))},${place.lat},${place.lng}`
-      : `https://map.kakao.com/link/search/${encodeURIComponent(localizedValue(place.name))}`;
+      : `https://map.kakao.com/link/search/${encodeURIComponent(koAddr || localizedValue(place.name))}`;
     const dBadgeClass = place.source === "demo-seed" ? "placeBadge--demo" : place.verified ? "placeBadge--ok" : "placeBadge--check";
     const dBadge = place.source === "demo-seed" ? "DEMO" : place.verified ? placeUi("verified") : placeUi("needCheck");
     const dPhoto = place.photo ? `<img class="placePhotoImg" src="${escapeHtml(safeUrl(place.photo))}" alt="${escapeHtml(localizedValue(place.name))}" loading="lazy" />` : escapeHtml(place.emoji || "🛒");
