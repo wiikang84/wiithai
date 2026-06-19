@@ -1,5 +1,5 @@
 (async function () {
-  const ASSET_VERSION = "20260619-02";
+  const ASSET_VERSION = "20260619-03";
   const LANGUAGES = window.WIIINFO_LANGUAGES || {};
   const LANGUAGE_NAMES = window.WIIINFO_LANGUAGE_NAMES || {};
   const PROFILES = window.WIIINFO_LEARNER_PROFILES || [];
@@ -51,7 +51,20 @@
     "central-asia": { ko: "중앙아", en: "Central Asia", th: "เอเชียกลาง", ja: "中央アジア", zh: "中亚", vi: "Trung Á", es: "Asia Central" },
     indonesia: { ko: "인도네시아", en: "Indonesia", th: "อินโดนีเซีย", ja: "インドネシア", zh: "印度尼西亚", vi: "Indonesia", es: "Indonesia" },
     uzbekistan: { ko: "우즈벡", en: "Uzbekistan", th: "อุซเบกิสถาน", ja: "ウズベキスタン", zh: "乌兹别克斯坦", vi: "Uzbekistan", es: "Uzbekistán" },
-    halal: { ko: "할랄", en: "Halal", th: "ฮาลาล", ja: "ハラル", zh: "清真", vi: "Halal", es: "Halal" }
+    halal: { ko: "할랄", en: "Halal", th: "ฮาลาล", ja: "ハラル", zh: "清真", vi: "Halal", es: "Halal" },
+    // [2026-06-19] 전국 수집 데이터용 국적 확장 — 누락 시 "전 국적"으로 오표시되던 문제 해소
+    china: { ko: "중국", en: "China", th: "จีน", ja: "中国", zh: "中国", vi: "Trung Quốc", es: "China" },
+    nepal: { ko: "네팔", en: "Nepal", th: "เนปาล", ja: "ネパール", zh: "尼泊尔", vi: "Nepal", es: "Nepal" },
+    india: { ko: "인도", en: "India", th: "อินเดีย", ja: "インド", zh: "印度", vi: "Ấn Độ", es: "India" },
+    philippines: { ko: "필리핀", en: "Philippines", th: "ฟิลิปปินส์", ja: "フィリピン", zh: "菲律宾", vi: "Philippines", es: "Filipinas" },
+    myanmar: { ko: "미얀마", en: "Myanmar", th: "เมียนมา", ja: "ミャンマー", zh: "缅甸", vi: "Myanmar", es: "Myanmar" },
+    mongolia: { ko: "몽골", en: "Mongolia", th: "มองโกเลีย", ja: "モンゴル", zh: "蒙古", vi: "Mông Cổ", es: "Mongolia" },
+    russia: { ko: "러시아", en: "Russia", th: "รัสเซีย", ja: "ロシア", zh: "俄罗斯", vi: "Nga", es: "Rusia" },
+    cambodia: { ko: "캄보디아", en: "Cambodia", th: "กัมพูชา", ja: "カンボジア", zh: "柬埔寨", vi: "Campuchia", es: "Camboya" },
+    bangladesh: { ko: "방글라데시", en: "Bangladesh", th: "บังกลาเทศ", ja: "バングラデシュ", zh: "孟加拉国", vi: "Bangladesh", es: "Bangladés" },
+    pakistan: { ko: "파키스탄", en: "Pakistan", th: "ปากีสถาน", ja: "パキスタン", zh: "巴基斯坦", vi: "Pakistan", es: "Pakistán" },
+    "sri-lanka": { ko: "스리랑카", en: "Sri Lanka", th: "ศรีลังกา", ja: "スリランカ", zh: "斯里兰卡", vi: "Sri Lanka", es: "Sri Lanka" },
+    "south-asia": { ko: "남아시아", en: "South Asia", th: "เอเชียใต้", ja: "南アジア", zh: "南亚", vi: "Nam Á", es: "Asia del Sur" }
   };
   const KOREAN_LETTER_META = {
     "ㄱ": { kind: "consonant", name: "기역", roman: "g/k", example: "가(ga)", desc: { ko: "ㄱ/ㅋ에 가까운 소리", en: "close to g/k", th: "เสียงใกล้ ก/ค", ja: "g/kに近い音", zh: "接近 g/k 的音", vi: "gần âm g/k", es: "sonido parecido a g/k" } },
@@ -597,7 +610,9 @@
   }
 
   function placeNationalityLabel(nationality) {
-    const labels = PLACE_NATIONALITY_LABELS[nationality] || PLACE_NATIONALITY_LABELS.all;
+    // [2026-06-19] 미정의 국적은 'all'(전 국적)로 떨어뜨리지 말고 코드값 그대로 — 오표시 방지
+    const labels = PLACE_NATIONALITY_LABELS[nationality];
+    if (!labels) return nationality;
     return labels[sourceLang] || labels.en || labels.ko || nationality;
   }
 

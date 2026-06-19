@@ -1,7 +1,7 @@
 // wiiInfo 서비스워커 (2026-06-04 PWA 도입)
 // 배포 시 SW_VERSION을 index.html ?v= / app.js ASSET_VERSION과 같이 올릴 것
 // 주의: controllerchange 자동 reload 금지 (구버전-신버전 충돌로 무한 새로고침 사고 예방)
-const SW_VERSION = "20260619-02";
+const SW_VERSION = "20260619-03";
 const CORE_CACHE = `wiiinfo-core-${SW_VERSION}`;
 // const AUDIO_CACHE = "wiiinfo-audio-v1"; // 구 버전 (2026-06-04 문자 음성 재생성으로 v2 승격)
 const AUDIO_CACHE = "wiiinfo-audio-v4"; // 재생한 mp3만 저장. 음성 파일을 다시 생성하면 버전을 올릴 것 (v3: 2026-06-04 th/ko 전체 재생성 + 문장 200 확장)
