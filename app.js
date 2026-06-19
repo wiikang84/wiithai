@@ -1,5 +1,5 @@
 (async function () {
-  const ASSET_VERSION = "20260619-07";
+  const ASSET_VERSION = "20260619-08";
   const LANGUAGES = window.WIIINFO_LANGUAGES || {};
   const LANGUAGE_NAMES = window.WIIINFO_LANGUAGE_NAMES || {};
   const PROFILES = window.WIIINFO_LEARNER_PROFILES || [];
@@ -256,6 +256,8 @@
   const urlFrom = (urlParams.get("from") || "").toLowerCase();
   const urlLearn = (urlParams.get("learn") || "").toLowerCase();
   const urlPlace = (urlParams.get("place") || "").trim(); // [2026-06-18] QR/공유 딥링크: 가게 상세 직접 열기 (영업 QR 포스터 진입점)
+  // [2026-06-19] QR 유입 추적번호(q001 등). 영숫자/_/- 만 허용, 32자 제한(스미싱/주입 방지)
+  const urlRef = (urlParams.get("r") || "").replace(/[^a-zA-Z0-9_-]/g, "").slice(0, 32);
   const hasValidUrlFrom = PROFILES.some((profile) => profile.id === urlFrom);
   // [2026-06-18 P1-b] 첫 방문(저장된 언어 없음 + 딥링크 아님) → 진입 시 언어 선택 온보딩 표시
   const needsLangOnboarding = !localStorage.getItem("wiiinfoProfileId") && !hasValidUrlFrom;
@@ -516,7 +518,11 @@
       updatedAt: now,
       lastLoginAt: now
     };
-    if (isNew) payload.createdAt = now;
+    if (isNew) {
+      payload.createdAt = now;
+      // [2026-06-19] 가입 귀속: 어느 QR(ref)을 타고 들어와 가입했는지 Analytics로 기록(rules/필드 영향 없음)
+      track("sign_up", { ref: getStoredRef() });
+    }
     await ref.set(payload, { merge: true });
   }
 
@@ -572,6 +578,24 @@
     } catch (error) {
       // 수집 실패는 앱 동작에 영향 주지 않도록 무시
     }
+  }
+
+  // [2026-06-19] QR 유입 추적(attribution) — 가입 귀속의 기준이 되는 첫 유입 ref를 기기에 고정
+  function getStoredRef() {
+    try {
+      const raw = localStorage.getItem("wiiinfoRef");
+      if (raw) { const o = JSON.parse(raw); if (o && o.code) return String(o.code); }
+    } catch (error) { /* localStorage 접근 불가 무시 */ }
+    return "direct"; // QR 없이 들어온 직접 유입
+  }
+  function captureRef() {
+    try {
+      // 첫 유입만 저장(덮어쓰기 금지) — 이후 어떤 QR을 또 타도 최초 소개자를 보존
+      if (urlRef && !localStorage.getItem("wiiinfoRef")) {
+        localStorage.setItem("wiiinfoRef", JSON.stringify({ code: urlRef, ts: Date.now(), landingPlace: urlPlace || null }));
+      }
+    } catch (error) { /* 무시 */ }
+    track(urlRef ? "qr_visit" : "visit", urlRef ? { ref: urlRef, place: urlPlace || "" } : {});
   }
 
   function getVoice(lang) {
@@ -1907,6 +1931,7 @@
 
   if ("speechSynthesis" in window) speechSynthesis.onvoiceschanged = () => getVoice("th-TH");
   initAnalytics(); // Analytics (2026-06-04)
+  captureRef();    // [2026-06-19] QR 유입 캡처(첫 유입 ref 고정 + qr_visit/visit 이벤트)
   track("app_start", { profile: profileId, source: sourceLang, target: targetLang });
   // Firestore 문장 로드 비활성화 (2026-06-04 구조 정리): wiiinfoPhrases 컬렉션이 비어 있어
   // 매 방문마다 불필요한 쿼리만 발생했음. 콘텐츠는 로컬 js로 운영.
@@ -1936,6 +1961,9 @@
 
   // [2026-06-18] QR/공유 딥링크: ?place=<id> → 발견 탭 + 해당 가게 상세 바로 열기
   if (urlPlace) { setAppTab("nearby"); openPlaceDetail(urlPlace); }
+
+  // [2026-06-19] PWA 설치 시 유입 ref 귀속(전환 측정: 유입→설치)
+  window.addEventListener("appinstalled", () => { track("app_install", { ref: getStoredRef() }); });
 
   // [2026-06-18] master 등록 점포(Firestore stores)를 정적 places에 머지 — 실패 시 정적만(graceful)
   loadFirebaseStores();
