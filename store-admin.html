@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>wiiInfo · 점포 등록 (운영자)</title>
     <meta name="robots" content="noindex" />
-    <link rel="stylesheet" href="./styles.css?v=20260619-10" />
+    <link rel="stylesheet" href="./styles.css?v=20260619-11" />
     <style>
       /* [2026-06-18] master 점포 등록폼 데모 — 운영자(master) 전용. 점주 셀프(owner.html)는 추후 */
       .adminWrap { width: min(720px, 100%); margin: 0 auto; padding: 24px 16px 80px; display: grid; gap: 18px; }
@@ -34,6 +34,16 @@
       .notice { font-size: 13px; color: var(--text-secondary); line-height: 1.6; }
       .pill { display: inline-block; padding: 3px 9px; border-radius: var(--r-pill); background: var(--accent-wash); color: var(--accent-ink); font-size: 12px; font-weight: var(--w-med); }
       .hidden { display: none !important; }
+      /* [2026-06-19] 사장님 신청 심사 카드 — 정보 한눈에 + 서류 썸네일 */
+      .claimItem { padding: 16px 0; border-bottom: 1px solid var(--line); display: grid; gap: 9px; }
+      .claimItem:last-child { border-bottom: 0; }
+      .claimStore { font-size: 16px; font-weight: var(--w-bold); color: var(--text); }
+      .claimMeta { display: flex; flex-wrap: wrap; gap: 5px 14px; font-size: 13px; color: var(--text-secondary); }
+      .claimDocs { display: flex; flex-wrap: wrap; gap: 10px; }
+      .claimDoc { display: inline-flex; flex-direction: column; align-items: center; gap: 4px; text-decoration: none; color: var(--accent-ink); font-size: 11px; font-weight: var(--w-med); }
+      .claimDoc img { width: 76px; height: 76px; object-fit: cover; border-radius: 8px; border: 1px solid var(--line); background: var(--surface-sunk); }
+      .claimNoDoc { font-size: 13px; color: #c0392b; font-weight: var(--w-med); }
+      .claimBtns { display: flex; gap: 8px; }
     </style>
   </head>
   <body>
@@ -120,12 +130,23 @@
         <h2>등록된 점포</h2>
         <div id="storeList"></div>
       </div>
+
+      <!-- [2026-06-19] 테스트 도구 — 가상 신청/점포 생성으로 심사 흐름 점검 -->
+      <div id="testCard" class="adminCard hidden">
+        <h2>🧪 테스트 도구 <span class="pill">개발</span></h2>
+        <p class="sub">가상 사장님 신청·점포를 만들어 심사 흐름을 점검합니다. 모두 'TEST' 표시되며 버튼 한 번으로 전체 삭제됩니다(실데이터 영향 없음).</p>
+        <div class="row2">
+          <button id="genTestBtn" class="ghostBtn" type="button">가상 신청 3건 + 점포 2개 생성</button>
+          <button id="delTestBtn" class="ghostBtn" type="button">테스트 데이터 전체 삭제</button>
+        </div>
+        <p id="testMsg" class="notice"></p>
+      </div>
     </main>
 
-    <script src="./vendor/firebase/10.12.5/firebase-app-compat.js?v=20260619-10"></script>
-    <script src="./vendor/firebase/10.12.5/firebase-auth-compat.js?v=20260619-10"></script>
-    <script src="./vendor/firebase/10.12.5/firebase-firestore-compat.js?v=20260619-10"></script>
-    <script src="./firebase-config.js?v=20260619-10"></script>
-    <script src="./store-admin.js?v=20260619-10"></script>
+    <script src="./vendor/firebase/10.12.5/firebase-app-compat.js?v=20260619-11"></script>
+    <script src="./vendor/firebase/10.12.5/firebase-auth-compat.js?v=20260619-11"></script>
+    <script src="./vendor/firebase/10.12.5/firebase-firestore-compat.js?v=20260619-11"></script>
+    <script src="./firebase-config.js?v=20260619-11"></script>
+    <script src="./store-admin.js?v=20260619-11"></script>
   </body>
 </html>

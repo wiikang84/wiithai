@@ -12,6 +12,10 @@
         const claimList = document.getElementById("claimList");
         // [2026-06-19] 일괄 등록(bulk import) DOM
         const bulkCard = document.getElementById("bulkCard");
+        const testCard = document.getElementById("testCard");
+        const genTestBtn = document.getElementById("genTestBtn");
+        const delTestBtn = document.getElementById("delTestBtn");
+        const testMsg = document.getElementById("testMsg");
         const bulkInput = document.getElementById("bulkInput");
         const bulkFile = document.getElementById("bulkFile");
         const bulkPreviewBtn = document.getElementById("bulkPreviewBtn");
@@ -62,14 +66,15 @@
 
         auth && auth.onAuthStateChanged((user) => {
           currentUser = user;
-          if (!user) { authMsg.textContent = "운영자 계정으로 로그인하세요."; formCard.classList.add("hidden"); listCard.classList.add("hidden"); claimCard.classList.add("hidden"); bulkCard.classList.add("hidden"); loginBtn.classList.remove("hidden"); return; }
-          if (!isMaster(user)) { authMsg.textContent = `${user.email} 은(는) 운영자 권한이 없습니다.`; formCard.classList.add("hidden"); listCard.classList.add("hidden"); claimCard.classList.add("hidden"); bulkCard.classList.add("hidden"); return; }
+          if (!user) { authMsg.textContent = "운영자 계정으로 로그인하세요."; formCard.classList.add("hidden"); listCard.classList.add("hidden"); claimCard.classList.add("hidden"); bulkCard.classList.add("hidden"); testCard.classList.add("hidden"); loginBtn.classList.remove("hidden"); return; }
+          if (!isMaster(user)) { authMsg.textContent = `${user.email} 은(는) 운영자 권한이 없습니다.`; formCard.classList.add("hidden"); listCard.classList.add("hidden"); claimCard.classList.add("hidden"); bulkCard.classList.add("hidden"); testCard.classList.add("hidden"); return; }
           authMsg.textContent = `${user.email} (운영자) 로그인됨`;
           loginBtn.classList.add("hidden");
           formCard.classList.remove("hidden");
           listCard.classList.remove("hidden");
           claimCard.classList.remove("hidden");
           bulkCard.classList.remove("hidden");
+          testCard.classList.remove("hidden");
           loadStores();
           loadClaims();
         });
@@ -121,8 +126,20 @@
             if (snap.empty) { claimList.innerHTML = "<p class='notice'>대기 중인 신청이 없습니다.</p>"; return; }
             claimList.innerHTML = snap.docs.map((doc) => {
               const c = doc.data();
-              const docs = (c.documents || []).map((dd) => `<a href="${esc(dd.url)}" target="_blank" rel="noopener" style="display:inline-block;margin-top:5px;margin-right:8px;font-size:12px;color:#e8602c;text-decoration:underline;">📎 ${esc(dd.type === "business-license" ? "사업자등록증" : "서류")}</a>`).join("");
-              return `<div class="storeRow"><div><strong>${esc(c.storeName || "(가게명 없음)")}</strong><br><small>${esc(c.applicantName || "")} · ${esc(c.phone || "")} · ${esc(c.applicantEmail || "")}</small><br>${docs || "<small style='color:#c0392b;'>⚠ 첨부 서류 없음</small>"}</div><div style="display:flex;gap:6px;"><button class="primaryBtn" style="min-height:38px;padding:0 14px;width:auto;" data-approve="${esc(doc.id)}">승인</button><button class="ghostBtn" data-reject="${esc(doc.id)}">반려</button></div></div>`;
+              const id = esc(doc.id);
+              // [2026-06-19] 신청일시
+              let when = "";
+              try { if (c.createdAt && c.createdAt.toDate) when = c.createdAt.toDate().toLocaleString("ko-KR"); } catch (e) { /* */ }
+              // 서류 썸네일(사업자등록증 등) — 클릭 시 원본. 없으면 경고.
+              const docsBlock = (c.documents || []).length
+                ? c.documents.map((dd) => { const label = dd.type === "business-license" ? "사업자등록증" : "추가서류"; return `<a href="${esc(dd.url)}" target="_blank" rel="noopener" class="claimDoc" title="${esc(label)}"><img src="${esc(dd.url)}" alt="${esc(label)}" /><span>${esc(label)}</span></a>`; }).join("")
+                : `<div class="claimNoDoc">⚠ 첨부 서류 없음 — 사업자등록증 미제출. 승인에 신중하세요.</div>`;
+              return `<div class="claimItem">
+                <div class="claimStore">🏪 ${esc(c.storeName || "(가게명 없음)")}${c.test ? ' <span class="pill" style="background:#eee;color:#888;">TEST</span>' : ""}</div>
+                <div class="claimMeta"><span>👤 ${esc(c.applicantName || "-")}</span><span>📞 ${esc(c.phone || "미입력")}</span><span>✉ ${esc(c.applicantEmail || "-")}</span>${when ? `<span>🕒 ${esc(when)}</span>` : ""}</div>
+                <div class="claimDocs">${docsBlock}</div>
+                <div class="claimBtns"><button class="primaryBtn" style="min-height:40px;padding:0 18px;width:auto;" data-approve="${id}">승인</button><button class="ghostBtn" data-reject="${id}">반려</button></div>
+              </div>`;
             }).join("");
             claimList.querySelectorAll("[data-approve]").forEach((b) => b.addEventListener("click", () => approveClaim(b.dataset.approve)));
             claimList.querySelectorAll("[data-reject]").forEach((b) => b.addEventListener("click", () => rejectClaim(b.dataset.reject)));
@@ -313,4 +330,57 @@
           reader.onerror = () => { bulkMsg.textContent = "파일 읽기 실패"; };
           reader.readAsText(f);
         });
+
+        // ===== [2026-06-19] 테스트 도구: 가상 신청/점포 생성·삭제 (심사 흐름 점검) =====
+        // 더미 사업자등록증 이미지(data URI SVG) — Storage 없이 썸네일 테스트
+        const DUMMY_LICENSE = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='280'><rect width='200' height='280' fill='%23eef2f7'/><rect x='16' y='20' width='168' height='40' fill='%23d6dee8'/><text x='100' y='46' font-size='13' text-anchor='middle' fill='%23555'>사업자등록증</text><text x='100' y='150' font-size='12' text-anchor='middle' fill='%23999'>(테스트 더미)</text></svg>";
+
+        async function createTestData() {
+          if (!currentUser) return;
+          genTestBtn.disabled = true; testMsg.textContent = "생성 중...";
+          try {
+            const now = firebase.firestore.FieldValue.serverTimestamp();
+            // 가상 점포 2개(신청 가게명과 일치 → 승인 시 자동연결 테스트)
+            const stores = [
+              { name: { ko: "테스트 베트남쌀국수" }, category: "restaurant", nationalities: ["vietnam"], address: { ko: "울산 남구 테스트로 1" }, phone: "", hours: {}, items: { ko: "쌀국수" }, verified: false, source: "test", test: true, createdBy: currentUser.uid, createdByEmail: currentUser.email, createdAt: now },
+              { name: { ko: "테스트 양꼬치하우스" }, category: "restaurant", nationalities: ["china"], address: { ko: "울산 동구 테스트로 2" }, phone: "", hours: {}, items: { ko: "양꼬치" }, verified: false, source: "test", test: true, createdBy: currentUser.uid, createdByEmail: currentUser.email, createdAt: now }
+            ];
+            for (const s of stores) await db.collection("stores").add(s);
+            // 가상 신청 3건(서류 유/무, 매칭/비매칭)
+            const claims = [
+              { storeName: "테스트 베트남쌀국수", applicantName: "응우옌(테스트)", phone: "010-1111-2222", docs: true },
+              { storeName: "테스트 할랄케밥(등록점포 없음)", applicantName: "아흐메드(테스트)", phone: "010-3333-4444", docs: false },
+              { storeName: "테스트 양꼬치하우스", applicantName: "왕(테스트)", phone: "", docs: true }
+            ];
+            for (const c of claims) {
+              await db.collection("ownerClaims").add({
+                uid: currentUser.uid, applicantEmail: currentUser.email, applicantName: c.applicantName,
+                phone: c.phone, storeName: c.storeName,
+                documents: c.docs ? [{ type: "business-license", url: DUMMY_LICENSE }] : [],
+                status: "pending", test: true, createdAt: now
+              });
+            }
+            testMsg.textContent = "✓ 가상 신청 3건 + 점포 2개 생성됨. 위 심사·점포 목록을 확인하세요.";
+            loadStores(); loadClaims();
+          } catch (e) { testMsg.textContent = "생성 실패: " + e.message; }
+          finally { genTestBtn.disabled = false; }
+        }
+
+        async function deleteTestData() {
+          if (!confirm("test 표시된 가상 신청·점포를 모두 삭제할까요?")) return;
+          delTestBtn.disabled = true; testMsg.textContent = "삭제 중...";
+          try {
+            let n = 0;
+            const cs = await db.collection("ownerClaims").where("test", "==", true).get();
+            for (const d of cs.docs) { await d.ref.delete(); n++; }
+            const ss = await db.collection("stores").where("test", "==", true).get();
+            for (const d of ss.docs) { await d.ref.delete(); n++; }
+            testMsg.textContent = `✓ 테스트 데이터 ${n}건 삭제 완료.`;
+            loadStores(); loadClaims();
+          } catch (e) { testMsg.textContent = "삭제 실패: " + e.message; }
+          finally { delTestBtn.disabled = false; }
+        }
+
+        if (genTestBtn) genTestBtn.addEventListener("click", createTestData);
+        if (delTestBtn) delTestBtn.addEventListener("click", deleteTestData);
       })();
