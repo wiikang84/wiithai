@@ -800,6 +800,186 @@
    "zh": "菲律宾食材、冷冻食品、零食与餐食，周日露天市集",
    "vi": "Thực phẩm Philippines, đồ đông lạnh, đồ ăn vặt và bữa ăn, chợ trời Chủ Nhật",
    "es": "Productos filipinos, congelados, snacks y comidas, mercado dominical al aire libre"
+  },
+  "방글라데시 음식, 할랄": {
+   "ko": "방글라데시 음식, 할랄",
+   "en": "Bangladeshi food, halal",
+   "th": "อาหารบังกลาเทศ ฮาลาล",
+   "ja": "バングラデシュ料理、ハラル",
+   "zh": "孟加拉国菜、清真",
+   "vi": "Món Bangladesh, halal",
+   "es": "Comida bangladesí, halal"
+  },
+  "지중해·중동 음식, 할랄": {
+   "ko": "지중해·중동 음식, 할랄",
+   "en": "Mediterranean & Middle Eastern food, halal",
+   "th": "อาหารเมดิเตอร์เรเนียนและตะวันออกกลาง ฮาลาล",
+   "ja": "地中海・中東料理、ハラル",
+   "zh": "地中海与中东菜、清真",
+   "vi": "Món Địa Trung Hải & Trung Đông, halal",
+   "es": "Comida mediterránea y de Oriente Medio, halal"
+  },
+  "인도·파키스탄 음식, 할랄": {
+   "ko": "인도·파키스탄 음식, 할랄",
+   "en": "Indian & Pakistani food, halal",
+   "th": "อาหารอินเดียและปากีสถาน ฮาลาล",
+   "ja": "インド・パキスタン料理、ハラル",
+   "zh": "印度与巴基斯坦菜、清真",
+   "vi": "Món Ấn Độ & Pakistan, halal",
+   "es": "Comida india y pakistaní, halal"
+  },
+  "네팔 음식": {
+   "ko": "네팔 음식",
+   "en": "Nepali food",
+   "th": "อาหารเนปาล",
+   "ja": "ネパール料理",
+   "zh": "尼泊尔菜",
+   "vi": "Món Nepal",
+   "es": "Comida nepalí"
+  },
+  "방글라데시 음식": {
+   "ko": "방글라데시 음식",
+   "en": "Bangladeshi food",
+   "th": "อาหารบังกลาเทศ",
+   "ja": "バングラデシュ料理",
+   "zh": "孟加拉国菜",
+   "vi": "Món Bangladesh",
+   "es": "Comida bangladesí"
+  },
+  "러시아 음식, 베이커리": {
+   "ko": "러시아 음식, 베이커리",
+   "en": "Russian food, bakery",
+   "th": "อาหารรัสเซีย เบเกอรี่",
+   "ja": "ロシア料理、ベーカリー",
+   "zh": "俄罗斯菜、烘焙坊",
+   "vi": "Món Nga, tiệm bánh",
+   "es": "Comida rusa, panadería"
+  },
+  "우즈베키스탄 음식, 베이커리": {
+   "ko": "우즈베키스탄 음식, 베이커리",
+   "en": "Uzbek food, bakery",
+   "th": "อาหารอุซเบกิสถาน เบเกอรี่",
+   "ja": "ウズベキスタン料理、ベーカリー",
+   "zh": "乌兹别克斯坦菜、烘焙坊",
+   "vi": "Món Uzbekistan, tiệm bánh",
+   "es": "Comida uzbeka, panadería"
+  },
+  "러시아·중앙아시아 빵·식료품 (고려인 빵집), 24시간": {
+   "ko": "러시아·중앙아시아 빵·식료품 (고려인 빵집), 24시간",
+   "en": "Russian & Central Asian bread & groceries (Koryo-saram bakery), 24h",
+   "th": "ขนมปังและของชำรัสเซียและเอเชียกลาง (เบเกอรี่โครยอ-ซารัม) เปิด 24 ชั่วโมง",
+   "ja": "ロシア・中央アジアのパン・食料品(高麗人ベーカリー)、24時間",
+   "zh": "俄罗斯·中亚面包·食品(高丽人面包店)、24小时",
+   "vi": "Bánh mì và thực phẩm Nga, Trung Á (tiệm bánh Koryo-saram), 24 giờ",
+   "es": "Pan y comestibles rusos y de Asia Central (panadería koryo-saram), 24h"
+  },
+  "양꼬치, 훠궈, 중국 동북요리": {
+   "ko": "양꼬치, 훠궈, 중국 동북요리",
+   "en": "Lamb skewers, hotpot, Chinese northeastern cuisine",
+   "th": "เนื้อแกะเสียบไม้ หม้อไฟหั่วกัว อาหารจีนภาคตะวันออกเฉียงเหนือ",
+   "ja": "ラム串、火鍋、中国東北料理",
+   "zh": "羊肉串、火锅、东北菜",
+   "vi": "Xiên thịt cừu, lẩu, món Đông Bắc Trung Quốc",
+   "es": "Brochetas de cordero, hotpot, cocina del noreste de China"
+  },
+  "양꼬치, 마라양갈비, 중국 동북요리": {
+   "ko": "양꼬치, 마라양갈비, 중국 동북요리",
+   "en": "Lamb skewers, mala lamb ribs, Chinese northeastern cuisine",
+   "th": "เนื้อแกะเสียบไม้ ซี่โครงแกะหมาล่า อาหารจีนภาคตะวันออกเฉียงเหนือ",
+   "ja": "ラム串、麻辣ラムあばら、中国東北料理",
+   "zh": "羊肉串、麻辣羊排、东北菜",
+   "vi": "Xiên thịt cừu, sườn cừu mala, món Đông Bắc Trung Quốc",
+   "es": "Brochetas de cordero, costillas de cordero mala, cocina del noreste de China"
+  },
+  "훠궈, 훠궈무한리필, 중국 음식": {
+   "ko": "훠궈, 훠궈무한리필, 중국 음식",
+   "en": "Hotpot, all-you-can-eat hotpot, Chinese food",
+   "th": "หม้อไฟหั่วกัว หม้อไฟบุฟเฟ่ต์ไม่อั้น อาหารจีน",
+   "ja": "火鍋、火鍋食べ放題、中華料理",
+   "zh": "火锅、火锅自助、中国菜",
+   "vi": "Lẩu, lẩu buffet không giới hạn, món ăn Trung Quốc",
+   "es": "Hotpot, hotpot a voluntad, comida china"
+  },
+  "할랄 음식 (할랄 한식·퓨전)": {
+   "ko": "할랄 음식 (할랄 한식·퓨전)",
+   "en": "Halal food (halal Korean & fusion)",
+   "th": "อาหารฮาลาล (อาหารเกาหลีฮาลาลและฟิวชัน)",
+   "ja": "ハラル料理(ハラル韓国料理・フュージョン)",
+   "zh": "清真菜(清真韩餐·融合菜)",
+   "vi": "Món halal (món Hàn halal và fusion)",
+   "es": "Comida halal (coreana halal y fusión)"
+  },
+  "인도·네팔 음식, 커리, 할랄": {
+   "ko": "인도·네팔 음식, 커리, 할랄",
+   "en": "Indian & Nepali food, curry, halal",
+   "th": "อาหารอินเดียและเนปาล แกงกะหรี่ ฮาลาล",
+   "ja": "インド・ネパール料理、カレー、ハラル",
+   "zh": "印度·尼泊尔菜、咖喱、清真",
+   "vi": "Món Ấn Độ và Nepal, cà ri, halal",
+   "es": "Comida india y nepalí, curry, halal"
+  },
+  "레바논·중동 음식, 할랄": {
+   "ko": "레바논·중동 음식, 할랄",
+   "en": "Lebanese & Middle Eastern food, halal",
+   "th": "อาหารเลบานอนและตะวันออกกลาง ฮาลาล",
+   "ja": "レバノン・中東料理、ハラル",
+   "zh": "黎巴嫩·中东菜、清真",
+   "vi": "Món Liban và Trung Đông, halal",
+   "es": "Comida libanesa y de Oriente Medio, halal"
+  },
+  "우즈베키스탄·중앙아시아 음식, 샤슬릭, 플로프": {
+   "ko": "우즈베키스탄·중앙아시아 음식, 샤슬릭, 플로프",
+   "en": "Uzbek & Central Asian food, shashlik, plov",
+   "th": "อาหารอุซเบกและเอเชียกลาง ชาชลิก พลอฟ",
+   "ja": "ウズベク・中央アジア料理、シャシリク、プロフ",
+   "zh": "乌兹别克·中亚菜、烤肉串(沙什利克)、抓饭",
+   "vi": "Món Uzbek và Trung Á, shashlik, plov",
+   "es": "Comida uzbeka y de Asia Central, shashlik, plov"
+  },
+  "우즈베키스탄·중앙아시아 음식, 할랄": {
+   "ko": "우즈베키스탄·중앙아시아 음식, 할랄",
+   "en": "Uzbek & Central Asian food, halal",
+   "th": "อาหารอุซเบกและเอเชียกลาง ฮาลาล",
+   "ja": "ウズベク・中央アジア料理、ハラル",
+   "zh": "乌兹别克·中亚菜、清真",
+   "vi": "Món Uzbek và Trung Á, halal",
+   "es": "Comida uzbeka y de Asia Central, halal"
+  },
+  "인도 음식, 커리, 탄두리": {
+   "ko": "인도 음식, 커리, 탄두리",
+   "en": "Indian food, curry, tandoori",
+   "th": "อาหารอินเดีย แกงกะหรี่ ทันดูรี",
+   "ja": "インド料理、カレー、タンドリー",
+   "zh": "印度菜、咖喱、坦都里",
+   "vi": "Món ăn Ấn Độ, cà ri, tandoori",
+   "es": "Comida india, curry, tandoori"
+  },
+  "태국 음식, 팟타이, 푸팟퐁커리, 쏨땀, 똠얌꿍": {
+   "ko": "태국 음식, 팟타이, 푸팟퐁커리, 쏨땀, 똠얌꿍",
+   "en": "Thai food, pad thai, poo pad pong curry, som tam, tom yum goong",
+   "th": "อาหารไทย ผัดไทย ปูผัดผงกะหรี่ ส้มตำ ต้มยำกุ้ง",
+   "ja": "タイ料理、パッタイ、プーパッポンカリー、ソムタム、トムヤムクン",
+   "zh": "泰国菜、泰式炒河粉、咖喱炒蟹、青木瓜沙拉(宋丹)、冬阴功汤",
+   "vi": "Món Thái, pad thai, poo pad pong curry, som tam, tom yum goong",
+   "es": "Comida tailandesa, pad thai, poo pad pong curry, som tam, tom yum goong"
+  },
+  "베트남 음식, 쌀국수, 분짜, 반미": {
+   "ko": "베트남 음식, 쌀국수, 분짜, 반미",
+   "en": "Vietnamese food, pho, bun cha, banh mi",
+   "th": "อาหารเวียดนาม ก๋วยเตี๋ยวเฝอ บุนจ่า บั๋นหมี่",
+   "ja": "ベトナム料理、フォー、ブンチャー、バインミー",
+   "zh": "越南菜、河粉、烤肉米线(分查)、越式法包(班米)",
+   "vi": "Món ăn Việt Nam, phở, bún chả, bánh mì",
+   "es": "Comida vietnamita, pho, bun cha, banh mi"
+  },
+  "베트남 음식, 쌀국수, 분짜, 반쎄오, 반미": {
+   "ko": "베트남 음식, 쌀국수, 분짜, 반쎄오, 반미",
+   "en": "Vietnamese food, pho, bun cha, banh xeo, banh mi",
+   "th": "อาหารเวียดนาม ก๋วยเตี๋ยวเฝอ บุนจ่า บั๋นแส่ว บั๋นหมี่",
+   "ja": "ベトナム料理、フォー、ブンチャー、バインセオ、バインミー",
+   "zh": "越南菜、河粉、烤肉米线(分查)、越式煎饼(班赛奥)、越式法包(班米)",
+   "vi": "Món ăn Việt Nam, phở, bún chả, bánh xèo, bánh mì",
+   "es": "Comida vietnamita, pho, bun cha, banh xeo, banh mi"
   }
  },
  "nameEn": {

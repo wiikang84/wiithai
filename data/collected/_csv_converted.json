@@ -1,0 +1,2354 @@
+[
+ {
+  "name": {
+   "ko": "뉴델리"
+  },
+  "category": "halal",
+  "nationalities": [
+   "india",
+   "halal"
+  ],
+  "address": {
+   "ko": "고양시 덕양구 화신로272번길 29"
+  },
+  "region": "경기 고양시",
+  "phone": "070-4105-1010",
+  "items": {
+   "ko": "인도 음식, 커리"
+  },
+  "source": "data.go.kr 경기관광공사 무슬림친화",
+  "sourceUrl": "https://www.data.go.kr/data/15099378/fileData.do",
+  "confidence": "high"
+ },
+ {
+  "name": {
+   "ko": "아시아아시아"
+  },
+  "category": "halal",
+  "nationalities": [
+   "india",
+   "halal"
+  ],
+  "address": {
+   "ko": "고양시 일산동구 장항동 868 웨스턴돔 2층"
+  },
+  "region": "경기 고양시",
+  "phone": "031-901-0086",
+  "items": {
+   "ko": "인도 음식, 커리"
+  },
+  "source": "data.go.kr 경기관광공사 무슬림친화",
+  "sourceUrl": "https://www.data.go.kr/data/15099378/fileData.do",
+  "confidence": "high"
+ },
+ {
+  "name": {
+   "ko": "KB케밥&닭강정"
+  },
+  "category": "halal",
+  "nationalities": [
+   "bangladesh",
+   "halal"
+  ],
+  "address": {
+   "ko": "김포시 통진읍 조강로 40"
+  },
+  "region": "경기 김포시",
+  "phone": "031-981-3293",
+  "items": {
+   "ko": "방글라데시 음식, 할랄"
+  },
+  "source": "data.go.kr 경기관광공사 무슬림친화",
+  "sourceUrl": "https://www.data.go.kr/data/15099378/fileData.do",
+  "confidence": "high"
+ },
+ {
+  "name": {
+   "ko": "FORTUNE(파르투네)"
+  },
+  "category": "halal",
+  "nationalities": [
+   "uzbekistan",
+   "central-asia",
+   "halal"
+  ],
+  "address": {
+   "ko": "김포시 통진읍 조강로44번길 4 2층"
+  },
+  "region": "경기 김포시",
+  "phone": "031-997-2776",
+  "items": {
+   "ko": "우즈베키스탄 음식"
+  },
+  "source": "data.go.kr 경기관광공사 무슬림친화",
+  "sourceUrl": "https://www.data.go.kr/data/15099378/fileData.do",
+  "confidence": "high"
+ },
+ {
+  "name": {
+   "ko": "말리오보로"
+  },
+  "category": "halal",
+  "nationalities": [
+   "indonesia",
+   "halal"
+  ],
+  "address": {
+   "ko": "김포시 통진읍 서암로 94-30"
+  },
+  "region": "경기 김포시",
+  "phone": "031-984-4805",
+  "items": {
+   "ko": "인도네시아 음식"
+  },
+  "source": "data.go.kr 경기관광공사 무슬림친화",
+  "sourceUrl": "https://www.data.go.kr/data/15099378/fileData.do",
+  "confidence": "high"
+ },
+ {
+  "name": {
+   "ko": "할랄 인디안 레스토랑"
+  },
+  "category": "halal",
+  "nationalities": [
+   "indonesia",
+   "halal"
+  ],
+  "address": {
+   "ko": "김포시 통진읍 조강로 43"
+  },
+  "region": "경기 김포시",
+  "phone": "031-997-2334",
+  "items": {
+   "ko": "인도네시아 음식"
+  },
+  "source": "data.go.kr 경기관광공사 무슬림친화",
+  "sourceUrl": "https://www.data.go.kr/data/15099378/fileData.do",
+  "confidence": "high"
+ },
+ {
+  "name": {
+   "ko": "하스케밥"
+  },
+  "category": "halal",
+  "nationalities": [
+   "halal"
+  ],
+  "address": {
+   "ko": "동두천시 평화로 2553"
+  },
+  "region": "경기 동두천시",
+  "phone": "031-862-3869",
+  "items": {
+   "ko": "터키·중동 음식, 할랄"
+  },
+  "source": "data.go.kr 경기관광공사 무슬림친화",
+  "sourceUrl": "https://www.data.go.kr/data/15099378/fileData.do",
+  "confidence": "high"
+ },
+ {
+  "name": {
+   "ko": "마살라인디안레스토랑"
+  },
+  "category": "halal",
+  "nationalities": [
+   "india",
+   "halal"
+  ],
+  "address": {
+   "ko": "부천시 석천로 169번길 30"
+  },
+  "region": "경기 부천시",
+  "phone": "032-326-2244",
+  "items": {
+   "ko": "인도 음식, 커리"
+  },
+  "source": "data.go.kr 경기관광공사 무슬림친화",
+  "sourceUrl": "https://www.data.go.kr/data/15099378/fileData.do",
+  "confidence": "high"
+ },
+ {
+  "name": {
+   "ko": "안나푸르나 레스토랑"
+  },
+  "category": "halal",
+  "nationalities": [
+   "india",
+   "halal"
+  ],
+  "address": {
+   "ko": "부천시 부흥로 402번길 45"
+  },
+  "region": "경기 부천시",
+  "phone": "032-662-5075",
+  "items": {
+   "ko": "인도 음식, 커리"
+  },
+  "source": "data.go.kr 경기관광공사 무슬림친화",
+  "sourceUrl": "https://www.data.go.kr/data/15099378/fileData.do",
+  "confidence": "high"
+ },
+ {
+  "name": {
+   "ko": "디왈리"
+  },
+  "category": "halal",
+  "nationalities": [
+   "india",
+   "halal"
+  ],
+  "address": {
+   "ko": "성남시 수정구 성남대로 1334"
+  },
+  "region": "경기 성남시",
+  "phone": "031-722-0782",
+  "items": {
+   "ko": "인도 음식, 커리"
+  },
+  "source": "data.go.kr 경기관광공사 무슬림친화",
+  "sourceUrl": "https://www.data.go.kr/data/15099378/fileData.do",
+  "confidence": "high"
+ },
+ {
+  "name": {
+   "ko": "인디안 커리"
+  },
+  "category": "halal",
+  "nationalities": [
+   "india",
+   "halal"
+  ],
+  "address": {
+   "ko": "성남시 분당구 황새울로360번길 21"
+  },
+  "region": "경기 성남시",
+  "phone": "031-781-2177",
+  "items": {
+   "ko": "인도 음식, 커리"
+  },
+  "source": "data.go.kr 경기관광공사 무슬림친화",
+  "sourceUrl": "https://www.data.go.kr/data/15099378/fileData.do",
+  "confidence": "high"
+ },
+ {
+  "name": {
+   "ko": "인디테이블"
+  },
+  "category": "halal",
+  "nationalities": [
+   "india",
+   "halal"
+  ],
+  "address": {
+   "ko": "성남시 분당구 동판교로177번길 25"
+  },
+  "region": "경기 성남시",
+  "phone": "031-708-7022",
+  "items": {
+   "ko": "인도 음식, 커리"
+  },
+  "source": "data.go.kr 경기관광공사 무슬림친화",
+  "sourceUrl": "https://www.data.go.kr/data/15099378/fileData.do",
+  "confidence": "high"
+ },
+ {
+  "name": {
+   "ko": "그레이트 히말라야"
+  },
+  "category": "halal",
+  "nationalities": [
+   "nepal",
+   "india",
+   "halal"
+  ],
+  "address": {
+   "ko": "수원시 팔달구 매산로 7-1"
+  },
+  "region": "경기 수원시",
+  "phone": "031-243-1187",
+  "items": {
+   "ko": "인도·네팔 음식, 커리"
+  },
+  "source": "data.go.kr 경기관광공사 무슬림친화",
+  "sourceUrl": "https://www.data.go.kr/data/15099378/fileData.do",
+  "confidence": "high"
+ },
+ {
+  "name": {
+   "ko": "난"
+  },
+  "category": "halal",
+  "nationalities": [
+   "india",
+   "halal"
+  ],
+  "address": {
+   "ko": "수원시 팔달구 인계로166번길 45 2층"
+  },
+  "region": "경기 수원시",
+  "phone": "031-237-1090",
+  "items": {
+   "ko": "인도 음식, 커리"
+  },
+  "source": "data.go.kr 경기관광공사 무슬림친화",
+  "sourceUrl": "https://www.data.go.kr/data/15099378/fileData.do",
+  "confidence": "high"
+ },
+ {
+  "name": {
+   "ko": "델리다바"
+  },
+  "category": "halal",
+  "nationalities": [
+   "india",
+   "halal"
+  ],
+  "address": {
+   "ko": "수원시 팔달구 매산로 6-2"
+  },
+  "region": "경기 수원시",
+  "phone": "031-248-1090",
+  "items": {
+   "ko": "인도 음식, 커리"
+  },
+  "source": "data.go.kr 경기관광공사 무슬림친화",
+  "sourceUrl": "https://www.data.go.kr/data/15099378/fileData.do",
+  "confidence": "high"
+ },
+ {
+  "name": {
+   "ko": "벨라튀니지"
+  },
+  "category": "halal",
+  "nationalities": [
+   "halal"
+  ],
+  "address": {
+   "ko": "수원시 장안구 서부로2106번길 21"
+  },
+  "region": "경기 수원시",
+  "phone": "031-296-8327",
+  "items": {
+   "ko": "지중해·중동 음식, 할랄"
+  },
+  "source": "data.go.kr 경기관광공사 무슬림친화",
+  "sourceUrl": "https://www.data.go.kr/data/15099378/fileData.do",
+  "confidence": "high"
+ },
+ {
+  "name": {
+   "ko": "수엠부 인도요리"
+  },
+  "category": "halal",
+  "nationalities": [
+   "india",
+   "halal"
+  ],
+  "address": {
+   "ko": "수원시 팔달구 매산로20번길 9"
+  },
+  "region": "경기 수원시",
+  "phone": "031-258-3305",
+  "items": {
+   "ko": "인도 음식, 커리"
+  },
+  "source": "data.go.kr 경기관광공사 무슬림친화",
+  "sourceUrl": "https://www.data.go.kr/data/15099378/fileData.do",
+  "confidence": "high"
+ },
+ {
+  "name": {
+   "ko": "아그라 스타필드 수원점"
+  },
+  "category": "halal",
+  "nationalities": [
+   "india",
+   "halal"
+  ],
+  "address": {
+   "ko": "수원시 장안구 수성로 175 스타필드 수원점 7층"
+  },
+  "region": "경기 수원시",
+  "phone": "0507-1413-1704",
+  "items": {
+   "ko": "인도 음식, 커리"
+  },
+  "source": "data.go.kr 경기관광공사 무슬림친화",
+  "sourceUrl": "https://www.data.go.kr/data/15099378/fileData.do",
+  "confidence": "high"
+ },
+ {
+  "name": {
+   "ko": "히말라야 정원"
+  },
+  "category": "halal",
+  "nationalities": [
+   "nepal",
+   "india",
+   "halal"
+  ],
+  "address": {
+   "ko": "수원시 팔달구 권광로180번길 19"
+  },
+  "region": "경기 수원시",
+  "phone": "031-254-0977",
+  "items": {
+   "ko": "인도·네팔 음식, 커리"
+  },
+  "source": "data.go.kr 경기관광공사 무슬림친화",
+  "sourceUrl": "https://www.data.go.kr/data/15099378/fileData.do",
+  "confidence": "high"
+ },
+ {
+  "name": {
+   "ko": "New bakso garuda"
+  },
+  "category": "halal",
+  "nationalities": [
+   "indonesia",
+   "halal"
+  ],
+  "address": {
+   "ko": "경기도 안산시 단원구 원곡동 787-17"
+  },
+  "region": "경기 안산시",
+  "phone": "031-493-0605",
+  "items": {
+   "ko": "인도네시아 음식"
+  },
+  "source": "data.go.kr 경기관광공사 무슬림친화",
+  "sourceUrl": "https://www.data.go.kr/data/15099378/fileData.do",
+  "confidence": "high"
+ },
+ {
+  "name": {
+   "ko": "긴자인도레스토랑"
+  },
+  "category": "halal",
+  "nationalities": [
+   "india",
+   "halal"
+  ],
+  "address": {
+   "ko": "안산시 단원구 광덕대로151 304호"
+  },
+  "region": "경기 안산시",
+  "phone": "031-405-3368",
+  "items": {
+   "ko": "인도 음식, 커리"
+  },
+  "source": "data.go.kr 경기관광공사 무슬림친화",
+  "sourceUrl": "https://www.data.go.kr/data/15099378/fileData.do",
+  "confidence": "high"
+ },
+ {
+  "name": {
+   "ko": "뉴타지마할"
+  },
+  "category": "halal",
+  "nationalities": [
+   "india",
+   "halal"
+  ],
+  "address": {
+   "ko": "안산시 단원구 다문화1길 49"
+  },
+  "region": "경기 안산시",
+  "phone": "031-492-7861",
+  "items": {
+   "ko": "인도 음식, 커리"
+  },
+  "source": "data.go.kr 경기관광공사 무슬림친화",
+  "sourceUrl": "https://www.data.go.kr/data/15099378/fileData.do",
+  "confidence": "high"
+ },
+ {
+  "name": {
+   "ko": "아시아믹스"
+  },
+  "category": "halal",
+  "nationalities": [
+   "pakistan",
+   "halal"
+  ],
+  "address": {
+   "ko": "안산시 단원구 다문화2길 22"
+  },
+  "region": "경기 안산시",
+  "phone": "031-494-7447",
+  "items": {
+   "ko": "인도·파키스탄 음식, 할랄"
+  },
+  "source": "data.go.kr 경기관광공사 무슬림친화",
+  "sourceUrl": "https://www.data.go.kr/data/15099378/fileData.do",
+  "confidence": "high"
+ },
+ {
+  "name": {
+   "ko": "린두알람"
+  },
+  "category": "halal",
+  "nationalities": [
+   "indonesia",
+   "halal"
+  ],
+  "address": {
+   "ko": "안산시 단원구 다문화길 18 2층"
+  },
+  "region": "경기 안산시",
+  "phone": "031-894-7778",
+  "items": {
+   "ko": "인도네시아 음식"
+  },
+  "source": "data.go.kr 경기관광공사 무슬림친화",
+  "sourceUrl": "https://www.data.go.kr/data/15099378/fileData.do",
+  "confidence": "high"
+ },
+ {
+  "name": {
+   "ko": "레아 인도네시아"
+  },
+  "category": "halal",
+  "nationalities": [
+   "indonesia",
+   "halal"
+  ],
+  "address": {
+   "ko": "안산시 단원구 중앙대로 453 2층"
+  },
+  "region": "경기 안산시",
+  "phone": "031-508-6685",
+  "items": {
+   "ko": "인도네시아 음식"
+  },
+  "source": "data.go.kr 경기관광공사 무슬림친화",
+  "sourceUrl": "https://www.data.go.kr/data/15099378/fileData.do",
+  "confidence": "high"
+ },
+ {
+  "name": {
+   "ko": "로얄레스토랑"
+  },
+  "category": "halal",
+  "nationalities": [
+   "indonesia",
+   "halal"
+  ],
+  "address": {
+   "ko": "안산시 단원구 원곡로23 2층"
+  },
+  "region": "경기 안산시",
+  "phone": "031-5127-3674",
+  "items": {
+   "ko": "인도네시아 음식"
+  },
+  "source": "data.go.kr 경기관광공사 무슬림친화",
+  "sourceUrl": "https://www.data.go.kr/data/15099378/fileData.do",
+  "confidence": "high"
+ },
+ {
+  "name": {
+   "ko": "바타비아"
+  },
+  "category": "halal",
+  "nationalities": [
+   "indonesia",
+   "halal"
+  ],
+  "address": {
+   "ko": "안산시 단원구 다문화길 4"
+  },
+  "region": "경기 안산시",
+  "phone": "031-493-6626",
+  "items": {
+   "ko": "인도네시아 음식"
+  },
+  "source": "data.go.kr 경기관광공사 무슬림친화",
+  "sourceUrl": "https://www.data.go.kr/data/15099378/fileData.do",
+  "confidence": "high"
+ },
+ {
+  "name": {
+   "ko": "후르셰다사마르칸트"
+  },
+  "category": "halal",
+  "nationalities": [
+   "uzbekistan",
+   "central-asia",
+   "halal"
+  ],
+  "address": {
+   "ko": "안산시 단원구 다문화2길 3"
+  },
+  "region": "경기 안산시",
+  "phone": "031-492-6984",
+  "items": {
+   "ko": "우즈베키스탄 음식"
+  },
+  "source": "data.go.kr 경기관광공사 무슬림친화",
+  "sourceUrl": "https://www.data.go.kr/data/15099378/fileData.do",
+  "confidence": "high"
+ },
+ {
+  "name": {
+   "ko": "임페리아"
+  },
+  "category": "halal",
+  "nationalities": [
+   "indonesia",
+   "halal"
+  ],
+  "address": {
+   "ko": "안산시 단원구 다문화2길 12"
+  },
+  "region": "경기 안산시",
+  "phone": "031-494-5734",
+  "items": {
+   "ko": "인도네시아 음식"
+  },
+  "source": "data.go.kr 경기관광공사 무슬림친화",
+  "sourceUrl": "https://www.data.go.kr/data/15099378/fileData.do",
+  "confidence": "high"
+ },
+ {
+  "name": {
+   "ko": "솔티 인도네팔 레스토랑"
+  },
+  "category": "halal",
+  "nationalities": [
+   "nepal",
+   "india",
+   "halal"
+  ],
+  "address": {
+   "ko": "안산시 단원구 중앙대로 453"
+  },
+  "region": "경기 안산시",
+  "phone": "031-492-7723",
+  "items": {
+   "ko": "인도·네팔 음식, 커리"
+  },
+  "source": "data.go.kr 경기관광공사 무슬림친화",
+  "sourceUrl": "https://www.data.go.kr/data/15099378/fileData.do",
+  "confidence": "high"
+ },
+ {
+  "name": {
+   "ko": "아시아나 레스토랑"
+  },
+  "category": "halal",
+  "nationalities": [
+   "india",
+   "halal"
+  ],
+  "address": {
+   "ko": "안산시 단원구 다문화2길 51"
+  },
+  "region": "경기 안산시",
+  "phone": "031-494-6167",
+  "items": {
+   "ko": "인도 음식, 커리"
+  },
+  "source": "data.go.kr 경기관광공사 무슬림친화",
+  "sourceUrl": "https://www.data.go.kr/data/15099378/fileData.do",
+  "confidence": "high"
+ },
+ {
+  "name": {
+   "ko": "RAYHON"
+  },
+  "category": "halal",
+  "nationalities": [
+   "uzbekistan",
+   "central-asia",
+   "halal"
+  ],
+  "address": {
+   "ko": "안산시 상록구 학사1길 2"
+  },
+  "region": "경기 안산시",
+  "phone": "031-406-1914",
+  "items": {
+   "ko": "우즈베키스탄 음식"
+  },
+  "source": "data.go.kr 경기관광공사 무슬림친화",
+  "sourceUrl": "https://www.data.go.kr/data/15099378/fileData.do",
+  "confidence": "high"
+ },
+ {
+  "name": {
+   "ko": "와룽키타"
+  },
+  "category": "halal",
+  "nationalities": [
+   "indonesia",
+   "halal"
+  ],
+  "address": {
+   "ko": "안산시 원곡본동 원본로 3"
+  },
+  "region": "경기 안산시",
+  "phone": "031-508-1103",
+  "items": {
+   "ko": "인도네시아 음식"
+  },
+  "source": "data.go.kr 경기관광공사 무슬림친화",
+  "sourceUrl": "https://www.data.go.kr/data/15099378/fileData.do",
+  "confidence": "high"
+ },
+ {
+  "name": {
+   "ko": "칸티푸르"
+  },
+  "category": "halal",
+  "nationalities": [
+   "nepal",
+   "india",
+   "halal"
+  ],
+  "address": {
+   "ko": "안산시 단원구 다문화2길 28"
+  },
+  "region": "경기 안산시",
+  "phone": "031-493-9563",
+  "items": {
+   "ko": "인도·네팔 음식, 커리"
+  },
+  "source": "data.go.kr 경기관광공사 무슬림친화",
+  "sourceUrl": "https://www.data.go.kr/data/15099378/fileData.do",
+  "confidence": "high"
+ },
+ {
+  "name": {
+   "ko": "카르티니"
+  },
+  "category": "halal",
+  "nationalities": [
+   "indonesia",
+   "halal"
+  ],
+  "address": {
+   "ko": "안산시 단원구 다문화1길 1 2층"
+  },
+  "region": "경기 안산시",
+  "phone": "031-493-4471",
+  "items": {
+   "ko": "인도네시아 음식"
+  },
+  "source": "data.go.kr 경기관광공사 무슬림친화",
+  "sourceUrl": "https://www.data.go.kr/data/15099378/fileData.do",
+  "confidence": "high"
+ },
+ {
+  "name": {
+   "ko": "아그라 스타필드안성점"
+  },
+  "category": "halal",
+  "nationalities": [
+   "india",
+   "halal"
+  ],
+  "address": {
+   "ko": "안성시 공도읍 서동대로 3930-39 1층 1337호"
+  },
+  "region": "경기 안성시",
+  "phone": "0507-1361-1695",
+  "items": {
+   "ko": "인도 음식, 커리"
+  },
+  "source": "data.go.kr 경기관광공사 무슬림친화",
+  "sourceUrl": "https://www.data.go.kr/data/15099378/fileData.do",
+  "confidence": "high"
+ },
+ {
+  "name": {
+   "ko": "긴자인도레스토랑"
+  },
+  "category": "halal",
+  "nationalities": [
+   "india",
+   "halal"
+  ],
+  "address": {
+   "ko": "안양시 동안구 평촌대로217번길 19"
+  },
+  "region": "경기 안양시",
+  "phone": "031-383-2223",
+  "items": {
+   "ko": "인도 음식, 커리"
+  },
+  "source": "data.go.kr 경기관광공사 무슬림친화",
+  "sourceUrl": "https://www.data.go.kr/data/15099378/fileData.do",
+  "confidence": "high"
+ },
+ {
+  "name": {
+   "ko": "이타지마할 인디안레스토랑"
+  },
+  "category": "halal",
+  "nationalities": [
+   "india",
+   "halal"
+  ],
+  "address": {
+   "ko": "오산시 대원로 8-8"
+  },
+  "region": "경기 오산시",
+  "phone": "031-374-0195",
+  "items": {
+   "ko": "인도 음식, 커리"
+  },
+  "source": "data.go.kr 경기관광공사 무슬림친화",
+  "sourceUrl": "https://www.data.go.kr/data/15099378/fileData.do",
+  "confidence": "high"
+ },
+ {
+  "name": {
+   "ko": "갠지스(보정점)"
+  },
+  "category": "halal",
+  "nationalities": [
+   "india",
+   "halal"
+  ],
+  "address": {
+   "ko": "용인시 기흥구 죽전로15번길 7-15"
+  },
+  "region": "경기 용인시",
+  "phone": "031-889-3434",
+  "items": {
+   "ko": "인도 음식, 커리"
+  },
+  "source": "data.go.kr 경기관광공사 무슬림친화",
+  "sourceUrl": "https://www.data.go.kr/data/15099378/fileData.do",
+  "confidence": "high"
+ },
+ {
+  "name": {
+   "ko": "두르가(의정부점)"
+  },
+  "category": "halal",
+  "nationalities": [
+   "nepal",
+   "india",
+   "halal"
+  ],
+  "address": {
+   "ko": "의정부시 태평로73번길 50"
+  },
+  "region": "경기 의정부시",
+  "phone": "031-848-4785",
+  "items": {
+   "ko": "인도·네팔 음식, 커리"
+  },
+  "source": "data.go.kr 경기관광공사 무슬림친화",
+  "sourceUrl": "https://www.data.go.kr/data/15099378/fileData.do",
+  "confidence": "high"
+ },
+ {
+  "name": {
+   "ko": "인도레스토랑 그레이"
+  },
+  "category": "halal",
+  "nationalities": [
+   "india",
+   "halal"
+  ],
+  "address": {
+   "ko": "파주시 경의로 1114 10층"
+  },
+  "region": "경기 파주시",
+  "phone": "031-949-9135",
+  "items": {
+   "ko": "인도 음식, 커리"
+  },
+  "source": "data.go.kr 경기관광공사 무슬림친화",
+  "sourceUrl": "https://www.data.go.kr/data/15099378/fileData.do",
+  "confidence": "high"
+ },
+ {
+  "name": {
+   "ko": "더 히말라얀"
+  },
+  "category": "halal",
+  "nationalities": [
+   "nepal",
+   "india",
+   "halal"
+  ],
+  "address": {
+   "ko": "파주시 새꽃로 194"
+  },
+  "region": "경기 파주시",
+  "phone": "031-943-2256",
+  "items": {
+   "ko": "인도·네팔 음식, 커리"
+  },
+  "source": "data.go.kr 경기관광공사 무슬림친화",
+  "sourceUrl": "https://www.data.go.kr/data/15099378/fileData.do",
+  "confidence": "high"
+ },
+ {
+  "name": {
+   "ko": "니자르케밥(평택점)"
+  },
+  "category": "halal",
+  "nationalities": [
+   "halal"
+  ],
+  "address": {
+   "ko": "평택시 팽성읍 안정쇼핑로2 2층"
+  },
+  "region": "경기 평택시",
+  "phone": "031-651-9951",
+  "items": {
+   "ko": "터키·중동 음식, 할랄"
+  },
+  "source": "data.go.kr 경기관광공사 무슬림친화",
+  "sourceUrl": "https://www.data.go.kr/data/15099378/fileData.do",
+  "confidence": "high"
+ },
+ {
+  "name": {
+   "ko": "모티마할험프리점"
+  },
+  "category": "halal",
+  "nationalities": [
+   "india",
+   "halal"
+  ],
+  "address": {
+   "ko": "평택시 평택1로9번길 8"
+  },
+  "region": "경기 평택시",
+  "phone": "031-616-3358",
+  "items": {
+   "ko": "인도 음식, 커리"
+  },
+  "source": "data.go.kr 경기관광공사 무슬림친화",
+  "sourceUrl": "https://www.data.go.kr/data/15099378/fileData.do",
+  "confidence": "high"
+ },
+ {
+  "name": {
+   "ko": "스파이스빌리지"
+  },
+  "category": "halal",
+  "nationalities": [
+   "india",
+   "halal"
+  ],
+  "address": {
+   "ko": "평택시 쇼핑로 17-1"
+  },
+  "region": "경기 평택시",
+  "phone": "031-668-4444",
+  "items": {
+   "ko": "인도 음식, 커리"
+  },
+  "source": "data.go.kr 경기관광공사 무슬림친화",
+  "sourceUrl": "https://www.data.go.kr/data/15099378/fileData.do",
+  "confidence": "high"
+ },
+ {
+  "name": {
+   "ko": "에베레스트(스타필드 하남점)"
+  },
+  "category": "halal",
+  "nationalities": [
+   "india",
+   "halal"
+  ],
+  "address": {
+   "ko": "하남시 미사대로 750"
+  },
+  "region": "경기 하남시",
+  "phone": "031-8072-8289",
+  "items": {
+   "ko": "인도 음식, 커리"
+  },
+  "source": "data.go.kr 경기관광공사 무슬림친화",
+  "sourceUrl": "https://www.data.go.kr/data/15099378/fileData.do",
+  "confidence": "high"
+ },
+ {
+  "name": {
+   "ko": "갠지스(1동탄점)"
+  },
+  "category": "halal",
+  "nationalities": [
+   "india",
+   "halal"
+  ],
+  "address": {
+   "ko": "화성시 동탄공원로2길 33-11"
+  },
+  "region": "경기 화성시",
+  "phone": "031-613-9575",
+  "items": {
+   "ko": "인도 음식, 커리"
+  },
+  "source": "data.go.kr 경기관광공사 무슬림친화",
+  "sourceUrl": "https://www.data.go.kr/data/15099378/fileData.do",
+  "confidence": "high"
+ },
+ {
+  "name": {
+   "ko": "ZAMZAM"
+  },
+  "category": "halal",
+  "nationalities": [
+   "uzbekistan",
+   "central-asia",
+   "halal"
+  ],
+  "address": {
+   "ko": "화성시 향남읍 3.1만세로 1130"
+  },
+  "region": "경기 화성시",
+  "phone": "070-4255-1786",
+  "items": {
+   "ko": "우즈베키스탄 음식"
+  },
+  "source": "data.go.kr 경기관광공사 무슬림친화",
+  "sourceUrl": "https://www.data.go.kr/data/15099378/fileData.do",
+  "confidence": "high"
+ },
+ {
+  "name": {
+   "ko": "발안 인도네시아"
+  },
+  "category": "halal",
+  "nationalities": [
+   "indonesia",
+   "halal"
+  ],
+  "address": {
+   "ko": "화성시 향남읍 3.1만세로 1133"
+  },
+  "region": "경기 화성시",
+  "phone": "070-8844-0340",
+  "items": {
+   "ko": "인도네시아 음식"
+  },
+  "source": "data.go.kr 경기관광공사 무슬림친화",
+  "sourceUrl": "https://www.data.go.kr/data/15099378/fileData.do",
+  "confidence": "high"
+ },
+ {
+  "name": {
+   "ko": "수엠부(동탄점)"
+  },
+  "category": "halal",
+  "nationalities": [
+   "nepal",
+   "india",
+   "halal"
+  ],
+  "address": {
+   "ko": "화성시 노작로4길 18-15"
+  },
+  "region": "경기 화성시",
+  "phone": "031-8015-2494",
+  "items": {
+   "ko": "인도·네팔 음식, 커리"
+  },
+  "source": "data.go.kr 경기관광공사 무슬림친화",
+  "sourceUrl": "https://www.data.go.kr/data/15099378/fileData.do",
+  "confidence": "high"
+ },
+ {
+  "name": {
+   "ko": "파르투내레스토랑"
+  },
+  "category": "halal",
+  "nationalities": [
+   "uzbekistan",
+   "central-asia",
+   "halal"
+  ],
+  "address": {
+   "ko": "화성시 남양읍 남양시장로 88"
+  },
+  "region": "경기 화성시",
+  "phone": "031-356-9777",
+  "items": {
+   "ko": "우즈베키스탄 음식"
+  },
+  "source": "data.go.kr 경기관광공사 무슬림친화",
+  "sourceUrl": "https://www.data.go.kr/data/15099378/fileData.do",
+  "confidence": "high"
+ },
+ {
+  "name": {
+   "ko": "구강춘"
+  },
+  "category": "restaurant",
+  "nationalities": [
+   "china"
+  ],
+  "address": {
+   "ko": "경상남도 김해시 진영읍 진영로 150"
+  },
+  "region": "경남 김해시",
+  "phone": "",
+  "items": {
+   "ko": "중국 음식"
+  },
+  "source": "data.go.kr 김해시 외국인음식점",
+  "sourceUrl": "https://www.data.go.kr/data/15092353/fileData.do",
+  "confidence": "high"
+ },
+ {
+  "name": {
+   "ko": "식이네쪽갈비"
+  },
+  "category": "restaurant",
+  "nationalities": [
+   "china"
+  ],
+  "address": {
+   "ko": "경상남도 김해시 번화1로114번길 7-14 (삼문동)"
+  },
+  "region": "경남 김해시",
+  "phone": "",
+  "items": {
+   "ko": "중국 음식"
+  },
+  "source": "data.go.kr 김해시 외국인음식점",
+  "sourceUrl": "https://www.data.go.kr/data/15092353/fileData.do",
+  "confidence": "medium"
+ },
+ {
+  "name": {
+   "ko": "러시아 음식점 VIKTORIYA"
+  },
+  "category": "restaurant",
+  "nationalities": [
+   "uzbekistan",
+   "central-asia"
+  ],
+  "address": {
+   "ko": "경상남도 김해시 호계로499번길 8-11 (동상동)"
+  },
+  "region": "경남 김해시",
+  "phone": "",
+  "items": {
+   "ko": "우즈베키스탄 음식"
+  },
+  "source": "data.go.kr 김해시 외국인음식점",
+  "sourceUrl": "https://www.data.go.kr/data/15092353/fileData.do",
+  "confidence": "high"
+ },
+ {
+  "name": {
+   "ko": "빈땅레스토 BINTANG RESTO"
+  },
+  "category": "restaurant",
+  "nationalities": [
+   "indonesia"
+  ],
+  "address": {
+   "ko": "경상남도 김해시 분성로335번길 11 (서상동,외1필지 2층)"
+  },
+  "region": "경남 김해시",
+  "phone": "",
+  "items": {
+   "ko": "인도네시아 음식"
+  },
+  "source": "data.go.kr 김해시 외국인음식점",
+  "sourceUrl": "https://www.data.go.kr/data/15092353/fileData.do",
+  "confidence": "medium"
+ },
+ {
+  "name": {
+   "ko": "미바밋타"
+  },
+  "category": "restaurant",
+  "nationalities": [
+   "myanmar"
+  ],
+  "address": {
+   "ko": "경상남도 김해시 가락로86번길 5-16 (서상동)"
+  },
+  "region": "경남 김해시",
+  "phone": "",
+  "items": {
+   "ko": "미얀마 음식"
+  },
+  "source": "data.go.kr 김해시 외국인음식점",
+  "sourceUrl": "https://www.data.go.kr/data/15092353/fileData.do",
+  "confidence": "medium"
+ },
+ {
+  "name": {
+   "ko": "유앤미(You and me)"
+  },
+  "category": "restaurant",
+  "nationalities": [
+   "myanmar"
+  ],
+  "address": {
+   "ko": "경상남도 김해시 분성로 330-20 (서상동)"
+  },
+  "region": "경남 김해시",
+  "phone": "",
+  "items": {
+   "ko": "미얀마 음식"
+  },
+  "source": "data.go.kr 김해시 외국인음식점",
+  "sourceUrl": "https://www.data.go.kr/data/15092353/fileData.do",
+  "confidence": "medium"
+ },
+ {
+  "name": {
+   "ko": "짜이링(JEE LEANG) 999"
+  },
+  "category": "restaurant",
+  "nationalities": [
+   "cambodia"
+  ],
+  "address": {
+   "ko": "경상남도 김해시 가락로86번길 8-2 (서상동)"
+  },
+  "region": "경남 김해시",
+  "phone": "",
+  "items": {
+   "ko": "캄보디아 음식"
+  },
+  "source": "data.go.kr 김해시 외국인음식점",
+  "sourceUrl": "https://www.data.go.kr/data/15092353/fileData.do",
+  "confidence": "medium"
+ },
+ {
+  "name": {
+   "ko": "타이음식점"
+  },
+  "category": "restaurant",
+  "nationalities": [
+   "thai"
+  ],
+  "address": {
+   "ko": "경상남도 김해시 분성로336번길 23-1 (부원동)"
+  },
+  "region": "경남 김해시",
+  "phone": "",
+  "items": {
+   "ko": "태국 음식"
+  },
+  "source": "data.go.kr 김해시 외국인음식점",
+  "sourceUrl": "https://www.data.go.kr/data/15092353/fileData.do",
+  "confidence": "high"
+ },
+ {
+  "name": {
+   "ko": "예양꼬치"
+  },
+  "category": "restaurant",
+  "nationalities": [
+   "china"
+  ],
+  "address": {
+   "ko": "경상남도 김해시 분성로 327-14 (서상동)"
+  },
+  "region": "경남 김해시",
+  "phone": "",
+  "items": {
+   "ko": "중국 음식"
+  },
+  "source": "data.go.kr 김해시 외국인음식점",
+  "sourceUrl": "https://www.data.go.kr/data/15092353/fileData.do",
+  "confidence": "medium"
+ },
+ {
+  "name": {
+   "ko": "브쿠스노프(BKYCHOFF)"
+  },
+  "category": "restaurant",
+  "nationalities": [
+   "uzbekistan",
+   "central-asia"
+  ],
+  "address": {
+   "ko": "경상남도 김해시 진영읍 장등로6번길 49"
+  },
+  "region": "경남 김해시",
+  "phone": "",
+  "items": {
+   "ko": "우즈베키스탄 음식"
+  },
+  "source": "data.go.kr 김해시 외국인음식점",
+  "sourceUrl": "https://www.data.go.kr/data/15092353/fileData.do",
+  "confidence": "medium"
+ },
+ {
+  "name": {
+   "ko": "따군"
+  },
+  "category": "restaurant",
+  "nationalities": [
+   "myanmar"
+  ],
+  "address": {
+   "ko": "경상남도 김해시 분성로336번길 12, 2층 (서상동)"
+  },
+  "region": "경남 김해시",
+  "phone": "",
+  "items": {
+   "ko": "미얀마 음식"
+  },
+  "source": "data.go.kr 김해시 외국인음식점",
+  "sourceUrl": "https://www.data.go.kr/data/15092353/fileData.do",
+  "confidence": "high"
+ },
+ {
+  "name": {
+   "ko": "인도네시아레스토랑"
+  },
+  "category": "restaurant",
+  "nationalities": [
+   "indonesia"
+  ],
+  "address": {
+   "ko": "경상남도 김해시 분성로335번길 24, 2층 (동상동)"
+  },
+  "region": "경남 김해시",
+  "phone": "",
+  "items": {
+   "ko": "인도네시아 음식"
+  },
+  "source": "data.go.kr 김해시 외국인음식점",
+  "sourceUrl": "https://www.data.go.kr/data/15092353/fileData.do",
+  "confidence": "high"
+ },
+ {
+  "name": {
+   "ko": "사마르간드"
+  },
+  "category": "restaurant",
+  "nationalities": [
+   "central-asia"
+  ],
+  "address": {
+   "ko": "경상남도 김해시 가락로94번길 4, 2층 (서상동)"
+  },
+  "region": "경남 김해시",
+  "phone": "",
+  "items": {
+   "ko": "중앙아시아 음식"
+  },
+  "source": "data.go.kr 김해시 외국인음식점",
+  "sourceUrl": "https://www.data.go.kr/data/15092353/fileData.do",
+  "confidence": "high"
+ },
+ {
+  "name": {
+   "ko": "스카이(SKY BILLARDS CLUB)"
+  },
+  "category": "restaurant",
+  "nationalities": [
+   "vietnam"
+  ],
+  "address": {
+   "ko": "경상남도 김해시 호계로499번길 15, 5층 (동상동)"
+  },
+  "region": "경남 김해시",
+  "phone": "",
+  "items": {
+   "ko": "베트남 음식"
+  },
+  "source": "data.go.kr 김해시 외국인음식점",
+  "sourceUrl": "https://www.data.go.kr/data/15092353/fileData.do",
+  "confidence": "medium"
+ },
+ {
+  "name": {
+   "ko": "젤조아 달콤베이커리"
+  },
+  "category": "restaurant",
+  "nationalities": [
+   "china"
+  ],
+  "address": {
+   "ko": "경상남도 김해시 가락로49번길 9, 2층 (부원동)"
+  },
+  "region": "경남 김해시",
+  "phone": "",
+  "items": {
+   "ko": "중국 음식"
+  },
+  "source": "data.go.kr 김해시 외국인음식점",
+  "sourceUrl": "https://www.data.go.kr/data/15092353/fileData.do",
+  "confidence": "medium"
+ },
+ {
+  "name": {
+   "ko": "루마마칸판투라(RUMAH MAKAN PANTURA)"
+  },
+  "category": "restaurant",
+  "nationalities": [
+   "indonesia"
+  ],
+  "address": {
+   "ko": "경상남도 김해시 분성로 315, 2층 (서상동)"
+  },
+  "region": "경남 김해시",
+  "phone": "",
+  "items": {
+   "ko": "인도네시아 음식"
+  },
+  "source": "data.go.kr 김해시 외국인음식점",
+  "sourceUrl": "https://www.data.go.kr/data/15092353/fileData.do",
+  "confidence": "high"
+ },
+ {
+  "name": {
+   "ko": "양꼬치샤슬릭&빵"
+  },
+  "category": "restaurant",
+  "nationalities": [
+   "central-asia"
+  ],
+  "address": {
+   "ko": "경상남도 김해시 진영읍 여래로 42"
+  },
+  "region": "경남 김해시",
+  "phone": "",
+  "items": {
+   "ko": "중앙아시아 음식"
+  },
+  "source": "data.go.kr 김해시 외국인음식점",
+  "sourceUrl": "https://www.data.go.kr/data/15092353/fileData.do",
+  "confidence": "medium"
+ },
+ {
+  "name": {
+   "ko": "크로아똔쿤"
+  },
+  "category": "restaurant",
+  "nationalities": [
+   "thai"
+  ],
+  "address": {
+   "ko": "경상남도 김해시 가락로30번길 13, 104호 (부원동)"
+  },
+  "region": "경남 김해시",
+  "phone": "",
+  "items": {
+   "ko": "태국 음식"
+  },
+  "source": "data.go.kr 김해시 외국인음식점",
+  "sourceUrl": "https://www.data.go.kr/data/15092353/fileData.do",
+  "confidence": "medium"
+ },
+ {
+  "name": {
+   "ko": "밀라르트(MILLART)"
+  },
+  "category": "restaurant",
+  "nationalities": [
+   "central-asia"
+  ],
+  "address": {
+   "ko": "경상남도 김해시 구지로136번길 15, 해비치빌 1층 (대성동)"
+  },
+  "region": "경남 김해시",
+  "phone": "",
+  "items": {
+   "ko": "중앙아시아 음식"
+  },
+  "source": "data.go.kr 김해시 외국인음식점",
+  "sourceUrl": "https://www.data.go.kr/data/15092353/fileData.do",
+  "confidence": "medium"
+ },
+ {
+  "name": {
+   "ko": "라화쿵부 김해인제대점"
+  },
+  "category": "restaurant",
+  "nationalities": [
+   "china"
+  ],
+  "address": {
+   "ko": "경상남도 김해시 인제로 196, 나라타워프라자 301호 (어방동)"
+  },
+  "region": "경남 김해시",
+  "phone": "",
+  "items": {
+   "ko": "중국 음식"
+  },
+  "source": "data.go.kr 김해시 외국인음식점",
+  "sourceUrl": "https://www.data.go.kr/data/15092353/fileData.do",
+  "confidence": "high"
+ },
+ {
+  "name": {
+   "ko": "(주)딜샤드난바이 김해지점"
+  },
+  "category": "restaurant",
+  "nationalities": [
+   "russia"
+  ],
+  "address": {
+   "ko": "경상남도 김해시 분성로335번길 12-1, 2층 (동상동)"
+  },
+  "region": "경남 김해시",
+  "phone": "",
+  "items": {
+   "ko": "러시아 음식"
+  },
+  "source": "data.go.kr 김해시 외국인음식점",
+  "sourceUrl": "https://www.data.go.kr/data/15092353/fileData.do",
+  "confidence": "high"
+ },
+ {
+  "name": {
+   "ko": "타코"
+  },
+  "category": "restaurant",
+  "nationalities": [
+   "russia"
+  ],
+  "address": {
+   "ko": "경상남도 김해시 진영읍 김해대로332번길 35, 1층"
+  },
+  "region": "경남 김해시",
+  "phone": "",
+  "items": {
+   "ko": "러시아 음식"
+  },
+  "source": "data.go.kr 김해시 외국인음식점",
+  "sourceUrl": "https://www.data.go.kr/data/15092353/fileData.do",
+  "confidence": "medium"
+ },
+ {
+  "name": {
+   "ko": "주식회사 에베레스트 뷰 레스토랑 엔 바"
+  },
+  "category": "restaurant",
+  "nationalities": [
+   "nepal"
+  ],
+  "address": {
+   "ko": "경상남도 김해시 가락로94번길 5-5, 3층 (서상동)"
+  },
+  "region": "경남 김해시",
+  "phone": "",
+  "items": {
+   "ko": "네팔 음식"
+  },
+  "source": "data.go.kr 김해시 외국인음식점",
+  "sourceUrl": "https://www.data.go.kr/data/15092353/fileData.do",
+  "confidence": "high"
+ },
+ {
+  "name": {
+   "ko": "주식회사 오타시트레이딩"
+  },
+  "category": "restaurant",
+  "nationalities": [
+   "uzbekistan",
+   "central-asia"
+  ],
+  "address": {
+   "ko": "경상남도 김해시 분성로 335, 1층 (서상동)"
+  },
+  "region": "경남 김해시",
+  "phone": "",
+  "items": {
+   "ko": "우즈베키스탄 음식"
+  },
+  "source": "data.go.kr 김해시 외국인음식점",
+  "sourceUrl": "https://www.data.go.kr/data/15092353/fileData.do",
+  "confidence": "high"
+ },
+ {
+  "name": {
+   "ko": "오타시카섭밀리타옴"
+  },
+  "category": "restaurant",
+  "nationalities": [
+   "uzbekistan",
+   "central-asia"
+  ],
+  "address": {
+   "ko": "경상남도 김해시 분성로335번길 2, 1층 (동상동)"
+  },
+  "region": "경남 김해시",
+  "phone": "",
+  "items": {
+   "ko": "우즈베키스탄 음식"
+  },
+  "source": "data.go.kr 김해시 외국인음식점",
+  "sourceUrl": "https://www.data.go.kr/data/15092353/fileData.do",
+  "confidence": "high"
+ },
+ {
+  "name": {
+   "ko": "디돌(DIYDOR)"
+  },
+  "category": "restaurant",
+  "nationalities": [
+   "uzbekistan",
+   "central-asia"
+  ],
+  "address": {
+   "ko": "경상남도 김해시 진영읍 김해대로407번길 40-18, 1층"
+  },
+  "region": "경남 김해시",
+  "phone": "",
+  "items": {
+   "ko": "우즈베키스탄 음식"
+  },
+  "source": "data.go.kr 김해시 외국인음식점",
+  "sourceUrl": "https://www.data.go.kr/data/15092353/fileData.do",
+  "confidence": "high"
+ },
+ {
+  "name": {
+   "ko": "바로카 패밀리 레스토랑"
+  },
+  "category": "restaurant",
+  "nationalities": [
+   "indonesia"
+  ],
+  "address": {
+   "ko": "경상남도 김해시 가락로 99, 1층 (서상동)"
+  },
+  "region": "경남 김해시",
+  "phone": "",
+  "items": {
+   "ko": "인도네시아 음식"
+  },
+  "source": "data.go.kr 김해시 외국인음식점",
+  "sourceUrl": "https://www.data.go.kr/data/15092353/fileData.do",
+  "confidence": "high"
+ },
+ {
+  "name": {
+   "ko": "모지 타이푸드"
+  },
+  "category": "restaurant",
+  "nationalities": [
+   "thai"
+  ],
+  "address": {
+   "ko": "경상남도 김해시 금관대로1190번길 55-8, 1층 (외동)"
+  },
+  "region": "경남 김해시",
+  "phone": "",
+  "items": {
+   "ko": "태국 음식"
+  },
+  "source": "data.go.kr 김해시 외국인음식점",
+  "sourceUrl": "https://www.data.go.kr/data/15092353/fileData.do",
+  "confidence": "high"
+ },
+ {
+  "name": {
+   "ko": "취향마라 외동점"
+  },
+  "category": "restaurant",
+  "nationalities": [
+   "china"
+  ],
+  "address": {
+   "ko": "경상남도 김해시 함박로101번길 18, 한성B/D 204호 (외동)"
+  },
+  "region": "경남 김해시",
+  "phone": "",
+  "items": {
+   "ko": "중국 음식"
+  },
+  "source": "data.go.kr 김해시 외국인음식점",
+  "sourceUrl": "https://www.data.go.kr/data/15092353/fileData.do",
+  "confidence": "high"
+ },
+ {
+  "name": {
+   "ko": "향리원마라탕"
+  },
+  "category": "restaurant",
+  "nationalities": [
+   "china"
+  ],
+  "address": {
+   "ko": "경상남도 김해시 율하3로 31, 위너스빌딩 101호 (율하동)"
+  },
+  "region": "경남 김해시",
+  "phone": "",
+  "items": {
+   "ko": "중국 음식"
+  },
+  "source": "data.go.kr 김해시 외국인음식점",
+  "sourceUrl": "https://www.data.go.kr/data/15092353/fileData.do",
+  "confidence": "high"
+ },
+ {
+  "name": {
+   "ko": "초원양꼬치"
+  },
+  "category": "restaurant",
+  "nationalities": [
+   "china"
+  ],
+  "address": {
+   "ko": "경상남도 김해시 율하7로 13, 1층 (장유동)"
+  },
+  "region": "경남 김해시",
+  "phone": "",
+  "items": {
+   "ko": "중국 음식"
+  },
+  "source": "data.go.kr 김해시 외국인음식점",
+  "sourceUrl": "https://www.data.go.kr/data/15092353/fileData.do",
+  "confidence": "medium"
+ },
+ {
+  "name": {
+   "ko": "6000냥 솥뚜껑 생삼겹살"
+  },
+  "category": "restaurant",
+  "nationalities": [
+   "china"
+  ],
+  "address": {
+   "ko": "경상남도 김해시 내외중앙로 53, 2층 203호 (내동)"
+  },
+  "region": "경남 김해시",
+  "phone": "",
+  "items": {
+   "ko": "중국 음식"
+  },
+  "source": "data.go.kr 김해시 외국인음식점",
+  "sourceUrl": "https://www.data.go.kr/data/15092353/fileData.do",
+  "confidence": "medium"
+ },
+ {
+  "name": {
+   "ko": "향리원마라탕 김해삼계점"
+  },
+  "category": "restaurant",
+  "nationalities": [
+   "china"
+  ],
+  "address": {
+   "ko": "경상남도 김해시 삼계중앙로 38, 1층 102호 (삼계동)"
+  },
+  "region": "경남 김해시",
+  "phone": "",
+  "items": {
+   "ko": "중국 음식"
+  },
+  "source": "data.go.kr 김해시 외국인음식점",
+  "sourceUrl": "https://www.data.go.kr/data/15092353/fileData.do",
+  "confidence": "high"
+ },
+ {
+  "name": {
+   "ko": "향만원 중국쌀국수&튀김꼬치"
+  },
+  "category": "restaurant",
+  "nationalities": [
+   "china"
+  ],
+  "address": {
+   "ko": "경상남도 김해시 가락로86번길 5-30, 1층 (서상동)"
+  },
+  "region": "경남 김해시",
+  "phone": "",
+  "items": {
+   "ko": "중국 음식"
+  },
+  "source": "data.go.kr 김해시 외국인음식점",
+  "sourceUrl": "https://www.data.go.kr/data/15092353/fileData.do",
+  "confidence": "high"
+ },
+ {
+  "name": {
+   "ko": "콴고두엔(Quan Co Duyen)"
+  },
+  "category": "restaurant",
+  "nationalities": [
+   "vietnam"
+  ],
+  "address": {
+   "ko": "경상남도 김해시 분성로 328, 1층 (서상동)"
+  },
+  "region": "경남 김해시",
+  "phone": "",
+  "items": {
+   "ko": "베트남 음식"
+  },
+  "source": "data.go.kr 김해시 외국인음식점",
+  "sourceUrl": "https://www.data.go.kr/data/15092353/fileData.do",
+  "confidence": "high"
+ },
+ {
+  "name": {
+   "ko": "펠메쉬카(PELMESHKA)"
+  },
+  "category": "restaurant",
+  "nationalities": [
+   "uzbekistan",
+   "central-asia"
+  ],
+  "address": {
+   "ko": "경상남도 김해시 분성로 342, 2층 (동상동)"
+  },
+  "region": "경남 김해시",
+  "phone": "",
+  "items": {
+   "ko": "우즈베키스탄 음식"
+  },
+  "source": "data.go.kr 김해시 외국인음식점",
+  "sourceUrl": "https://www.data.go.kr/data/15092353/fileData.do",
+  "confidence": "medium"
+ },
+ {
+  "name": {
+   "ko": "방글라푸드(BANGLA FOOD)"
+  },
+  "category": "restaurant",
+  "nationalities": [
+   "bangladesh"
+  ],
+  "address": {
+   "ko": "경상남도 김해시 가락로86번길 5-5, 1층 (서상동)"
+  },
+  "region": "경남 김해시",
+  "phone": "",
+  "items": {
+   "ko": "방글라데시 음식"
+  },
+  "source": "data.go.kr 김해시 외국인음식점",
+  "sourceUrl": "https://www.data.go.kr/data/15092353/fileData.do",
+  "confidence": "high"
+ },
+ {
+  "name": {
+   "ko": "가르모니야 브쿠사(Garmoniya vkusa)"
+  },
+  "category": "restaurant",
+  "nationalities": [
+   "central-asia"
+  ],
+  "address": {
+   "ko": "경상남도 김해시 가야로181번길 9-8, 1층 (삼계동)"
+  },
+  "region": "경남 김해시",
+  "phone": "",
+  "items": {
+   "ko": "중앙아시아 음식"
+  },
+  "source": "data.go.kr 김해시 외국인음식점",
+  "sourceUrl": "https://www.data.go.kr/data/15092353/fileData.do",
+  "confidence": "medium"
+ },
+ {
+  "name": {
+   "ko": "더 베스트"
+  },
+  "category": "restaurant",
+  "nationalities": [
+   "thai"
+  ],
+  "address": {
+   "ko": "경상남도 김해시 진례면 진례로256번길 10, 2층"
+  },
+  "region": "경남 김해시",
+  "phone": "",
+  "items": {
+   "ko": "태국 음식"
+  },
+  "source": "data.go.kr 김해시 외국인음식점",
+  "sourceUrl": "https://www.data.go.kr/data/15092353/fileData.do",
+  "confidence": "medium"
+ },
+ {
+  "name": {
+   "ko": "케이엠푸드"
+  },
+  "category": "restaurant",
+  "nationalities": [
+   "china"
+  ],
+  "address": {
+   "ko": "경상남도 김해시 진례면 송현로 58, A동 1층"
+  },
+  "region": "경남 김해시",
+  "phone": "",
+  "items": {
+   "ko": "중국 음식"
+  },
+  "source": "data.go.kr 김해시 외국인음식점",
+  "sourceUrl": "https://www.data.go.kr/data/15092353/fileData.do",
+  "confidence": "medium"
+ },
+ {
+  "name": {
+   "ko": "(주)더히말라야"
+  },
+  "category": "restaurant",
+  "nationalities": [
+   "nepal"
+  ],
+  "address": {
+   "ko": "경상남도 김해시 가락로 97, 2층 (서상동)"
+  },
+  "region": "경남 김해시",
+  "phone": "",
+  "items": {
+   "ko": "네팔 음식"
+  },
+  "source": "data.go.kr 김해시 외국인음식점",
+  "sourceUrl": "https://www.data.go.kr/data/15092353/fileData.do",
+  "confidence": "high"
+ },
+ {
+  "name": {
+   "ko": "천라쿵푸마라탕(장유점)"
+  },
+  "category": "restaurant",
+  "nationalities": [
+   "china"
+  ],
+  "address": {
+   "ko": "경상남도 김해시 능동로149번길 8, 일진프라자 1층 101-1호 (부곡동)"
+  },
+  "region": "경남 김해시",
+  "phone": "",
+  "items": {
+   "ko": "중국 음식"
+  },
+  "source": "data.go.kr 김해시 외국인음식점",
+  "sourceUrl": "https://www.data.go.kr/data/15092353/fileData.do",
+  "confidence": "high"
+ },
+ {
+  "name": {
+   "ko": "아시아_플러스34(ASIA_PLUS34)"
+  },
+  "category": "restaurant",
+  "nationalities": [
+   "russia"
+  ],
+  "address": {
+   "ko": "경상남도 김해시 호계로 498-1 (동상동)"
+  },
+  "region": "경남 김해시",
+  "phone": "",
+  "items": {
+   "ko": "러시아 음식"
+  },
+  "source": "data.go.kr 김해시 외국인음식점",
+  "sourceUrl": "https://www.data.go.kr/data/15092353/fileData.do",
+  "confidence": "medium"
+ },
+ {
+  "name": {
+   "ko": "탕화쿵푸마라탕 김해주촌점"
+  },
+  "category": "restaurant",
+  "nationalities": [
+   "china"
+  ],
+  "address": {
+   "ko": "경상남도 김해시 주촌면 천곡로 9, 1층 102호"
+  },
+  "region": "경남 김해시",
+  "phone": "",
+  "items": {
+   "ko": "중국 음식"
+  },
+  "source": "data.go.kr 김해시 외국인음식점",
+  "sourceUrl": "https://www.data.go.kr/data/15092353/fileData.do",
+  "confidence": "high"
+ },
+ {
+  "name": {
+   "ko": "엑스프레스(Express)"
+  },
+  "category": "restaurant",
+  "nationalities": [
+   "uzbekistan",
+   "central-asia"
+  ],
+  "address": {
+   "ko": "경상남도 김해시 진영읍 장등로 32, 1층"
+  },
+  "region": "경남 김해시",
+  "phone": "",
+  "items": {
+   "ko": "우즈베키스탄 음식"
+  },
+  "source": "data.go.kr 김해시 외국인음식점",
+  "sourceUrl": "https://www.data.go.kr/data/15092353/fileData.do",
+  "confidence": "medium"
+ },
+ {
+  "name": {
+   "ko": "프엉뉴(PHUONG NHU)"
+  },
+  "category": "restaurant",
+  "nationalities": [
+   "vietnam"
+  ],
+  "address": {
+   "ko": "경상남도 김해시 분성로 345-19, 1층 (동상동)"
+  },
+  "region": "경남 김해시",
+  "phone": "",
+  "items": {
+   "ko": "베트남 음식"
+  },
+  "source": "data.go.kr 김해시 외국인음식점",
+  "sourceUrl": "https://www.data.go.kr/data/15092353/fileData.do",
+  "confidence": "high"
+ },
+ {
+  "name": {
+   "ko": "범이네 붕어빵호떡"
+  },
+  "category": "restaurant",
+  "nationalities": [
+   "china"
+  ],
+  "address": {
+   "ko": "경상남도 김해시 진영읍 진산대로 65, 금선빌딩 1층"
+  },
+  "region": "경남 김해시",
+  "phone": "",
+  "items": {
+   "ko": "중국 음식"
+  },
+  "source": "data.go.kr 김해시 외국인음식점",
+  "sourceUrl": "https://www.data.go.kr/data/15092353/fileData.do",
+  "confidence": "medium"
+ },
+ {
+  "name": {
+   "ko": "만두집옐레나"
+  },
+  "category": "restaurant",
+  "nationalities": [
+   "uzbekistan",
+   "central-asia"
+  ],
+  "address": {
+   "ko": "경상남도 김해시 호계로 493, 1층 (동상동)"
+  },
+  "region": "경남 김해시",
+  "phone": "",
+  "items": {
+   "ko": "우즈베키스탄 음식"
+  },
+  "source": "data.go.kr 김해시 외국인음식점",
+  "sourceUrl": "https://www.data.go.kr/data/15092353/fileData.do",
+  "confidence": "medium"
+ },
+ {
+  "name": {
+   "ko": "미소짬뽕"
+  },
+  "category": "restaurant",
+  "nationalities": [
+   "vietnam"
+  ],
+  "address": {
+   "ko": "경상남도 김해시 내외중앙로 69, 1층 116,117호 (내동)"
+  },
+  "region": "경남 김해시",
+  "phone": "",
+  "items": {
+   "ko": "베트남 음식"
+  },
+  "source": "data.go.kr 김해시 외국인음식점",
+  "sourceUrl": "https://www.data.go.kr/data/15092353/fileData.do",
+  "confidence": "high"
+ },
+ {
+  "name": {
+   "ko": "우골록(UGOLOK)"
+  },
+  "category": "restaurant",
+  "nationalities": [
+   "uzbekistan",
+   "central-asia"
+  ],
+  "address": {
+   "ko": "경상남도 김해시 호계로 498-1, 1층 (동상동)"
+  },
+  "region": "경남 김해시",
+  "phone": "",
+  "items": {
+   "ko": "우즈베키스탄 음식"
+  },
+  "source": "data.go.kr 김해시 외국인음식점",
+  "sourceUrl": "https://www.data.go.kr/data/15092353/fileData.do",
+  "confidence": "medium"
+ },
+ {
+  "name": {
+   "ko": "미스터프레지던트(Mr.President)"
+  },
+  "category": "restaurant",
+  "nationalities": [
+   "myanmar"
+  ],
+  "address": {
+   "ko": "경상남도 김해시 가락로 76-1, 2층 (서상동)"
+  },
+  "region": "경남 김해시",
+  "phone": "",
+  "items": {
+   "ko": "미얀마 음식"
+  },
+  "source": "data.go.kr 김해시 외국인음식점",
+  "sourceUrl": "https://www.data.go.kr/data/15092353/fileData.do",
+  "confidence": "high"
+ },
+ {
+  "name": {
+   "ko": "라사천마라탕&공시우육면 홈플러스김해점"
+  },
+  "category": "restaurant",
+  "nationalities": [
+   "china"
+  ],
+  "address": {
+   "ko": "경상남도 김해시 김해대로 2078 (내동)"
+  },
+  "region": "경남 김해시",
+  "phone": "",
+  "items": {
+   "ko": "중국 음식"
+  },
+  "source": "data.go.kr 김해시 외국인음식점",
+  "sourceUrl": "https://www.data.go.kr/data/15092353/fileData.do",
+  "confidence": "high"
+ },
+ {
+  "name": {
+   "ko": "버미스키친(BURMESE KITCHEN)"
+  },
+  "category": "restaurant",
+  "nationalities": [
+   "myanmar"
+  ],
+  "address": {
+   "ko": "경상남도 김해시 분성로 329, 2층 일부호 (서상동)"
+  },
+  "region": "경남 김해시",
+  "phone": "",
+  "items": {
+   "ko": "미얀마 음식"
+  },
+  "source": "data.go.kr 김해시 외국인음식점",
+  "sourceUrl": "https://www.data.go.kr/data/15092353/fileData.do",
+  "confidence": "high"
+ },
+ {
+  "name": {
+   "ko": "창성양꼬치우육면 내동직영점"
+  },
+  "category": "restaurant",
+  "nationalities": [
+   "china"
+  ],
+  "address": {
+   "ko": "경상남도 김해시 경원로73번길 15, 경보 더:숨시티 118,119호 (내동)"
+  },
+  "region": "경남 김해시",
+  "phone": "",
+  "items": {
+   "ko": "중국 음식"
+  },
+  "source": "data.go.kr 김해시 외국인음식점",
+  "sourceUrl": "https://www.data.go.kr/data/15092353/fileData.do",
+  "confidence": "high"
+ },
+ {
+  "name": {
+   "ko": "다카 레스토랑(HD)"
+  },
+  "category": "restaurant",
+  "nationalities": [
+   "bangladesh"
+  ],
+  "address": {
+   "ko": "경상남도 김해시 가락로 102-1, 2층 (서상동)"
+  },
+  "region": "경남 김해시",
+  "phone": "",
+  "items": {
+   "ko": "방글라데시 음식"
+  },
+  "source": "data.go.kr 김해시 외국인음식점",
+  "sourceUrl": "https://www.data.go.kr/data/15092353/fileData.do",
+  "confidence": "high"
+ },
+ {
+  "name": {
+   "ko": "사마르칸드(SAMARKAND)"
+  },
+  "category": "restaurant",
+  "nationalities": [
+   "uzbekistan",
+   "central-asia"
+  ],
+  "address": {
+   "ko": "경상남도 김해시 분성로 334, 1층 (서상동)"
+  },
+  "region": "경남 김해시",
+  "phone": "",
+  "items": {
+   "ko": "우즈베키스탄 음식"
+  },
+  "source": "data.go.kr 김해시 외국인음식점",
+  "sourceUrl": "https://www.data.go.kr/data/15092353/fileData.do",
+  "confidence": "high"
+ },
+ {
+  "name": {
+   "ko": "NGO NHO 1991(노녀 1991)"
+  },
+  "category": "restaurant",
+  "nationalities": [
+   "vietnam"
+  ],
+  "address": {
+   "ko": "경상남도 김해시 가락로94번길 8-1, 1층 일부호 (서상동)"
+  },
+  "region": "경남 김해시",
+  "phone": "",
+  "items": {
+   "ko": "베트남 음식"
+  },
+  "source": "data.go.kr 김해시 외국인음식점",
+  "sourceUrl": "https://www.data.go.kr/data/15092353/fileData.do",
+  "confidence": "medium"
+ },
+ {
+  "name": {
+   "ko": "춘리마라탕"
+  },
+  "category": "restaurant",
+  "nationalities": [
+   "china"
+  ],
+  "address": {
+   "ko": "경상남도 김해시 진영읍 김해대로361번길 16, 103호"
+  },
+  "region": "경남 김해시",
+  "phone": "",
+  "items": {
+   "ko": "중국 음식"
+  },
+  "source": "data.go.kr 김해시 외국인음식점",
+  "sourceUrl": "https://www.data.go.kr/data/15092353/fileData.do",
+  "confidence": "medium"
+ },
+ {
+  "name": {
+   "ko": "베트남 반미(KHANH VY)"
+  },
+  "category": "restaurant",
+  "nationalities": [
+   "vietnam"
+  ],
+  "address": {
+   "ko": "경상남도 김해시 가락로 84, 1층 일부호 (서상동)"
+  },
+  "region": "경남 김해시",
+  "phone": "",
+  "items": {
+   "ko": "베트남 음식"
+  },
+  "source": "data.go.kr 김해시 외국인음식점",
+  "sourceUrl": "https://www.data.go.kr/data/15092353/fileData.do",
+  "confidence": "medium"
+ },
+ {
+  "name": {
+   "ko": "무슬림"
+  },
+  "category": "restaurant",
+  "nationalities": [
+   "uzbekistan",
+   "central-asia"
+  ],
+  "address": {
+   "ko": "경상남도 김해시 분성로 334, 1층 일부호 (서상동)"
+  },
+  "region": "경남 김해시",
+  "phone": "",
+  "items": {
+   "ko": "우즈베키스탄 음식"
+  },
+  "source": "data.go.kr 김해시 외국인음식점",
+  "sourceUrl": "https://www.data.go.kr/data/15092353/fileData.do",
+  "confidence": "high"
+ },
+ {
+  "name": {
+   "ko": "호밀빵"
+  },
+  "category": "grocery",
+  "nationalities": [
+   "russia"
+  ],
+  "address": {
+   "ko": "경상남도 김해시 진영읍 장등로 26-1, 1층"
+  },
+  "region": "경남 김해시",
+  "phone": "",
+  "items": {
+   "ko": "러시아 음식, 베이커리"
+  },
+  "source": "data.go.kr 김해시 외국인음식점",
+  "sourceUrl": "https://www.data.go.kr/data/15092353/fileData.do",
+  "confidence": "medium"
+ },
+ {
+  "name": {
+   "ko": "임페리아 푸드"
+  },
+  "category": "grocery",
+  "nationalities": [
+   "uzbekistan",
+   "central-asia"
+  ],
+  "address": {
+   "ko": "경상남도 김해시 진영읍 장등로6번길 17, 1층"
+  },
+  "region": "경남 김해시",
+  "phone": "",
+  "items": {
+   "ko": "우즈베키스탄 음식, 베이커리"
+  },
+  "source": "data.go.kr 김해시 외국인음식점",
+  "sourceUrl": "https://www.data.go.kr/data/15092353/fileData.do",
+  "confidence": "medium"
+ },
+ {
+  "name": {
+   "ko": "남 스토어(Nam Store)"
+  },
+  "category": "grocery",
+  "nationalities": [
+   "russia"
+  ],
+  "address": {
+   "ko": "경상남도 김해시 분성로 378-1, 1층 (동상동)"
+  },
+  "region": "경남 김해시",
+  "phone": "",
+  "items": {
+   "ko": "러시아 음식, 베이커리"
+  },
+  "source": "data.go.kr 김해시 외국인음식점",
+  "sourceUrl": "https://www.data.go.kr/data/15092353/fileData.do",
+  "confidence": "medium"
+ }
+]
