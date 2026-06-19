@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>wiiInfo · 점포 등록 (운영자)</title>
     <meta name="robots" content="noindex" />
-    <link rel="stylesheet" href="./styles.css?v=20260619-04" />
+    <link rel="stylesheet" href="./styles.css?v=20260619-05" />
     <style>
       /* [2026-06-18] master 점포 등록폼 데모 — 운영자(master) 전용. 점주 셀프(owner.html)는 추후 */
       .adminWrap { width: min(720px, 100%); margin: 0 auto; padding: 24px 16px 80px; display: grid; gap: 18px; }
@@ -111,10 +111,10 @@
       </div>
     </main>
 
-    <script src="./vendor/firebase/10.12.5/firebase-app-compat.js?v=20260619-04"></script>
-    <script src="./vendor/firebase/10.12.5/firebase-auth-compat.js?v=20260619-04"></script>
-    <script src="./vendor/firebase/10.12.5/firebase-firestore-compat.js?v=20260619-04"></script>
-    <script src="./firebase-config.js?v=20260619-04"></script>
+    <script src="./vendor/firebase/10.12.5/firebase-app-compat.js?v=20260619-05"></script>
+    <script src="./vendor/firebase/10.12.5/firebase-auth-compat.js?v=20260619-05"></script>
+    <script src="./vendor/firebase/10.12.5/firebase-firestore-compat.js?v=20260619-05"></script>
+    <script src="./firebase-config.js?v=20260619-05"></script>
     <script>
       (function () {
         // [2026-06-18] master 점포 등록 데모. master 판별은 이메일 화이트리스트(데모). 정식은 Custom Claims 예정.
@@ -147,6 +147,18 @@
         function isMaster(user) { return user && MASTER_EMAILS.includes((user.email || "").toLowerCase()); }
         function esc(s) { return String(s == null ? "" : s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c])); }
         function langObj(ko, en) { const o = { ko: ko || "" }; if (en) o.en = en; return o; }
+        // [2026-06-19] 7개 언어 보존용 — 일괄 등록 시 번역된 다국어 객체(ko/en/th/ja/zh/vi/es)를 그대로 적재
+        const I18N_LANGS = ["ko", "en", "th", "ja", "zh", "vi", "es"];
+        function langObjFull(src, fallbackKo) {
+          const o = {};
+          if (src && typeof src === "object") {
+            I18N_LANGS.forEach((l) => { if (typeof src[l] === "string" && src[l].trim()) o[l] = src[l].trim(); });
+          } else if (typeof src === "string" && src.trim()) {
+            o.ko = src.trim();
+          }
+          if (!o.ko && fallbackKo) o.ko = fallbackKo;
+          return o;
+        }
 
         loginBtn.addEventListener("click", () => {
           const provider = new firebase.auth.GoogleAuthProvider();
@@ -306,13 +318,14 @@
             ? raw.nationalities.map((s) => String(s).trim()).filter(Boolean).slice(0, 6)
             : (typeof raw.nationalities === "string" ? raw.nationalities.split(",").map((s) => s.trim()).filter(Boolean).slice(0, 6) : []);
           const data = {
-            name: langObj(nameKo, pickEn(raw.name)),
+            // [2026-06-19] 다국어 객체(ko/en/th/ja/zh/vi/es) 전체 보존. 번역 없으면 ko만 들어가고 앱이 ko로 fallback.
+            name: langObjFull(raw.name, nameKo),
             category: cat,
             nationalities: nat,
-            address: langObj(addrKo),
+            address: langObjFull(raw.address, addrKo),
             phone: String(raw.phone || "").trim(),
-            hours: langObj(pickKo(raw.hours)),
-            items: langObj(pickKo(raw.items)),
+            hours: langObjFull(raw.hours),
+            items: langObjFull(raw.items),
             ownerNote: String(raw.region || raw.ownerNote || "").trim(), // region을 메모로 보존
             photo: raw.photo ? String(raw.photo).trim() : null,
             verified: false,
