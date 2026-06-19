@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>wiiInfo · 점포 등록 (운영자)</title>
     <meta name="robots" content="noindex" />
-    <link rel="stylesheet" href="./styles.css?v=20260619-01" />
+    <link rel="stylesheet" href="./styles.css?v=20260619-02" />
     <style>
       /* [2026-06-18] master 점포 등록폼 데모 — 운영자(master) 전용. 점주 셀프(owner.html)는 추후 */
       .adminWrap { width: min(720px, 100%); margin: 0 auto; padding: 24px 16px 80px; display: grid; gap: 18px; }
@@ -100,7 +100,7 @@
       </div>
 
       <div id="claimCard" class="adminCard hidden">
-        <h2>사장님 등록 신청 <span class="pill">심사</span></h2>
+        <h2>사장님 등록 신청 <span class="pill" id="claimCount">심사</span></h2>
         <p class="sub">승인하면 신청자(owner)가 해당 가게를 직접 관리할 수 있습니다. 가게명이 등록 점포와 일치하면 자동 연결됩니다.</p>
         <div id="claimList"></div>
       </div>
@@ -111,10 +111,10 @@
       </div>
     </main>
 
-    <script src="./vendor/firebase/10.12.5/firebase-app-compat.js?v=20260619-01"></script>
-    <script src="./vendor/firebase/10.12.5/firebase-auth-compat.js?v=20260619-01"></script>
-    <script src="./vendor/firebase/10.12.5/firebase-firestore-compat.js?v=20260619-01"></script>
-    <script src="./firebase-config.js?v=20260619-01"></script>
+    <script src="./vendor/firebase/10.12.5/firebase-app-compat.js?v=20260619-02"></script>
+    <script src="./vendor/firebase/10.12.5/firebase-auth-compat.js?v=20260619-02"></script>
+    <script src="./vendor/firebase/10.12.5/firebase-firestore-compat.js?v=20260619-02"></script>
+    <script src="./firebase-config.js?v=20260619-02"></script>
     <script>
       (function () {
         // [2026-06-18] master 점포 등록 데모. master 판별은 이메일 화이트리스트(데모). 정식은 Custom Claims 예정.
@@ -170,12 +170,35 @@
 
         function loadStores() {
           storeList.innerHTML = "<p class='notice'>불러오는 중...</p>";
-          db.collection("stores").orderBy("createdAt", "desc").limit(50).get().then((snap) => {
+          // [2026-06-19] 최신 등록(일괄 import 포함)이 위로. 미검증 검수용으로 100개까지 표시.
+          db.collection("stores").orderBy("createdAt", "desc").limit(100).get().then((snap) => {
             if (snap.empty) { storeList.innerHTML = "<p class='notice'>아직 등록된 점포가 없습니다.</p>"; return; }
-            storeList.innerHTML = snap.docs.map((doc) => {
+            // 미검증 개수 요약(검수 진행상황)
+            let unver = 0;
+            snap.docs.forEach((doc) => { if (!doc.data().verified) unver++; });
+            const summary = `<p class='notice' style='margin-bottom:8px;'>총 ${snap.size}개 · <strong style='color:#b15c00;'>미검증 ${unver}개</strong> (검증✓ 누르면 손님 화면 상위 노출)</p>`;
+            storeList.innerHTML = summary + snap.docs.map((doc) => {
               const d = doc.data();
-              return `<div class="storeRow"><div><strong>${esc((d.name && d.name.ko) || "(이름없음)")}</strong><br><small>${esc(d.category || "")} · ${esc((d.address && d.address.ko) || "")}</small></div><button class="ghostBtn" data-del="${esc(doc.id)}">삭제</button></div>`;
+              const id = esc(doc.id);
+              const verified = !!d.verified;
+              // [2026-06-19] 검증 배지: 검증완료(초록)/미검증(주황). 검색팀 수집데이터는 기본 미검증.
+              const vBadge = verified
+                ? `<span class="pill" style="background:#e6f7ec;color:#1a7f37;">✓ 검증</span>`
+                : `<span class="pill" style="background:#fff3e0;color:#b15c00;">미검증</span>`;
+              const meta = [d.category, (d.address && d.address.ko)].filter(Boolean).map(esc).join(" · ");
+              const extra = [];
+              if (d.confidence) extra.push("신뢰도 " + esc(d.confidence));
+              if (d.source) extra.push(esc(d.source));
+              if (d.sourceUrl) extra.push(`<a href="${esc(d.sourceUrl)}" target="_blank" rel="noopener" style="color:#e8602c;">출처</a>`);
+              const extraLine = extra.length ? `<br><small style="color:var(--muted)">${extra.join(" · ")}</small>` : "";
+              return `<div class="storeRow"><div><strong>${esc((d.name && d.name.ko) || "(이름없음)")}</strong> ${vBadge}<br><small>${meta}</small>${extraLine}</div><div style="display:flex;gap:6px;flex-shrink:0;"><button class="ghostBtn" data-verify="${id}" data-cur="${verified ? "1" : "0"}">${verified ? "검증취소" : "검증✓"}</button><button class="ghostBtn" data-del="${id}">삭제</button></div></div>`;
             }).join("");
+            storeList.querySelectorAll("[data-verify]").forEach((b) => b.addEventListener("click", () => {
+              const next = b.dataset.cur !== "1";
+              b.disabled = true;
+              db.collection("stores").doc(b.dataset.verify).update({ verified: next }).then(loadStores)
+                .catch((e) => { alert("검증 상태 변경 실패: " + e.message); b.disabled = false; });
+            }));
             storeList.querySelectorAll("[data-del]").forEach((b) => b.addEventListener("click", () => {
               if (!confirm("이 점포를 삭제할까요?")) return;
               db.collection("stores").doc(b.dataset.del).delete().then(loadStores);
@@ -186,6 +209,9 @@
         function loadClaims() {
           claimList.innerHTML = "<p class='notice'>불러오는 중...</p>";
           db.collection("ownerClaims").where("status", "==", "pending").limit(50).get().then((snap) => {
+            // [2026-06-19] 대기 건수 배지 — 신청 들어오면 운영자가 바로 인지
+            const cc = document.getElementById("claimCount");
+            if (cc) cc.textContent = snap.empty ? "심사" : (snap.size + "건 대기");
             if (snap.empty) { claimList.innerHTML = "<p class='notice'>대기 중인 신청이 없습니다.</p>"; return; }
             claimList.innerHTML = snap.docs.map((doc) => {
               const c = doc.data();

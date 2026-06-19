@@ -1,5 +1,5 @@
 (async function () {
-  const ASSET_VERSION = "20260618-28";
+  const ASSET_VERSION = "20260619-02";
   const LANGUAGES = window.WIIINFO_LANGUAGES || {};
   const LANGUAGE_NAMES = window.WIIINFO_LANGUAGE_NAMES || {};
   const PROFILES = window.WIIINFO_LEARNER_PROFILES || [];
@@ -642,7 +642,14 @@
       .filter((place) => state.placeNationality === "all" || (place.nationalities || []).includes(state.placeNationality))
       .filter((place) => !keyword || placeSearchText(place).includes(keyword))
       .map((place) => ({ ...place, distanceKm: distanceKm(location, place) }))
-      .sort((a, b) => (a.distanceKm ?? 999) - (b.distanceKm ?? 999));
+      // [2026-06-19] 노출 우선순위: 검증 점포(0) → 미검증 수집데이터(1) → 데모(2). 같은 등급 내에서 거리순.
+      // 검색팀 수집분(verified:false)이 손님 화면 상위를 점령해 신뢰를 떨어뜨리지 않도록 검증된 가게를 항상 먼저 보여준다.
+      .sort((a, b) => {
+        const rank = (p) => (p.source === "demo-seed" ? 2 : (p.verified ? 0 : 1));
+        const r = rank(a) - rank(b);
+        if (r !== 0) return r;
+        return (a.distanceKm ?? 999) - (b.distanceKm ?? 999);
+      });
   }
 
   function distanceKm(origin, place) {
