@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>wiiInfo · 점포 등록 (운영자)</title>
     <meta name="robots" content="noindex" />
-    <link rel="stylesheet" href="./styles.css?v=20260619-05" />
+    <link rel="stylesheet" href="./styles.css?v=20260619-06" />
     <style>
       /* [2026-06-18] master 점포 등록폼 데모 — 운영자(master) 전용. 점주 셀프(owner.html)는 추후 */
       .adminWrap { width: min(720px, 100%); margin: 0 auto; padding: 24px 16px 80px; display: grid; gap: 18px; }
@@ -75,7 +75,11 @@
         <h2>JSON 일괄 등록 <span class="pill">대량</span></h2>
         <p class="sub">검색팀이 수집한 점포 배열(JSON)을 붙여넣어 한 번에 등록합니다. 같은 상호+주소는 자동으로 건너뜁니다. 7개 언어 번역은 등록 후 보강합니다.</p>
         <div class="field">
-          <label>점포 JSON 배열 <small style="color:var(--muted)">— [ {"name":{"ko":"..."}, "category":"grocery", "address":{"ko":"..."}, ... } ]</small></label>
+          <label>JSON 파일 불러오기 <small style="color:var(--muted)">— foreign_stores_ready.json 선택하면 아래 칸이 자동으로 채워지고 미리보기까지 실행됩니다</small></label>
+          <input type="file" id="bulkFile" accept=".json,application/json" />
+        </div>
+        <div class="field">
+          <label>점포 JSON 배열 <small style="color:var(--muted)">— 직접 붙여넣어도 됩니다</small></label>
           <textarea id="bulkInput" rows="10" placeholder='[
   {
     "name": { "ko": "사이공 쌀국수", "en": "Saigon Pho" },
@@ -111,10 +115,10 @@
       </div>
     </main>
 
-    <script src="./vendor/firebase/10.12.5/firebase-app-compat.js?v=20260619-05"></script>
-    <script src="./vendor/firebase/10.12.5/firebase-auth-compat.js?v=20260619-05"></script>
-    <script src="./vendor/firebase/10.12.5/firebase-firestore-compat.js?v=20260619-05"></script>
-    <script src="./firebase-config.js?v=20260619-05"></script>
+    <script src="./vendor/firebase/10.12.5/firebase-app-compat.js?v=20260619-06"></script>
+    <script src="./vendor/firebase/10.12.5/firebase-auth-compat.js?v=20260619-06"></script>
+    <script src="./vendor/firebase/10.12.5/firebase-firestore-compat.js?v=20260619-06"></script>
+    <script src="./firebase-config.js?v=20260619-06"></script>
     <script>
       (function () {
         // [2026-06-18] master 점포 등록 데모. master 판별은 이메일 화이트리스트(데모). 정식은 Custom Claims 예정.
@@ -131,6 +135,7 @@
         // [2026-06-19] 일괄 등록(bulk import) DOM
         const bulkCard = document.getElementById("bulkCard");
         const bulkInput = document.getElementById("bulkInput");
+        const bulkFile = document.getElementById("bulkFile");
         const bulkPreviewBtn = document.getElementById("bulkPreviewBtn");
         const bulkImportBtn = document.getElementById("bulkImportBtn");
         const bulkMsg = document.getElementById("bulkMsg");
@@ -410,6 +415,15 @@
 
         bulkPreviewBtn.addEventListener("click", bulkPreview);
         bulkImportBtn.addEventListener("click", bulkImport);
+        // [2026-06-19] JSON 파일 업로드 → textarea 채우고 자동 미리보기 (92개+ 수동 복사 방지)
+        if (bulkFile) bulkFile.addEventListener("change", () => {
+          const f = bulkFile.files && bulkFile.files[0];
+          if (!f) return;
+          const reader = new FileReader();
+          reader.onload = () => { bulkInput.value = String(reader.result || ""); bulkPreview(); };
+          reader.onerror = () => { bulkMsg.textContent = "파일 읽기 실패"; };
+          reader.readAsText(f);
+        });
       })();
     </script>
   </body>

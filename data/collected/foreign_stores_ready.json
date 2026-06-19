@@ -1,0 +1,2700 @@
+[
+ {
+  "id": "ansan-warung-kita",
+  "source": "web-research",
+  "verified": false,
+  "category": "restaurant",
+  "nationalities": [
+   "indonesia"
+  ],
+  "name": {
+   "ko": "와룽키타",
+   "en": "Warung Kita"
+  },
+  "address": {
+   "ko": "경기도 안산시 단원구 원본로 3 (원곡동)"
+  },
+  "region": "경기 안산시 단원구",
+  "phone": "",
+  "items": {
+   "ko": "인도네시아 음식",
+   "en": "Indonesian food",
+   "th": "อาหารอินโดนีเซีย",
+   "ja": "インドネシア料理",
+   "zh": "印度尼西亚菜",
+   "vi": "Món ăn Indonesia",
+   "es": "Comida indonesia"
+  },
+  "sourceUrl": "http://food.ansan.go.kr/ASF/bbs/content.php?co_id=s211",
+  "confidence": "high"
+ },
+ {
+  "id": "ansan-vietnam-gohyang",
+  "source": "web-research",
+  "verified": false,
+  "category": "restaurant",
+  "nationalities": [
+   "vietnam"
+  ],
+  "name": {
+   "ko": "베트남고향식당",
+   "en": "Vietnam Gohyang"
+  },
+  "address": {
+   "ko": "경기도 안산시 단원구 중앙대로 443 (원곡동)"
+  },
+  "region": "경기 안산시 단원구",
+  "phone": "031-492-0865",
+  "items": {
+   "ko": "베트남 쌀국수, 베트남 가정식",
+   "en": "Vietnamese pho, home-style food",
+   "th": "ก๋วยเตี๋ยวเฝอเวียดนาม อาหารบ้านเวียดนาม",
+   "ja": "ベトナムのフォー、家庭料理",
+   "zh": "越南河粉、越南家常菜",
+   "vi": "Phở Việt Nam, cơm nhà Việt",
+   "es": "Pho vietnamita, comida casera"
+  },
+  "sourceUrl": "https://www.ekw.co.kr/news/articleView.html?idxno=1684",
+  "confidence": "high"
+ },
+ {
+  "id": "ansan-eurasia",
+  "source": "web-research",
+  "verified": false,
+  "category": "restaurant",
+  "nationalities": [
+   "central-asia"
+  ],
+  "name": {
+   "ko": "유라시아",
+   "en": "Eurasia"
+  },
+  "address": {
+   "ko": "경기도 안산시 단원구 다문화1길 4-1, 2층 (원곡동)"
+  },
+  "region": "경기 안산시 단원구",
+  "phone": "",
+  "items": {
+   "ko": "중앙아시아 음식",
+   "en": "Central Asian food",
+   "th": "อาหารเอเชียกลาง",
+   "ja": "中央アジア料理",
+   "zh": "中亚菜",
+   "vi": "Món ăn Trung Á",
+   "es": "Comida de Asia Central"
+  },
+  "sourceUrl": "http://food.ansan.go.kr/ASF/bbs/content.php?co_id=s211",
+  "confidence": "high"
+ },
+ {
+  "id": "ansan-dyu-hien-quan",
+  "source": "web-research",
+  "verified": false,
+  "category": "restaurant",
+  "nationalities": [
+   "vietnam"
+  ],
+  "name": {
+   "ko": "디유 히엔 콴",
+   "en": "Dyu Hien Quan"
+  },
+  "address": {
+   "ko": "경기도 안산시 단원구 다문화1길 6 (원곡동)"
+  },
+  "region": "경기 안산시 단원구",
+  "phone": "",
+  "items": {
+   "ko": "베트남 음식",
+   "en": "Vietnamese food",
+   "th": "อาหารเวียดนาม",
+   "ja": "ベトナム料理",
+   "zh": "越南菜",
+   "vi": "Món ăn Việt Nam",
+   "es": "Comida vietnamita"
+  },
+  "sourceUrl": "http://food.ansan.go.kr/ASF/bbs/content.php?co_id=s211",
+  "confidence": "high"
+ },
+ {
+  "id": "ansan-fursheida-samarkand",
+  "source": "web-research",
+  "verified": false,
+  "category": "halal",
+  "nationalities": [
+   "uzbekistan",
+   "central-asia",
+   "halal"
+  ],
+  "name": {
+   "ko": "후르셰다사마르칸트",
+   "en": "Fursheida Samarkand"
+  },
+  "address": {
+   "ko": "경기도 안산시 단원구 다문화2길 3 (원곡동)"
+  },
+  "region": "경기 안산시 단원구",
+  "phone": "",
+  "nationalities_note": "우즈베키스탄/러시아",
+  "items": {
+   "ko": "우즈베키스탄/러시아 음식, 플로프, 삼사, 양고기꼬치, 할랄",
+   "en": "Uzbek/Russian food, plov, samsa, lamb skewers, halal",
+   "th": "อาหารอุซเบก/รัสเซีย พลอฟ ซัมซา เนื้อแกะเสียบไม้ ฮาลาล",
+   "ja": "ウズベク/ロシア料理、プロフ、サムサ、ラム串、ハラル",
+   "zh": "乌兹别克/俄罗斯菜、抓饭、烤包子、羊肉串、清真",
+   "vi": "Món Uzbek/Nga, plov, samsa, xiên thịt cừu, halal",
+   "es": "Comida uzbeka/rusa, plov, samsa, brochetas de cordero, halal"
+  },
+  "sourceUrl": "https://www.diningcode.com/profile.php?rid=uDDgfeNhZSQ1",
+  "confidence": "high"
+ },
+ {
+  "id": "ansan-imperia-chaihana",
+  "source": "web-research",
+  "verified": false,
+  "category": "restaurant",
+  "nationalities": [
+   "central-asia"
+  ],
+  "name": {
+   "ko": "임페리아차이하나",
+   "en": "Imperia Chaihana"
+  },
+  "address": {
+   "ko": "경기도 안산시 단원구 다문화2길 12 (원곡동)"
+  },
+  "region": "경기 안산시 단원구",
+  "phone": "",
+  "items": {
+   "ko": "중앙아시아/러시아 음식",
+   "en": "Central Asian/Russian food",
+   "th": "อาหารเอเชียกลาง/รัสเซีย",
+   "ja": "中央アジア/ロシア料理",
+   "zh": "中亚/俄罗斯菜",
+   "vi": "Món ăn Trung Á/Nga",
+   "es": "Comida de Asia Central/rusa"
+  },
+  "sourceUrl": "http://food.ansan.go.kr/ASF/bbs/content.php?co_id=s211",
+  "confidence": "high"
+ },
+ {
+  "id": "ansan-bakso-sultan",
+  "source": "web-research",
+  "verified": false,
+  "category": "halal",
+  "nationalities": [
+   "halal",
+   "indonesia"
+  ],
+  "name": {
+   "ko": "박소술탄",
+   "en": "Bakso Sultan"
+  },
+  "address": {
+   "ko": "경기도 안산시 단원구 다문화길 13-1, 2층 (원곡동)"
+  },
+  "region": "경기 안산시 단원구",
+  "phone": "",
+  "items": {
+   "ko": "할랄/중동·인도네시아 음식",
+   "en": "Halal/Middle Eastern & Indonesian food",
+   "th": "อาหารฮาลาล/ตะวันออกกลางและอินโดนีเซีย",
+   "ja": "ハラル/中東・インドネシア料理",
+   "zh": "清真/中东·印尼菜",
+   "vi": "Món halal/Trung Đông và Indonesia",
+   "es": "Comida halal/de Oriente Medio e Indonesia"
+  },
+  "sourceUrl": "http://food.ansan.go.kr/ASF/bbs/content.php?co_id=s211",
+  "confidence": "medium"
+ },
+ {
+  "id": "ansan-lak-thai",
+  "source": "web-research",
+  "verified": false,
+  "category": "restaurant",
+  "nationalities": [
+   "thai"
+  ],
+  "name": {
+   "ko": "락타이",
+   "en": "Lak Thai"
+  },
+  "address": {
+   "ko": "경기도 안산시 단원구 원곡로 25 (원곡동)"
+  },
+  "region": "경기 안산시 단원구",
+  "phone": "",
+  "items": {
+   "ko": "태국 음식",
+   "en": "Thai food",
+   "th": "อาหารไทย",
+   "ja": "タイ料理",
+   "zh": "泰国菜",
+   "vi": "Món ăn Thái Lan",
+   "es": "Comida tailandesa"
+  },
+  "sourceUrl": "http://food.ansan.go.kr/ASF/bbs/content.php?co_id=s211",
+  "confidence": "high"
+ },
+ {
+  "id": "ansan-lanka-korea",
+  "source": "web-research",
+  "verified": false,
+  "category": "restaurant",
+  "nationalities": [
+   "sri-lanka",
+   "south-asia"
+  ],
+  "name": {
+   "ko": "랑카코리아",
+   "en": "Lanka Korea"
+  },
+  "address": {
+   "ko": "경기도 안산시 단원구 다문화1길 53 (원곡동)"
+  },
+  "region": "경기 안산시 단원구",
+  "phone": "",
+  "items": {
+   "ko": "스리랑카 음식",
+   "en": "Sri Lankan food",
+   "th": "อาหารศรีลังกา",
+   "ja": "スリランカ料理",
+   "zh": "斯里兰卡菜",
+   "vi": "Món ăn Sri Lanka",
+   "es": "Comida de Sri Lanka"
+  },
+  "sourceUrl": "http://food.ansan.go.kr/ASF/bbs/content.php?co_id=s211",
+  "confidence": "high"
+ },
+ {
+  "id": "ansan-new-taj-mahal",
+  "source": "web-research",
+  "verified": false,
+  "category": "restaurant",
+  "nationalities": [
+   "india"
+  ],
+  "name": {
+   "ko": "뉴타지마할",
+   "en": "New Taj Mahal"
+  },
+  "address": {
+   "ko": "경기도 안산시 단원구 다문화1길 49 (원곡동)"
+  },
+  "region": "경기 안산시 단원구",
+  "phone": "",
+  "items": {
+   "ko": "인도 음식, 커리",
+   "en": "Indian food, curry",
+   "th": "อาหารอินเดีย แกงกะหรี่",
+   "ja": "インド料理、カレー",
+   "zh": "印度菜、咖喱",
+   "vi": "Món ăn Ấn Độ, cà ri",
+   "es": "Comida india, curry"
+  },
+  "sourceUrl": "http://food.ansan.go.kr/ASF/bbs/content.php?co_id=s211",
+  "confidence": "high"
+ },
+ {
+  "id": "ansan-kantipur",
+  "source": "web-research",
+  "verified": false,
+  "category": "restaurant",
+  "nationalities": [
+   "nepal",
+   "india"
+  ],
+  "name": {
+   "ko": "칸티뿌르레스토랑",
+   "en": "Kantipur Restaurant"
+  },
+  "address": {
+   "ko": "경기도 안산시 단원구 다문화2길 28 (원곡동)"
+  },
+  "region": "경기 안산시 단원구",
+  "phone": "",
+  "items": {
+   "ko": "인도/네팔 음식, 커리",
+   "en": "Indian/Nepali food, curry",
+   "th": "อาหารอินเดีย/เนปาล แกงกะหรี่",
+   "ja": "インド/ネパール料理、カレー",
+   "zh": "印度/尼泊尔菜、咖喱",
+   "vi": "Món ăn Ấn Độ/Nepal, cà ri",
+   "es": "Comida india/nepalí, curry"
+  },
+  "sourceUrl": "http://food.ansan.go.kr/ASF/bbs/content.php?co_id=s211",
+  "confidence": "high"
+ },
+ {
+  "id": "ansan-nusantara",
+  "source": "web-research",
+  "verified": false,
+  "category": "restaurant",
+  "nationalities": [
+   "indonesia"
+  ],
+  "name": {
+   "ko": "누산따라",
+   "en": "Nusantara"
+  },
+  "address": {
+   "ko": "경기도 안산시 단원구 다문화2길 28, 지하층 (원곡동)"
+  },
+  "region": "경기 안산시 단원구",
+  "phone": "",
+  "items": {
+   "ko": "인도네시아 음식",
+   "en": "Indonesian food",
+   "th": "อาหารอินโดนีเซีย",
+   "ja": "インドネシア料理",
+   "zh": "印度尼西亚菜",
+   "vi": "Món ăn Indonesia",
+   "es": "Comida indonesia"
+  },
+  "sourceUrl": "http://food.ansan.go.kr/ASF/bbs/content.php?co_id=s211",
+  "confidence": "high"
+ },
+ {
+  "id": "ansan-kdai-rinjani",
+  "source": "web-research",
+  "verified": false,
+  "category": "restaurant",
+  "nationalities": [
+   "indonesia"
+  ],
+  "name": {
+   "ko": "크다이 린자니",
+   "en": "Kedai Rinjani"
+  },
+  "address": {
+   "ko": "경기도 안산시 단원구 다문화2길 30 (원곡동)"
+  },
+  "region": "경기 안산시 단원구",
+  "phone": "",
+  "items": {
+   "ko": "인도네시아 음식",
+   "en": "Indonesian food",
+   "th": "อาหารอินโดนีเซีย",
+   "ja": "インドネシア料理",
+   "zh": "印度尼西亚菜",
+   "vi": "Món ăn Indonesia",
+   "es": "Comida indonesia"
+  },
+  "sourceUrl": "http://food.ansan.go.kr/ASF/bbs/content.php?co_id=s211",
+  "confidence": "high"
+ },
+ {
+  "id": "ansan-lindu-alam",
+  "source": "web-research",
+  "verified": false,
+  "category": "restaurant",
+  "nationalities": [
+   "indonesia"
+  ],
+  "name": {
+   "ko": "린두알람",
+   "en": "Lindu Alam"
+  },
+  "address": {
+   "ko": "경기도 안산시 단원구 다문화길 18, 2층 (원곡동)"
+  },
+  "region": "경기 안산시 단원구",
+  "phone": "",
+  "items": {
+   "ko": "인도네시아 음식",
+   "en": "Indonesian food",
+   "th": "อาหารอินโดนีเซีย",
+   "ja": "インドネシア料理",
+   "zh": "印度尼西亚菜",
+   "vi": "Món ăn Indonesia",
+   "es": "Comida indonesia"
+  },
+  "sourceUrl": "http://food.ansan.go.kr/ASF/bbs/content.php?co_id=s211",
+  "confidence": "high"
+ },
+ {
+  "id": "ansan-suwal-thai",
+  "source": "web-research",
+  "verified": false,
+  "category": "restaurant",
+  "nationalities": [
+   "thai"
+  ],
+  "name": {
+   "ko": "수왈태국레스토랑",
+   "en": "Suwal Thai Restaurant"
+  },
+  "address": {
+   "ko": "경기도 안산시 단원구 다문화길 18 (원곡동)"
+  },
+  "region": "경기 안산시 단원구",
+  "phone": "",
+  "items": {
+   "ko": "태국 음식",
+   "en": "Thai food",
+   "th": "อาหารไทย",
+   "ja": "タイ料理",
+   "zh": "泰国菜",
+   "vi": "Món ăn Thái Lan",
+   "es": "Comida tailandesa"
+  },
+  "sourceUrl": "http://food.ansan.go.kr/ASF/bbs/content.php?co_id=s211",
+  "confidence": "high"
+ },
+ {
+  "id": "ansan-asiana-restaurant",
+  "source": "web-research",
+  "verified": false,
+  "category": "restaurant",
+  "nationalities": [
+   "indonesia"
+  ],
+  "name": {
+   "ko": "아시아나레스토랑",
+   "en": "Asiana Restaurant"
+  },
+  "address": {
+   "ko": "경기도 안산시 단원구 다문화2길 51 (원곡동)"
+  },
+  "region": "경기 안산시 단원구",
+  "phone": "",
+  "items": {
+   "ko": "필리핀 음식",
+   "en": "Filipino food",
+   "th": "อาหารฟิลิปปินส์",
+   "ja": "フィリピン料理",
+   "zh": "菲律宾菜",
+   "vi": "Món ăn Philippines",
+   "es": "Comida filipina"
+  },
+  "sourceUrl": "http://food.ansan.go.kr/ASF/bbs/content.php?co_id=s211",
+  "confidence": "medium"
+ },
+ {
+  "id": "ansan-agun-restaurant",
+  "source": "web-research",
+  "verified": false,
+  "category": "restaurant",
+  "nationalities": [
+   "india"
+  ],
+  "name": {
+   "ko": "아건레스토랑",
+   "en": "Agun Restaurant"
+  },
+  "address": {
+   "ko": "경기도 안산시 단원구 다문화길 6, 2층 (원곡동)"
+  },
+  "region": "경기 안산시 단원구",
+  "phone": "",
+  "items": {
+   "ko": "인도 음식",
+   "en": "Indian food",
+   "th": "อาหารอินเดีย",
+   "ja": "インド料理",
+   "zh": "印度菜",
+   "vi": "Món ăn Ấn Độ",
+   "es": "Comida india"
+  },
+  "sourceUrl": "http://food.ansan.go.kr/ASF/bbs/content.php?co_id=s211",
+  "confidence": "medium"
+ },
+ {
+  "id": "ansan-langka-india",
+  "source": "web-research",
+  "verified": false,
+  "category": "restaurant",
+  "nationalities": [
+   "india"
+  ],
+  "name": {
+   "ko": "랑까인디아레스토랑",
+   "en": "Langka India Restaurant"
+  },
+  "address": {
+   "ko": "경기도 안산시 단원구 중앙대로 455, 3층 (원곡동)"
+  },
+  "region": "경기 안산시 단원구",
+  "phone": "",
+  "items": {
+   "ko": "인도 음식, 커리",
+   "en": "Indian food, curry",
+   "th": "อาหารอินเดีย แกงกะหรี่",
+   "ja": "インド料理、カレー",
+   "zh": "印度菜、咖喱",
+   "vi": "Món ăn Ấn Độ, cà ri",
+   "es": "Comida india, curry"
+  },
+  "sourceUrl": "http://food.ansan.go.kr/ASF/bbs/content.php?co_id=s211",
+  "confidence": "high"
+ },
+ {
+  "id": "ansan-rea-indonesia",
+  "source": "web-research",
+  "verified": false,
+  "category": "restaurant",
+  "nationalities": [
+   "indonesia"
+  ],
+  "name": {
+   "ko": "레아 인도네시아",
+   "en": "Rea Indonesia"
+  },
+  "address": {
+   "ko": "경기도 안산시 단원구 중앙대로 453 (원곡동)"
+  },
+  "region": "경기 안산시 단원구",
+  "phone": "",
+  "items": {
+   "ko": "인도네시아 음식",
+   "en": "Indonesian food",
+   "th": "อาหารอินโดนีเซีย",
+   "ja": "インドネシア料理",
+   "zh": "印度尼西亚菜",
+   "vi": "Món ăn Indonesia",
+   "es": "Comida indonesia"
+  },
+  "sourceUrl": "http://food.ansan.go.kr/ASF/bbs/content.php?co_id=s211",
+  "confidence": "high"
+ },
+ {
+  "id": "ansan-solti-indonepal",
+  "source": "web-research",
+  "verified": false,
+  "category": "restaurant",
+  "nationalities": [
+   "nepal",
+   "india"
+  ],
+  "name": {
+   "ko": "솔티인도네팔음식점",
+   "en": "Solti Indo Nepal"
+  },
+  "address": {
+   "ko": "경기도 안산시 단원구 중앙대로 453, 3층 (원곡동)"
+  },
+  "region": "경기 안산시 단원구",
+  "phone": "",
+  "items": {
+   "ko": "인도/네팔 음식, 커리",
+   "en": "Indian/Nepali food, curry",
+   "th": "อาหารอินเดีย/เนปาล แกงกะหรี่",
+   "ja": "インド/ネパール料理、カレー",
+   "zh": "印度/尼泊尔菜、咖喱",
+   "vi": "Món ăn Ấn Độ/Nepal, cà ri",
+   "es": "Comida india/nepalí, curry"
+  },
+  "sourceUrl": "http://food.ansan.go.kr/ASF/bbs/content.php?co_id=s211",
+  "confidence": "high"
+ },
+ {
+  "id": "ansan-warung-batavia",
+  "source": "web-research",
+  "verified": false,
+  "category": "restaurant",
+  "nationalities": [
+   "indonesia"
+  ],
+  "name": {
+   "ko": "와룽바타비아",
+   "en": "Warung Batavia"
+  },
+  "address": {
+   "ko": "경기도 안산시 단원구 다문화길 4, 3층 (원곡동)"
+  },
+  "region": "경기 안산시 단원구",
+  "phone": "",
+  "items": {
+   "ko": "인도네시아 음식",
+   "en": "Indonesian food",
+   "th": "อาหารอินโดนีเซีย",
+   "ja": "インドネシア料理",
+   "zh": "印度尼西亚菜",
+   "vi": "Món ăn Indonesia",
+   "es": "Comida indonesia"
+  },
+  "sourceUrl": "http://food.ansan.go.kr/ASF/bbs/content.php?co_id=s211",
+  "confidence": "high"
+ },
+ {
+  "id": "ansan-she-sisa",
+  "source": "web-research",
+  "verified": false,
+  "category": "restaurant",
+  "nationalities": [
+   "myanmar"
+  ],
+  "name": {
+   "ko": "쉐시사",
+   "en": "Shwe Sisa"
+  },
+  "address": {
+   "ko": "경기도 안산시 단원구 중앙대로 459, 2층 (원곡동)"
+  },
+  "region": "경기 안산시 단원구",
+  "phone": "",
+  "items": {
+   "ko": "미얀마 음식",
+   "en": "Myanmar food",
+   "th": "อาหารพม่า",
+   "ja": "ミャンマー料理",
+   "zh": "缅甸菜",
+   "vi": "Món ăn Myanmar",
+   "es": "Comida de Myanmar"
+  },
+  "sourceUrl": "http://food.ansan.go.kr/ASF/bbs/content.php?co_id=s211",
+  "confidence": "high"
+ },
+ {
+  "id": "ansan-choigo-banjeom",
+  "source": "web-research",
+  "verified": false,
+  "category": "restaurant",
+  "nationalities": [
+   "china"
+  ],
+  "name": {
+   "ko": "최고반점",
+   "en": "Choigo Banjeom"
+  },
+  "address": {
+   "ko": "경기도 안산시 단원구 원곡공원로 12 (원곡동)"
+  },
+  "region": "경기 안산시 단원구",
+  "phone": "",
+  "items": {
+   "ko": "중국 동북요리, 양꼬치",
+   "en": "Chinese northeastern cuisine, lamb skewers",
+   "th": "อาหารจีนภาคตะวันออกเฉียงเหนือ เนื้อแกะเสียบไม้",
+   "ja": "中国東北料理、ラム串",
+   "zh": "东北菜、羊肉串",
+   "vi": "Món Đông Bắc Trung Quốc, xiên thịt cừu",
+   "es": "Cocina del noreste de China, brochetas de cordero"
+  },
+  "sourceUrl": "http://food.ansan.go.kr/ASF/bbs/content.php?co_id=s211",
+  "confidence": "high"
+ },
+ {
+  "id": "ansan-sinbukgyeong-ussankowi",
+  "source": "web-research",
+  "verified": false,
+  "category": "restaurant",
+  "nationalities": [
+   "china"
+  ],
+  "name": {
+   "ko": "신북경우싼코위",
+   "en": "Sinbukgyeong Ussankowi"
+  },
+  "address": {
+   "ko": "경기도 안산시 단원구 원본로1길 11 (원곡동)"
+  },
+  "region": "경기 안산시 단원구",
+  "phone": "",
+  "items": {
+   "ko": "중국 동북요리",
+   "en": "Chinese northeastern cuisine",
+   "th": "อาหารจีนภาคตะวันออกเฉียงเหนือ",
+   "ja": "中国東北料理",
+   "zh": "东北菜",
+   "vi": "Món Đông Bắc Trung Quốc",
+   "es": "Cocina del noreste de China"
+  },
+  "sourceUrl": "http://food.ansan.go.kr/ASF/bbs/content.php?co_id=s211",
+  "confidence": "high"
+ },
+ {
+  "id": "ansan-syochai",
+  "source": "web-research",
+  "verified": false,
+  "category": "restaurant",
+  "nationalities": [
+   "china"
+  ],
+  "name": {
+   "ko": "쇼차이",
+   "en": "Syochai"
+  },
+  "address": {
+   "ko": "경기도 안산시 단원구 원본로1길 5 (원곡동)"
+  },
+  "region": "경기 안산시 단원구",
+  "phone": "",
+  "items": {
+   "ko": "중국 음식",
+   "en": "Chinese food",
+   "th": "อาหารจีน",
+   "ja": "中華料理",
+   "zh": "中国菜",
+   "vi": "Món ăn Trung Quốc",
+   "es": "Comida china"
+  },
+  "sourceUrl": "http://food.ansan.go.kr/ASF/bbs/content.php?co_id=s211",
+  "confidence": "high"
+ },
+ {
+  "id": "ansan-gohyang-yangkkochi",
+  "source": "web-research",
+  "verified": false,
+  "category": "restaurant",
+  "nationalities": [
+   "china"
+  ],
+  "name": {
+   "ko": "고향양꼬치",
+   "en": "Gohyang Yangkkochi"
+  },
+  "address": {
+   "ko": "경기도 안산시 단원구 원본로1길 10-6 (원곡동)"
+  },
+  "region": "경기 안산시 단원구",
+  "phone": "",
+  "items": {
+   "ko": "양꼬치, 중국 동북요리",
+   "en": "Lamb skewers, Chinese northeastern cuisine",
+   "th": "เนื้อแกะเสียบไม้ อาหารจีนภาคตะวันออกเฉียงเหนือ",
+   "ja": "ラム串、中国東北料理",
+   "zh": "羊肉串、东北菜",
+   "vi": "Xiên thịt cừu, món Đông Bắc Trung Quốc",
+   "es": "Brochetas de cordero, cocina del noreste de China"
+  },
+  "sourceUrl": "http://food.ansan.go.kr/ASF/bbs/content.php?co_id=s211",
+  "confidence": "high"
+ },
+ {
+  "id": "ansan-jangggang-banjeom",
+  "source": "web-research",
+  "verified": false,
+  "category": "restaurant",
+  "nationalities": [
+   "china"
+  ],
+  "name": {
+   "ko": "장강반점",
+   "en": "Janggang Banjeom"
+  },
+  "address": {
+   "ko": "경기도 안산시 단원구 부부로1길 21 (원곡동)"
+  },
+  "region": "경기 안산시 단원구",
+  "phone": "",
+  "items": {
+   "ko": "중국 음식",
+   "en": "Chinese food",
+   "th": "อาหารจีน",
+   "ja": "中華料理",
+   "zh": "中国菜",
+   "vi": "Món ăn Trung Quốc",
+   "es": "Comida china"
+  },
+  "sourceUrl": "http://food.ansan.go.kr/ASF/bbs/content.php?co_id=s211",
+  "confidence": "high"
+ },
+ {
+  "id": "ansan-yeongil-soyangkkochiwang",
+  "source": "web-research",
+  "verified": false,
+  "category": "restaurant",
+  "nationalities": [
+   "china"
+  ],
+  "name": {
+   "ko": "연길소양꼬치왕",
+   "en": "Yeongil So Yangkkochi Wang"
+  },
+  "address": {
+   "ko": "경기도 안산시 단원구 부부로1길 19 (원곡동)"
+  },
+  "region": "경기 안산시 단원구",
+  "phone": "",
+  "items": {
+   "ko": "연길 양꼬치, 중국 동북요리",
+   "en": "Yanji lamb skewers, Chinese northeastern cuisine",
+   "th": "เนื้อแกะเสียบไม้เหยียนจี๋ อาหารจีนภาคตะวันออกเฉียงเหนือ",
+   "ja": "延吉ラム串、中国東北料理",
+   "zh": "延吉羊肉串、东北菜",
+   "vi": "Xiên thịt cừu Diên Cát, món Đông Bắc Trung Quốc",
+   "es": "Brochetas de cordero de Yanji, cocina del noreste de China"
+  },
+  "sourceUrl": "http://food.ansan.go.kr/ASF/bbs/content.php?co_id=s211",
+  "confidence": "high"
+ },
+ {
+  "id": "ansan-hwangharu",
+  "source": "web-research",
+  "verified": false,
+  "category": "restaurant",
+  "nationalities": [
+   "china"
+  ],
+  "name": {
+   "ko": "황학루",
+   "en": "Hwanghaknu"
+  },
+  "address": {
+   "ko": "경기도 안산시 단원구 부부로1길 17 (원곡동)"
+  },
+  "region": "경기 안산시 단원구",
+  "phone": "",
+  "items": {
+   "ko": "중국 음식",
+   "en": "Chinese food",
+   "th": "อาหารจีน",
+   "ja": "中華料理",
+   "zh": "中国菜",
+   "vi": "Món ăn Trung Quốc",
+   "es": "Comida china"
+  },
+  "sourceUrl": "http://food.ansan.go.kr/ASF/bbs/content.php?co_id=s211",
+  "confidence": "high"
+ },
+ {
+  "id": "ansan-hwaryong-yangkkochi",
+  "source": "web-research",
+  "verified": false,
+  "category": "restaurant",
+  "nationalities": [
+   "china"
+  ],
+  "name": {
+   "ko": "화룡양꼬치",
+   "en": "Hwaryong Yangkkochi"
+  },
+  "address": {
+   "ko": "경기도 안산시 단원구 원본로1길 10-8 (원곡동)"
+  },
+  "region": "경기 안산시 단원구",
+  "phone": "",
+  "items": {
+   "ko": "양꼬치, 중국 동북요리",
+   "en": "Lamb skewers, Chinese northeastern cuisine",
+   "th": "เนื้อแกะเสียบไม้ อาหารจีนภาคตะวันออกเฉียงเหนือ",
+   "ja": "ラム串、中国東北料理",
+   "zh": "羊肉串、东北菜",
+   "vi": "Xiên thịt cừu, món Đông Bắc Trung Quốc",
+   "es": "Brochetas de cordero, cocina del noreste de China"
+  },
+  "sourceUrl": "http://food.ansan.go.kr/ASF/bbs/content.php?co_id=s211",
+  "confidence": "high"
+ },
+ {
+  "id": "ansan-somyeong-yangkkochi",
+  "source": "web-research",
+  "verified": false,
+  "category": "restaurant",
+  "nationalities": [
+   "china"
+  ],
+  "name": {
+   "ko": "소명양꼬치",
+   "en": "Somyeong Yangkkochi"
+  },
+  "address": {
+   "ko": "경기도 안산시 단원구 원본로1길 10-14 (원곡동)"
+  },
+  "region": "경기 안산시 단원구",
+  "phone": "",
+  "items": {
+   "ko": "양꼬치, 중국 동북요리",
+   "en": "Lamb skewers, Chinese northeastern cuisine",
+   "th": "เนื้อแกะเสียบไม้ อาหารจีนภาคตะวันออกเฉียงเหนือ",
+   "ja": "ラム串、中国東北料理",
+   "zh": "羊肉串、东北菜",
+   "vi": "Xiên thịt cừu, món Đông Bắc Trung Quốc",
+   "es": "Brochetas de cordero, cocina del noreste de China"
+  },
+  "sourceUrl": "http://food.ansan.go.kr/ASF/bbs/content.php?co_id=s211",
+  "confidence": "high"
+ },
+ {
+  "id": "ansan-mara-yuhok",
+  "source": "web-research",
+  "verified": false,
+  "category": "restaurant",
+  "nationalities": [
+   "china"
+  ],
+  "name": {
+   "ko": "마라유혹",
+   "en": "Mara Yuhok"
+  },
+  "address": {
+   "ko": "경기도 안산시 단원구 부부로2길 20 (원곡동)"
+  },
+  "region": "경기 안산시 단원구",
+  "phone": "",
+  "items": {
+   "ko": "마라탕, 마라샹궈, 중국 음식",
+   "en": "Malatang, malaxiangguo, Chinese food",
+   "th": "หมาล่าทัง หมาล่าเซียงกัว อาหารจีน",
+   "ja": "麻辣湯、麻辣香鍋、中華料理",
+   "zh": "麻辣烫、麻辣香锅、中国菜",
+   "vi": "Malatang, malaxiangguo, món ăn Trung Quốc",
+   "es": "Malatang, malaxiangguo, comida china"
+  },
+  "sourceUrl": "http://food.ansan.go.kr/ASF/bbs/content.php?co_id=s211",
+  "confidence": "high"
+ },
+ {
+  "id": "ansan-gilim-sukbul",
+  "source": "web-research",
+  "verified": false,
+  "category": "restaurant",
+  "nationalities": [
+   "china"
+  ],
+  "name": {
+   "ko": "길림숯불생고기구이",
+   "en": "Gilim Sukbul Gogigui"
+  },
+  "address": {
+   "ko": "경기도 안산시 단원구 원본로1길 10-7 (원곡동)"
+  },
+  "region": "경기 안산시 단원구",
+  "phone": "",
+  "items": {
+   "ko": "중국 동북요리, 숯불구이",
+   "en": "Chinese northeastern cuisine, charcoal grill",
+   "th": "อาหารจีนภาคตะวันออกเฉียงเหนือ ปิ้งย่างถ่าน",
+   "ja": "中国東北料理、炭火焼き",
+   "zh": "东北菜、炭火烧烤",
+   "vi": "Món Đông Bắc Trung Quốc, nướng than",
+   "es": "Cocina del noreste de China, parrilla al carbón"
+  },
+  "sourceUrl": "http://food.ansan.go.kr/ASF/bbs/content.php?co_id=s211",
+  "confidence": "high"
+ },
+ {
+  "id": "ansan-yeongil-jindallae-naengmyeon",
+  "source": "web-research",
+  "verified": false,
+  "category": "restaurant",
+  "nationalities": [
+   "china"
+  ],
+  "name": {
+   "ko": "연길진달래냉면",
+   "en": "Yeongil Jindallae Naengmyeon"
+  },
+  "address": {
+   "ko": "경기도 안산시 단원구 원본로1길 10-5 (원곡동)"
+  },
+  "region": "경기 안산시 단원구",
+  "phone": "",
+  "items": {
+   "ko": "연길냉면, 중국 동북요리",
+   "en": "Yanji cold noodles, Chinese northeastern cuisine",
+   "th": "บะหมี่เย็นเหยียนจี๋ อาหารจีนภาคตะวันออกเฉียงเหนือ",
+   "ja": "延吉冷麺、中国東北料理",
+   "zh": "延吉冷面、东北菜",
+   "vi": "Mì lạnh Diên Cát, món Đông Bắc Trung Quốc",
+   "es": "Fideos fríos de Yanji, cocina del noreste de China"
+  },
+  "sourceUrl": "http://food.ansan.go.kr/ASF/bbs/content.php?co_id=s211",
+  "confidence": "high"
+ },
+ {
+  "id": "ansan-yeongil-wangkkochi",
+  "source": "web-research",
+  "verified": false,
+  "category": "restaurant",
+  "nationalities": [
+   "china"
+  ],
+  "name": {
+   "ko": "연길왕꼬치",
+   "en": "Yeongil Wangkkochi"
+  },
+  "address": {
+   "ko": "경기도 안산시 단원구 원본로1길 10-1 (원곡동)"
+  },
+  "region": "경기 안산시 단원구",
+  "phone": "",
+  "items": {
+   "ko": "양꼬치, 중국 동북요리",
+   "en": "Lamb skewers, Chinese northeastern cuisine",
+   "th": "เนื้อแกะเสียบไม้ อาหารจีนภาคตะวันออกเฉียงเหนือ",
+   "ja": "ラム串、中国東北料理",
+   "zh": "羊肉串、东北菜",
+   "vi": "Xiên thịt cừu, món Đông Bắc Trung Quốc",
+   "es": "Brochetas de cordero, cocina del noreste de China"
+  },
+  "sourceUrl": "http://food.ansan.go.kr/ASF/bbs/content.php?co_id=s211",
+  "confidence": "high"
+ },
+ {
+  "id": "seoul-gwanghui-samarkand-main",
+  "source": "web-research",
+  "verified": false,
+  "category": "halal",
+  "nationalities": [
+   "uzbekistan",
+   "central-asia",
+   "halal"
+  ],
+  "name": {
+   "ko": "사마르칸트 본점",
+   "en": "Samarkand"
+  },
+  "address": {
+   "ko": "서울특별시 중구 마른내로 159-10 (광희동)"
+  },
+  "region": "서울 중구",
+  "phone": "02-2277-4261",
+  "items": {
+   "ko": "우즈베키스탄 요리, 플로프, 삼사, 양고기",
+   "en": "Uzbek cuisine, plov, samsa, lamb",
+   "th": "อาหารอุซเบก พลอฟ ซัมซา เนื้อแกะ",
+   "ja": "ウズベク料理、プロフ、サムサ、ラム肉",
+   "zh": "乌兹别克菜、抓饭、烤包子、羊肉",
+   "vi": "Món Uzbek, plov, samsa, thịt cừu",
+   "es": "Cocina uzbeka, plov, samsa, cordero"
+  },
+  "sourceUrl": "https://www.diningcode.com/profile.php?rid=eGUQFf9eNgHa",
+  "confidence": "high"
+ },
+ {
+  "id": "seoul-gwanghui-cafe-uzbekistan",
+  "source": "web-research",
+  "verified": false,
+  "category": "restaurant",
+  "nationalities": [
+   "uzbekistan",
+   "central-asia",
+   "russia"
+  ],
+  "name": {
+   "ko": "카페 우즈베키스탄",
+   "en": "Cafe Uzbekistan"
+  },
+  "address": {
+   "ko": "서울특별시 중구 마른내로 159-23 (광희동)"
+  },
+  "region": "서울 중구",
+  "phone": "02-2277-4163",
+  "items": {
+   "ko": "우즈베키스탄/러시아 음식, 삼사, 양고기",
+   "en": "Uzbek/Russian food, samsa, lamb",
+   "th": "อาหารอุซเบก/รัสเซีย ซัมซา เนื้อแกะ",
+   "ja": "ウズベク/ロシア料理、サムサ、ラム肉",
+   "zh": "乌兹别克/俄罗斯菜、烤包子、羊肉",
+   "vi": "Món Uzbek/Nga, samsa, thịt cừu",
+   "es": "Comida uzbeka/rusa, samsa, cordero"
+  },
+  "sourceUrl": "https://love.seoul.go.kr/articles/7238",
+  "confidence": "high"
+ },
+ {
+  "id": "seoul-gwanghui-imperia",
+  "source": "web-research",
+  "verified": false,
+  "category": "grocery",
+  "nationalities": [
+   "russia",
+   "central-asia"
+  ],
+  "name": {
+   "ko": "임페리아",
+   "en": "Imperia"
+  },
+  "address": {
+   "ko": "서울특별시 중구 마른내로 161 (광희동)"
+  },
+  "region": "서울 중구",
+  "phone": "02-2263-4115",
+  "items": {
+   "ko": "러시아·중앙아시아 식료품, 소시지, 통조림, 빵",
+   "en": "Russian & Central Asian groceries, sausages, canned goods, bread",
+   "th": "ของชำรัสเซียและเอเชียกลาง ไส้กรอก อาหารกระป๋อง ขนมปัง",
+   "ja": "ロシア・中央アジア食料品、ソーセージ、缶詰、パン",
+   "zh": "俄罗斯·中亚食品、香肠、罐头、面包",
+   "vi": "Thực phẩm Nga và Trung Á, xúc xích, đồ hộp, bánh mì",
+   "es": "Comestibles rusos y de Asia Central, salchichas, conservas, pan"
+  },
+  "sourceUrl": "https://love.seoul.go.kr/articles/7238",
+  "confidence": "high"
+ },
+ {
+  "id": "seoul-gwanghui-mongol-nomadic",
+  "source": "web-research",
+  "verified": false,
+  "category": "restaurant",
+  "nationalities": [
+   "mongolia"
+  ],
+  "name": {
+   "ko": "유목민 몽골",
+   "en": "Mongol Nomadic"
+  },
+  "address": {
+   "ko": "서울특별시 중구 을지로44길 19 (광희동)"
+  },
+  "region": "서울 중구",
+  "phone": "02-2269-6669",
+  "items": {
+   "ko": "몽골 음식, 허르헉, 양갈비",
+   "en": "Mongolian food, khorkhog, lamb ribs",
+   "th": "อาหารมองโกเลีย คอร์ค็อก ซี่โครงแกะ",
+   "ja": "モンゴル料理、ホルホグ、ラムあばら",
+   "zh": "蒙古菜、石烤羊肉(霍尔霍格)、羊排",
+   "vi": "Món Mông Cổ, khorkhog, sườn cừu",
+   "es": "Comida mongola, khorkhog, costillas de cordero"
+  },
+  "sourceUrl": "https://love.seoul.go.kr/articles/7238",
+  "confidence": "high"
+ },
+ {
+  "id": "seoul-gwanghui-cafe-baikal",
+  "source": "web-research",
+  "verified": false,
+  "category": "restaurant",
+  "nationalities": [
+   "russia"
+  ],
+  "name": {
+   "ko": "카페 바이칼",
+   "en": "Cafe Baikal"
+  },
+  "address": {
+   "ko": "서울특별시 중구 동호로34길 24, 2층 (광희동)"
+  },
+  "region": "서울 중구",
+  "phone": "02-3390-4310",
+  "items": {
+   "ko": "러시아 부랴트 전통음식",
+   "en": "Russian Buryat traditional food",
+   "th": "อาหารดั้งเดิมบูร์ยัตรัสเซีย",
+   "ja": "ロシア・ブリヤート伝統料理",
+   "zh": "俄罗斯布里亚特传统菜",
+   "vi": "Món ăn truyền thống Buryat của Nga",
+   "es": "Comida tradicional buriato-rusa"
+  },
+  "sourceUrl": "https://love.seoul.go.kr/articles/7238",
+  "confidence": "high"
+ },
+ {
+  "id": "seoul-gwanghui-russia-cake",
+  "source": "web-research",
+  "verified": false,
+  "category": "grocery",
+  "nationalities": [
+   "russia"
+  ],
+  "name": {
+   "ko": "러시아케익",
+   "en": "Russia Cake"
+  },
+  "address": {
+   "ko": "서울특별시 중구 을지로42길 7 (광희동)"
+  },
+  "region": "서울 중구",
+  "phone": "02-6053-4079",
+  "items": {
+   "ko": "러시아 케이크·파이 베이커리",
+   "en": "Russian cake & pie bakery",
+   "th": "เบเกอรี่เค้กและพายรัสเซีย",
+   "ja": "ロシアのケーキ・パイのベーカリー",
+   "zh": "俄罗斯蛋糕·派烘焙店",
+   "vi": "Tiệm bánh ngọt và pie kiểu Nga",
+   "es": "Pastelería rusa de tartas y pasteles"
+  },
+  "sourceUrl": "https://love.seoul.go.kr/articles/7238",
+  "confidence": "high"
+ },
+ {
+  "id": "seoul-itaewon-usmania",
+  "source": "web-research",
+  "verified": false,
+  "category": "halal",
+  "nationalities": [
+   "india",
+   "halal"
+  ],
+  "name": {
+   "ko": "우스마니아",
+   "en": "Usmania"
+  },
+  "address": {
+   "ko": "서울특별시 용산구 우사단로 34 (이태원)"
+  },
+  "region": "서울 용산구",
+  "phone": "02-798-7155",
+  "items": {
+   "ko": "인도·파키스탄 할랄 음식, 커리",
+   "en": "Indian & Pakistani halal food, curry",
+   "th": "อาหารฮาลาลอินเดียและปากีสถาน แกงกะหรี่",
+   "ja": "インド・パキスタンのハラル料理、カレー",
+   "zh": "印度·巴基斯坦清真菜、咖喱",
+   "vi": "Món halal Ấn Độ và Pakistan, cà ri",
+   "es": "Comida halal india y pakistaní, curry"
+  },
+  "sourceUrl": "https://korean.visitseoul.net/restaurants/우스마니아_/12767",
+  "confidence": "high"
+ },
+ {
+  "id": "seoul-itaewon-makan-halal",
+  "source": "web-research",
+  "verified": false,
+  "category": "halal",
+  "nationalities": [
+   "halal"
+  ],
+  "name": {
+   "ko": "마칸 할랄 코리안 레스토랑",
+   "en": "Makan Halal Korean Restaurant"
+  },
+  "address": {
+   "ko": "서울특별시 용산구 우사단로10길 52 (이태원)"
+  },
+  "region": "서울 용산구",
+  "phone": "02-6012-2231",
+  "items": {
+   "ko": "할랄 한식",
+   "en": "Halal Korean food",
+   "th": "อาหารเกาหลีฮาลาล",
+   "ja": "ハラル韓国料理",
+   "zh": "清真韩餐",
+   "vi": "Món Hàn Quốc halal",
+   "es": "Comida coreana halal"
+  },
+  "sourceUrl": "https://k-life.co/travel/9480",
+  "confidence": "high"
+ },
+ {
+  "id": "seoul-itaewon-petra",
+  "source": "web-research",
+  "verified": false,
+  "category": "halal",
+  "nationalities": [
+   "halal"
+  ],
+  "name": {
+   "ko": "페트라",
+   "en": "Petra"
+  },
+  "address": {
+   "ko": "서울특별시 용산구 녹사평대로40길 33 (이태원)"
+  },
+  "region": "서울 용산구",
+  "phone": "02-790-4433",
+  "items": {
+   "ko": "중동(요르단) 음식, 할랄",
+   "en": "Middle Eastern (Jordanian) food, halal",
+   "th": "อาหารตะวันออกกลาง (จอร์แดน) ฮาลาล",
+   "ja": "中東(ヨルダン)料理、ハラル",
+   "zh": "中东(约旦)菜、清真",
+   "vi": "Món Trung Đông (Jordan), halal",
+   "es": "Comida de Oriente Medio (jordana), halal"
+  },
+  "sourceUrl": "https://k-life.co/travel/9480",
+  "confidence": "high"
+ },
+ {
+  "id": "seoul-itaewon-bombay-grill",
+  "source": "web-research",
+  "verified": false,
+  "category": "halal",
+  "nationalities": [
+   "india",
+   "halal"
+  ],
+  "name": {
+   "ko": "봄베그릴 이태원",
+   "en": "Bombay Grill Itaewon"
+  },
+  "address": {
+   "ko": "서울특별시 용산구 우사단로10길 11, 2층 (이태원)"
+  },
+  "region": "서울 용산구",
+  "phone": "02-792-7155",
+  "items": {
+   "ko": "인도 그릴, 할랄",
+   "en": "Indian grill, halal",
+   "th": "อาหารย่างอินเดีย ฮาลาล",
+   "ja": "インドのグリル料理、ハラル",
+   "zh": "印度烧烤、清真",
+   "vi": "Món nướng Ấn Độ, halal",
+   "es": "Parrilla india, halal"
+  },
+  "sourceUrl": "https://k-life.co/travel/9480",
+  "confidence": "high"
+ },
+ {
+  "id": "seoul-itaewon-kervan",
+  "source": "web-research",
+  "verified": false,
+  "category": "halal",
+  "nationalities": [
+   "halal"
+  ],
+  "name": {
+   "ko": "케르반레스토랑 이태원점",
+   "en": "Kervan Restaurant"
+  },
+  "address": {
+   "ko": "서울특별시 용산구 이태원로 192 (이태원)"
+  },
+  "region": "서울 용산구",
+  "phone": "02-792-4767",
+  "items": {
+   "ko": "터키·중동 음식, 할랄",
+   "en": "Turkish & Middle Eastern food, halal",
+   "th": "อาหารตุรกีและตะวันออกกลาง ฮาลาล",
+   "ja": "トルコ・中東料理、ハラル",
+   "zh": "土耳其·中东菜、清真",
+   "vi": "Món Thổ Nhĩ Kỳ và Trung Đông, halal",
+   "es": "Comida turca y de Oriente Medio, halal"
+  },
+  "sourceUrl": "https://k-life.co/travel/9480",
+  "confidence": "high"
+ },
+ {
+  "id": "seoul-itaewon-mr-kebab",
+  "source": "web-research",
+  "verified": false,
+  "category": "halal",
+  "nationalities": [
+   "halal"
+  ],
+  "name": {
+   "ko": "미스터케밥",
+   "en": "Mr. Kebab"
+  },
+  "address": {
+   "ko": "서울특별시 용산구 이태원로 192 (이태원)"
+  },
+  "region": "서울 용산구",
+  "phone": "02-3463-2356",
+  "items": {
+   "ko": "케밥, 중동 음식, 할랄",
+   "en": "Kebab, Middle Eastern food, halal",
+   "th": "เคบับ อาหารตะวันออกกลาง ฮาลาล",
+   "ja": "ケバブ、中東料理、ハラル",
+   "zh": "烤肉串(卡巴)、中东菜、清真",
+   "vi": "Kebab, món Trung Đông, halal",
+   "es": "Kebab, comida de Oriente Medio, halal"
+  },
+  "sourceUrl": "https://k-life.co/travel/9480",
+  "confidence": "high"
+ },
+ {
+  "id": "seoul-itaewon-murree-tandoori",
+  "source": "web-research",
+  "verified": false,
+  "category": "halal",
+  "nationalities": [
+   "india",
+   "halal"
+  ],
+  "name": {
+   "ko": "머리 탄두리 앤 커리",
+   "en": "Murree Tandoori & Curry"
+  },
+  "address": {
+   "ko": "서울특별시 용산구 이태원로 140-6 (이태원)"
+  },
+  "region": "서울 용산구",
+  "phone": "02-3785-1436",
+  "items": {
+   "ko": "인도·파키스탄 음식, 탄두리, 커리, 할랄",
+   "en": "Indian & Pakistani food, tandoori, curry, halal",
+   "th": "อาหารอินเดียและปากีสถาน ทันดูรี แกงกะหรี่ ฮาลาล",
+   "ja": "インド・パキスタン料理、タンドリー、カレー、ハラル",
+   "zh": "印度·巴基斯坦菜、坦都里、咖喱、清真",
+   "vi": "Món Ấn Độ và Pakistan, tandoori, cà ri, halal",
+   "es": "Comida india y pakistaní, tandoori, curry, halal"
+  },
+  "sourceUrl": "https://k-life.co/travel/9480",
+  "confidence": "high"
+ },
+ {
+  "id": "seoul-itaewon-taj-palace",
+  "source": "web-research",
+  "verified": false,
+  "category": "halal",
+  "nationalities": [
+   "halal"
+  ],
+  "name": {
+   "ko": "타지팰리스",
+   "en": "Taj Palace"
+  },
+  "address": {
+   "ko": "서울특별시 용산구 우사단로 39 (이태원)"
+  },
+  "region": "서울 용산구",
+  "phone": "02-790-5786",
+  "items": {
+   "ko": "중동·인도 음식, 할랄",
+   "en": "Middle Eastern & Indian food, halal",
+   "th": "อาหารตะวันออกกลางและอินเดีย ฮาลาล",
+   "ja": "中東・インド料理、ハラル",
+   "zh": "中东·印度菜、清真",
+   "vi": "Món Trung Đông và Ấn Độ, halal",
+   "es": "Comida de Oriente Medio e india, halal"
+  },
+  "sourceUrl": "https://k-life.co/travel/9480",
+  "confidence": "high"
+ },
+ {
+  "id": "seoul-itaewon-dubai-restaurant",
+  "source": "web-research",
+  "verified": false,
+  "category": "halal",
+  "nationalities": [
+   "halal"
+  ],
+  "name": {
+   "ko": "두바이 레스토랑",
+   "en": "Dubai Restaurant"
+  },
+  "address": {
+   "ko": "서울특별시 용산구 이태원로 192, 2층 (이태원)"
+  },
+  "region": "서울 용산구",
+  "phone": "02-798-9277",
+  "items": {
+   "ko": "아랍 음식, 할랄",
+   "en": "Arabic food, halal",
+   "th": "อาหารอาหรับ ฮาลาล",
+   "ja": "アラブ料理、ハラル",
+   "zh": "阿拉伯菜、清真",
+   "vi": "Món Ả Rập, halal",
+   "es": "Comida árabe, halal"
+  },
+  "sourceUrl": "https://k-life.co/travel/9480",
+  "confidence": "high"
+ },
+ {
+  "id": "seoul-itaewon-rajat",
+  "source": "web-research",
+  "verified": false,
+  "category": "halal",
+  "nationalities": [
+   "halal"
+  ],
+  "name": {
+   "ko": "라자트",
+   "en": "Rajat"
+  },
+  "address": {
+   "ko": "서울특별시 용산구 우사단로 37, 3층 (이태원)"
+  },
+  "region": "서울 용산구",
+  "phone": "02-792-7008",
+  "items": {
+   "ko": "중동·인도 음식, 할랄",
+   "en": "Middle Eastern & Indian food, halal",
+   "th": "อาหารตะวันออกกลางและอินเดีย ฮาลาล",
+   "ja": "中東・インド料理、ハラル",
+   "zh": "中东·印度菜、清真",
+   "vi": "Món Trung Đông và Ấn Độ, halal",
+   "es": "Comida de Oriente Medio e india, halal"
+  },
+  "sourceUrl": "https://k-life.co/travel/9480",
+  "confidence": "high"
+ },
+ {
+  "id": "gimhae-yatao",
+  "source": "web-research",
+  "verified": false,
+  "category": "restaurant",
+  "nationalities": [
+   "vietnam"
+  ],
+  "name": {
+   "ko": "야타오",
+   "en": "Ya Tao"
+  },
+  "address": {
+   "ko": "경상남도 김해시 분성로335번길 3-1, 1층 (서상동)"
+  },
+  "region": "경남 김해시",
+  "phone": "010-4182-0819",
+  "items": {
+   "ko": "베트남 쌀국수, 덮밥",
+   "en": "Vietnamese pho, rice bowls",
+   "th": "ก๋วยเตี๋ยวเฝอเวียดนาม ข้าวราดหน้า",
+   "ja": "ベトナムのフォー、丼物",
+   "zh": "越南河粉、盖饭",
+   "vi": "Phở Việt Nam, cơm tô",
+   "es": "Pho vietnamita, platos de arroz"
+  },
+  "sourceUrl": "https://www.gimhae.go.kr/00510/03080/03820.web?idx=137&amode=view",
+  "confidence": "high"
+ },
+ {
+  "id": "gimhae-samarkand",
+  "source": "web-research",
+  "verified": false,
+  "category": "halal",
+  "nationalities": [
+   "uzbekistan",
+   "central-asia",
+   "halal"
+  ],
+  "name": {
+   "ko": "사마르칸트",
+   "en": "Samarkand"
+  },
+  "address": {
+   "ko": "경상남도 김해시 분성로335번길 3 (서상동)"
+  },
+  "region": "경남 김해시",
+  "phone": "",
+  "items": {
+   "ko": "우즈베키스탄 음식, 플로프, 삼사",
+   "en": "Uzbek food, plov, samsa",
+   "th": "อาหารอุซเบก พลอฟ ซัมซา",
+   "ja": "ウズベク料理、プロフ、サムサ",
+   "zh": "乌兹别克菜、抓饭、烤包子",
+   "vi": "Món Uzbek, plov, samsa",
+   "es": "Comida uzbeka, plov, samsa"
+  },
+  "sourceUrl": "https://www.gimhae.go.kr/00510/03080/03820.web?idx=137&amode=view",
+  "confidence": "high"
+ },
+ {
+  "id": "gimhae-urgut",
+  "source": "web-research",
+  "verified": false,
+  "category": "halal",
+  "nationalities": [
+   "uzbekistan",
+   "central-asia",
+   "halal"
+  ],
+  "name": {
+   "ko": "우르굿레스토랑",
+   "en": "Urgut Restaurant"
+  },
+  "address": {
+   "ko": "경상남도 김해시 분성로335번길 6 (서상동)"
+  },
+  "region": "경남 김해시",
+  "phone": "",
+  "items": {
+   "ko": "우즈베키스탄 음식",
+   "en": "Uzbek food",
+   "th": "อาหารอุซเบก",
+   "ja": "ウズベク料理",
+   "zh": "乌兹别克菜",
+   "vi": "Món ăn Uzbekistan",
+   "es": "Comida uzbeka"
+  },
+  "sourceUrl": "https://www.gimhae.go.kr/00510/03080/03820.web?idx=137&amode=view",
+  "confidence": "high"
+ },
+ {
+  "id": "gimhae-khmer",
+  "source": "web-research",
+  "verified": false,
+  "category": "restaurant",
+  "nationalities": [
+   "cambodia"
+  ],
+  "name": {
+   "ko": "크메이",
+   "en": "Khmer"
+  },
+  "address": {
+   "ko": "경상남도 김해시 가락로86번길 5-8, 2층"
+  },
+  "region": "경남 김해시",
+  "phone": "",
+  "items": {
+   "ko": "캄보디아 음식",
+   "en": "Cambodian food",
+   "th": "อาหารกัมพูชา",
+   "ja": "カンボジア料理",
+   "zh": "柬埔寨菜",
+   "vi": "Món ăn Campuchia",
+   "es": "Comida camboyana"
+  },
+  "sourceUrl": "https://www.gimhae.go.kr/00510/03080/03820.web?idx=137&amode=view",
+  "confidence": "high"
+ },
+ {
+  "id": "gimhae-namaste",
+  "source": "web-research",
+  "verified": false,
+  "category": "restaurant",
+  "nationalities": [
+   "india",
+   "nepal"
+  ],
+  "name": {
+   "ko": "나마스떼 김해레스토랑",
+   "en": "Namaste Gimhae"
+  },
+  "address": {
+   "ko": "경상남도 김해시 가락로94번길 2-1, 3층"
+  },
+  "region": "경남 김해시",
+  "phone": "",
+  "items": {
+   "ko": "인도·네팔 음식, 커리",
+   "en": "Indian & Nepali food, curry",
+   "th": "อาหารอินเดียและเนปาล แกงกะหรี่",
+   "ja": "インド・ネパール料理、カレー",
+   "zh": "印度·尼泊尔菜、咖喱",
+   "vi": "Món Ấn Độ và Nepal, cà ri",
+   "es": "Comida india y nepalí, curry"
+  },
+  "sourceUrl": "https://www.gimhae.go.kr/00510/03080/03820.web?idx=137&amode=view",
+  "confidence": "high"
+ },
+ {
+  "id": "gimhae-taj-mahal",
+  "source": "web-research",
+  "verified": false,
+  "category": "restaurant",
+  "nationalities": [
+   "india"
+  ],
+  "name": {
+   "ko": "타지마할",
+   "en": "Taj Mahal"
+  },
+  "address": {
+   "ko": "경상남도 김해시 분성로335번길 13, 2층 (서상동)"
+  },
+  "region": "경남 김해시",
+  "phone": "",
+  "items": {
+   "ko": "인도 음식, 커리",
+   "en": "Indian food, curry",
+   "th": "อาหารอินเดีย แกงกะหรี่",
+   "ja": "インド料理、カレー",
+   "zh": "印度菜、咖喱",
+   "vi": "Món ăn Ấn Độ, cà ri",
+   "es": "Comida india, curry"
+  },
+  "sourceUrl": "https://www.gimhae.go.kr/00510/03080/03820.web?idx=137&amode=view",
+  "confidence": "high"
+ },
+ {
+  "id": "gimhae-kabayan",
+  "source": "web-research",
+  "verified": false,
+  "category": "restaurant",
+  "nationalities": [
+   "philippines"
+  ],
+  "name": {
+   "ko": "카바얀",
+   "en": "Kabayan"
+  },
+  "address": {
+   "ko": "경상남도 김해시 가락로86번길 5-20"
+  },
+  "region": "경남 김해시",
+  "phone": "",
+  "items": {
+   "ko": "필리핀 음식",
+   "en": "Filipino food",
+   "th": "อาหารฟิลิปปินส์",
+   "ja": "フィリピン料理",
+   "zh": "菲律宾菜",
+   "vi": "Món ăn Philippines",
+   "es": "Comida filipina"
+  },
+  "sourceUrl": "https://www.gimhae.go.kr/00510/03080/03820.web?idx=137&amode=view",
+  "confidence": "high"
+ },
+ {
+  "id": "gimhae-lan-con-muong",
+  "source": "web-research",
+  "verified": false,
+  "category": "restaurant",
+  "nationalities": [
+   "vietnam"
+  ],
+  "name": {
+   "ko": "란콘므엉",
+   "en": "Lan Con Muong"
+  },
+  "address": {
+   "ko": "경상남도 김해시 가락로94번길 5-7"
+  },
+  "region": "경남 김해시",
+  "phone": "",
+  "items": {
+   "ko": "베트남 음식",
+   "en": "Vietnamese food",
+   "th": "อาหารเวียดนาม",
+   "ja": "ベトナム料理",
+   "zh": "越南菜",
+   "vi": "Món ăn Việt Nam",
+   "es": "Comida vietnamita"
+  },
+  "sourceUrl": "https://www.gimhae.go.kr/00510/03080/03820.web?idx=137&amode=view",
+  "confidence": "high"
+ },
+ {
+  "id": "gimhae-thai-food",
+  "source": "web-research",
+  "verified": false,
+  "category": "restaurant",
+  "nationalities": [
+   "thai"
+  ],
+  "name": {
+   "ko": "타이푸드",
+   "en": "Thai Food"
+  },
+  "address": {
+   "ko": "경상남도 김해시 분성로317번길 21 (서상동)"
+  },
+  "region": "경남 김해시",
+  "phone": "",
+  "items": {
+   "ko": "태국 음식",
+   "en": "Thai food",
+   "th": "อาหารไทย",
+   "ja": "タイ料理",
+   "zh": "泰国菜",
+   "vi": "Món ăn Thái Lan",
+   "es": "Comida tailandesa"
+  },
+  "sourceUrl": "https://www.gimhae.go.kr/00510/03080/03820.web?idx=137&amode=view",
+  "confidence": "high"
+ },
+ {
+  "id": "gimhae-new-little-india",
+  "source": "web-research",
+  "verified": false,
+  "category": "restaurant",
+  "nationalities": [
+   "india",
+   "nepal"
+  ],
+  "name": {
+   "ko": "뉴리틀인디아",
+   "en": "New Little India"
+  },
+  "address": {
+   "ko": "경상남도 김해시 가락로 95"
+  },
+  "region": "경남 김해시",
+  "phone": "",
+  "items": {
+   "ko": "인도·네팔 음식, 커리",
+   "en": "Indian & Nepali food, curry",
+   "th": "อาหารอินเดียและเนปาล แกงกะหรี่",
+   "ja": "インド・ネパール料理、カレー",
+   "zh": "印度·尼泊尔菜、咖喱",
+   "vi": "Món Ấn Độ và Nepal, cà ri",
+   "es": "Comida india y nepalí, curry"
+  },
+  "sourceUrl": "https://www.gimhae.go.kr/00510/03080/03820.web?idx=137&amode=view",
+  "confidence": "high"
+ },
+ {
+  "id": "busan-choryang-sinbalwon",
+  "source": "web-research",
+  "verified": false,
+  "category": "restaurant",
+  "nationalities": [
+   "china"
+  ],
+  "name": {
+   "ko": "신발원",
+   "en": "Sinbalwon"
+  },
+  "address": {
+   "ko": "부산광역시 동구 중앙대로214번길 11-3 (초량동)"
+  },
+  "region": "부산 동구",
+  "phone": "",
+  "items": {
+   "ko": "중국 만두·딤섬, 중국 음식",
+   "en": "Chinese dumplings & dim sum, Chinese food",
+   "th": "เกี๊ยวจีนและติ่มซำ อาหารจีน",
+   "ja": "中華まんじゅう・点心、中華料理",
+   "zh": "中式饺子·点心、中国菜",
+   "vi": "Bánh bao và dim sum Trung Quốc, món ăn Trung Quốc",
+   "es": "Dumplings y dim sum chinos, comida china"
+  },
+  "sourceUrl": "https://kr.trip.com/moments/theme/poi-busan-chinatown-82901-restaurant-993134/",
+  "confidence": "high"
+ },
+ {
+  "id": "busan-choryang-maga-mandu",
+  "source": "web-research",
+  "verified": false,
+  "category": "restaurant",
+  "nationalities": [
+   "china"
+  ],
+  "name": {
+   "ko": "마가만두",
+   "en": "Maga Mandu"
+  },
+  "address": {
+   "ko": "부산광역시 동구 중앙대로225번길 3 (초량동)"
+  },
+  "region": "부산 동구",
+  "phone": "",
+  "items": {
+   "ko": "중국 만두, 중국 음식",
+   "en": "Chinese dumplings, Chinese food",
+   "th": "เกี๊ยวจีน อาหารจีน",
+   "ja": "中華まんじゅう、中華料理",
+   "zh": "中式饺子、中国菜",
+   "vi": "Bánh bao Trung Quốc, món ăn Trung Quốc",
+   "es": "Dumplings chinos, comida china"
+  },
+  "sourceUrl": "https://brunch.co.kr/@poetgarden/204",
+  "confidence": "high"
+ },
+ {
+  "id": "busan-choryang-hongseongbang",
+  "source": "web-research",
+  "verified": false,
+  "category": "restaurant",
+  "nationalities": [
+   "china"
+  ],
+  "name": {
+   "ko": "홍성방 본점",
+   "en": "Hongseongbang"
+  },
+  "address": {
+   "ko": "부산광역시 동구 중앙대로179번길 16 (초량동)"
+  },
+  "region": "부산 동구",
+  "phone": "",
+  "items": {
+   "ko": "중국 음식",
+   "en": "Chinese food",
+   "th": "อาหารจีน",
+   "ja": "中華料理",
+   "zh": "中国菜",
+   "vi": "Món ăn Trung Quốc",
+   "es": "Comida china"
+  },
+  "sourceUrl": "https://kr.trip.com/moments/theme/poi-busan-chinatown-82901-restaurant-993134/",
+  "confidence": "high"
+ },
+ {
+  "id": "busan-choryang-uchkuduk2",
+  "source": "web-research",
+  "verified": false,
+  "category": "halal",
+  "nationalities": [
+   "uzbekistan",
+   "central-asia",
+   "halal"
+  ],
+  "name": {
+   "ko": "우치쿠둑2",
+   "en": "Uchkuduk2"
+  },
+  "address": {
+   "ko": "부산광역시 동구 초량동 차이나타운/텍사스거리 일대"
+  },
+  "region": "부산 동구",
+  "phone": "",
+  "items": {
+   "ko": "우즈베키스탄 음식",
+   "en": "Uzbek food",
+   "th": "อาหารอุซเบก",
+   "ja": "ウズベク料理",
+   "zh": "乌兹别克菜",
+   "vi": "Món ăn Uzbekistan",
+   "es": "Comida uzbeka"
+  },
+  "sourceUrl": "https://kr.trip.com/moments/theme/poi-busan-chinatown-82901-restaurant-993134/",
+  "confidence": "low"
+ },
+ {
+  "id": "busan-choryang-mayak",
+  "source": "web-research",
+  "verified": false,
+  "category": "restaurant",
+  "nationalities": [
+   "russia"
+  ],
+  "name": {
+   "ko": "마야크 레스토랑",
+   "en": "Mayak Restaurant"
+  },
+  "address": {
+   "ko": "부산광역시 동구 초량동 텍사스거리 일대"
+  },
+  "region": "부산 동구",
+  "phone": "",
+  "items": {
+   "ko": "러시아 음식",
+   "en": "Russian food",
+   "th": "อาหารรัสเซีย",
+   "ja": "ロシア料理",
+   "zh": "俄罗斯菜",
+   "vi": "Món ăn Nga",
+   "es": "Comida rusa"
+  },
+  "sourceUrl": "https://brunch.co.kr/@northalps/1724",
+  "confidence": "low"
+ },
+ {
+  "id": "incheon-bupyeong-mingalaba",
+  "source": "web-research",
+  "verified": false,
+  "category": "restaurant",
+  "nationalities": [
+   "myanmar"
+  ],
+  "name": {
+   "ko": "밍그라바미얀마식당",
+   "en": "Mingalaba Myanmar"
+  },
+  "address": {
+   "ko": "인천광역시 부평구 경원대로 1360, 지하1층 (부평동)"
+  },
+  "region": "인천 부평구",
+  "phone": "",
+  "items": {
+   "ko": "미얀마 음식",
+   "en": "Myanmar food",
+   "th": "อาหารพม่า",
+   "ja": "ミャンマー料理",
+   "zh": "缅甸菜",
+   "vi": "Món ăn Myanmar",
+   "es": "Comida de Myanmar"
+  },
+  "sourceUrl": "https://www.siksinhot.com/P/1435718",
+  "confidence": "high"
+ },
+ {
+  "id": "incheon-bupyeong-bihani",
+  "source": "web-research",
+  "verified": false,
+  "category": "restaurant",
+  "nationalities": [
+   "india",
+   "nepal"
+  ],
+  "name": {
+   "ko": "비하니",
+   "en": "Bihani"
+  },
+  "address": {
+   "ko": "인천광역시 부평구 광장로24번길 13, 신성빌딩 (부평동)"
+  },
+  "region": "인천 부평구",
+  "phone": "",
+  "items": {
+   "ko": "인도·네팔 음식, 커리",
+   "en": "Indian & Nepali food, curry",
+   "th": "อาหารอินเดียและเนปาล แกงกะหรี่",
+   "ja": "インド・ネパール料理、カレー",
+   "zh": "印度·尼泊尔菜、咖喱",
+   "vi": "Món Ấn Độ và Nepal, cà ri",
+   "es": "Comida india y nepalí, curry"
+  },
+  "sourceUrl": "https://www.siksinhot.com/P/254300",
+  "confidence": "high"
+ },
+ {
+  "id": "incheon-bupyeong-myanmar-village",
+  "source": "web-research",
+  "verified": false,
+  "category": "restaurant",
+  "nationalities": [
+   "myanmar"
+  ],
+  "name": {
+   "ko": "미얀마마을 (부평 미얀마 식당)",
+   "en": "Myanmar Village"
+  },
+  "address": {
+   "ko": "인천광역시 부평구 광장로4번길 8 (부평동)"
+  },
+  "region": "인천 부평구",
+  "phone": "",
+  "items": {
+   "ko": "미얀마 음식",
+   "en": "Myanmar food",
+   "th": "อาหารพม่า",
+   "ja": "ミャンマー料理",
+   "zh": "缅甸菜",
+   "vi": "Món ăn Myanmar",
+   "es": "Comida de Myanmar"
+  },
+  "sourceUrl": "https://www.tabling.co.kr/place/67a19c33fb544fef682bc1e2",
+  "confidence": "medium"
+ },
+ {
+  "id": "gwangju-goryeo-family-restaurant",
+  "source": "web-research",
+  "verified": false,
+  "category": "restaurant",
+  "nationalities": [
+   "central-asia",
+   "russia"
+  ],
+  "name": {
+   "ko": "고려가족식당",
+   "en": "Goryeo Family Restaurant"
+  },
+  "address": {
+   "ko": "광주광역시 광산구 산정공원로 57 (월곡동/산정동)"
+  },
+  "region": "광주 광산구",
+  "phone": "070-4001-5040",
+  "items": {
+   "ko": "고려인·중앙아시아·러시아 음식, 라그만, 샤슬릭, 굴라쉬, 필라프, 국시",
+   "en": "Koryo-saram, Central Asian & Russian food, lagman, shashlik, goulash, pilaf, guksi",
+   "th": "อาหารโครยอ-ซารัม เอเชียกลางและรัสเซีย ลักมัน ชาชลิก กูลาช พิลาฟ กุกซี",
+   "ja": "高麗人・中央アジア・ロシア料理、ラグマン、シャシリク、グーラシュ、ピラフ、ククシ",
+   "zh": "高丽人·中亚·俄罗斯菜、拉条子(拉格曼)、烤肉串(沙什利克)、匈牙利炖肉、抓饭、朝鲜冷面(国수)",
+   "vi": "Món Koryo-saram, Trung Á và Nga, lagman, shashlik, goulash, pilaf, guksi",
+   "es": "Comida koryo-saram, de Asia Central y rusa, lagman, shashlik, gulash, pilaf, guksi"
+  },
+  "sourceUrl": "https://www.diningcode.com/profile.php?rid=5hRxhIoNBTXV",
+  "confidence": "high"
+ },
+ {
+  "id": "gwangju-goryeo-family-cafe-1",
+  "source": "web-research",
+  "verified": false,
+  "category": "restaurant",
+  "nationalities": [
+   "central-asia",
+   "russia"
+  ],
+  "name": {
+   "ko": "고려인마을가족카페 1호점",
+   "en": "Goryeoin Village Family Cafe"
+  },
+  "address": {
+   "ko": "광주광역시 광산구 산정로54번길 26 (산정동)"
+  },
+  "region": "광주 광산구",
+  "phone": "",
+  "items": {
+   "ko": "러시아·중앙아시아 음식·베이커리, 샤슬릭, 필라프, 삼사",
+   "en": "Russian & Central Asian food & bakery, shashlik, pilaf, samsa",
+   "th": "อาหารและเบเกอรี่รัสเซียและเอเชียกลาง ชาชลิก พิลาฟ ซัมซา",
+   "ja": "ロシア・中央アジア料理・ベーカリー、シャシリク、ピラフ、サムサ",
+   "zh": "俄罗斯·中亚菜·烘焙、烤肉串(沙什利克)、抓饭、烤包子",
+   "vi": "Món ăn và tiệm bánh Nga, Trung Á, shashlik, pilaf, samsa",
+   "es": "Comida y panadería rusa y de Asia Central, shashlik, pilaf, samsa"
+  },
+  "sourceUrl": "https://www.diningcode.com/profile.php?rid=NPspfLUCwL7V",
+  "confidence": "high"
+ },
+ {
+  "id": "gwangju-goryeoin-coop",
+  "source": "web-research",
+  "verified": false,
+  "category": "restaurant",
+  "nationalities": [
+   "central-asia",
+   "russia"
+  ],
+  "name": {
+   "ko": "고려인마을협동조합 (가족카페 본점)",
+   "en": "Goryeoin Village Coop"
+  },
+  "address": {
+   "ko": "광주광역시 광산구 산정공원로28번길 35 (월곡동 518-6)"
+  },
+  "region": "광주 광산구",
+  "phone": "",
+  "items": {
+   "ko": "고려인·러시아·중앙아시아 음식, 식료품 (1호점 식당·2호점 카페·3호점 식료품점)",
+   "en": "Koryo-saram, Russian & Central Asian food and groceries (1st: restaurant, 2nd: cafe, 3rd: grocery)",
+   "th": "อาหารและของชำโครยอ-ซารัม รัสเซีย เอเชียกลาง (สาขา 1 ร้านอาหาร·สาขา 2 คาเฟ่·สาขา 3 ร้านของชำ)",
+   "ja": "高麗人・ロシア・中央アジア料理、食料品(1号店レストラン・2号店カフェ・3号店食料品店)",
+   "zh": "高丽人·俄罗斯·中亚菜、食品(1号店餐厅·2号店咖啡·3号店食品店)",
+   "vi": "Món ăn và thực phẩm Koryo-saram, Nga, Trung Á (cơ sở 1 nhà hàng·cơ sở 2 quán cà phê·cơ sở 3 cửa hàng thực phẩm)",
+   "es": "Comida y comestibles koryo-saram, rusos y de Asia Central (1.º restaurante, 2.º café, 3.º tienda)"
+  },
+  "sourceUrl": "https://www.koreancoop.com/",
+  "confidence": "medium"
+ },
+ {
+  "id": "hwaseong-balan-anilsa",
+  "source": "web-research",
+  "verified": false,
+  "category": "restaurant",
+  "nationalities": [
+   "sri-lanka",
+   "south-asia"
+  ],
+  "name": {
+   "ko": "아닐사레스토랑",
+   "en": "Anilsa Restaurant"
+  },
+  "address": {
+   "ko": "경기도 화성시 향남읍 3.1만세로 1122, 3층"
+  },
+  "region": "경기 화성시",
+  "phone": "070-5100-6033",
+  "items": {
+   "ko": "스리랑카·남아시아 음식",
+   "en": "Sri Lankan & South Asian food",
+   "th": "อาหารศรีลังกาและเอเชียใต้",
+   "ja": "スリランカ・南アジア料理",
+   "zh": "斯里兰卡·南亚菜",
+   "vi": "Món ăn Sri Lanka và Nam Á",
+   "es": "Comida de Sri Lanka y del sur de Asia"
+  },
+  "sourceUrl": "https://www.keyzard.cc/daboram_j/nb/224119117149",
+  "confidence": "high"
+ },
+ {
+  "id": "siheung-jeongwang-39-vietnam",
+  "source": "web-research",
+  "verified": false,
+  "category": "restaurant",
+  "nationalities": [
+   "vietnam"
+  ],
+  "name": {
+   "ko": "39베트남식당",
+   "en": "39 Vietnam"
+  },
+  "address": {
+   "ko": "경기도 시흥시 평안상가4길 24, 우석빌딩 (정왕동)"
+  },
+  "region": "경기 시흥시",
+  "phone": "",
+  "items": {
+   "ko": "베트남 음식, 쌀국수",
+   "en": "Vietnamese food, pho",
+   "th": "อาหารเวียดนาม ก๋วยเตี๋ยวเฝอ",
+   "ja": "ベトナム料理、フォー",
+   "zh": "越南菜、河粉",
+   "vi": "Món ăn Việt Nam, phở",
+   "es": "Comida vietnamita, pho"
+  },
+  "sourceUrl": "https://www.siksinhot.com/P/1882633",
+  "confidence": "medium"
+ },
+ {
+  "id": "siheung-jeongwang-welcome-saigon",
+  "source": "web-research",
+  "verified": false,
+  "category": "restaurant",
+  "nationalities": [
+   "vietnam"
+  ],
+  "name": {
+   "ko": "웰컴 사이공",
+   "en": "Welcome Saigon"
+  },
+  "address": {
+   "ko": "경기도 시흥시 정왕동 2703, 퍼스트에비뉴2차 5층 508호"
+  },
+  "region": "경기 시흥시",
+  "phone": "",
+  "items": {
+   "ko": "베트남 음식, 쌀국수",
+   "en": "Vietnamese food, pho",
+   "th": "อาหารเวียดนาม ก๋วยเตี๋ยวเฝอ",
+   "ja": "ベトナム料理、フォー",
+   "zh": "越南菜、河粉",
+   "vi": "Món ăn Việt Nam, phở",
+   "es": "Comida vietnamita, pho"
+  },
+  "sourceUrl": "https://autoreserve.com/ko/kr/gyeonggi/siheung-si/vietnamese-food",
+  "confidence": "medium"
+ },
+ {
+  "id": "ansan-hanoi-hof-cafe",
+  "source": "web-research",
+  "verified": false,
+  "category": "restaurant",
+  "nationalities": [
+   "vietnam"
+  ],
+  "name": {
+   "ko": "하노이호프카페",
+   "en": "Hanoi Hof Cafe"
+  },
+  "address": {
+   "ko": "경기도 안산시 단원구 부부로 44, 3층 (원곡동)"
+  },
+  "region": "경기 안산시 단원구",
+  "phone": "",
+  "items": {
+   "ko": "베트남 음식·카페",
+   "en": "Vietnamese food & cafe",
+   "th": "อาหารเวียดนามและคาเฟ่",
+   "ja": "ベトナム料理・カフェ",
+   "zh": "越南菜·咖啡",
+   "vi": "Món ăn Việt Nam và cà phê",
+   "es": "Comida vietnamita y café"
+  },
+  "sourceUrl": "http://food.ansan.go.kr/ASF/bbs/content.php?co_id=s211",
+  "confidence": "high"
+ },
+ {
+  "id": "ansan-bondok-bali",
+  "source": "web-research",
+  "verified": false,
+  "category": "restaurant",
+  "nationalities": [
+   "indonesia"
+  ],
+  "name": {
+   "ko": "본독발리",
+   "en": "Bondok Bali"
+  },
+  "address": {
+   "ko": "경기도 안산시 단원구 중앙대로 451, 2층 (원곡동)"
+  },
+  "region": "경기 안산시 단원구",
+  "phone": "",
+  "items": {
+   "ko": "인도네시아 음식",
+   "en": "Indonesian food",
+   "th": "อาหารอินโดนีเซีย",
+   "ja": "インドネシア料理",
+   "zh": "印度尼西亚菜",
+   "vi": "Món ăn Indonesia",
+   "es": "Comida indonesia"
+  },
+  "sourceUrl": "http://food.ansan.go.kr/ASF/bbs/content.php?co_id=s211",
+  "confidence": "high"
+ },
+ {
+  "id": "ansan-warung-sahabat",
+  "source": "web-research",
+  "verified": false,
+  "category": "restaurant",
+  "nationalities": [
+   "indonesia"
+  ],
+  "name": {
+   "ko": "와롱사하밧트",
+   "en": "Warung Sahabat"
+  },
+  "address": {
+   "ko": "경기도 안산시 단원구 중앙대로 447, 1층 (원곡동)"
+  },
+  "region": "경기 안산시 단원구",
+  "phone": "",
+  "items": {
+   "ko": "인도네시아 음식",
+   "en": "Indonesian food",
+   "th": "อาหารอินโดนีเซีย",
+   "ja": "インドネシア料理",
+   "zh": "印度尼西亚菜",
+   "vi": "Món ăn Indonesia",
+   "es": "Comida indonesia"
+  },
+  "sourceUrl": "http://food.ansan.go.kr/ASF/bbs/content.php?co_id=s211",
+  "confidence": "high"
+ },
+ {
+  "id": "ansan-crystal",
+  "source": "web-research",
+  "verified": false,
+  "category": "restaurant",
+  "nationalities": [
+   "indonesia"
+  ],
+  "name": {
+   "ko": "크리스탈",
+   "en": "Crystal"
+  },
+  "address": {
+   "ko": "경기도 안산시 단원구 부부로 4, 3층 (원곡동)"
+  },
+  "region": "경기 안산시 단원구",
+  "phone": "",
+  "items": {
+   "ko": "인도네시아 음식",
+   "en": "Indonesian food",
+   "th": "อาหารอินโดนีเซีย",
+   "ja": "インドネシア料理",
+   "zh": "印度尼西亚菜",
+   "vi": "Món ăn Indonesia",
+   "es": "Comida indonesia"
+  },
+  "sourceUrl": "http://food.ansan.go.kr/ASF/bbs/content.php?co_id=s211",
+  "confidence": "high"
+ },
+ {
+  "id": "ansan-mari-restaurant",
+  "source": "web-research",
+  "verified": false,
+  "category": "restaurant",
+  "nationalities": [
+   "thai"
+  ],
+  "name": {
+   "ko": "마리레스토랑",
+   "en": "Mari Restaurant"
+  },
+  "address": {
+   "ko": "경기도 안산시 단원구 다문화길 19, 2층 (원곡동)"
+  },
+  "region": "경기 안산시 단원구",
+  "phone": "",
+  "items": {
+   "ko": "태국 음식",
+   "en": "Thai food",
+   "th": "อาหารไทย",
+   "ja": "タイ料理",
+   "zh": "泰国菜",
+   "vi": "Món ăn Thái Lan",
+   "es": "Comida tailandesa"
+  },
+  "sourceUrl": "http://food.ansan.go.kr/ASF/bbs/content.php?co_id=s211",
+  "confidence": "high"
+ },
+ {
+  "id": "ansan-mit-thai",
+  "source": "web-research",
+  "verified": false,
+  "category": "restaurant",
+  "nationalities": [
+   "thai"
+  ],
+  "name": {
+   "ko": "및타이",
+   "en": "Mit Thai"
+  },
+  "address": {
+   "ko": "경기도 안산시 단원구 다문화길 19, 지하1층 (원곡동)"
+  },
+  "region": "경기 안산시 단원구",
+  "phone": "",
+  "items": {
+   "ko": "태국 음식",
+   "en": "Thai food",
+   "th": "อาหารไทย",
+   "ja": "タイ料理",
+   "zh": "泰国菜",
+   "vi": "Món ăn Thái Lan",
+   "es": "Comida tailandesa"
+  },
+  "sourceUrl": "http://food.ansan.go.kr/ASF/bbs/content.php?co_id=s211",
+  "confidence": "high"
+ },
+ {
+  "id": "ansan-gatotkaca",
+  "source": "web-research",
+  "verified": false,
+  "category": "restaurant",
+  "nationalities": [
+   "indonesia"
+  ],
+  "name": {
+   "ko": "가톳카차",
+   "en": "Gatotkaca"
+  },
+  "address": {
+   "ko": "경기도 안산시 단원구 다문화2길 25, 2층 (원곡동)"
+  },
+  "region": "경기 안산시 단원구",
+  "phone": "",
+  "items": {
+   "ko": "인도네시아 음식",
+   "en": "Indonesian food",
+   "th": "อาหารอินโดนีเซีย",
+   "ja": "インドネシア料理",
+   "zh": "印度尼西亚菜",
+   "vi": "Món ăn Indonesia",
+   "es": "Comida indonesia"
+  },
+  "sourceUrl": "http://food.ansan.go.kr/ASF/bbs/content.php?co_id=s211",
+  "confidence": "high"
+ },
+ {
+  "id": "ansan-batavia",
+  "source": "web-research",
+  "verified": false,
+  "category": "restaurant",
+  "nationalities": [
+   "indonesia"
+  ],
+  "name": {
+   "ko": "바타비아",
+   "en": "Batavia"
+  },
+  "address": {
+   "ko": "경기도 안산시 단원구 다문화길 4, 2층 (원곡동)"
+  },
+  "region": "경기 안산시 단원구",
+  "phone": "",
+  "items": {
+   "ko": "인도네시아 음식",
+   "en": "Indonesian food",
+   "th": "อาหารอินโดนีเซีย",
+   "ja": "インドネシア料理",
+   "zh": "印度尼西亚菜",
+   "vi": "Món ăn Indonesia",
+   "es": "Comida indonesia"
+  },
+  "sourceUrl": "http://food.ansan.go.kr/ASF/bbs/content.php?co_id=s211",
+  "confidence": "high"
+ },
+ {
+  "id": "ansan-doda-kebab",
+  "source": "web-research",
+  "verified": false,
+  "category": "halal",
+  "nationalities": [
+   "halal"
+  ],
+  "name": {
+   "ko": "도다케밥",
+   "en": "Doda Kebab"
+  },
+  "address": {
+   "ko": "경기도 안산시 단원구 중앙대로 457-1, 1층 (원곡동)"
+  },
+  "region": "경기 안산시 단원구",
+  "phone": "",
+  "items": {
+   "ko": "케밥, 중동 음식, 할랄",
+   "en": "Kebab, Middle Eastern food, halal",
+   "th": "เคบับ อาหารตะวันออกกลาง ฮาลาล",
+   "ja": "ケバブ、中東料理、ハラル",
+   "zh": "烤肉串(卡巴)、中东菜、清真",
+   "vi": "Kebab, món Trung Đông, halal",
+   "es": "Kebab, comida de Oriente Medio, halal"
+  },
+  "sourceUrl": "http://food.ansan.go.kr/ASF/bbs/content.php?co_id=s211",
+  "confidence": "high"
+ },
+ {
+  "id": "ansan-pengpeng-food",
+  "source": "web-research",
+  "verified": false,
+  "category": "restaurant",
+  "nationalities": [
+   "china"
+  ],
+  "name": {
+   "ko": "펑펑푸드",
+   "en": "Pengpeng Food"
+  },
+  "address": {
+   "ko": "경기도 안산시 단원구 다문화1길 42 (원곡동)"
+  },
+  "region": "경기 안산시 단원구",
+  "phone": "",
+  "items": {
+   "ko": "중국 음식",
+   "en": "Chinese food",
+   "th": "อาหารจีน",
+   "ja": "中華料理",
+   "zh": "中国菜",
+   "vi": "Món ăn Trung Quốc",
+   "es": "Comida china"
+  },
+  "sourceUrl": "http://food.ansan.go.kr/ASF/bbs/content.php?co_id=s211",
+  "confidence": "high"
+ },
+ {
+  "id": "gyeongju-gyeongnam-asia-mart",
+  "source": "web-research",
+  "verified": false,
+  "category": "grocery",
+  "nationalities": [
+   "southeast-asia"
+  ],
+  "name": {
+   "ko": "경남아시아마트",
+   "en": "Gyeongnam Asia Mart"
+  },
+  "address": {
+   "ko": "경상북도 경주시 황오동 251"
+  },
+  "region": "경북 경주시",
+  "phone": "010-8691-8242",
+  "items": {
+   "ko": "동남아·외국 식료품, 식자재",
+   "en": "Southeast Asian & foreign groceries, ingredients",
+   "th": "ของชำเอเชียตะวันออกเฉียงใต้และต่างประเทศ วัตถุดิบ",
+   "ja": "東南アジア・外国食料品、食材",
+   "zh": "东南亚·进口食品、食材",
+   "vi": "Thực phẩm Đông Nam Á và nước ngoài, nguyên liệu",
+   "es": "Comestibles del sudeste asiático y extranjeros, ingredientes"
+  },
+  "sourceUrl": "https://www.diningcode.com/list.dc?query=경주+베트남음식",
+  "confidence": "medium"
+ },
+ {
+  "id": "ansan-green-asia-mart",
+  "source": "web-research",
+  "verified": false,
+  "category": "grocery",
+  "nationalities": [
+   "india",
+   "indonesia",
+   "halal"
+  ],
+  "name": {
+   "ko": "그린아시아레스토랑앤마트",
+   "en": "Green Asia Restaurant & Mart"
+  },
+  "address": {
+   "ko": "경기도 안산시 단원구 부부로 28-1 (원곡동)"
+  },
+  "region": "경기 안산시 단원구",
+  "phone": "",
+  "items": {
+   "ko": "외국 식료품·식자재, 레스토랑 복합",
+   "en": "Foreign groceries & ingredients, with restaurant",
+   "th": "ของชำและวัตถุดิบต่างประเทศ พร้อมร้านอาหาร",
+   "ja": "外国食料品・食材、レストラン併設",
+   "zh": "进口食品·食材、餐厅综合",
+   "vi": "Thực phẩm và nguyên liệu nước ngoài, kèm nhà hàng",
+   "es": "Comestibles e ingredientes extranjeros, con restaurante"
+  },
+  "sourceUrl": "http://food.ansan.go.kr/ASF/bbs/content.php?co_id=s211",
+  "confidence": "high"
+ },
+ {
+  "id": "ansan-pad-thai",
+  "source": "web-research",
+  "verified": false,
+  "category": "restaurant",
+  "nationalities": [
+   "thai"
+  ],
+  "name": {
+   "ko": "팟타이",
+   "en": "Pad Thai"
+  },
+  "address": {
+   "ko": "경기도 안산시 단원구 부부로 4, 1층 (원곡동)"
+  },
+  "region": "경기 안산시 단원구",
+  "phone": "",
+  "items": {
+   "ko": "태국 음식, 팟타이",
+   "en": "Thai food, pad thai",
+   "th": "อาหารไทย ผัดไทย",
+   "ja": "タイ料理、パッタイ",
+   "zh": "泰国菜、泰式炒河粉",
+   "vi": "Món ăn Thái Lan, pad thai",
+   "es": "Comida tailandesa, pad thai"
+  },
+  "sourceUrl": "http://food.ansan.go.kr/ASF/bbs/content.php?co_id=s211",
+  "confidence": "high"
+ },
+ {
+  "id": "ansan-new-garuda",
+  "source": "web-research",
+  "verified": false,
+  "category": "restaurant",
+  "nationalities": [
+   "indonesia"
+  ],
+  "name": {
+   "ko": "뉴가루다레스토랑",
+   "en": "New Garuda Restaurant"
+  },
+  "address": {
+   "ko": "경기도 안산시 단원구 부부로 4, 4층 (원곡동)"
+  },
+  "region": "경기 안산시 단원구",
+  "phone": "",
+  "items": {
+   "ko": "인도네시아 음식",
+   "en": "Indonesian food",
+   "th": "อาหารอินโดนีเซีย",
+   "ja": "インドネシア料理",
+   "zh": "印度尼西亚菜",
+   "vi": "Món ăn Indonesia",
+   "es": "Comida indonesia"
+  },
+  "sourceUrl": "http://food.ansan.go.kr/ASF/bbs/content.php?co_id=s211",
+  "confidence": "high"
+ },
+ {
+  "id": "ansan-albaraka",
+  "source": "web-research",
+  "verified": false,
+  "category": "halal",
+  "nationalities": [
+   "halal"
+  ],
+  "name": {
+   "ko": "알바라카",
+   "en": "Albaraka"
+  },
+  "address": {
+   "ko": "경기도 안산시 단원구 부부로 28-1, 2층 (원곡동)"
+  },
+  "region": "경기 안산시 단원구",
+  "phone": "",
+  "items": {
+   "ko": "중동 음식, 할랄",
+   "en": "Middle Eastern food, halal",
+   "th": "อาหารตะวันออกกลาง ฮาลาล",
+   "ja": "中東料理、ハラル",
+   "zh": "中东菜、清真",
+   "vi": "Món Trung Đông, halal",
+   "es": "Comida de Oriente Medio, halal"
+  },
+  "sourceUrl": "http://food.ansan.go.kr/ASF/bbs/content.php?co_id=s211",
+  "confidence": "high"
+ },
+ {
+  "id": "ansan-butt-kebab",
+  "source": "web-research",
+  "verified": false,
+  "category": "halal",
+  "nationalities": [
+   "halal"
+  ],
+  "name": {
+   "ko": "바트케밥",
+   "en": "Butt Kebab"
+  },
+  "address": {
+   "ko": "경기도 안산시 단원구 중앙대로 441, 1층 (원곡동)"
+  },
+  "region": "경기 안산시 단원구",
+  "phone": "",
+  "items": {
+   "ko": "케밥, 중동·파키스탄 음식, 할랄",
+   "en": "Kebab, Middle Eastern & Pakistani food, halal",
+   "th": "เคบับ อาหารตะวันออกกลางและปากีสถาน ฮาลาล",
+   "ja": "ケバブ、中東・パキスタン料理、ハラル",
+   "zh": "烤肉串(卡巴)、中东·巴基斯坦菜、清真",
+   "vi": "Kebab, món Trung Đông và Pakistan, halal",
+   "es": "Kebab, comida de Oriente Medio y pakistaní, halal"
+  },
+  "sourceUrl": "http://food.ansan.go.kr/ASF/bbs/content.php?co_id=s211",
+  "confidence": "high"
+ },
+ {
+  "id": "ansan-real-taste-doner-kebab",
+  "source": "web-research",
+  "verified": false,
+  "category": "halal",
+  "nationalities": [
+   "halal"
+  ],
+  "name": {
+   "ko": "리얼테이스트도너케밥",
+   "en": "Real Taste Doner Kebab"
+  },
+  "address": {
+   "ko": "경기도 안산시 단원구 부부로 34, 1층 (원곡동)"
+  },
+  "region": "경기 안산시 단원구",
+  "phone": "",
+  "items": {
+   "ko": "도너케밥, 중동 음식, 할랄",
+   "en": "Doner kebab, Middle Eastern food, halal",
+   "th": "โดเนอร์เคบับ อาหารตะวันออกกลาง ฮาลาล",
+   "ja": "ドネルケバブ、中東料理、ハラル",
+   "zh": "旋转烤肉(多纳卡巴)、中东菜、清真",
+   "vi": "Doner kebab, món Trung Đông, halal",
+   "es": "Döner kebab, comida de Oriente Medio, halal"
+  },
+  "sourceUrl": "http://food.ansan.go.kr/ASF/bbs/content.php?co_id=s211",
+  "confidence": "high"
+ }
+]
