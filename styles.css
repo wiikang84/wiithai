@@ -652,6 +652,17 @@ button {
   line-height: 1.45;
 }
 
+/* [2026-06-19] 미검증(수집) 점포 안내 배너 — 상세 모달 */
+.placeDetailRows .placeUnverifiedNote {
+  display: block;
+  grid-template-columns: none;
+  background: var(--accent-wash);
+  color: var(--accent-ink);
+  font-size: 13px;
+  line-height: 1.5;
+  font-weight: var(--w-med);
+}
+
 .placeDetailCoupon {
   padding: 13px 14px;
   border-radius: 14px;

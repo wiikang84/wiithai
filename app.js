@@ -1,5 +1,5 @@
 (async function () {
-  const ASSET_VERSION = "20260619-06";
+  const ASSET_VERSION = "20260619-07";
   const LANGUAGES = window.WIIINFO_LANGUAGES || {};
   const LANGUAGE_NAMES = window.WIIINFO_LANGUAGE_NAMES || {};
   const PROFILES = window.WIIINFO_LEARNER_PROFILES || [];
@@ -66,6 +66,17 @@
     "sri-lanka": { ko: "스리랑카", en: "Sri Lanka", th: "ศรีลังกา", ja: "スリランカ", zh: "斯里兰卡", vi: "Sri Lanka", es: "Sri Lanka" },
     "south-asia": { ko: "남아시아", en: "South Asia", th: "เอเชียใต้", ja: "南アジア", zh: "南亚", vi: "Nam Á", es: "Asia del Sur" }
   };
+  // [2026-06-19] 미검증(수집) 점포 상세 안내 — 방문 전 전화 확인 유도(신뢰·법적 안전)
+  const UNVERIFIED_NOTICE = {
+    ko: "운영자가 아직 확인하지 않은 정보예요. 방문 전 전화로 확인해 주세요.",
+    en: "Not yet verified by our team. Please call before visiting.",
+    th: "ข้อมูลนี้ทีมงานยังไม่ได้ตรวจสอบ กรุณาโทรสอบถามก่อนไปที่ร้าน",
+    ja: "運営側で未確認の情報です。訪問前にお電話でご確認ください。",
+    zh: "此信息尚未经平台核实，到店前请先电话确认。",
+    vi: "Thông tin chưa được xác minh. Vui lòng gọi điện trước khi đến.",
+    es: "Información aún no verificada. Llama antes de visitar."
+  };
+  function unverifiedNote() { return UNVERIFIED_NOTICE[sourceLang] || UNVERIFIED_NOTICE.en; }
   const KOREAN_LETTER_META = {
     "ㄱ": { kind: "consonant", name: "기역", roman: "g/k", example: "가(ga)", desc: { ko: "ㄱ/ㅋ에 가까운 소리", en: "close to g/k", th: "เสียงใกล้ ก/ค", ja: "g/kに近い音", zh: "接近 g/k 的音", vi: "gần âm g/k", es: "sonido parecido a g/k" } },
     "ㄴ": { kind: "consonant", name: "니은", roman: "n", example: "나(na)", desc: { ko: "ㄴ 소리", en: "n sound", th: "เสียงใกล้ น", ja: "nの音", zh: "n 音", vi: "âm n", es: "sonido n" } },
@@ -898,6 +909,7 @@
       <div><span>📍</span><strong>${escapeHtml(localizedValue(place.address))}</strong></div>
       <div><span>🕐</span><strong>${escapeHtml(localizedValue(place.hours))}</strong></div>
       <div><span>✓</span><strong>${escapeHtml(place.verified ? placeUi("verified") : placeUi("needCheck"))}</strong></div>
+      ${(!place.verified && place.source !== "demo-seed") ? `<div class="placeUnverifiedNote">ℹ️ ${escapeHtml(unverifiedNote())}</div>` : ""}
     `;
     if (place.coupon?.title) {
       placeDetailCoupon.hidden = false;
