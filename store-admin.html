@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>wiiInfo · 점포 등록 (운영자)</title>
     <meta name="robots" content="noindex" />
-    <link rel="stylesheet" href="./styles.css?v=20260619-08" />
+    <link rel="stylesheet" href="./styles.css?v=20260619-09" />
     <style>
       /* [2026-06-18] master 점포 등록폼 데모 — 운영자(master) 전용. 점주 셀프(owner.html)는 추후 */
       .adminWrap { width: min(720px, 100%); margin: 0 auto; padding: 24px 16px 80px; display: grid; gap: 18px; }
@@ -23,6 +23,10 @@
       .primaryBtn { min-height: 48px; border: 0; border-radius: var(--r-md); background: var(--accent); color: #fff; font-weight: var(--w-bold); cursor: pointer; }
       .primaryBtn:disabled { background: var(--surface-sunk); color: var(--faint); cursor: not-allowed; }
       .ghostBtn { min-height: 40px; padding: 0 14px; border: 1px solid var(--line); border-radius: var(--r-pill); background: var(--surface); color: var(--text-secondary); cursor: pointer; font-weight: var(--w-med); }
+      /* [2026-06-19] Google 공식 로고 버튼 — 브랜드 가이드(흰 배경 + 4색 G 로고). 다크모드에서도 흰 배경 유지 */
+      .googleBtn { display: inline-flex; align-items: center; gap: 10px; min-height: 48px; padding: 0 18px; border: 1px solid #dadce0; border-radius: var(--r-md); background: #fff; color: #3c4043; font-weight: var(--w-bold); font-size: 15px; cursor: pointer; }
+      .googleBtn:hover { background: #f7f8f8; box-shadow: 0 1px 2px rgba(60,64,67,.2); }
+      .googleBtn svg { flex-shrink: 0; }
       .storeRow { display: flex; justify-content: space-between; align-items: center; gap: 10px; padding: 12px 0; border-bottom: 1px solid var(--line); }
       .storeRow:last-child { border-bottom: 0; }
       .storeRow strong { font-size: 15px; color: var(--text); }
@@ -38,7 +42,10 @@
         <h2>wiiInfo 점포 등록 <span class="pill">운영자 데모</span></h2>
         <p class="sub">운영자(master)가 현장에서 수집한 점포를 등록합니다. (점주 셀프 등록은 추후 단계)</p>
         <div id="authArea">
-          <button id="loginBtn" class="primaryBtn" type="button">Google로 로그인</button>
+          <button id="loginBtn" class="googleBtn" type="button">
+            <svg width="18" height="18" viewBox="0 0 48 48" aria-hidden="true"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg>
+            <span>Google 계정으로 로그인</span>
+          </button>
           <p id="authMsg" class="notice"></p>
         </div>
       </div>
@@ -115,10 +122,10 @@
       </div>
     </main>
 
-    <script src="./vendor/firebase/10.12.5/firebase-app-compat.js?v=20260619-08"></script>
-    <script src="./vendor/firebase/10.12.5/firebase-auth-compat.js?v=20260619-08"></script>
-    <script src="./vendor/firebase/10.12.5/firebase-firestore-compat.js?v=20260619-08"></script>
-    <script src="./firebase-config.js?v=20260619-08"></script>
+    <script src="./vendor/firebase/10.12.5/firebase-app-compat.js?v=20260619-09"></script>
+    <script src="./vendor/firebase/10.12.5/firebase-auth-compat.js?v=20260619-09"></script>
+    <script src="./vendor/firebase/10.12.5/firebase-firestore-compat.js?v=20260619-09"></script>
+    <script src="./firebase-config.js?v=20260619-09"></script>
     <script>
       (function () {
         // [2026-06-18] master 점포 등록 데모. master 판별은 이메일 화이트리스트(데모). 정식은 Custom Claims 예정.
@@ -166,9 +173,20 @@
         }
 
         loginBtn.addEventListener("click", () => {
+          if (!auth) { authMsg.textContent = "인증 초기화에 실패했습니다. 페이지를 새로고침 해주세요."; return; }
+          authMsg.textContent = "로그인 창을 여는 중...";
           const provider = new firebase.auth.GoogleAuthProvider();
           provider.setCustomParameters({ prompt: "select_account" });
-          auth.signInWithPopup(provider).catch((err) => { authMsg.textContent = "로그인 실패: " + err.message; });
+          auth.signInWithPopup(provider).catch((err) => {
+            const code = (err && err.code) || "";
+            // [2026-06-19] 팝업 차단/미지원 환경이면 페이지 이동(redirect) 방식으로 폴백
+            if (["auth/popup-blocked", "auth/popup-closed-by-user", "auth/cancelled-popup-request", "auth/operation-not-supported-in-this-environment"].includes(code)) {
+              authMsg.textContent = "팝업이 막혀 페이지 이동 방식으로 로그인합니다...";
+              auth.signInWithRedirect(provider).catch((e2) => { authMsg.textContent = "로그인 실패: " + ((e2 && e2.code) || e2.message); });
+            } else {
+              authMsg.textContent = "로그인 실패: " + (code || err.message);
+            }
+          });
         });
 
         auth && auth.onAuthStateChanged((user) => {
