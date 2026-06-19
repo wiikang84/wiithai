@@ -980,6 +980,51 @@
    "zh": "越南菜、河粉、烤肉米线(分查)、越式煎饼(班赛奥)、越式法包(班米)",
    "vi": "Món ăn Việt Nam, phở, bún chả, bánh xèo, bánh mì",
    "es": "Comida vietnamita, pho, bun cha, banh xeo, banh mi"
+  },
+  "마라탕, 마라샹궈, 꿔바로우, 중국 음식": {
+   "ko": "마라탕, 마라샹궈, 꿔바로우, 중국 음식",
+   "en": "Malatang, mala xiang guo, guo bao rou, Chinese food",
+   "th": "หมาล่าทัง หมาล่าเซียงกัว กัวเปาโร่ว อาหารจีน",
+   "ja": "マーラータン、マーラーシャングオ、グオバオロウ、中華料理",
+   "zh": "麻辣烫、麻辣香锅、锅包肉、中国菜",
+   "vi": "Malatang, mala xiang guo, guo bao rou, món Trung Quốc",
+   "es": "Malatang, mala xiang guo, guo bao rou, comida china"
+  },
+  "마라탕, 꿔바로우, 중국 음식": {
+   "ko": "마라탕, 꿔바로우, 중국 음식",
+   "en": "Malatang, guo bao rou, Chinese food",
+   "th": "หมาล่าทัง กัวเปาโร่ว อาหารจีน",
+   "ja": "マーラータン、グオバオロウ、中華料理",
+   "zh": "麻辣烫、锅包肉、中国菜",
+   "vi": "Malatang, guo bao rou, món Trung Quốc",
+   "es": "Malatang, guo bao rou, comida china"
+  },
+  "양꼬치, 꿔바로우, 중국 동북요리": {
+   "ko": "양꼬치, 꿔바로우, 중국 동북요리",
+   "en": "Lamb skewers, guo bao rou, Chinese northeastern cuisine",
+   "th": "เนื้อแกะเสียบไม้ กัวเปาโร่ว อาหารจีนภาคตะวันออกเฉียงเหนือ",
+   "ja": "ラム串、グオバオロウ、中国東北料理",
+   "zh": "羊肉串、锅包肉、东北菜",
+   "vi": "Xiên thịt cừu, guo bao rou, món Đông Bắc Trung Quốc",
+   "es": "Brochetas de cordero, guo bao rou, cocina del noreste de China"
+  },
+  "양꼬치, 마라탕, 꿔바로우, 중국 동북요리": {
+   "ko": "양꼬치, 마라탕, 꿔바로우, 중국 동북요리",
+   "en": "Lamb skewers, malatang, guo bao rou, Chinese northeastern cuisine",
+   "th": "เนื้อแกะเสียบไม้ หมาล่าทัง กัวเปาโร่ว อาหารจีนภาคตะวันออกเฉียงเหนือ",
+   "ja": "ラム串、マーラータン、グオバオロウ、中国東北料理",
+   "zh": "羊肉串、麻辣烫、锅包肉、东北菜",
+   "vi": "Xiên thịt cừu, malatang, guo bao rou, món Đông Bắc Trung Quốc",
+   "es": "Brochetas de cordero, malatang, guo bao rou, cocina del noreste de China"
+  },
+  "양꼬치, 마라탕, 꿔바로우, 중국 음식": {
+   "ko": "양꼬치, 마라탕, 꿔바로우, 중국 음식",
+   "en": "Lamb skewers, malatang, guo bao rou, Chinese food",
+   "th": "เนื้อแกะเสียบไม้ หมาล่าทัง กัวเปาโร่ว อาหารจีน",
+   "ja": "ラム串、マーラータン、グオバオロウ、中華料理",
+   "zh": "羊肉串、麻辣烫、锅包肉、中国菜",
+   "vi": "Xiên thịt cừu, malatang, guo bao rou, món Trung Quốc",
+   "es": "Brochetas de cordero, malatang, guo bao rou, comida china"
   }
  },
  "nameEn": {
