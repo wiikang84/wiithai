@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>wiiInfo · 점포 등록 (운영자)</title>
     <meta name="robots" content="noindex" />
-    <link rel="stylesheet" href="./styles.css?v=20260619-11" />
+    <link rel="stylesheet" href="./styles.css?v=20260622-01" />
     <style>
       /* [2026-06-18] master 점포 등록폼 데모 — 운영자(master) 전용. 점주 셀프(owner.html)는 추후 */
       .adminWrap { width: min(720px, 100%); margin: 0 auto; padding: 24px 16px 80px; display: grid; gap: 18px; }
@@ -87,6 +87,51 @@
         <p id="saveMsg" class="notice"></p>
       </div>
 
+      <!-- [2026-06-22] §3 현장 등록 — 사진 촬영 + GPS 좌표 + 사업자증. master/supervisor 사용. 등록 즉시 verified -->
+      <div id="fieldCard" class="adminCard hidden">
+        <h2>📍 현장 등록 <span class="pill">사진·GPS</span></h2>
+        <p class="sub">가게 앞에서 사진 찍고 위치를 잡아 바로 등록합니다. 현장 확인이므로 <strong>검증완료</strong>로 등록됩니다. 7개 언어 번역은 등록 후 보강합니다.</p>
+        <div class="field"><label>상호 (한국어) *</label><input id="fr_name_ko" placeholder="예: 와룽키타" /></div>
+        <div class="field"><label>상호 (영어, 선택)</label><input id="fr_name_en" placeholder="e.g. Warung Kita" /></div>
+        <div class="row2">
+          <div class="field"><label>카테고리</label>
+            <select id="fr_category">
+              <option value="restaurant">음식점</option>
+              <option value="grocery">마트·식료품</option>
+              <option value="halal">할랄</option>
+            </select>
+          </div>
+          <div class="field"><label>주요 국적 (쉼표로)</label><input id="fr_nat" placeholder="vietnam, halal" /></div>
+        </div>
+        <div class="field"><label>주소 *</label><input id="fr_address" placeholder="경기 안산시 단원구 ..." /></div>
+        <div class="row2">
+          <div class="field"><label>전화 (선택)</label><input id="fr_phone" placeholder="031-..." /></div>
+          <div class="field"><label>영업시간 (선택)</label><input id="fr_hours" placeholder="평일 10:00~22:00" /></div>
+        </div>
+        <div class="field"><label>취급 품목 / 주메뉴 (선택)</label><input id="fr_items" placeholder="쌀국수, 분짜" /></div>
+        <!-- GPS 좌표 -->
+        <div class="field">
+          <label>현재 위치 좌표 (GPS)</label>
+          <div class="row2">
+            <button id="fr_gpsBtn" class="ghostBtn" type="button">📍 현재 위치 가져오기</button>
+            <input id="fr_coords" placeholder="위도, 경도 (자동)" readonly />
+          </div>
+        </div>
+        <!-- 가게 사진 촬영/선택 -->
+        <div class="field">
+          <label>가게 사진 (촬영 또는 선택, 선택)</label>
+          <input type="file" id="fr_photo" accept="image/*" capture="environment" />
+          <img id="fr_photoPreview" class="hidden" style="margin-top:8px;max-width:160px;border-radius:8px;border:1px solid var(--line);" alt="미리보기" />
+        </div>
+        <!-- 사업자등록증 (선택) -->
+        <div class="field">
+          <label>사업자등록증 (촬영/첨부, 선택)</label>
+          <input type="file" id="fr_license" accept="image/*,application/pdf" capture="environment" />
+        </div>
+        <button id="fr_save" class="primaryBtn" type="button">현장 등록 (검증완료로)</button>
+        <p id="fr_msg" class="notice"></p>
+      </div>
+
       <!-- [2026-06-19] JSON 일괄 등록(bulk import) — 검색팀 수집 데이터를 한 번에 stores로 적재 -->
       <div id="bulkCard" class="adminCard hidden">
         <h2>JSON 일괄 등록 <span class="pill">대량</span></h2>
@@ -131,6 +176,18 @@
         <div id="storeList"></div>
       </div>
 
+      <!-- [2026-06-22] §3 현장매니저(supervisor) 관리 — master만. 이메일로 임명/해제. -->
+      <div id="supCard" class="adminCard hidden">
+        <h2>👷 현장매니저 관리 <span class="pill">운영자 전용</span></h2>
+        <p class="sub">영업 담당을 현장매니저(supervisor)로 임명하면 현장 등록(사진·GPS)을 쓸 수 있습니다. Google 로그인에 쓰는 이메일로 임명하세요. 본인 등록 가게만 수정/삭제할 수 있습니다.</p>
+        <div class="row2">
+          <div class="field" style="margin-bottom:0;"><label>임명할 이메일</label><input id="sup_email" type="email" placeholder="staff@example.com" /></div>
+          <button id="sup_addBtn" class="primaryBtn" type="button" style="align-self:end;min-height:44px;">임명</button>
+        </div>
+        <p id="sup_msg" class="notice"></p>
+        <div id="sup_list" style="margin-top:10px;"></div>
+      </div>
+
       <!-- [2026-06-19] 테스트 도구 — 가상 신청/점포 생성으로 심사 흐름 점검 -->
       <div id="testCard" class="adminCard hidden">
         <h2>🧪 테스트 도구 <span class="pill">개발</span></h2>
@@ -143,10 +200,11 @@
       </div>
     </main>
 
-    <script src="./vendor/firebase/10.12.5/firebase-app-compat.js?v=20260619-11"></script>
-    <script src="./vendor/firebase/10.12.5/firebase-auth-compat.js?v=20260619-11"></script>
-    <script src="./vendor/firebase/10.12.5/firebase-firestore-compat.js?v=20260619-11"></script>
-    <script src="./firebase-config.js?v=20260619-11"></script>
-    <script src="./store-admin.js?v=20260619-11"></script>
+    <script src="./vendor/firebase/10.12.5/firebase-app-compat.js?v=20260622-01"></script>
+    <script src="./vendor/firebase/10.12.5/firebase-auth-compat.js?v=20260622-01"></script>
+    <script src="./vendor/firebase/10.12.5/firebase-firestore-compat.js?v=20260622-01"></script>
+    <script src="./vendor/firebase/10.12.5/firebase-storage-compat.js?v=20260622-01"></script>
+    <script src="./firebase-config.js?v=20260622-01"></script>
+    <script src="./store-admin.js?v=20260622-01"></script>
   </body>
 </html>

@@ -20,7 +20,7 @@
     <link rel="manifest" href="./manifest.webmanifest" />
     <meta name="theme-color" content="#e8602c" />
     <link rel="apple-touch-icon" href="./icons/icon-192.png" />
-    <link rel="stylesheet" href="./styles.css?v=20260619-09" />
+    <link rel="stylesheet" href="./styles.css?v=20260622-01" />
   </head>
   <body>
     <!-- [2026-06-18 P1-b] 첫 방문 언어 선택 온보딩. 저장된 언어가 없고 딥링크(?from=)도 없을 때만 표시.
@@ -51,10 +51,23 @@
           </div>
         </header>
 
+        <!-- [2026-06-22] QR(스미싱 안심) 진입 배너 — ?r= 로 들어왔을 때만 표시. 공식 도메인 명시로 큐싱 안심 신호 제공 -->
+        <div id="qrSafetyBanner" class="qrSafetyBanner" hidden>🔒 <strong>wiiInfo</strong> 공식 페이지입니다 · wiiinfo.web.app</div>
+
         <section class="placeSearchPanel" aria-label="Store search and filters">
           <input id="placeSearchInput" type="search" aria-label="Search stores" placeholder="가게, 음식, 나라 검색" />
           <div id="placeCategoryTabs" class="placeChips" aria-label="Store category filter"></div>
           <div id="placeNationalityTabs" class="placeChips compact" aria-label="Nationality filter"></div>
+          <!-- [2026-06-22] §2 지역(시·도) 수동선택 — GPS 꺼져 있어도 동작. 좌표 없는 수집 데이터의 핵심 필터 -->
+          <div class="placeFilterRow">
+            <span id="placeRegionLabel" class="placeFilterLabel">지역</span>
+            <div id="placeRegionTabs" class="placeChips compact" aria-label="Region filter"></div>
+          </div>
+          <!-- [2026-06-22] §2 반경 칩 — 내 위치(GPS) 켜졌을 때만 표시. 좌표 있는 가게를 거리로 좁힘 -->
+          <div id="placeRadiusRow" class="placeFilterRow" hidden>
+            <span id="placeRadiusLabel" class="placeFilterLabel">반경</span>
+            <div id="placeRadiusTabs" class="placeChips compact" aria-label="Radius filter"></div>
+          </div>
           <div class="placeToolbar">
             <strong id="placeResultCount">0 등록 가게</strong>
             <button id="placeViewToggle" class="placeViewToggle" type="button">🗺 <span>지도</span></button>
@@ -301,15 +314,17 @@
       </article>
     </template>
 
-    <script src="./vendor/firebase/10.12.5/firebase-app-compat.js?v=20260619-09"></script>
-    <script src="./vendor/firebase/10.12.5/firebase-auth-compat.js?v=20260619-09"></script>
-    <script src="./vendor/firebase/10.12.5/firebase-firestore-compat.js?v=20260619-09"></script>
-    <script src="./vendor/firebase/10.12.5/firebase-storage-compat.js?v=20260619-09"></script>
-    <script src="./vendor/firebase/10.12.5/firebase-analytics-compat.js?v=20260619-09"></script>
-    <script src="./firebase-config.js?v=20260619-09"></script>
-    <script src="./phrases.js?v=20260619-09"></script>
-    <script src="./multilingual-data.js?v=20260619-09"></script>
-    <script src="./data/places.js?v=20260619-09"></script>
-    <script src="./app.js?v=20260619-09"></script>
+    <script src="./vendor/firebase/10.12.5/firebase-app-compat.js?v=20260622-01"></script>
+    <script src="./vendor/firebase/10.12.5/firebase-auth-compat.js?v=20260622-01"></script>
+    <script src="./vendor/firebase/10.12.5/firebase-firestore-compat.js?v=20260622-01"></script>
+    <script src="./vendor/firebase/10.12.5/firebase-storage-compat.js?v=20260622-01"></script>
+    <script src="./vendor/firebase/10.12.5/firebase-analytics-compat.js?v=20260622-01"></script>
+    <script src="./firebase-config.js?v=20260622-01"></script>
+    <script src="./phrases.js?v=20260622-01"></script>
+    <script src="./multilingual-data.js?v=20260622-01"></script>
+    <script src="./data/places.js?v=20260622-01"></script>
+    <!-- [2026-06-22] 전국 점포 274개 정적 시드 (app.js가 WIIINFO_PLACES에 머지) -->
+    <script src="./data/stores-seed.js?v=20260622-01"></script>
+    <script src="./app.js?v=20260622-01"></script>
   </body>
 </html>

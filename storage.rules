@@ -15,6 +15,17 @@ service firebase.storage {
             || request.resource.contentType == 'application/pdf');
     }
 
+    // [2026-06-22] §3 현장 등록 가게 사진: store-photos/{uid}/{fileName}.
+    //   손님 화면에 노출되므로 read 공개. 업로드는 로그인 사용자(본인 폴더), 이미지 2MB 이하만(클라 리사이즈 후).
+    //   가게 doc에 사진 URL을 박는 건 master/supervisor만 가능(firestore stores 규칙)하므로 임의 업로드는 노출되지 않음.
+    match /store-photos/{uid}/{allPaths=**} {
+      allow read: if true;
+      allow write: if request.auth != null
+        && request.auth.uid == uid
+        && request.resource.size < 2 * 1024 * 1024
+        && request.resource.contentType.matches('image/.*');
+    }
+
     // 그 외 경로는 기본 차단
     match /{allPaths=**} {
       allow read, write: if false;

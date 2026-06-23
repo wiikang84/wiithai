@@ -13,17 +13,43 @@ service cloud.firestore {
     }
 
     // [2026-06-18] master 운영자 점포 등록(store-admin.html). 정식 단계에서 Custom Claims로 승격 예정
+    // [2026-06-22] §3 supervisor(현장매니저)도 가게 등록 가능 — 단 본인 등록분(createdBy==uid)만 수정/삭제.
     match /stores/{storeId} {
       allow read: if true;
-      allow create, delete: if isMaster();
-      // [2026-06-18 T10] master는 전체, 인증된 owner는 자기 가게의 운영필드만
-      allow update: if isMaster() || (isVerifiedOwner(storeId) && onlyOwnerEditableFields());
+      allow create: if isMaster()
+        || (isSupervisor() && request.resource.data.createdBy == request.auth.uid);
+      allow delete: if isMaster()
+        || (isSupervisor() && resource.data.createdBy == request.auth.uid);
+      // [2026-06-18 T10] master는 전체, supervisor는 본인 등록분, 인증된 owner는 자기 가게의 운영필드만
+      allow update: if isMaster()
+        || (isSupervisor() && resource.data.createdBy == request.auth.uid)
+        || (isVerifiedOwner(storeId) && onlyOwnerEditableFields());
+    }
+
+    // [2026-06-22] §3 supervisor 명단 — 문서 id = 이메일(master가 uid 몰라도 임명 가능). master만 임명/해제.
+    //   본인/master만 조회(앱이 자기 역할 확인). 이메일은 토큰에서 직접 검증(request.auth.token.email).
+    match /supervisors/{email} {
+      allow read: if isMaster() || (request.auth != null && request.auth.token.email == email);
+      allow create, update, delete: if isMaster();
+    }
+
+    // [2026-06-22] §4 QR 코드 — master만 발급/수정, 읽기 공개(앱 도착지 라우팅·집계 참조)
+    match /qrcodes/{code} {
+      allow read: if true;
+      allow create, update, delete: if isMaster();
     }
 
     function isVerifiedOwner(storeId) {
       return request.auth != null
         && resource.data.ownerUid == request.auth.uid
         && resource.data.ownerStatus == "verified";
+    }
+    // [2026-06-22] §3 supervisor 판별: supervisors/{email} 문서 존재 + active != false
+    function isSupervisor() {
+      return request.auth != null
+        && request.auth.token.email != null
+        && exists(/databases/$(database)/documents/supervisors/$(request.auth.token.email))
+        && get(/databases/$(database)/documents/supervisors/$(request.auth.token.email)).data.active != false;
     }
     function onlyOwnerEditableFields() {
       return request.resource.data.diff(resource.data).affectedKeys()
@@ -81,6 +107,8 @@ service cloud.firestore {
         "preferredLang",
         "preferredFrom",
         "preferredLearn",
+        "signupRef",
+        "signupAt",
         "createdAt",
         "updatedAt",
         "lastLoginAt"
@@ -93,8 +121,10 @@ service cloud.firestore {
       && optionalString("preferredLang", 20)
       && optionalString("preferredFrom", 20)
       && optionalString("preferredLearn", 20)
+      && optionalString("signupRef", 64)
       && optionalFavorites()
       && optionalSavedPlaces()
+      && optionalTimestamp("signupAt")
       && optionalTimestamp("createdAt")
       && optionalTimestamp("updatedAt")
       && optionalTimestamp("lastLoginAt");

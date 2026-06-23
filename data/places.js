@@ -156,8 +156,11 @@ window.WIIINFO_PLACES = [
       es: "Carne halal, productos de Asia Central, fruta seca, té"
     },
     tags: ["halal", "central-asia", "meat", "tea"]
-  },
-  {
+  }
+  // [2026-06-22] 데모(가짜) 가게 2곳 제거 — 실존하지 않는 샘플이라 손님 화면에서 노출 금지.
+  //   향후 샘플/테스트 가게는 형님 요청이 있을 때만 다시 추가한다. (코드 보존 규칙에 따라 삭제 대신 주석처리)
+  /*
+  , {
     id: "demo-saigon-mart",
     source: "demo-seed",
     verified: false,
@@ -255,6 +258,7 @@ window.WIIINFO_PLACES = [
     },
     tags: ["thai", "coconut", "tom-yum", "jasmine-rice"]
   }
+  */
 ];
 
 window.WIIINFO_PLACE_COPY = {

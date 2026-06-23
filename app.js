@@ -1,12 +1,27 @@
 (async function () {
-  const ASSET_VERSION = "20260619-09";
+  const ASSET_VERSION = "20260622-01";
   const LANGUAGES = window.WIIINFO_LANGUAGES || {};
   const LANGUAGE_NAMES = window.WIIINFO_LANGUAGE_NAMES || {};
   const PROFILES = window.WIIINFO_LEARNER_PROFILES || [];
   const UI_COPY = window.WIIINFO_UI_COPY || {};
   const CATEGORY_LABELS = window.WIIINFO_CATEGORY_LABELS || {};
   const SEARCH_KEYWORDS = window.WIIINFO_SEARCH_KEYWORDS || {};
-  const PLACES = window.WIIINFO_PLACES || [];
+  // [2026-06-22] 정적 점포 = 기존 시드(places.js) + 전국 수집 274개(stores-seed.js) 머지.
+  //   id 중복 / 상호+주소 중복은 제외(places.js 우선). Firestore stores는 이후 loadFirebaseStores에서 id 기준으로 덮어씀.
+  const PLACES = (function buildPlaces() {
+    const base = (window.WIIINFO_PLACES || []).slice();
+    const seedList = window.WIIINFO_STORES_SEED || [];
+    const naKey = (p) => `${((p.name && p.name.ko) || "").trim().toLowerCase()}@@${((p.address && p.address.ko) || "").trim().toLowerCase()}`;
+    const idSet = new Set(base.map((p) => p.id));
+    const naSet = new Set(base.map(naKey));
+    seedList.forEach((p) => {
+      if (!p || !p.id) return;
+      if (idSet.has(p.id) || naSet.has(naKey(p))) return; // 중복 방어
+      idSet.add(p.id); naSet.add(naKey(p));
+      base.push(p);
+    });
+    return base;
+  })();
   const PLACE_COPY = window.WIIINFO_PLACE_COPY || {};
   // [2026-06-18] 언어 버튼/온보딩에 표시할 각 언어의 자국어 이름
   const LANG_NATIVE = { ko: "한국어", th: "ไทย", ja: "日本語", en: "English", zh: "中文", vi: "Tiếng Việt", es: "Español" };
@@ -22,19 +37,44 @@
   const ROLE_LABEL = {
     member: { ko: "회원", en: "Member", th: "สมาชิก", vi: "Thành viên", zh: "会员", ja: "会員", es: "Miembro" },
     owner: { ko: "사장님", en: "Owner", th: "เจ้าของร้าน", vi: "Chủ quán", zh: "店主", ja: "店主", es: "Dueño" },
+    // [2026-06-22] §3 supervisor(영업 담당) 역할 추가 — 현장 가게 등록 권한
+    supervisor: { ko: "현장매니저", en: "Field Mgr", th: "ผู้จัดการพื้นที่", vi: "Quản lý hiện trường", zh: "现场经理", ja: "現場担当", es: "Gestor de campo" },
     master: { ko: "운영자", en: "Admin", th: "ผู้ดูแล", vi: "Quản trị", zh: "管理员", ja: "管理者", es: "Admin" }
   };
   function isMasterEmail(email) { return MASTER_EMAILS.includes((email || "").toLowerCase()); }
+  // [2026-06-22] §3 supervisor: Firestore supervisors/{uid} 문서 존재 여부(master가 임명). 로그인 후 1회 조회해 플래그.
+  let isSupervisorFlag = false;
   // owner 판별: 내 uid가 ownerUid인 (인증된) 매장 보유 시 — T9 승인 후 동작. 지금은 master/member 우선
   function getRole(user) {
     if (!user) return null;
     if (isMasterEmail(user.email)) return "master";
+    if (isSupervisorFlag) return "supervisor";
     if (PLACES.some((p) => p.ownerUid === user.uid && p.ownerStatus === "verified")) return "owner";
     return "member";
   }
   const INFO_DEFAULT_UPDATED = "2026-06";
   const INFO_OFFICIAL_CHECK_SECTIONS = new Set(["life", "housing", "realty", "safety", "warning"]);
   const DEFAULT_LOCATION = { lat: 35.5359, lng: 129.3248, label: "울산 남구" };
+  // [2026-06-22] §2 반경 옵션(km). "all"=전체(거리 무관). GPS(내 위치)가 켜졌을 때만 노출/적용.
+  const RADIUS_OPTIONS = ["all", 5, 10, 50, 100, 200];
+  const RADIUS_ALL_LABEL = { ko: "전체", en: "All", th: "ทั้งหมด", ja: "すべて", zh: "全部", vi: "Tất cả", es: "Todo" };
+  const REGION_ALL_LABEL = { ko: "전국", en: "All", th: "ทั่วประเทศ", ja: "全国", zh: "全国", vi: "Toàn quốc", es: "Todo" };
+  // 주소/지역 문자열에서 시·도 토큰을 정규화 (긴 정식명 → 짧은 표기)
+  const REGION_NORMALIZE = [
+    [/서울특별시|^서울/, "서울"], [/부산광역시|^부산/, "부산"], [/대구광역시|^대구/, "대구"],
+    [/인천광역시|^인천/, "인천"], [/광주광역시|^광주/, "광주"], [/대전광역시|^대전/, "대전"],
+    [/울산광역시|^울산/, "울산"], [/세종특별자치시|^세종/, "세종"],
+    [/경기도|^경기/, "경기"], [/강원특별자치도|강원도|^강원/, "강원"],
+    [/충청북도|^충북/, "충북"], [/충청남도|^충남/, "충남"],
+    [/전북특별자치도|전라북도|^전북/, "전북"], [/전라남도|^전남/, "전남"],
+    [/경상북도|^경북/, "경북"], [/경상남도|^경남/, "경남"],
+    [/제주특별자치도|제주도|^제주/, "제주"]
+  ];
+  function regionOf(place) {
+    const src = (place.region || (place.address && place.address.ko) || "").trim();
+    for (const [re, name] of REGION_NORMALIZE) { if (re.test(src)) return name; }
+    return "";
+  }
   const PLACE_CATEGORY_LABELS = {
     all: { ko: "전체", en: "All", th: "ทั้งหมด", ja: "すべて", zh: "全部", vi: "Tất cả", es: "Todo" },
     grocery: { ko: "식료품", en: "Grocery", th: "ของชำ", ja: "食材店", zh: "食品店", vi: "Tạp hóa", es: "Comestibles" },
@@ -154,6 +194,10 @@
     placeNationality: "all",
     placeView: "list",
     userLocation: null,
+    // [2026-06-22] §2 지역(시·도) 수동선택 + 반경 필터. gpsActive: 내 위치 좌표 확보 여부(반경칩 노출 조건)
+    placeRegion: "all",
+    placeRadius: "all",
+    gpsActive: false,
     savedPlaceIds: new Set(readJson("wiiinfoSavedPlaces", [])),
     category: "전체",
     search: "",
@@ -218,6 +262,13 @@
   const placeSearchInput = document.getElementById("placeSearchInput");
   const placeCategoryTabs = document.getElementById("placeCategoryTabs");
   const placeNationalityTabs = document.getElementById("placeNationalityTabs");
+  // [2026-06-22] §2 지역/반경 필터 DOM
+  const placeRegionTabs = document.getElementById("placeRegionTabs");
+  const placeRegionLabel = document.getElementById("placeRegionLabel");
+  const placeRadiusRow = document.getElementById("placeRadiusRow");
+  const placeRadiusTabs = document.getElementById("placeRadiusTabs");
+  const placeRadiusLabel = document.getElementById("placeRadiusLabel");
+  const qrSafetyBanner = document.getElementById("qrSafetyBanner");
   const placeResultCount = document.getElementById("placeResultCount");
   const placeViewToggle = document.getElementById("placeViewToggle");
   const placeList = document.getElementById("placeList");
@@ -452,8 +503,12 @@
       db = firebase.firestore();
       auth.onAuthStateChanged(async (user) => {
         currentUser = user;
+        isSupervisorFlag = false; // 로그아웃/계정전환 시 초기화
         updateAuthUi(user ? "authSyncing" : "authSyncLocal");
-        if (user) await mergeCloudFavorites(user);
+        if (user) {
+          await mergeCloudFavorites(user);
+          checkSupervisor(user); // [2026-06-22] §3 supervisor 여부 확인(배지·권한)
+        }
       });
     } catch (error) {
       updateAuthUi("authSyncError");
@@ -481,6 +536,16 @@
   function userDoc(user) {
     if (!db || !user) return null;
     return db.collection("users").doc(user.uid);
+  }
+
+  // [2026-06-22] §3 supervisor 임명 여부 확인: supervisors/{email} 문서 존재 시 현장매니저. 실패 시 무시(member 유지).
+  async function checkSupervisor(user) {
+    if (!db || !user || !user.email || isMasterEmail(user.email)) return;
+    try {
+      const snap = await db.collection("supervisors").doc(user.email).get();
+      isSupervisorFlag = snap.exists && snap.data() && snap.data().active !== false;
+      if (isSupervisorFlag) updateAuthUi();
+    } catch (error) { /* 권한/네트워크 실패는 member로 동작 */ }
   }
 
   async function mergeCloudFavorites(user) {
@@ -520,7 +585,10 @@
     };
     if (isNew) {
       payload.createdAt = now;
-      // [2026-06-19] 가입 귀속: 어느 QR(ref)을 타고 들어와 가입했는지 Analytics로 기록(rules/필드 영향 없음)
+      // [2026-06-22] §4-2 가입 귀속 영구저장: 최초 가입 시 첫 유입 QR(ref)을 users 문서에 1회 기록(이후 불변).
+      //   Analytics(sign_up)와 별개로, qr-admin 집계가 Firestore에서 코드별 가입수를 직접 셀 수 있게 한다.
+      payload.signupRef = getStoredRef();
+      payload.signupAt = now;
       track("sign_up", { ref: getStoredRef() });
     }
     await ref.set(payload, { merge: true });
@@ -595,6 +663,21 @@
         localStorage.setItem("wiiinfoRef", JSON.stringify({ code: urlRef, ts: Date.now(), landingPlace: urlPlace || null }));
       }
     } catch (error) { /* 무시 */ }
+    // [2026-06-22] §4 큐싱(QR 스미싱) 안심 신호: QR로 들어왔을 때 공식 도메인 배너를 잠깐 노출.
+    if (urlRef && qrSafetyBanner) {
+      const QR_SAFE = {
+        ko: "🔒 wiiInfo 공식 페이지입니다 · wiiinfo.web.app",
+        en: "🔒 Official wiiInfo page · wiiinfo.web.app",
+        th: "🔒 หน้าทางการของ wiiInfo · wiiinfo.web.app",
+        ja: "🔒 wiiInfo 公式ページ · wiiinfo.web.app",
+        zh: "🔒 wiiInfo 官方页面 · wiiinfo.web.app",
+        vi: "🔒 Trang chính thức wiiInfo · wiiinfo.web.app",
+        es: "🔒 Página oficial de wiiInfo · wiiinfo.web.app"
+      };
+      qrSafetyBanner.textContent = QR_SAFE[sourceLang] || QR_SAFE.en;
+      qrSafetyBanner.hidden = false;
+      setTimeout(() => { try { qrSafetyBanner.hidden = true; } catch (e) { /* */ } }, 8000);
+    }
     track(urlRef ? "qr_visit" : "visit", urlRef ? { ref: urlRef, place: urlPlace || "" } : {});
   }
 
@@ -672,6 +755,18 @@
     return ["all", ...Array.from(new Set(PLACES.flatMap((place) => place.nationalities || []).filter(Boolean)))];
   }
 
+  // [2026-06-22] §2 데이터에 실제 존재하는 시·도만 지역 칩으로 노출(빈 옵션 방지). 가나다순.
+  function availablePlaceRegions() {
+    const set = new Set(PLACES.map(regionOf).filter(Boolean));
+    return ["all", ...Array.from(set).sort((a, b) => a.localeCompare(b, "ko"))];
+  }
+  function placeRegionLabelText(region) {
+    return region === "all" ? (REGION_ALL_LABEL[sourceLang] || REGION_ALL_LABEL.en) : region;
+  }
+  function placeRadiusLabelText(radius) {
+    return radius === "all" ? (RADIUS_ALL_LABEL[sourceLang] || RADIUS_ALL_LABEL.en) : `${radius}km`;
+  }
+
   function placeSearchText(place) {
     return [
       localizedValue(place.name),
@@ -685,13 +780,20 @@
 
   function filteredPlaces(scope = "all") {
     const keyword = state.placeSearch.trim().toLowerCase();
-    const location = state.userLocation || DEFAULT_LOCATION;
+    // [2026-06-22] §2 거리 기준점: 내 위치(GPS)가 켜졌을 때만 거리 계산. 수동 지역선택은 좌표가 아니라 텍스트 필터.
+    const location = state.gpsActive ? state.userLocation : null;
+    // 반경: GPS 켜졌고 "전체"가 아닐 때만 적용. 좌표 없는 수집 점포는 거리 미상이라 항상 통과(나중에 정렬에서 뒤로).
+    const radiusKm = (state.gpsActive && state.placeRadius !== "all") ? Number(state.placeRadius) : null;
     return PLACES
       .filter((place) => scope !== "saved" || state.savedPlaceIds.has(place.id))
       .filter((place) => state.placeCategory === "all" || place.category === state.placeCategory)
       .filter((place) => state.placeNationality === "all" || (place.nationalities || []).includes(state.placeNationality))
+      // [2026-06-22] 지역(시·도) 수동선택 필터 — GPS 꺼져 있어도 동작. 좌표 없는 274개의 핵심 필터.
+      .filter((place) => state.placeRegion === "all" || regionOf(place) === state.placeRegion)
       .filter((place) => !keyword || placeSearchText(place).includes(keyword))
       .map((place) => ({ ...place, distanceKm: distanceKm(location, place) }))
+      // [2026-06-22] 반경 필터: 좌표 있는 가게는 반경 내만, 좌표 없는 가게(거리 미상)는 유지(정렬에서 뒤로 감).
+      .filter((place) => radiusKm == null || place.distanceKm == null || place.distanceKm <= radiusKm)
       // [2026-06-19] 노출 우선순위: 검증 점포(0) → 미검증 수집데이터(1) → 데모(2). 같은 등급 내에서 거리순.
       // 검색팀 수집분(verified:false)이 손님 화면 상위를 점령해 신뢰를 떨어뜨리지 않도록 검증된 가게를 항상 먼저 보여준다.
       .sort((a, b) => {
@@ -730,6 +832,23 @@
       state.placeNationality = nationality;
       renderPlaces();
     }, placeNationalityLabel);
+    // [2026-06-22] §2 지역(시·도) 칩
+    if (placeRegionTabs) {
+      renderPlaceChipGroup(placeRegionTabs, availablePlaceRegions(), state.placeRegion, (region) => {
+        state.placeRegion = region;
+        track("filter_place_region", { region });
+        renderPlaces();
+      }, placeRegionLabelText);
+    }
+    // [2026-06-22] §2 반경 칩 — GPS(내 위치)가 켜졌을 때만 표시
+    if (placeRadiusRow) placeRadiusRow.hidden = !state.gpsActive;
+    if (placeRadiusTabs && state.gpsActive) {
+      renderPlaceChipGroup(placeRadiusTabs, RADIUS_OPTIONS, state.placeRadius, (radius) => {
+        state.placeRadius = radius;
+        track("filter_place_radius", { radius: String(radius) });
+        renderPlaces();
+      }, placeRadiusLabelText);
+    }
   }
 
   function renderPlaceChipGroup(container, values, activeValue, onSelect, labelFn) {
@@ -983,6 +1102,11 @@
     if (placeTitle) placeTitle.textContent = placeUi("nearby");
     if (placeSeedNote) placeSeedNote.textContent = placeUi("seedNote");
     if (placeLocationLabel) placeLocationLabel.textContent = state.userLocation?.label || placeUi("location");
+    // [2026-06-22] §2 지역/반경 라벨 다국어
+    const REGION_TITLE = { ko: "지역", en: "Region", th: "พื้นที่", ja: "地域", zh: "地区", vi: "Khu vực", es: "Región" };
+    const RADIUS_TITLE = { ko: "반경", en: "Radius", th: "รัศมี", ja: "範囲", zh: "范围", vi: "Bán kính", es: "Radio" };
+    if (placeRegionLabel) placeRegionLabel.textContent = REGION_TITLE[sourceLang] || REGION_TITLE.en;
+    if (placeRadiusLabel) placeRadiusLabel.textContent = RADIUS_TITLE[sourceLang] || RADIUS_TITLE.en;
     if (placeLangLabel) placeLangLabel.textContent = LANG_NATIVE[sourceLang] || sourceLang;
     if (placeSearchInput) placeSearchInput.placeholder = placeUi("search");
     if (savedTitle) savedTitle.textContent = placeUi("saved");
@@ -1837,18 +1961,25 @@
   });
   placeLocationButton?.addEventListener("click", () => {
     if (!navigator.geolocation) return;
+    if (placeLocationLabel) placeLocationLabel.textContent = "···";
     navigator.geolocation.getCurrentPosition((position) => {
       state.userLocation = {
         lat: position.coords.latitude,
         lng: position.coords.longitude,
         label: placeUi("nearby")
       };
+      // [2026-06-22] §2 GPS 확보 → 반경 칩 활성화(거리순 정렬·반경 필터 사용 가능)
+      state.gpsActive = true;
       updatePlaceStaticLabels();
       renderPlaces();
       track("set_place_location", { source: "geolocation" });
     }, () => {
+      // 위치 거부/실패 → 반경 비활성, 지역 수동선택으로 안내
       state.userLocation = null;
+      state.gpsActive = false;
+      state.placeRadius = "all";
       updatePlaceStaticLabels();
+      renderPlaces();
     }, { enableHighAccuracy: false, timeout: 7000, maximumAge: 300000 });
   });
   // [2026-06-18] 언어 바꾸기 버튼 → 선택 카드 재표시(닫기 허용) / 닫기 버튼 → 변경 취소
@@ -1971,7 +2102,8 @@
     if (!window.firebase || !window.WIIINFO_FIREBASE_CONFIG) return;
     try {
       if (!firebase.apps.length) firebase.initializeApp(window.WIIINFO_FIREBASE_CONFIG);
-      const snap = await firebase.firestore().collection("stores").limit(200).get();
+      // [2026-06-22] 전국 274개 적재로 200→1000 상향(전체 반영). region 매핑 추가(§2 지역필터가 Firestore판도 정확히 분류).
+      const snap = await firebase.firestore().collection("stores").limit(1000).get();
       const emojiByCat = { grocery: "🛒", restaurant: "🍽️", halal: "🛒" };
       snap.docs.forEach((doc) => {
         const d = doc.data();
@@ -1980,6 +2112,7 @@
           category: d.category || "grocery", nationalities: d.nationalities || [],
           emoji: d.emoji || emojiByCat[d.category] || "🛒",
           name: d.name || {}, address: d.address || {}, lat: d.lat, lng: d.lng,
+          region: d.region || "",
           phone: d.phone || "", hours: d.hours || {}, items: d.items || {}, coupon: d.coupon || null,
           photo: d.photo || null,
           ownerUid: d.ownerUid || null, ownerStatus: d.ownerStatus || null,

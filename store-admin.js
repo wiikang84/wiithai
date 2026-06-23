@@ -22,13 +22,19 @@
         const bulkImportBtn = document.getElementById("bulkImportBtn");
         const bulkMsg = document.getElementById("bulkMsg");
         const bulkReport = document.getElementById("bulkReport");
+        // [2026-06-22] §3 현장 등록 + 현장매니저 관리 DOM
+        const fieldCard = document.getElementById("fieldCard");
+        const supCard = document.getElementById("supCard");
         let bulkPending = []; // 미리보기 통과한 신규 점포(정규화 완료) 대기열
-        let db = null, auth = null, currentUser = null;
+        let db = null, auth = null, storage = null, currentUser = null;
+        let currentRole = null; // "master" | "supervisor"
+        let frCoords = null;    // 현장 등록 GPS 좌표 {lat,lng}
 
         try {
           firebase.initializeApp(window.WIIINFO_FIREBASE_CONFIG);
           auth = firebase.auth();
           db = firebase.firestore();
+          try { storage = firebase.storage(); } catch (se) { /* storage 미로드 시 사진 없이 동작 */ }
         } catch (e) { authMsg.textContent = "Firebase 초기화 실패: " + e.message; }
 
         function isMaster(user) { return user && MASTER_EMAILS.includes((user.email || "").toLowerCase()); }
@@ -64,25 +70,50 @@
           });
         });
 
-        auth && auth.onAuthStateChanged((user) => {
+        const allCards = [formCard, listCard, claimCard, bulkCard, testCard, fieldCard, supCard];
+        function hideAll() { allCards.forEach((c) => c && c.classList.add("hidden")); }
+
+        auth && auth.onAuthStateChanged(async (user) => {
           currentUser = user;
-          if (!user) { authMsg.textContent = "운영자 계정으로 로그인하세요."; formCard.classList.add("hidden"); listCard.classList.add("hidden"); claimCard.classList.add("hidden"); bulkCard.classList.add("hidden"); testCard.classList.add("hidden"); loginBtn.classList.remove("hidden"); return; }
-          if (!isMaster(user)) { authMsg.textContent = `${user.email} 은(는) 운영자 권한이 없습니다.`; formCard.classList.add("hidden"); listCard.classList.add("hidden"); claimCard.classList.add("hidden"); bulkCard.classList.add("hidden"); testCard.classList.add("hidden"); return; }
-          authMsg.textContent = `${user.email} (운영자) 로그인됨`;
+          currentRole = null;
+          if (!user) { authMsg.textContent = "운영자 또는 현장매니저 계정으로 로그인하세요."; hideAll(); loginBtn.classList.remove("hidden"); return; }
           loginBtn.classList.add("hidden");
-          formCard.classList.remove("hidden");
-          listCard.classList.remove("hidden");
-          claimCard.classList.remove("hidden");
-          bulkCard.classList.remove("hidden");
-          testCard.classList.remove("hidden");
-          loadStores();
-          loadClaims();
+          if (isMaster(user)) {
+            currentRole = "master";
+          } else {
+            // [2026-06-22] §3 supervisor(현장매니저) 여부 확인 — supervisors/{email} 문서
+            authMsg.textContent = "권한 확인 중...";
+            try {
+              const sdoc = await db.collection("supervisors").doc(user.email).get();
+              if (sdoc.exists && sdoc.data() && sdoc.data().active !== false) currentRole = "supervisor";
+            } catch (e) { /* 조회 실패는 권한 없음 처리 */ }
+          }
+          if (!currentRole) { authMsg.textContent = `${user.email} 은(는) 등록 권한이 없습니다. (운영자/현장매니저 전용)`; hideAll(); return; }
+
+          if (currentRole === "master") {
+            authMsg.textContent = `${user.email} (운영자) 로그인됨`;
+            hideAll();
+            [formCard, listCard, claimCard, bulkCard, testCard, fieldCard, supCard].forEach((c) => c && c.classList.remove("hidden"));
+            loadStores();
+            loadClaims();
+            loadSupervisors();
+          } else {
+            // supervisor: 현장 등록 + 본인 등록 점포만
+            authMsg.textContent = `${user.email} (현장매니저) 로그인됨 · 현장 등록을 사용할 수 있어요`;
+            hideAll();
+            [fieldCard, listCard].forEach((c) => c && c.classList.remove("hidden"));
+            loadStores();
+          }
         });
 
         function loadStores() {
           storeList.innerHTML = "<p class='notice'>불러오는 중...</p>";
           // [2026-06-19] 최신 등록(일괄 import 포함)이 위로. 미검증 검수용으로 100개까지 표시.
-          db.collection("stores").orderBy("createdAt", "desc").limit(100).get().then((snap) => {
+          // [2026-06-22] supervisor는 본인 등록분만(createdBy==uid, 복합색인 회피 위해 orderBy 생략).
+          const query = currentRole === "supervisor"
+            ? db.collection("stores").where("createdBy", "==", currentUser.uid).limit(100)
+            : db.collection("stores").orderBy("createdAt", "desc").limit(100);
+          query.get().then((snap) => {
             if (snap.empty) { storeList.innerHTML = "<p class='notice'>아직 등록된 점포가 없습니다.</p>"; return; }
             // 미검증 개수 요약(검수 진행상황)
             let unver = 0;
@@ -383,4 +414,157 @@
 
         if (genTestBtn) genTestBtn.addEventListener("click", createTestData);
         if (delTestBtn) delTestBtn.addEventListener("click", deleteTestData);
+
+        // ===== [2026-06-22] §3 현장 등록 (사진 촬영 + GPS + 사업자증) — master/supervisor =====
+        const fr = (id) => document.getElementById(id);
+        const frGpsBtn = fr("fr_gpsBtn"), frCoordsInput = fr("fr_coords");
+        const frPhoto = fr("fr_photo"), frPhotoPreview = fr("fr_photoPreview");
+        const frLicense = fr("fr_license"), frSave = fr("fr_save"), frMsg = fr("fr_msg");
+
+        // 클라이언트 이미지 리사이즈(최대 1280px, jpeg) → Storage 비용·업로드 시간 절감
+        function resizeImage(file, maxDim, quality) {
+          return new Promise((resolve, reject) => {
+            const img = new Image();
+            const url = URL.createObjectURL(file);
+            img.onload = () => {
+              URL.revokeObjectURL(url);
+              let { width, height } = img;
+              if (width > maxDim || height > maxDim) {
+                if (width >= height) { height = Math.round(height * maxDim / width); width = maxDim; }
+                else { width = Math.round(width * maxDim / height); height = maxDim; }
+              }
+              const canvas = document.createElement("canvas");
+              canvas.width = width; canvas.height = height;
+              canvas.getContext("2d").drawImage(img, 0, 0, width, height);
+              canvas.toBlob((blob) => blob ? resolve(blob) : reject(new Error("이미지 변환 실패")), "image/jpeg", quality || 0.82);
+            };
+            img.onerror = () => { URL.revokeObjectURL(url); reject(new Error("이미지 로드 실패")); };
+            img.src = url;
+          });
+        }
+
+        if (frGpsBtn) frGpsBtn.addEventListener("click", () => {
+          if (!navigator.geolocation) { frMsg.textContent = "이 기기는 위치를 지원하지 않습니다."; return; }
+          frGpsBtn.disabled = true; frCoordsInput.value = "위치 잡는 중...";
+          navigator.geolocation.getCurrentPosition((pos) => {
+            frCoords = { lat: +pos.coords.latitude.toFixed(6), lng: +pos.coords.longitude.toFixed(6) };
+            frCoordsInput.value = `${frCoords.lat}, ${frCoords.lng}`;
+            frGpsBtn.disabled = false;
+          }, (err) => {
+            frCoordsInput.value = ""; frCoords = null; frGpsBtn.disabled = false;
+            frMsg.textContent = "위치 가져오기 실패: " + (err.message || err.code);
+          }, { enableHighAccuracy: true, timeout: 10000, maximumAge: 0 });
+        });
+
+        if (frPhoto) frPhoto.addEventListener("change", () => {
+          const f = frPhoto.files && frPhoto.files[0];
+          if (!f) { frPhotoPreview.classList.add("hidden"); return; }
+          frPhotoPreview.src = URL.createObjectURL(f);
+          frPhotoPreview.classList.remove("hidden");
+        });
+
+        async function uploadStorePhoto(file) {
+          if (!storage) return null;
+          const blob = await resizeImage(file, 1280, 0.82);
+          const path = `store-photos/${currentUser.uid}/${Date.now()}.jpg`;
+          const snap = await storage.ref(path).put(blob, { contentType: "image/jpeg" });
+          return await snap.ref.getDownloadURL();
+        }
+        async function uploadFieldLicense(file, storeRef) {
+          if (!storage) return null;
+          // 사업자증: owner-docs/{uid}/field-{storeId}/ (storage 규칙: 본인 uid만, 5MB, image/pdf)
+          const isPdf = file.type === "application/pdf";
+          const blob = isPdf ? file : await resizeImage(file, 1600, 0.85);
+          const ext = isPdf ? "pdf" : "jpg";
+          const path = `owner-docs/${currentUser.uid}/field-${storeRef.id}/license-${Date.now()}.${ext}`;
+          const snap = await storage.ref(path).put(blob, { contentType: isPdf ? "application/pdf" : "image/jpeg" });
+          return await snap.ref.getDownloadURL();
+        }
+
+        if (frSave) frSave.addEventListener("click", async () => {
+          const nameKo = fr("fr_name_ko").value.trim();
+          const address = fr("fr_address").value.trim();
+          if (!nameKo || !address) { frMsg.textContent = "상호와 주소는 필수입니다."; return; }
+          frSave.disabled = true; frMsg.textContent = "등록 중...";
+          try {
+            const nat = fr("fr_nat").value.split(",").map((s) => s.trim()).filter(Boolean).slice(0, 6);
+            // 좌표/지역 — region은 주소 첫 토큰(시·도)로 간이 보존
+            const data = {
+              name: langObj(nameKo, fr("fr_name_en").value.trim()),
+              category: fr("fr_category").value,
+              nationalities: nat,
+              address: langObj(address),
+              region: address.split(/\s+/)[0] || "",
+              phone: fr("fr_phone").value.trim(),
+              hours: langObj(fr("fr_hours").value.trim()),
+              items: langObj(fr("fr_items").value.trim()),
+              photo: null,
+              verified: true, // 현장 확인 등록이므로 검증완료
+              source: "field",
+              createdBy: currentUser.uid,
+              createdByEmail: currentUser.email,
+              createdByRole: currentRole,
+              createdAt: firebase.firestore.FieldValue.serverTimestamp()
+            };
+            if (frCoords) { data.lat = frCoords.lat; data.lng = frCoords.lng; }
+            // 1) 가게 사진 업로드(있으면)
+            const pf = frPhoto.files && frPhoto.files[0];
+            if (pf) { frMsg.textContent = "사진 업로드 중..."; data.photo = await uploadStorePhoto(pf); }
+            // 2) 가게 문서 생성
+            frMsg.textContent = "가게 등록 중...";
+            const ref = await db.collection("stores").add(data);
+            // 3) 사업자증(있으면) 업로드 후 doc에 연결
+            const lf = frLicense.files && frLicense.files[0];
+            if (lf) {
+              frMsg.textContent = "사업자증 업로드 중...";
+              const licenseUrl = await uploadFieldLicense(lf, ref);
+              if (licenseUrl) await ref.update({ businessLicense: licenseUrl });
+            }
+            frMsg.textContent = "✓ 현장 등록 완료 (검증완료로 노출됩니다).";
+            ["fr_name_ko", "fr_name_en", "fr_nat", "fr_address", "fr_phone", "fr_hours", "fr_items", "fr_photo", "fr_license", "fr_coords"].forEach((id) => { const el = fr(id); if (el) el.value = ""; });
+            frCoords = null; frPhotoPreview.classList.add("hidden");
+            loadStores();
+          } catch (e) {
+            frMsg.textContent = "등록 실패: " + e.message;
+          } finally { frSave.disabled = false; }
+        });
+
+        // ===== [2026-06-22] §3 현장매니저(supervisor) 관리 — master 전용 =====
+        const supEmail = fr("sup_email"), supAddBtn = fr("sup_addBtn"), supMsg = fr("sup_msg"), supListEl = fr("sup_list");
+
+        function loadSupervisors() {
+          if (!supListEl) return;
+          supListEl.innerHTML = "<p class='notice'>불러오는 중...</p>";
+          db.collection("supervisors").limit(100).get().then((snap) => {
+            if (snap.empty) { supListEl.innerHTML = "<p class='notice'>아직 임명된 현장매니저가 없습니다.</p>"; return; }
+            supListEl.innerHTML = snap.docs.map((doc) => {
+              const d = doc.data();
+              const email = esc(doc.id);
+              const off = d.active === false;
+              return `<div class="storeRow"><div><strong>${email}</strong>${off ? " <span class='pill' style='background:#eee;color:#888;'>해제됨</span>" : " <span class='pill' style='background:#e6f7ec;color:#1a7f37;'>활성</span>"}</div><button class="ghostBtn" data-supdel="${email}">삭제</button></div>`;
+            }).join("");
+            supListEl.querySelectorAll("[data-supdel]").forEach((b) => b.addEventListener("click", () => {
+              if (!confirm(`${b.dataset.supdel} 의 현장매니저 권한을 삭제할까요?`)) return;
+              db.collection("supervisors").doc(b.dataset.supdel).delete().then(loadSupervisors)
+                .catch((e) => { supMsg.textContent = "삭제 실패: " + e.message; });
+            }));
+          }).catch((err) => { supListEl.innerHTML = `<p class='notice'>로드 실패: ${esc(err.message)}</p>`; });
+        }
+
+        if (supAddBtn) supAddBtn.addEventListener("click", () => {
+          const email = (supEmail.value || "").trim().toLowerCase();
+          if (!email || !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) { supMsg.textContent = "올바른 이메일을 입력하세요."; return; }
+          supAddBtn.disabled = true; supMsg.textContent = "임명 중...";
+          db.collection("supervisors").doc(email).set({
+            email,
+            active: true,
+            createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+            createdByEmail: currentUser.email
+          }).then(() => {
+            supMsg.textContent = `✓ ${email} 현장매니저로 임명됨. 본인이 그 계정으로 로그인하면 현장 등록을 쓸 수 있어요.`;
+            supEmail.value = "";
+            loadSupervisors();
+          }).catch((e) => { supMsg.textContent = "임명 실패: " + e.message; })
+            .finally(() => { supAddBtn.disabled = false; });
+        });
       })();
